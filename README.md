@@ -20,6 +20,5 @@ After that, run
 It should open a new page in your browser. Remember to keep your terminal open.
 
 After that, download the Expo app on your phone from Google Play or App Store.
-Scan the qr code, and it should work :')
-
+Scan the qr code, and it should work.
 
