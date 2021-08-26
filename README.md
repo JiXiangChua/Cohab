@@ -8,7 +8,7 @@ Once you've installed that you need to install [expo](https://expo.dev/). Open y
 `npm install -g expo-cli`
 
 Next you need to clone this repo so you have a copy on your computer.
-If yall can't remember the github stuff just try downloading the zip file and unzipping somewhere.
+If y'all can't remember how to do the github stuff just try downloading the zip file and unzipping somewhere.
 Then cd to wherever you cloned/unzipped and run
 
 `npm install`
