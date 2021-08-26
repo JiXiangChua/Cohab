@@ -1,25 +1,25 @@
-hello friends pls follow my instructions
+Hello friends pls follow my instructions
 
-first download [Node.js](https://nodejs.org/en/download/).
-we're not really using Node.js but we need it for npm, which is a package manager that you use to download everything else
+First download [Node.js](https://nodejs.org/en/download/).
+We're not really using Node.js but we need it for npm, which is a package manager that you use to download everything else
 
-once you've installed that you need to install [expo](https://expo.dev/). open your terminal or command prompt and run
+Once you've installed that you need to install [expo](https://expo.dev/). Open your terminal or command prompt and run
 
 `npm install -g expo-cli`
 
-next you need to clone this repo so you have a copy on your computer.
-if yall can't remember the github stuff just try downloading the zip file and unzipping somewhere.
-then cd to wherever you cloned/unzipped and run
+Next you need to clone this repo so you have a copy on your computer.
+If yall can't remember the github stuff just try downloading the zip file and unzipping somewhere.
+Then cd to wherever you cloned/unzipped and run
 
 `npm install`
 
-after that, run
+After that, run
 
 `npm run start`
 
-and it should open a page in your browser. remember to leave the terminal open too.
+It should open a new page in your browser. Remember to keep your terminal open.
 
-after that, download the Expo app on your phone. you can just search Google Play or App Store.
-scan the qr code, and you should see the app.
+After that, download the Expo app on your phone from Google Play or App Store.
+Scan the qr code, and it should work :')
 
 
