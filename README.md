@@ -1,14 +1,14 @@
 hello friends pls follow my instructions
 
-first download [Node.js] (https://nodejs.org/en/download/)
+first download [Node.js](https://nodejs.org/en/download/)
 we're not really using Node.js but we need it for npm, which is a package manager that you use to download everything else
 
-once you've installed that you need to open terminal or command prompt and run
+once you've installed that you need to install [expo](https://expo.dev/). open your terminal or command prompt and run
 
 `npm install -g expo-cli`
 
 next you need to clone this repo so you have a copy on your computer.
-then, cd into the folder where you have the repo and run
+then cd to wherever you cloned and run
 
 `npm install`
 
