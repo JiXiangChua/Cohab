@@ -33,7 +33,10 @@ export default function LoginScreen() {
 
 const styles = StyleSheet.create({
     logo: {
+        minHeight:100,
+        minWidth:150,
         marginBottom:100,
+        resizeMode: 'center',
     },
     container: {
         flex: 1,
