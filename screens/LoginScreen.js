@@ -10,7 +10,6 @@ import {
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/stack";
 import logo from "../assets/logo.png";
-import HomeScreen from "./HomeScreen";
 
 export default function LoginScreen({ navigation }) {
   const [username, setUsername] = useState("");
