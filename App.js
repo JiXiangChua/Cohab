@@ -6,7 +6,7 @@ import "react-native-gesture-handler";
 // import LoginScreen from "./screens/LoginScreen.js";
 // import HomeScreen from "./screens/HomeScreen.js";
 import RootStackScreen from "./screens/RootStackScreen";
-import HomeScreen from "./screens/HomeScreen";
+import HomeStackScreen from "./screens/HomeStackScreen";
 
 const Stack = createStackNavigator();
 
@@ -25,7 +25,7 @@ export default function App() {
     //   </Stack.Navigator>
     // </NavigationContainer>
     <NavigationContainer>
-      {isLogin == true ? <HomeScreen /> : <RootStackScreen />}
+      {isLogin == true ? <HomeStackScreen /> : <RootStackScreen />}
     </NavigationContainer>
   );
 }
