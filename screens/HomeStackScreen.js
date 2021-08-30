@@ -3,10 +3,10 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import LoginScreen from "./LoginScreen";
 import HomeScreen from "./HomeScreen";
-import FinanceScreen from "./FinanceScreen";
-import TaskScreen from "./TaskScreen";
-import ChoreScreen from "./ChoreScreen";
-import CalandarScreen from "./CalandarScreen";
+import FinanceStackScreen from "../stackscreens/FinanceStackScreen";
+import TaskStackScreen from "../stackscreens/TaskStackScreen";
+import ChoreStackScreen from "../stackscreens/ChoreStackScreen";
+import CalandarStackScreen from "../stackscreens/CalandarStackScreen";
 
 const HomeStack = createStackNavigator();
 
@@ -15,6 +15,7 @@ const HomeStackScreen = ({ navigation }) => (
     initialRouteName="Home"
     screenOptions={(route, nagivation) => ({
       //input any adjustments to the navigation bar
+      headerShown: false,
     })}
   >
     <HomeStack.Screen
@@ -23,9 +24,9 @@ const HomeStackScreen = ({ navigation }) => (
       options={{ headerShown: false }}
     />
     <HomeStack.Screen name="FinanceStack" component={FinanceStackScreen} />
-    <HomeStack.Screen name="Task" component={TaskScreen} />
-    <HomeStack.Screen name="Chore" component={ChoreScreen} />
-    <HomeStack.Screen name="Calandar" component={CalandarScreen} />
+    <HomeStack.Screen name="TaskStack" component={TaskStackScreen} />
+    <HomeStack.Screen name="ChoreStack" component={ChoreStackScreen} />
+    <HomeStack.Screen name="CalandarStack" component={CalandarStackScreen} />
   </HomeStack.Navigator>
 );
 

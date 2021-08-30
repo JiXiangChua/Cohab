@@ -2,7 +2,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import HomeScreen from "../screens/HomeScreen";
-import FinanceScreen from "./FinanceScreen";
+import FinanceScreen from "../screens/FinanceScreen";
 
 const FinanceStack = createStackNavigator();
 
@@ -14,7 +14,7 @@ const FinanceStackScreen = ({ navigation }) => (
     })}
   >
     <FinanceStack.Screen name="Finance" component={FinanceScreen} />
-    <FinanceScreen.Screen name="Home" component={HomeScreen} />
+    <FinanceStack.Screen name="Home" component={HomeScreen} />
   </FinanceStack.Navigator>
 );
 

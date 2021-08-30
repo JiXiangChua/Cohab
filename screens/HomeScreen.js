@@ -9,19 +9,19 @@ import {
 
 export default function HomeScreen({ navigation }) {
   function goToFinance() {
-    navigation.navigate("Finance");
+    navigation.navigate("FinanceStack");
   }
 
   function goToTask() {
-    navigation.navigate("Task");
+    navigation.navigate("TaskStack");
   }
 
   function goToChore() {
-    navigation.navigate("Chore");
+    navigation.navigate("ChoreStack");
   }
 
   function goToCalandar() {
-    navigation.navigate("Calandar");
+    navigation.navigate("CalandarStack");
   }
 
   return (
