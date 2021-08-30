@@ -22,7 +22,7 @@ const HomeStackScreen = ({ navigation }) => (
       component={HomeScreen}
       options={{ headerShown: false }}
     />
-    <HomeStack.Screen name="Finance" component={FinanceScreen} />
+    <HomeStack.Screen name="FinanceStack" component={FinanceStackScreen} />
     <HomeStack.Screen name="Task" component={TaskScreen} />
     <HomeStack.Screen name="Chore" component={ChoreScreen} />
     <HomeStack.Screen name="Calandar" component={CalandarScreen} />
