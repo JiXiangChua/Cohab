@@ -1,11 +1,11 @@
 import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import LoginScreen from "./LoginScreen";
 import RegisterScreen from "./RegisterScreen";
 import HomeStackScreen from "./HomeStackScreen";
 
-const RootStack = createStackNavigator();
+const RootStack = createNativeStackNavigator();
 
 const RootStackScreen = ({ navigation }) => (
   <RootStack.Navigator

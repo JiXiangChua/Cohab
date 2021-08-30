@@ -7,10 +7,7 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/stack";
 import logo from "../assets/logo.png";
-import HomeStackScreen from "./HomeStackScreen";
 
 export default function LoginScreen({ navigation }) {
   const [username, setUsername] = useState("");

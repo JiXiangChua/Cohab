@@ -1,14 +1,13 @@
 import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import LoginScreen from "./LoginScreen";
 import HomeScreen from "./HomeScreen";
 import FinanceStackScreen from "../stackscreens/FinanceStackScreen";
 import TaskStackScreen from "../stackscreens/TaskStackScreen";
 import ChoreStackScreen from "../stackscreens/ChoreStackScreen";
 import CalandarStackScreen from "../stackscreens/CalandarStackScreen";
 
-const HomeStack = createStackNavigator();
+const HomeStack = createNativeStackNavigator();
 
 const HomeStackScreen = ({ navigation }) => (
   <HomeStack.Navigator

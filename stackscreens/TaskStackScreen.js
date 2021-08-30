@@ -1,10 +1,10 @@
 import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import HomeScreen from "../screens/HomeScreen";
 import TaskScreen from "../screens/TaskScreen";
 
-const TaskStack = createStackNavigator();
+const TaskStack = createNativeStackNavigator();
 
 const TaskStackScreen = ({ navigation }) => (
   <TaskStack.Navigator

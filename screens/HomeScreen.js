@@ -2,10 +2,10 @@ import React from "react";
 import {
   View,
   Text,
-  SafeAreaView,
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 export default function HomeScreen({ navigation }) {
   function goToFinance() {
