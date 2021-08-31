@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import HomeScreen from "../screens/HomeScreen";
 import TaskScreen from "../screens/TaskScreen";
+import ChoreScreen from "../screens/ChoreScreen";
 
 const TaskStack = createNativeStackNavigator();
 
@@ -11,10 +12,10 @@ const TaskStackScreen = ({ navigation }) => (
     initialRouteName="Task"
     screenOptions={(route, nagivation) => ({
       //input any adjustments to the navigation bar
+      headerBackVisible: true,
     })}
   >
     <TaskStack.Screen name="Task" component={TaskScreen} />
-    <TaskStack.Screen name="Home" component={HomeScreen} />
   </TaskStack.Navigator>
 );
 
