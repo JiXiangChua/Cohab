@@ -1,12 +1,12 @@
 import React from "react";
-import { View , Text , StyleSheet } from "react-native";
+import { View , Text , StyleSheet} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function TaskScreen({ navigation }) {
+export default function CalendarScreen() {
   return (
     <SafeAreaView style = {styles.backgroundContainer}>
       <View>
-        <Text>Hello to Task Screen</Text>
+        <Text>Hello to Calendar Screen</Text>
       </View>
     </SafeAreaView>
   );
