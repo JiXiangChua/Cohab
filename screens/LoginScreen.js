@@ -3,28 +3,22 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  TouchableOpacity,
+  View,
   Image,
+  TouchableOpacity,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import logo from "../assets/logo.png";
-import { useLoginContext } from "../LoginContext";
 
 export default function LoginScreen({ navigation }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { setIsSignedIn } = useLoginContext();
-  
-  function login() {
-    setIsSignedIn(true);
-  }
 
-  function goToRegister() {
-    navigation.navigate('Register');
+  function login() {
+    navigation.navigate("HomeStackScreen");
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <Image source={logo} style={styles.logo} />
       <TextInput
         style={styles.inputField}
@@ -37,15 +31,14 @@ export default function LoginScreen({ navigation }) {
         placeholder="Password"
         onChangeText={(password) => setPassword(password)}
         defaultValue={password}
-        secureTextEntry={true}
       />
       <TouchableOpacity style={styles.button} onPress={login}>
         <Text style={styles.buttonText}>Log In</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={goToRegister}>
-        <Text style={styles.buttonText}>Sign Up</Text>
-      </TouchableOpacity>
-    </SafeAreaView>
+      <View style={styles.button}>
+        <Text style={styles.buttonText}>Sign In</Text>
+      </View>
+    </View>
   );
 }
 
