@@ -11,6 +11,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import settingLogo from "../assets/Finance-assets/SettingsWheel.png";
 import addBillButton from "../assets/Finance-assets/AddBill.png";
 import RoommateCard from "../components/RoommateCard";
+import GroupPayCard from "../components/GroupPayCard";
 
 export default function FinanceScreen() {
   const [budget, setBudget] = useState(100);
@@ -22,6 +23,7 @@ export default function FinanceScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView
+        showsVerticalScrollIndicator={false}
         contentContainerStyle={{
           justifyContent: "center",
           alignItems: "center",
@@ -40,7 +42,7 @@ export default function FinanceScreen() {
         {/* Monthly Budget Section */}
 
         <View style={styles.budgetContainer}>
-          <Text style={{ position: "absolute", left: 0, fontSize: 18 }}>
+          <Text style={{ position: "absolute", left: 0, fontSize: 24 }}>
             Monthly Budget
           </Text>
           <TouchableOpacity style={{ position: "absolute", right: 0 }}>
@@ -70,7 +72,7 @@ export default function FinanceScreen() {
               style={{
                 position: "absolute",
                 left: 0,
-                fontSize: 18,
+                fontSize: 24,
                 marginTop: 7,
               }}
             >
@@ -80,7 +82,7 @@ export default function FinanceScreen() {
               style={{
                 position: "absolute",
                 right: 40,
-                fontSize: 18,
+                fontSize: 24,
                 marginTop: 7,
               }}
             >
@@ -94,7 +96,65 @@ export default function FinanceScreen() {
           </View>
           <View style={styles.roommateBillPanel}>
             {/* Display each roommate and how much  */}
-            <RoommateCard></RoommateCard>
+            {/* Here may need an array to store the information and then use javascript map function  */}
+            <RoommateCard
+              name="Jixiang"
+              profileImage=""
+              description="Air-Con Fee"
+              amount="$20"
+              status="True"
+            ></RoommateCard>
+            <RoommateCard
+              name="Jixiang"
+              profileImage=""
+              description="Air-Con Fee"
+              amount="$20"
+              status="True"
+            ></RoommateCard>
+            <RoommateCard
+              name="Jixiang"
+              profileImage=""
+              description="Air-Con Fee"
+              amount="$20"
+              status="True"
+            ></RoommateCard>
+          </View>
+        </View>
+
+        {/* Group Pay Section */}
+        <View style={styles.roommateContainer}>
+          <View style={{ width: "100%", height: 50, flexDirection: "row" }}>
+            <Text
+              style={{
+                position: "absolute",
+                left: 0,
+                fontSize: 24,
+                marginTop: 7,
+              }}
+            >
+              Group Payment
+            </Text>
+            <Text
+              style={{
+                position: "absolute",
+                right: 40,
+                fontSize: 24,
+                marginTop: 7,
+              }}
+            >
+              New Split
+            </Text>
+            <TouchableOpacity
+              style={{ position: "absolute", right: 0, fontSize: 18 }}
+            >
+              <Image source={addBillButton}></Image>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.roommateBillPanel}>
+            {/* Display each roommate and how much  */}
+            {/* Here may need an array to store the information and then use javascript map function  */}
+            <GroupPayCard amount="$20"></GroupPayCard>
+            <GroupPayCard amount="$20"></GroupPayCard>
           </View>
         </View>
       </ScrollView>
@@ -135,7 +195,7 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   budgetContainer: {
-    width: "80%",
+    width: "95%",
     height: 80,
     flexDirection: "row",
   },
@@ -149,15 +209,15 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   roommateContainer: {
-    backgroundColor: "#888",
     marginTop: 20,
-    width: "80%",
+    width: "95%",
     alignItems: "center",
   },
   roommateBillPanel: {
-    backgroundColor: "#FFF",
+    alignItems: "center",
+    backgroundColor: "#FFFAF2",
     width: "90%",
-    height: 400,
     borderRadius: 20,
+    paddingVertical: 10,
   },
 });
