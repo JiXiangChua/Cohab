@@ -8,10 +8,12 @@ import {
   ScrollView,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import settingLogo from "../assets/Finance-assets/SettingsWheel.png";
 import addBillButton from "../assets/Finance-assets/AddBill.png";
 import RoommateCard from "../components/RoommateCard";
 import GroupPayCard from "../components/GroupPayCard";
+import TopUpLogo from "../assets/Finance-assets/TopUp.png";
+import ScanLogo from "../assets/Finance-assets/Scan.png";
+import TransferLogo from "../assets/Finance-assets/Transfer.png";
 
 export default function FinanceScreen() {
   const [budget, setBudget] = useState(100);
@@ -32,11 +34,23 @@ export default function FinanceScreen() {
         {/* Balance Section */}
 
         <Text style={styles.balanceText}> Wallet </Text>
-        <Text style={{ color: "#8A8585" }}> Current Balance </Text>
+        <Text style={{ color: "#943855", opacity: 0.7 }}>Current Balance</Text>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.walletButton}></TouchableOpacity>
-          <TouchableOpacity style={styles.walletButton}></TouchableOpacity>
-          <TouchableOpacity style={styles.walletButton}></TouchableOpacity>
+          <TouchableOpacity style={styles.walletButton}>
+            <Image source={TopUpLogo} style={styles.walletButtonLogo}></Image>
+            <Text>Top Up</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.walletButton}>
+            <Image source={ScanLogo} style={styles.walletButtonLogo}></Image>
+            <Text>Scan</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.walletButton}>
+            <Image
+              source={TransferLogo}
+              style={[styles.walletButtonLogo, { marginBottom: 14 }]}
+            ></Image>
+            <Text>Transfer</Text>
+          </TouchableOpacity>
         </View>
 
         {/* Monthly Budget Section */}
@@ -45,8 +59,8 @@ export default function FinanceScreen() {
           <Text style={{ position: "absolute", left: 0, fontSize: 24 }}>
             Monthly Budget
           </Text>
-          <TouchableOpacity style={{ position: "absolute", right: 0 }}>
-            <Image source={settingLogo}></Image>
+          <TouchableOpacity style={styles.budgetManageButton}>
+            <Text style={styles.budgetManageButtonText}>Manage</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.progressBar}>
             <TouchableOpacity
@@ -68,26 +82,8 @@ export default function FinanceScreen() {
         {/* Roommate Section */}
         <View style={styles.roommateContainer}>
           <View style={{ width: "100%", height: 50, flexDirection: "row" }}>
-            <Text
-              style={{
-                position: "absolute",
-                left: 0,
-                fontSize: 24,
-                marginTop: 7,
-              }}
-            >
-              Roommates
-            </Text>
-            <Text
-              style={{
-                position: "absolute",
-                right: 40,
-                fontSize: 24,
-                marginTop: 7,
-              }}
-            >
-              New Bill
-            </Text>
+            <Text style={styles.createNewTitle}>Pay Roommates</Text>
+            <Text style={styles.createNewButton}>Pay Me</Text>
             <TouchableOpacity
               style={{ position: "absolute", right: 0, fontSize: 18 }}
             >
@@ -124,26 +120,8 @@ export default function FinanceScreen() {
         {/* Group Pay Section */}
         <View style={styles.roommateContainer}>
           <View style={{ width: "100%", height: 50, flexDirection: "row" }}>
-            <Text
-              style={{
-                position: "absolute",
-                left: 0,
-                fontSize: 24,
-                marginTop: 7,
-              }}
-            >
-              Group Payment
-            </Text>
-            <Text
-              style={{
-                position: "absolute",
-                right: 40,
-                fontSize: 24,
-                marginTop: 7,
-              }}
-            >
-              New Split
-            </Text>
+            <Text style={styles.createNewTitle}>Group Payment</Text>
+            <Text style={styles.createNewButton}>New Split</Text>
             <TouchableOpacity
               style={{ position: "absolute", right: 0, fontSize: 18 }}
             >
@@ -193,11 +171,31 @@ const styles = StyleSheet.create({
     height: 100,
     borderRadius: 20,
     margin: 10,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  walletButtonLogo: {
+    width: "100%",
+    alignSelf: "center",
+    marginRight: 5,
+    marginBottom: 5,
   },
   budgetContainer: {
     width: "95%",
     height: 80,
     flexDirection: "row",
+  },
+  budgetManageButton: {
+    position: "absolute",
+    right: 0,
+    borderWidth: 2,
+    borderColor: "#E16363",
+    borderRadius: 10,
+  },
+  budgetManageButtonText: {
+    padding: 5,
+    paddingHorizontal: 10,
+    color: "#E16363",
   },
   progressBar: {
     backgroundColor: "#E1B468",
@@ -219,5 +217,18 @@ const styles = StyleSheet.create({
     width: "90%",
     borderRadius: 20,
     paddingVertical: 10,
+  },
+  createNewTitle: {
+    position: "absolute",
+    left: 0,
+    fontSize: 24,
+    marginTop: 7,
+  },
+  createNewButton: {
+    position: "absolute",
+    right: 40,
+    fontSize: 24,
+    marginTop: 7,
+    color: "#826335",
   },
 });
