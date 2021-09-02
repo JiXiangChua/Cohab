@@ -17,21 +17,31 @@ export default function RoommateCard(props) {
     >
       <View style={{ flexDirection: "row" }}>
         {/* Here the image need change when the database is ready */}
-        <Image source={ProfilePic} style={{ marginRight: 10 }}></Image>
-        <Text style={styles.cardText}>{props.name}</Text>
-        <Text style={[styles.cardText, { marginRight: 10 }]}>
-          {props.amount}
-        </Text>
-        <TouchableOpacity style={styles.payButton}>
-          <Text style={{ color: "#FFF", fontSize: 18, fontWeight: "bold" }}>
-            Pay
+        <Image
+          source={ProfilePic}
+          style={{ marginRight: 10, alignSelf: "center" }}
+        ></Image>
+
+        {/* Column for Name and Description */}
+        <View style={styles.cardDisplayColumnFormat}>
+          <Text style={styles.cardText}>{props.name}</Text>
+          <Text style={[styles.cardText, { fontSize: 14, color: "#8A8585" }]}>
+            {props.description}
           </Text>
-        </TouchableOpacity>
+        </View>
+
+        {/* Column for Amount and Pay Button */}
+        <View style={[styles.cardDisplayColumnFormat, { marginLeft: 25 }]}>
+          <Text style={[styles.cardText, { marginRight: 10 }]}>
+            {props.amount}
+          </Text>
+          <TouchableOpacity style={styles.payButton}>
+            <Text style={{ color: "#FFF", fontSize: 18, fontWeight: "bold" }}>
+              Pay
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
-      <Text style={[styles.cardText, { fontSize: 14, color: "#8A8585" }]}>
-        {" "}
-        {props.description}
-      </Text>
     </View>
   );
 }
@@ -49,21 +59,26 @@ const styles = StyleSheet.create({
   shadowProp: {
     shadowColor: "#171717",
     shadowOffset: { width: -2, height: 4 },
-    shadowOpacity: 0.2,
+    shadowOpacity: 0.25,
     shadowRadius: 3,
+  },
+  cardDisplayColumnFormat: {
+    flexDirection: "column",
+    justifyContent: "center",
   },
   cardText: {
     alignSelf: "center",
     marginRight: 20,
-    fontSize: 24,
+    fontSize: 25,
   },
   payButton: {
     backgroundColor: "#FFA903",
-    height: 50,
-    width: 50,
+    height: 38,
+    width: 78,
     borderRadius: 20,
     marginRight: 10,
     justifyContent: "center",
     alignItems: "center",
+    marginTop: 5,
   },
 });

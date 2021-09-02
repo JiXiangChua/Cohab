@@ -14,6 +14,8 @@ import GroupPayCard from "../components/GroupPayCard";
 import TopUpLogo from "../assets/Finance-assets/TopUp.png";
 import ScanLogo from "../assets/Finance-assets/Scan.png";
 import TransferLogo from "../assets/Finance-assets/Transfer.png";
+import PayerLogo from "../assets/Finance-assets/Payers.png";
+import PayeeLogo from "../assets/Finance-assets/Payee.png";
 
 export default function FinanceScreen() {
   const [budget, setBudget] = useState(100);
@@ -90,28 +92,49 @@ export default function FinanceScreen() {
               <Image source={addBillButton}></Image>
             </TouchableOpacity>
           </View>
+
+          {/* Roommate Bill Container */}
           <View style={styles.roommateBillPanel}>
+            {/* Swiping Left and Right to display payees and payers */}
+            <View
+              style={{
+                width: "90%",
+                paddingVertical: 5,
+                alignItems: "center",
+              }}
+            >
+              <View
+                style={{ flexDirection: "row", justifyContent: "space-evenly" }}
+              >
+                <Image source={PayerLogo} style={styles.payLogoStyle}></Image>
+                <Image source={PayeeLogo} style={styles.payLogoStyle}></Image>
+              </View>
+
+              {/* TODO - Maybe the bar need to use Carousel, need to explore */}
+              <View style={styles.payProgressBar}></View>
+            </View>
+
             {/* Display each roommate and how much  */}
             {/* Here may need an array to store the information and then use javascript map function  */}
             <RoommateCard
               name="Jixiang"
               profileImage=""
               description="Air-Con Fee"
-              amount="$20"
+              amount="$20.00"
               status="True"
             ></RoommateCard>
             <RoommateCard
               name="Jixiang"
               profileImage=""
               description="Air-Con Fee"
-              amount="$20"
+              amount="$20.00"
               status="True"
             ></RoommateCard>
             <RoommateCard
               name="Jixiang"
               profileImage=""
               description="Air-Con Fee"
-              amount="$20"
+              amount="$20.00"
               status="True"
             ></RoommateCard>
           </View>
@@ -214,7 +237,7 @@ const styles = StyleSheet.create({
   roommateBillPanel: {
     alignItems: "center",
     backgroundColor: "#FFFAF2",
-    width: "90%",
+    width: "95%",
     borderRadius: 20,
     paddingVertical: 10,
   },
@@ -230,5 +253,17 @@ const styles = StyleSheet.create({
     fontSize: 24,
     marginTop: 7,
     color: "#826335",
+  },
+  payLogoStyle: {
+    marginVertical: 10,
+    width: 120,
+    height: 50,
+  },
+  payProgressBar: {
+    backgroundColor: "#696363",
+    opacity: 0.3,
+    width: "90%",
+    height: 10,
+    borderRadius: 10,
   },
 });
