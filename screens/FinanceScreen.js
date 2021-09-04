@@ -154,8 +154,16 @@ export default function FinanceScreen() {
           <View style={styles.roommateBillPanel}>
             {/* Display each roommate and how much  */}
             {/* Here may need an array to store the information and then use javascript map function  */}
-            <GroupPayCard amount="$20"></GroupPayCard>
-            <GroupPayCard amount="$20"></GroupPayCard>
+            <GroupPayCard
+              totalAmount="$20.00"
+              amountPaid="$15.00"
+              description="Frozen yoghurt @ llaollao"
+            ></GroupPayCard>
+            <GroupPayCard
+              totalAmount="$45.00"
+              amountPaid="$45.00"
+              description="Din Tai Fung"
+            ></GroupPayCard>
           </View>
         </View>
       </ScrollView>

@@ -35,7 +35,7 @@ export default function RoommateCard(props) {
           <Text style={[styles.cardText, { marginRight: 10 }]}>
             {props.amount}
           </Text>
-          <TouchableOpacity style={styles.payButton}>
+          <TouchableOpacity style={[styles.payButton, styles.shadowProp]}>
             <Text style={{ color: "#FFF", fontSize: 18, fontWeight: "bold" }}>
               Pay
             </Text>
