@@ -16,6 +16,8 @@ import ScanLogo from "../assets/Finance-assets/Scan.png";
 import TransferLogo from "../assets/Finance-assets/Transfer.png";
 import PayerLogo from "../assets/Finance-assets/Payers.png";
 import PayeeLogo from "../assets/Finance-assets/Payee.png";
+import NotificationButton from "../assets/NotificationButton.png";
+import backToRoomButton from "../assets/back-to-room-button.png";
 
 export default function FinanceScreen() {
   const [budget, setBudget] = useState(100);
@@ -26,6 +28,17 @@ export default function FinanceScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <View style={styles.menuBarStyle}>
+        <TouchableOpacity
+          style={{ alignSelf: "flex-start", flexDirection: "row", right: 15 }}
+        >
+          <Image source={backToRoomButton}></Image>
+          <Text style={styles.backToRoomButtonStyle}>home</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={{ alignSelf: "flex-end" }}>
+          <Image source={NotificationButton}></Image>
+        </TouchableOpacity>
+      </View>
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
@@ -36,7 +49,10 @@ export default function FinanceScreen() {
         {/* Balance Section */}
 
         <Text style={styles.balanceText}> Wallet </Text>
-        <Text style={{ color: "#943855", opacity: 0.7 }}>Current Balance</Text>
+        <Text style={{ color: "#943855", fontSize: 50 }}>$100.00</Text>
+        <Text style={{ color: "#943855", opacity: 0.7, fontSize: 18 }}>
+          Current Balance
+        </Text>
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.walletButton}>
             <Image source={TopUpLogo} style={styles.walletButtonLogo}></Image>
@@ -179,6 +195,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  menuBarStyle: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "90%",
+  },
+  backToRoomButtonStyle: {
+    color: "#E16363",
+    fontSize: 20,
+    alignSelf: "center",
+    right: 10,
+  },
   scrollView: {
     flex: 1,
     flexDirection: "column",
@@ -188,8 +215,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   balanceText: {
-    color: "#943855",
-    fontSize: 40,
+    color: "#E16363",
+    fontSize: 20,
+    marginVertical: 10,
   },
   buttonContainer: {
     flexDirection: "row",
