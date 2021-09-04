@@ -18,8 +18,9 @@ import PayerLogo from "../assets/Finance-assets/Payers.png";
 import PayeeLogo from "../assets/Finance-assets/Payee.png";
 import NotificationButton from "../assets/NotificationButton.png";
 import backToRoomButton from "../assets/back-to-room-button.png";
+import { NavigationContainer } from "@react-navigation/native";
 
-export default function FinanceScreen() {
+export default function FinanceScreen({ navigation }) {
   const [budget, setBudget] = useState(100);
   const [shopping, setShopping] = useState(20);
 
@@ -31,6 +32,7 @@ export default function FinanceScreen() {
       <View style={styles.menuBarStyle}>
         <TouchableOpacity
           style={{ alignSelf: "flex-start", flexDirection: "row", right: 15 }}
+          onPress={navigation.goBack}
         >
           <Image source={backToRoomButton}></Image>
           <Text style={styles.backToRoomButtonStyle}>home</Text>

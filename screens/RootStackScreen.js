@@ -15,7 +15,13 @@ const RootStackScreen = ({ navigation }) => (
   >
     <RootStack.Screen name="Login" component={LoginScreen} />
     <RootStack.Screen name="Register" component={RegisterScreen} />
-    <RootStack.Screen name="HomeStackScreen" component={HomeStackScreen} />
+    <RootStack.Screen
+      name="HomeStackScreen"
+      component={HomeStackScreen}
+      options={{
+        animation: "fade",
+      }}
+    />
   </RootStack.Navigator>
 );
 
