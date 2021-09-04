@@ -15,7 +15,13 @@ const TaskStackScreen = ({ navigation }) => (
       headerBackVisible: true,
     })}
   >
-    <TaskStack.Screen name="Task" component={TaskScreen} />
+    <TaskStack.Screen
+      name="Task"
+      component={TaskScreen}
+      options={{
+        headerShown: false,
+      }}
+    />
   </TaskStack.Navigator>
 );
 

@@ -18,7 +18,6 @@ const FinanceStackScreen = ({ navigation }) => (
       component={FinanceScreen}
       options={{
         headerShown: false,
-        // headerLeft: () => <Button title="Back to Room"></Button>,
       }}
     />
     <FinanceStack.Screen name="Home" component={HomeScreen} />

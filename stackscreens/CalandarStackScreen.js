@@ -13,7 +13,13 @@ const CalandarStackScreen = ({ navigation }) => (
       //input any adjustments to the navigation bar
     })}
   >
-    <CalandarStack.Screen name="Calandar" component={CalandarScreen} />
+    <CalandarStack.Screen
+      name="Calandar"
+      component={CalandarScreen}
+      options={{
+        headerShown: false,
+      }}
+    />
     <CalandarStack.Screen name="Home" component={HomeScreen} />
   </CalandarStack.Navigator>
 );

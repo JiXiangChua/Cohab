@@ -18,7 +18,6 @@ import PayerLogo from "../assets/Finance-assets/Payers.png";
 import PayeeLogo from "../assets/Finance-assets/Payee.png";
 import NotificationButton from "../assets/NotificationButton.png";
 import backToRoomButton from "../assets/back-to-room-button.png";
-import { NavigationContainer } from "@react-navigation/native";
 
 export default function FinanceScreen({ navigation }) {
   const [budget, setBudget] = useState(100);
@@ -29,6 +28,7 @@ export default function FinanceScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
+      {/* Menu bar */}
       <View style={styles.menuBarStyle}>
         <TouchableOpacity
           style={{ alignSelf: "flex-start", flexDirection: "row", right: 15 }}
@@ -41,6 +41,7 @@ export default function FinanceScreen({ navigation }) {
           <Image source={NotificationButton}></Image>
         </TouchableOpacity>
       </View>
+      {/* End of Menu Bar */}
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{

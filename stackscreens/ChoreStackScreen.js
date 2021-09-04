@@ -13,7 +13,13 @@ const ChoreStackScreen = ({ navigation }) => (
       //input any adjustments to the navigation bar
     })}
   >
-    <ChoreStack.Screen name="Chore" component={ChoreScreen} />
+    <ChoreStack.Screen
+      name="Chore"
+      component={ChoreScreen}
+      options={{
+        headerShown: false,
+      }}
+    />
     <ChoreStack.Screen name="Home" component={HomeScreen} />
   </ChoreStack.Navigator>
 );
