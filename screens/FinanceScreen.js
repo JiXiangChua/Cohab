@@ -8,9 +8,18 @@ import {
   ScrollView,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import settingLogo from "../assets/Finance-assets/SettingsWheel.png";
+import addBillButton from "../assets/Finance-assets/AddBill.png";
+import RoommateCard from "../components/RoommateCard";
+import GroupPayCard from "../components/GroupPayCard";
+import TopUpLogo from "../assets/Finance-assets/TopUp.png";
+import ScanLogo from "../assets/Finance-assets/Scan.png";
+import TransferLogo from "../assets/Finance-assets/Transfer.png";
+import PayerLogo from "../assets/Finance-assets/Payers.png";
+import PayeeLogo from "../assets/Finance-assets/Payee.png";
+import NotificationButton from "../assets/NotificationButton.png";
+import backToRoomButton from "../assets/back-to-room-button.png";
 
-export default function FinanceScreen() {
+export default function FinanceScreen({ navigation }) {
   const [budget, setBudget] = useState(100);
   const [shopping, setShopping] = useState(20);
 
@@ -19,26 +28,60 @@ export default function FinanceScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
+      {/* Menu bar */}
+      <View style={styles.menuBarStyle}>
+        <TouchableOpacity
+          style={{ alignSelf: "flex-start", flexDirection: "row", right: 15 }}
+          onPress={navigation.goBack}
+        >
+          <Image source={backToRoomButton}></Image>
+          <Text style={styles.backToRoomButtonStyle}>home</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={{ alignSelf: "flex-end" }}>
+          <Image source={NotificationButton}></Image>
+        </TouchableOpacity>
+      </View>
+      {/* End of Menu Bar */}
       <ScrollView
+        showsVerticalScrollIndicator={false}
         contentContainerStyle={{
           justifyContent: "center",
           alignItems: "center",
         }}
       >
+        {/* Balance Section */}
+
         <Text style={styles.balanceText}> Wallet </Text>
-        <Text style={{ color: "#8A8585" }}> Current Balance </Text>
+        <Text style={{ color: "#943855", fontSize: 50 }}>$100.00</Text>
+        <Text style={{ color: "#943855", opacity: 0.7, fontSize: 18 }}>
+          Current Balance
+        </Text>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.walletButton}></TouchableOpacity>
-          <TouchableOpacity style={styles.walletButton}></TouchableOpacity>
-          <TouchableOpacity style={styles.walletButton}></TouchableOpacity>
+          <TouchableOpacity style={styles.walletButton}>
+            <Image source={TopUpLogo} style={styles.walletButtonLogo}></Image>
+            <Text>Top Up</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.walletButton}>
+            <Image source={ScanLogo} style={styles.walletButtonLogo}></Image>
+            <Text>Scan</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.walletButton}>
+            <Image
+              source={TransferLogo}
+              style={[styles.walletButtonLogo, { marginBottom: 14 }]}
+            ></Image>
+            <Text>Transfer</Text>
+          </TouchableOpacity>
         </View>
 
+        {/* Monthly Budget Section */}
+
         <View style={styles.budgetContainer}>
-          <Text style={{ position: "absolute", left: 0, fontSize: 18 }}>
+          <Text style={{ position: "absolute", left: 0, fontSize: 24 }}>
             Monthly Budget
           </Text>
-          <TouchableOpacity style={{ position: "absolute", right: 0 }}>
-            <Image source={settingLogo}></Image>
+          <TouchableOpacity style={styles.budgetManageButton}>
+            <Text style={styles.budgetManageButtonText}>Manage</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.progressBar}>
             <TouchableOpacity
@@ -52,7 +95,96 @@ export default function FinanceScreen() {
           </TouchableOpacity>
         </View>
 
-        <View></View>
+        {/* Monthly Budget Display */}
+        <View>
+          <Text style={{ color: "#8A8585" }}> $ 710 / $1000</Text>
+        </View>
+
+        {/* Roommate Section */}
+        <View style={styles.roommateContainer}>
+          <View style={{ width: "100%", height: 50, flexDirection: "row" }}>
+            <Text style={styles.createNewTitle}>Pay Roommates</Text>
+            <Text style={styles.createNewButton}>Pay Me</Text>
+            <TouchableOpacity
+              style={{ position: "absolute", right: 0, fontSize: 18 }}
+            >
+              <Image source={addBillButton}></Image>
+            </TouchableOpacity>
+          </View>
+
+          {/* Roommate Bill Container */}
+          <View style={styles.roommateBillPanel}>
+            {/* Swiping Left and Right to display payees and payers */}
+            <View
+              style={{
+                width: "90%",
+                paddingVertical: 5,
+                alignItems: "center",
+              }}
+            >
+              <View
+                style={{ flexDirection: "row", justifyContent: "space-evenly" }}
+              >
+                <Image source={PayerLogo} style={styles.payLogoStyle}></Image>
+                <Image source={PayeeLogo} style={styles.payLogoStyle}></Image>
+              </View>
+
+              {/* TODO - Maybe the bar need to use Carousel, need to explore */}
+              <View style={styles.payProgressBar}></View>
+            </View>
+
+            {/* Display each roommate and how much  */}
+            {/* Here may need an array to store the information and then use javascript map function  */}
+            <RoommateCard
+              name="Jixiang"
+              profileImage=""
+              description="Air-Con Fee"
+              amount="$20.00"
+              status="True"
+            ></RoommateCard>
+            <RoommateCard
+              name="Jixiang"
+              profileImage=""
+              description="Air-Con Fee"
+              amount="$20.00"
+              status="True"
+            ></RoommateCard>
+            <RoommateCard
+              name="Jixiang"
+              profileImage=""
+              description="Air-Con Fee"
+              amount="$20.00"
+              status="True"
+            ></RoommateCard>
+          </View>
+        </View>
+
+        {/* Group Pay Section */}
+        <View style={styles.roommateContainer}>
+          <View style={{ width: "100%", height: 50, flexDirection: "row" }}>
+            <Text style={styles.createNewTitle}>Group Payment</Text>
+            <Text style={styles.createNewButton}>New Split</Text>
+            <TouchableOpacity
+              style={{ position: "absolute", right: 0, fontSize: 18 }}
+            >
+              <Image source={addBillButton}></Image>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.roommateBillPanel}>
+            {/* Display each roommate and how much  */}
+            {/* Here may need an array to store the information and then use javascript map function  */}
+            <GroupPayCard
+              totalAmount="$20.00"
+              amountPaid="$15.00"
+              description="Frozen yoghurt @ llaollao"
+            ></GroupPayCard>
+            <GroupPayCard
+              totalAmount="$45.00"
+              amountPaid="$45.00"
+              description="Din Tai Fung"
+            ></GroupPayCard>
+          </View>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -66,6 +198,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  menuBarStyle: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "90%",
+  },
+  backToRoomButtonStyle: {
+    color: "#E16363",
+    fontSize: 20,
+    alignSelf: "center",
+    right: 10,
+  },
   scrollView: {
     flex: 1,
     flexDirection: "column",
@@ -75,8 +218,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   balanceText: {
-    color: "#943855",
-    fontSize: 40,
+    color: "#E16363",
+    fontSize: 20,
+    marginVertical: 10,
   },
   buttonContainer: {
     flexDirection: "row",
@@ -89,11 +233,31 @@ const styles = StyleSheet.create({
     height: 100,
     borderRadius: 20,
     margin: 10,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  walletButtonLogo: {
+    width: "100%",
+    alignSelf: "center",
+    marginRight: 5,
+    marginBottom: 5,
   },
   budgetContainer: {
-    width: "80%",
+    width: "95%",
     height: 80,
     flexDirection: "row",
+  },
+  budgetManageButton: {
+    position: "absolute",
+    right: 0,
+    borderWidth: 2,
+    borderColor: "#E16363",
+    borderRadius: 10,
+  },
+  budgetManageButtonText: {
+    padding: 5,
+    paddingHorizontal: 10,
+    color: "#E16363",
   },
   progressBar: {
     backgroundColor: "#E1B468",
@@ -102,6 +266,43 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     width: "90%",
     height: 20,
+    borderRadius: 10,
+  },
+  roommateContainer: {
+    marginTop: 20,
+    width: "95%",
+    alignItems: "center",
+  },
+  roommateBillPanel: {
+    alignItems: "center",
+    backgroundColor: "#FFFAF2",
+    width: "95%",
+    borderRadius: 20,
+    paddingVertical: 10,
+  },
+  createNewTitle: {
+    position: "absolute",
+    left: 0,
+    fontSize: 24,
+    marginTop: 7,
+  },
+  createNewButton: {
+    position: "absolute",
+    right: 40,
+    fontSize: 24,
+    marginTop: 7,
+    color: "#826335",
+  },
+  payLogoStyle: {
+    marginVertical: 10,
+    width: 120,
+    height: 50,
+  },
+  payProgressBar: {
+    backgroundColor: "#696363",
+    opacity: 0.3,
+    width: "90%",
+    height: 10,
     borderRadius: 10,
   },
 });
