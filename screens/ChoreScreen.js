@@ -8,26 +8,14 @@ import {
   ScrollView,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+
+
 import NotificationButton from "../assets/NotificationButton.png";
 import backToRoomButton from "../assets/back-to-room-button.png";
 
 export default function ChoreScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
-      {/* Menu bar */}
-      <View style={styles.menuBarStyle}>
-        <TouchableOpacity
-          style={{ alignSelf: "flex-start", flexDirection: "row", right: 15 }}
-          onPress={navigation.goBack}
-        >
-          <Image source={backToRoomButton}></Image>
-          <Text style={styles.backToRoomButtonStyle}>home</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={{ alignSelf: "flex-end" }}>
-          <Image source={NotificationButton}></Image>
-        </TouchableOpacity>
-      </View>
-      {/* End of Menu Bar */}
       <ScrollView>
         {/* Write Your code here */}
         <Text>Hello to Chore Screen</Text>

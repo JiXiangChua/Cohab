@@ -14,20 +14,6 @@ import backToRoomButton from "../assets/back-to-room-button.png";
 export default function CalendarScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
-      {/* Menu bar */}
-      <View style={styles.menuBarStyle}>
-        <TouchableOpacity
-          style={{ alignSelf: "flex-start", flexDirection: "row", right: 15 }}
-          onPress={navigation.goBack}
-        >
-          <Image source={backToRoomButton}></Image>
-          <Text style={styles.backToRoomButtonStyle}>home</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={{ alignSelf: "flex-end" }}>
-          <Image source={NotificationButton}></Image>
-        </TouchableOpacity>
-      </View>
-      {/* End of Menu Bar */}
       <ScrollView>
         {/* Write Your code here */}
         <Text>Hello to Calendar Screen</Text>

@@ -8,6 +8,8 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import logo from "../assets/logo.png";
+import NotificationButton from '../assets/NotificationButton.png';
+import backButton from '../assets/back-to-room-button.png';
 import { useLoginContext } from "../LoginContext";
 
 export default function LoginScreen({ navigation }) {

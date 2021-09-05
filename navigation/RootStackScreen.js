@@ -1,11 +1,14 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { StyleSheet , Image } from 'react-native';
+
 import { CalendarScreen , ChoreScreen , FinanceScreen , HomeScreen , LoginScreen , RegisterScreen , TaskScreen } from "../screens";
 import { useLoginContext } from "../LoginContext";
 
-const RootStack = createNativeStackNavigator();
+import notificationButton from '../assets/NotificationButton.png';
 
-const RootStackScreen = ({ navigation }) => {
+const RootStack = createNativeStackNavigator();
+export default function RootStackScreen ({ navigation }) {
 
   const { isSignedIn } = useLoginContext();
 
@@ -13,10 +16,19 @@ const RootStackScreen = ({ navigation }) => {
     headerShown: false,
   };
   
-  const yellowHeader = {
+  const screenOptions = {
     headerStyle: {
-      backgroundColor: '#FFD692',
-    }
+      backgroundColor: '#FFD897',
+      borderWidth: 0,
+      shadowOpacity: 0,
+      elevation: 0,
+      zIndex: 1,
+      shadowColor: "FFD897",
+    },
+    headerTintColor: "#E16363",
+    headerRight: () => (
+      <Image source = {notificationButton} style = {styles.notificationButton} />
+    ),
   }
 
   if (!isSignedIn) {
@@ -28,7 +40,7 @@ const RootStackScreen = ({ navigation }) => {
     );
   } else {
     return(
-      <RootStack.Navigator screenOptions = {yellowHeader}>
+      <RootStack.Navigator screenOptions = {screenOptions}>
         <RootStack.Screen name="Home" component={HomeScreen} options = {noHeader} />
         <RootStack.Screen name="Calendar" component={CalendarScreen} />
         <RootStack.Screen name="Chore" component={ChoreScreen} />
@@ -39,4 +51,13 @@ const RootStackScreen = ({ navigation }) => {
   }
 };
 
-export default RootStackScreen;
+const styles = StyleSheet.create({
+  backButton: {
+    minHeight: 24,
+    minWidth: 24,
+    resizeMode: "center",
+  },
+  notificationButton: {
+    resizeMode: "center",
+  }
+});
