@@ -15,7 +15,7 @@ const ChoreStackScreen = ({ navigation }) => (
   >
     <ChoreStack.Screen name="Chore" component={ChoreScreen} 
     options={{
-      headerShown: false,,
+      headerShown: false,
     }}  />
     <ChoreStack.Screen name="Home" component={HomeScreen} />
   </ChoreStack.Navigator>
