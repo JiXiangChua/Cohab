@@ -67,19 +67,19 @@ const styles = StyleSheet.create({
   },
   shared: {
     alignItems: 'center',
-    padding: 5,
+    padding: 10,
     maxWidth: 200,
     height: 50,
     flexDirection: "row",
   },
   currentTab: {
-    backgroundColor: '#E16363',
+    backgroundColor: 'white',
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
   },
   completed: {
     minHeight: 50,
-    padding: 5,
+    padding: 10,
     alignItems: 'center',
     flexDirection:' row',
   },
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   },
   backgroundContainer: {
     width: '100%',
-    backgroundColor: '#E16363',
+    backgroundColor: 'white',
     borderRadius: 8,
     alignItems: 'center',
   },

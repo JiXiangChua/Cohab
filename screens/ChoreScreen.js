@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import {View,Text,StyleSheet,TouchableOpacity,Image,ScrollView} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 //header
-import NotificationButton from "../assets/NotificationButton.png";
-import backToRoomButton from "../assets/back-to-room-button.png";
+import MenuBar from "../components/MenuBar";
 //assets
 import RoommateCard from "../components/ChoreCard";
 import NewChoresButton from "../assets/Chores-assets/Caddbutton.png";
@@ -11,18 +10,7 @@ import NewChoresButton from "../assets/Chores-assets/Caddbutton.png";
 export default function ChoreScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.menuBarStyle}>
-        <TouchableOpacity
-          style={{ alignSelf: "flex-start", flexDirection: "row", right: 15 }}
-          onPress={navigation.goBack}
-        >
-          <Image source={backToRoomButton}></Image>
-          <Text style={styles.backToRoomButtonStyle}>home</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={{ alignSelf: "flex-end" }}>
-          <Image source={NotificationButton}></Image>
-        </TouchableOpacity>
-      </View>
+      <MenuBar navigation = {navigation} />
       {/*stuff*/}
       <ScrollView
       showsVerticalScrollIndicator={false}
