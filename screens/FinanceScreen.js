@@ -29,7 +29,7 @@ export default function FinanceScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <MenuBar navigation = {navigation} />
+      {/* <MenuBar navigation = {navigation} /> */}
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
   balanceText: {
     color: "#E16363",
     fontSize: 20,
-    marginVertical: 10,
+    marginBottom: 10,
   },
   buttonContainer: {
     flexDirection: "row",

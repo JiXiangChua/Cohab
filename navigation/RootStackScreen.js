@@ -1,24 +1,32 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { StyleSheet , Image } from 'react-native';
+import { StyleSheet, Image } from "react-native";
 
-import { CalendarScreen , ChoreScreen , FinanceScreen , HomeScreen , LoginScreen , RegisterScreen , TaskScreen } from "../screens";
+import {
+  CalendarScreen,
+  ChoreScreen,
+  FinanceScreen,
+  HomeScreen,
+  LoginScreen,
+  RegisterScreen,
+  TaskScreen,
+} from "../screens";
 import { useLoginContext } from "../LoginContext";
 
-import notificationButton from '../assets/NotificationButton.png';
+import notificationButton from "../assets/NotificationButton.png";
+import { StackActions } from "@react-navigation/routers";
 
 const RootStack = createNativeStackNavigator();
-export default function RootStackScreen ({ navigation }) {
-
+export default function RootStackScreen({ navigation }) {
   const { isSignedIn } = useLoginContext();
 
   const noHeader = {
     headerShown: false,
   };
-  
+
   const screenOptions = {
     headerStyle: {
-      backgroundColor: '#FFD897',
+      backgroundColor: "#FFD897",
       borderWidth: 0,
       shadowOpacity: 0,
       elevation: 0,
@@ -27,29 +35,43 @@ export default function RootStackScreen ({ navigation }) {
     },
     headerTintColor: "#E16363",
     headerRight: () => (
-      <Image source = {notificationButton} style = {styles.notificationButton} />
+      <Image source={notificationButton} style={styles.notificationButton} />
     ),
-  }
+  };
 
   if (!isSignedIn) {
-    return(
+    return (
       <RootStack.Navigator>
-        <RootStack.Screen name="Login" component={LoginScreen} options = {noHeader} />
-        <RootStack.Screen name="Register" component={RegisterScreen} options = {noHeader} />
+        <RootStack.Screen
+          name="Login"
+          component={LoginScreen}
+          options={noHeader}
+        />
+        <RootStack.Screen
+          name="Register"
+          component={RegisterScreen}
+          options={noHeader}
+        />
       </RootStack.Navigator>
     );
   } else {
-    return(
-      <RootStack.Navigator screenOptions = {screenOptions}>
-        <RootStack.Screen name="Home" component={HomeScreen} options = {noHeader} />
+    return (
+      <RootStack.Navigator screenOptions={screenOptions}>
+        <RootStack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={noHeader}
+        />
         <RootStack.Screen name="Calendar" component={CalendarScreen} />
         <RootStack.Screen name="Chore" component={ChoreScreen} />
-        <RootStack.Screen name="Finance" component={FinanceScreen} />
+        <RootStack.Group name="FinanceStack">
+          <RootStack.Screen name="Finance" component={FinanceScreen} />
+        </RootStack.Group>
         <RootStack.Screen name="Task" component={TaskScreen} />
       </RootStack.Navigator>
     );
   }
-};
+}
 
 const styles = StyleSheet.create({
   backButton: {
@@ -59,5 +81,5 @@ const styles = StyleSheet.create({
   },
   notificationButton: {
     resizeMode: "center",
-  }
+  },
 });
