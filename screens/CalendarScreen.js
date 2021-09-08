@@ -1,34 +1,29 @@
 import React from "react";
 import {
+  View,
   Text,
   StyleSheet,
+  TouchableOpacity,
+  Image,
   ScrollView,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import MenuBar from "../components/MenuBar";
-import MyTasks from "../components/task/MyTasks";
-import SharedTasks from "../components/task/SharedTasks";
 
-export default function TaskScreen({ navigation }) {
+export default function CalendarScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <MenuBar navigation = {navigation} />
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollViewStyle}>
-        <Text style = {styles.taskText}> Tasks </Text>
-        <MyTasks />
-        <SharedTasks />
+      <ScrollView>
+        {/* Write Your code here */}
+        <Text>Hello to Calendar Screen</Text>
       </ScrollView>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  scrollViewStyle: {
-    justifyContent: "center",
-    alignItems: "center",
-    width: 400,
-  },
   container: {
     flex: 1,
     backgroundColor: "#FFD897",
@@ -36,9 +31,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  taskText: {
+  menuBarStyle: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "90%",
+    position: "absolute",
+    top: 40,
+  },
+  backToRoomButtonStyle: {
     color: "#E16363",
     fontSize: 20,
-    fontWeight: "bold",
+    alignSelf: "center",
+    right: 10,
   },
 });

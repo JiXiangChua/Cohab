@@ -8,51 +8,42 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 export default function HomeScreen({ navigation }) {
+
   function goToFinance() {
-    navigation.navigate("FinanceStack");
+    navigation.navigate("Finance");
   }
 
   function goToTask() {
-    navigation.navigate("TaskStack");
+    navigation.navigate("Task");
   }
 
   function goToChore() {
-    navigation.navigate("ChoreStack");
+    navigation.navigate("Chore");
   }
 
   function goToCalandar() {
-    navigation.navigate("CalandarStack");
+    navigation.navigate("Calendar");
   }
 
   return (
     <SafeAreaView style={styles.backgroundContainer}>
-      <View>
-        <Text> Hello world !</Text>
-      </View>
 
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.buttonStyle} onPress={goToFinance}>
-          <Text>GO TO FINANCE</Text>
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity style={styles.buttonContainer} onPress={goToFinance}>
+        <Text style = {styles.buttonText}>GO TO FINANCE</Text>
+      </TouchableOpacity>
 
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.buttonStyle} onPress={goToTask}>
-          <Text>GO TO TASK</Text>
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity style={styles.buttonContainer} onPress={goToTask}>
+        <Text style = {styles.buttonText}>GO TO TASK</Text>
+      </TouchableOpacity>
 
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.buttonStyle} onPress={goToChore}>
-          <Text>GO TO CHORE</Text>
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity style={styles.buttonContainer} onPress={goToChore}>
+        <Text style = {styles.buttonText}>GO TO CHORE</Text>
+      </TouchableOpacity>
 
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.buttonStyle} onPress={goToCalandar}>
-          <Text>GO TO CALANDAR</Text>
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity style={styles.buttonContainer} onPress={goToCalandar}>
+        <Text style = {styles.buttonText}>GO TO CALENDAR</Text>
+      </TouchableOpacity>
+
     </SafeAreaView>
   );
 }
@@ -60,19 +51,22 @@ export default function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   backgroundContainer: {
     flex: 1,
-    backgroundColor: "#FFD692",
+    backgroundColor: "#FFD897",
+    alignItems: "center",
+    justifyContent: "center",
   },
   buttonContainer: {
-    padding: 20,
+    margin: 20,
+    height: 75,
+    width: "75%",
     justifyContent: "center",
     alignContent: "center",
     alignItems: "center",
+    backgroundColor: "#E16363",
   },
-  buttonStyle: {
-    width: 100,
-    height: 100,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "lightblue",
+  buttonText: {
+    color: "#FFD692",
+    textAlign: "center",
+    fontSize: 18,
   },
 });

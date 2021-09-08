@@ -8,17 +8,17 @@ import {
   ScrollView,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import addBillButton from "../assets/Finance-assets/AddBill.png";
+
+import MenuBar from "../components/MenuBar";
 import RoommateCard from "../components/RoommateCard";
 import GroupPayCard from "../components/GroupPayCard";
+
+import addBillButton from "../assets/Finance-assets/AddBill.png";
 import TopUpLogo from "../assets/Finance-assets/TopUp.png";
 import ScanLogo from "../assets/Finance-assets/Scan.png";
 import TransferLogo from "../assets/Finance-assets/Transfer.png";
 import PayerLogo from "../assets/Finance-assets/Payers.png";
 import PayeeLogo from "../assets/Finance-assets/Payee.png";
-import NotificationButton from "../assets/NotificationButton.png";
-import backToRoomButton from "../assets/back-to-room-button.png";
-import { NavigationContainer } from "@react-navigation/native";
 
 export default function FinanceScreen({ navigation }) {
   const [budget, setBudget] = useState(100);
@@ -29,18 +29,9 @@ export default function FinanceScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.menuBarStyle}>
-        <TouchableOpacity
-          style={{ alignSelf: "flex-start", flexDirection: "row", right: 15 }}
-          onPress={navigation.goBack}
-        >
-          <Image source={backToRoomButton}></Image>
-          <Text style={styles.backToRoomButtonStyle}>home</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={{ alignSelf: "flex-end" }}>
-          <Image source={NotificationButton}></Image>
-        </TouchableOpacity>
-      </View>
+      
+      <MenuBar navigation = {navigation} />
+      
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
@@ -197,17 +188,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  menuBarStyle: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    width: "90%",
-  },
-  backToRoomButtonStyle: {
-    color: "#E16363",
-    fontSize: 20,
-    alignSelf: "center",
-    right: 10,
-  },
   scrollView: {
     flex: 1,
     flexDirection: "column",
@@ -219,7 +199,7 @@ const styles = StyleSheet.create({
   balanceText: {
     color: "#E16363",
     fontSize: 20,
-    marginVertical: 10,
+    marginBottom: 10,
   },
   buttonContainer: {
     flexDirection: "row",

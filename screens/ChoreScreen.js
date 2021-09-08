@@ -4,7 +4,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 //header
 import NotificationButton from "../assets/NotificationButton.png";
 import backToRoomButton from "../assets/back-to-room-button.png";
-import { NavigationContainer } from "@react-navigation/native";
 //assets
 import RoommateCard from "../components/ChoreCard";
 import NewChoresButton from "../assets/Chores-assets/Caddbutton.png";
@@ -57,7 +56,6 @@ export default function ChoreScreen({ navigation }) {
     </SafeAreaView>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -70,6 +68,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     width: "90%",
+    position: "absolute",
+    top: 40,
   },
   backToRoomButtonStyle: {
     color: "#E16363",
