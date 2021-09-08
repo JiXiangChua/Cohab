@@ -1,6 +1,5 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { StyleSheet, Image } from "react-native";
 
 import {
   CalendarScreen,
@@ -13,9 +12,6 @@ import {
 } from "../screens";
 import { useLoginContext } from "../LoginContext";
 
-import notificationButton from "../assets/NotificationButton.png";
-import { StackActions } from "@react-navigation/routers";
-
 const RootStack = createNativeStackNavigator();
 export default function RootStackScreen({ navigation }) {
   const { isSignedIn } = useLoginContext();
@@ -24,40 +20,23 @@ export default function RootStackScreen({ navigation }) {
     headerShown: false,
   };
 
-  const screenOptions = {
-    headerStyle: {
-      backgroundColor: "#FFD897",
-      borderWidth: 0,
-      shadowOpacity: 0,
-      elevation: 0,
-      zIndex: 1,
-      shadowColor: "FFD897",
-    },
-    headerTintColor: "#E16363",
-    headerRight: () => (
-      <Image source={notificationButton} style={styles.notificationButton} />
-    ),
-  };
-
   if (!isSignedIn) {
     return (
-      <RootStack.Navigator>
+      <RootStack.Navigator screenOptions = {noHeader}>
         <RootStack.Screen
           name="Login"
           component={LoginScreen}
-          options={noHeader}
         />
         <RootStack.Screen
           name="Register"
           component={RegisterScreen}
-          options={noHeader}
         />
       </RootStack.Navigator>
     );
   } else {
     return(
       <RootStack.Navigator screenOptions = {noHeader}>
-        <RootStack.Screen name="Home" component={HomeScreen} options = {noHeader} />
+        <RootStack.Screen name="Home" component={HomeScreen} />
         <RootStack.Screen name="Calendar" component={CalendarScreen} />
         <RootStack.Screen name="Chore" component={ChoreScreen} />
         <RootStack.Group name="FinanceStack">
@@ -68,14 +47,3 @@ export default function RootStackScreen({ navigation }) {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  backButton: {
-    minHeight: 24,
-    minWidth: 24,
-    resizeMode: "center",
-  },
-  notificationButton: {
-    resizeMode: "center",
-  },
-});
