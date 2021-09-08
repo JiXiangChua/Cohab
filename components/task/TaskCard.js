@@ -8,7 +8,8 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import ProfilePic from "../assets/Finance-assets/Kimberly.png";
+
+import ProfilePic from "../../assets/Finance-assets/Kimberly.png";
 
 export default function TaskCard(props) {
   return (
@@ -23,7 +24,7 @@ export default function TaskCard(props) {
             justifyContent: "space-between",
           }}
         >
-          <Text> Do the dishes</Text>
+          <Text>Do the dishes</Text>
           <Text>Set own deadline</Text>
         </View>
       </View>
