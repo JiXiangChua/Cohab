@@ -6,87 +6,59 @@ import TaskCard from './TaskCard';
 
 export default function MyTasks() {
     return(
-        <View style={styles.taskContainer}>
-          <View
-            style={{
-              width: "100%",
-              height: 50,
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            <Text style={styles.subHeaderText}>Claim Tasks</Text>
-            <Text
-              style={[
-                styles.createNewButton,
-                { position: "absolute", right: 50 },
-              ]}
-            >
-              New Task
-            </Text>
-            <TouchableOpacity
-              style={{ position: "absolute", right: 0, top: 5 }}
-            >
-              <Image
-                source={newTaskButton}
-                style={{ width: 40, height: 40 }}
-              ></Image>
-            </TouchableOpacity>
-          </View>
+        <View style={styles.myTasks}>
 
-          {/* My Task Container */}
-          <View>
-            {/* Swiping Left and Right to display payees and payers */}
-            <View
-              style={{
-                width: "90%",
-                paddingVertical: 5,
-                alignItems: "center",
-              }}
-            >
-              <View
-                style={{ flexDirection: "col", justifyContent: "space-evenly" }}
-              >
-                <TaskCard></TaskCard>
-                <TaskCard></TaskCard>
-              </View>
+            <View style={styles.title}>
+            <Text style={styles.subHeaderText}>Claim Tasks</Text>
+            
+            <TouchableOpacity style={styles.newTask}>
+                <Text style={styles.subHeaderText}>New Task</Text>
+                <Image source={newTaskButton} style={styles.newTaskButton} />
+                {/*icon is a lil off center cause the image is off center. if the new icon is centered it should be centered*/}
+            </TouchableOpacity>
             </View>
-          </View>
+
+            <View style={styles.tasksContainer}>
+                <TaskCard />
+                <TaskCard />
+            </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: "#FFD897",
-      alignItems: "center",
-      justifyContent: "center",
-      alignItems: "center",
+    myTasks: {
+        marginTop: 20,
+        width: "95%",
+        alignItems: "center",
     },
-    taskText: {
-      color: "#E16363",
-      fontSize: 20,
-      fontWeight: "bold",
-    },
-    taskContainer: {
-      marginTop: 20,
-      width: "95%",
-      alignItems: "center",
+    title: {
+        width: "95%",
+        height: 40,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        marginTop: 10,
+        alignItems: 'center',
     },
     subHeaderText: {
-      fontSize: 24,
-      marginTop: 7,
+        fontSize: 22,
+        alignItems: "center",
     },
-    createNewButton: {
-      fontSize: 24,
-      marginTop: 7,
-      color: "#826335",
+    newTask: {
+        alignItems: 'center',
+        minHeight:40,
+        flexDirection: 'row',
     },
-    sharedTaskDisplayPanel: {
-      width: "100%",
-      height: 400,
-      backgroundColor: "#777",
+    newTaskButton: {
+        minWidth: 30,
+        minHeight: 30,
+        resizeMode: 'center',
     },
-  });
+    tasksContainer: {
+        width: "90%",
+        alignItems: "center",
+        flexDirection: "col",
+        justifyContent: "space-evenly",
+    }
+});
   

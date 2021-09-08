@@ -1,29 +1,47 @@
-import React from 'react';
-import { View , Text ,  TouchableOpacity  , StyleSheet } from 'react-native';
+import React , { useState } from 'react';
+import { View , Text ,  TouchableOpacity  , StyleSheet , Image } from 'react-native';
 import TaskCard from './TaskCard';
+import Kimberly from '../../assets/Finance-assets/Kimberly.png';
 
 export default function SharedTasks() {
+
+  const [currentTab , setCurrentTab] = useState('shared');
+
+  var shared = [styles.shared] ;
+  var completed = [styles.completed];
+
+  if (currentTab === 'shared') {
+    shared.push(styles.currentTab);
+  } else if (currentTab === 'completed') {
+    completed.push(styles.currentTab);
+  }
+
+  function handleShared() {
+    setCurrentTab('shared');
+    console.log(currentTab);
+  }
+
+  function handleCompleted() {
+    setCurrentTab('completed');
+    console.log(currentTab);
+  }
+
   return(
     <View style={styles.taskContainer}>
-          <View
-            style={{
-              width: "100%",
-              height: 50,
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            <Text style={styles.subHeaderText}>Shared</Text>
 
-            <TouchableOpacity>
-              <Text style={styles.createNewButton}>Completed</Text>
+          <View style={styles.title}>
+            <TouchableOpacity style = {shared} onPress = {handleShared}>
+              <Text style={styles.subHeaderText}>Shared</Text>
+              <Image source = {Kimberly} style = {styles.profileImage} />
             </TouchableOpacity>
+              <TouchableOpacity style={completed} onPress = {handleCompleted}>
+                  <Text style={styles.subHeaderText}>Completed</Text>
+              </TouchableOpacity>
           </View>
 
           {/* Shared Task Container */}
-          <View>
-            {/* Swiping Left and Right to display payees and payers */}
-            <View style={[styles.sharedTaskDisplayPanel]}>
+          <View style = {styles.backgroundContainer}>
+            <View style = {styles.taskCardContainer}>
               <TaskCard></TaskCard>
               <TaskCard></TaskCard>
             </View>
@@ -33,35 +51,55 @@ export default function SharedTasks() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#FFD897",
-    alignItems: "center",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  taskText: {
-    color: "#E16363",
-    fontSize: 20,
-    fontWeight: "bold",
-  },
   taskContainer: {
     marginTop: 20,
     width: "95%",
     alignItems: "center",
   },
+  title: {
+    width: "95%",
+    height: 50,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 10,
+    alignItems: 'center',
+    
+  },
+  shared: {
+    alignItems: 'center',
+    padding: 5,
+    maxWidth: 200,
+    height: 50,
+    flexDirection: "row",
+  },
+  currentTab: {
+    backgroundColor: '#E16363',
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
+  },
+  completed: {
+    minHeight: 50,
+    padding: 5,
+    alignItems: 'center',
+    flexDirection:' row',
+  },
+  profileImage: {
+    marginLeft: 10,
+    minWidth: 40,
+    minHeight: 40,
+    resizeMode: 'center',
+  },
   subHeaderText: {
-    fontSize: 24,
-    marginTop: 7,
+    fontSize: 22,
+    alignItems: "center",
   },
-  createNewButton: {
-    fontSize: 24,
-    marginTop: 7,
-    color: "#826335",
+  backgroundContainer: {
+    width: '100%',
+    backgroundColor: '#E16363',
+    borderRadius: 8,
+    alignItems: 'center',
   },
-  sharedTaskDisplayPanel: {
-    width: "100%",
-    height: 400,
-    backgroundColor: "#777",
+  taskCardContainer: {
+    width: '90%',
   },
 });

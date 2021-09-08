@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Text,
   StyleSheet,
@@ -15,7 +15,7 @@ export default function TaskScreen({ navigation }) {
     <SafeAreaView style={styles.container}>
       <MenuBar navigation = {navigation} />
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollViewStyle}>
-        <Text style={styles.taskText}> Tasks </Text>
+        <Text style = {styles.taskText}> Tasks </Text>
         <MyTasks />
         <SharedTasks />
       </ScrollView>
