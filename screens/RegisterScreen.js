@@ -1,6 +1,8 @@
 import React , { useState } from "react";
-import { StyleSheet , Text , TextInput , Image , TouchableOpacity } from "react-native";
+import { StyleSheet , Text , TextInput , Image , TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useLoginContext } from "../LoginContext";
+import Dialog, {DialogButton,DialogFooter,ScaleAnimation, DialogTitle,DialogContent } from 'react-native-popup-dialog';
 import logo from "../assets/logo.png";
 
 export default function RegisterScreen({ navigation }) {
@@ -8,9 +10,12 @@ export default function RegisterScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
+  const [visible, setVisible] = useState(false);
+  const [message, setMessage] = useState("");
+  const { setIsSignedIn } = useLoginContext();
 
   function signup() {
-    const registerURL = 'http://localhost:9999/cohab/register';
+    const registerURL = 'http://10.27.124.66:9999/cohab/register';
 
     const registerPackage = {
       email: email,
@@ -24,16 +29,36 @@ export default function RegisterScreen({ navigation }) {
       body: JSON.stringify(registerPackage)
     };
 
-    ;(async () => {
-      try {
-        const response = await fetch(registerURL , init);
-        const json = response.json();
-        console.log(json);
-        goToLogin();
-      } catch (error) {
-        console.log(error);
+
+    if(username==""||email==""||password==""||password2==""){
+      setMessage("Please fill in all the required field.");
+      setVisible(true);
+    }
+    else{
+      if(password==password2){
+        ;(async () => {
+          try {
+            const response = await fetch(registerURL , init);
+            const json = await response.json();
+            console.log(json);
+            if(json.status=="OK"){
+              setIsSignedIn(true);
+              navigation.navigate('Home');
+            }
+            else{
+              setMessage(json.status);
+              setVisible(true);
+            }
+          } catch (error) {
+            console.log(error);
+          }
+        })();
       }
-    })();
+      else{
+        setMessage("Passwords don't match.");
+        setVisible(true);
+      }
+    }
   }
 
   function goToLogin() {
@@ -42,6 +67,33 @@ export default function RegisterScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
+      <View>
+      <Dialog
+        visible={visible}
+        onTouchOutside={() => {
+          setVisible(false);
+        }}
+        dialogTitle={<DialogTitle title="Error Message" />}
+        dialogAnimation={new ScaleAnimation({
+          initialValue: 0, // optional
+          useNativeDriver: true, // optional
+        })}
+        footer={
+          <DialogFooter>
+            <>
+            <DialogButton
+              text="DISMISS"
+              onPress={() => {setVisible(false);}}
+            />
+            </>
+          </DialogFooter>
+        }
+      >
+      <DialogContent>
+        <Text>{message}</Text>
+      </DialogContent>
+      </Dialog>
+    </View>
       <Image source={logo} style={styles.logo} />
       <TextInput
         style={styles.inputField}
@@ -77,6 +129,7 @@ export default function RegisterScreen({ navigation }) {
       </TouchableOpacity>
     </SafeAreaView>
   );
+
 }
 
 const styles = StyleSheet.create({
@@ -88,7 +141,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: "#FFD897",
+    backgroundColor: "#FFD692",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -107,7 +160,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   buttonText: {
-    color: "#FFD897",
+    color: "#FFD692",
     textAlign: "center",
     fontSize: 18,
   },

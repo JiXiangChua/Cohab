@@ -1,24 +1,57 @@
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  Image,
-} from "react-native";
+import {StyleSheet,Text,TextInput,TouchableOpacity,Image,View} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import logo from "../assets/logo.png";
-import NotificationButton from '../assets/NotificationButton.png';
-import backButton from '../assets/back-to-room-button.png';
+import Dialog, {DialogTitle,DialogContent,DialogFooter,DialogButton,SlideAnimation,ScaleAnimation,}
+ from 'react-native-popup-dialog';
 import { useLoginContext } from "../LoginContext";
 
 export default function LoginScreen({ navigation }) {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [visible, setVisible] = useState(false);
+  const [message, setMessage] = useState("");
   const { setIsSignedIn } = useLoginContext();
   
   function login() {
-    setIsSignedIn(true);
+    const loginURL = 'http://10.27.124.66:9999/cohab/login';
+
+    const loginPackage = {
+      email: email,
+      password: password
+    };
+
+    const init = {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' , 'Content-Type': 'application/json' },
+      body: JSON.stringify(loginPackage)
+    };
+
+    if(email!=""&&password!=""){
+      ;(async () => {
+        try {
+          const response = await fetch(loginURL , init);
+          const json = await response.json();
+          console.log(json);
+          if(json.status=="OK"){
+            setIsSignedIn(true);
+            navigation.navigate('Home');
+          }
+          else{
+            setMessage(json.status);
+            setVisible(true);
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      })();
+    }
+    else{
+      setMessage("Please key in the email and password.");
+      setVisible(true);
+    }
+
+    
   }
 
   function goToRegister() {
@@ -27,12 +60,38 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
+      <View>
+      <Dialog
+        visible={visible}
+        onTouchOutside={() => {
+          setVisible(false);
+        }}
+        dialogTitle={<DialogTitle title="Error Message" />}
+        dialogAnimation={new ScaleAnimation({
+          initialValue: 0, // optional
+          useNativeDriver: true, // optional
+        })}
+        footer={
+          <DialogFooter>
+            <DialogButton
+              text="DISMISS"
+              onPress={() => {setVisible(false);}}
+            />
+          </DialogFooter>
+        }
+      >
+      <DialogContent>
+        <Text>{message}</Text>
+      </DialogContent>
+      </Dialog>
+    </View>
+    
       <Image source={logo} style={styles.logo} />
       <TextInput
         style={styles.inputField}
-        placeholder="Username/Email"
-        onChangeText={(username) => setUsername(username)}
-        defaultValue={username}
+        placeholder="Email"
+        onChangeText={(email) => setEmail(email)}
+        defaultValue={email}
       />
       <TextInput
         style={styles.inputField}
@@ -60,7 +119,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: "#FFD897",
+    backgroundColor: "#FFD692",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -79,7 +138,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   buttonText: {
-    color: "#FFD897",
+    color: "#FFD692",
     textAlign: "center",
     fontSize: 18,
   },
