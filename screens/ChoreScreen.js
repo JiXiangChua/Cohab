@@ -6,13 +6,12 @@ import NotificationButton from "../assets/NotificationButton.png";
 import backToRoomButton from "../assets/back-to-room-button.png";
 import { NavigationContainer } from "@react-navigation/native";
 //assets
-import NewChoresButton from "../assets/Chores-assets/addchorebutton.png";
+import RoommateCard from "../components/ChoreCard";
+import NewChoresButton from "../assets/Chores-assets/Caddbutton.png";
 
 export default function ChoreScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
-
-      {/*header*/}
       <View style={styles.menuBarStyle}>
         <TouchableOpacity
           style={{ alignSelf: "flex-start", flexDirection: "row", right: 15 }}
@@ -25,7 +24,6 @@ export default function ChoreScreen({ navigation }) {
           <Image source={NotificationButton}></Image>
         </TouchableOpacity>
       </View>
-
       {/*stuff*/}
       <ScrollView
       showsVerticalScrollIndicator={false}
@@ -35,13 +33,27 @@ export default function ChoreScreen({ navigation }) {
       }}>
         <Text style={styles.choreText}> Chores </Text>
         <View style={styles.choreContainer}>
-          <TouchableOpacity>
           <Text style={styles.chorenewText}>New Chore</Text>
-          <Image source={NewChoresButton} style={styles.addchoreButton}></Image>
+          <TouchableOpacity style={{ position: "absolute", right: 30}}>
+            <Image source={NewChoresButton}></Image>
           </TouchableOpacity>
         </View>
+        {/* Roommate Bill Container */}
+      <View
+        style={{
+          width: "95%",
+          paddingVertical: 5,
+          alignItems: "center",
+        }}>
+        <RoommateCard
+          duedate="14/7"
+          dutyname="Wash the dishes"
+          description="It's your turn!"
+          choretype="Weekly"
+          status="True"
+        ></RoommateCard>
+      </View>
       </ScrollView>
-
     </SafeAreaView>
   );
 }
@@ -70,24 +82,23 @@ const styles = StyleSheet.create({
     flexDirection: "column",
   },
   choreText: {
-    fontFamily: "Montserrat-Regular",
+    flexWrap: "wrap",
+    //fontFamily: "Montserrat-Regular",
     color: "#E16363",
     fontSize: 20,
     marginVertical: 10,
   },
-  chorenewText: {
-    fontFamily: "Montserrat-Regular",
-    color: "#826335",
-    fontSize: 18,
-  },
-  addchoreButton: {
-    height: "10px",
-    width: "10px",
-    alignSelf: "center",
-  },
   choreContainer: {
     width: "95%",
-    height: 80,
+    height: 30,
     flexDirection: "row",
+  },
+  chorenewText: {
+    //fontFamily: "Montserrat-Regular",
+    position: "absolute", 
+    right: 60,
+    flexWrap: "wrap",
+    color: "#826335",
+    fontSize: 18,
   },
 });
