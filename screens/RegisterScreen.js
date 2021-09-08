@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: "#FFD692",
+    backgroundColor: "#FFD897",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   buttonText: {
-    color: "#FFD692",
+    color: "#FFD897",
     textAlign: "center",
     fontSize: 18,
   },

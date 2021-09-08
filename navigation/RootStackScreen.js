@@ -40,7 +40,7 @@ export default function RootStackScreen ({ navigation }) {
     );
   } else {
     return(
-      <RootStack.Navigator screenOptions = {screenOptions}>
+      <RootStack.Navigator screenOptions = {noHeader}>
         <RootStack.Screen name="Home" component={HomeScreen} options = {noHeader} />
         <RootStack.Screen name="Calendar" component={CalendarScreen} />
         <RootStack.Screen name="Chore" component={ChoreScreen} />
