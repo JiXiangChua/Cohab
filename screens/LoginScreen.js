@@ -35,7 +35,6 @@ export default function LoginScreen({ navigation }) {
           console.log(json);
           if(json.status=="OK"){
             setIsSignedIn(true);
-            navigation.navigate('Home');
           }
           else{
             setMessage(json.status);
@@ -54,9 +53,13 @@ export default function LoginScreen({ navigation }) {
     
   }
 
+  function cheatLogin() {
+    setIsSignedIn(true);
+  };
+
   function goToRegister() {
     navigation.navigate('Register');
-  }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -100,6 +103,9 @@ export default function LoginScreen({ navigation }) {
         defaultValue={password}
         secureTextEntry={true}
       />
+      <TouchableOpacity style={styles.button} onPress={cheatLogin}>
+        <Text style={styles.buttonText}>Cheater Log In</Text>
+      </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={login}>
         <Text style={styles.buttonText}>Log In</Text>
       </TouchableOpacity>
