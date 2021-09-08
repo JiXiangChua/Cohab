@@ -9,13 +9,12 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-
-import NotificationButton from "../assets/NotificationButton.png";
-import backToRoomButton from "../assets/back-to-room-button.png";
+import MenuBar from "../components/MenuBar";
 
 export default function ChoreScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
+      <MenuBar navigation = {navigation} />
       <ScrollView>
         {/* Write Your code here */}
         <Text>Hello to Chore Screen</Text>

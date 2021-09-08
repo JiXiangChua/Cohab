@@ -16,7 +16,7 @@ import newTaskButton from "../assets/Task-assets/NewTaskButton.png";
 export default function TaskScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
-      {/* <MenuBar navigation = {navigation} /> */}
+      <MenuBar navigation = {navigation} />
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
