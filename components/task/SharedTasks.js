@@ -1,53 +1,51 @@
-import React , { useState } from 'react';
-import { View , Text ,  TouchableOpacity  , StyleSheet , Image } from 'react-native';
-import TaskCard from './TaskCard';
-import Kimberly from '../../assets/Finance-assets/Kimberly.png';
+import React, { useState } from "react";
+import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
+import TaskCard from "./TaskCard";
+import Kimberly from "../../assets/Finance-assets/Kimberly.png";
 
 export default function SharedTasks() {
+  const [currentTab, setCurrentTab] = useState("shared");
 
-  const [currentTab , setCurrentTab] = useState('shared');
-
-  var shared = [styles.shared] ;
+  var shared = [styles.shared];
   var completed = [styles.completed];
 
-  if (currentTab === 'shared') {
+  if (currentTab === "shared") {
     shared.push(styles.currentTab);
-  } else if (currentTab === 'completed') {
+  } else if (currentTab === "completed") {
     completed.push(styles.currentTab);
   }
 
   function handleShared() {
-    setCurrentTab('shared');
+    setCurrentTab("shared");
     console.log(currentTab);
   }
 
   function handleCompleted() {
-    setCurrentTab('completed');
+    setCurrentTab("completed");
     console.log(currentTab);
   }
 
-  return(
+  return (
     <View style={styles.taskContainer}>
+      <View style={styles.title}>
+        <TouchableOpacity style={shared} onPress={handleShared}>
+          <Text style={styles.subHeaderText}>Shared</Text>
+          <Image source={Kimberly} style={styles.profileImage} />
+        </TouchableOpacity>
+        <TouchableOpacity style={completed} onPress={handleCompleted}>
+          <Text style={styles.subHeaderText}>Completed</Text>
+        </TouchableOpacity>
+      </View>
 
-          <View style={styles.title}>
-            <TouchableOpacity style = {shared} onPress = {handleShared}>
-              <Text style={styles.subHeaderText}>Shared</Text>
-              <Image source = {Kimberly} style = {styles.profileImage} />
-            </TouchableOpacity>
-              <TouchableOpacity style={completed} onPress = {handleCompleted}>
-                  <Text style={styles.subHeaderText}>Completed</Text>
-              </TouchableOpacity>
-          </View>
-
-          {/* Shared Task Container */}
-          <View style = {styles.backgroundContainer}>
-            <View style = {styles.taskCardContainer}>
-              <TaskCard></TaskCard>
-              <TaskCard></TaskCard>
-            </View>
-          </View>
+      {/* Shared Task Container */}
+      <View style={styles.backgroundContainer}>
+        <View style={styles.taskCardContainer}>
+          <TaskCard></TaskCard>
+          <TaskCard></TaskCard>
         </View>
-  )
+      </View>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -62,44 +60,43 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     marginTop: 10,
-    alignItems: 'center',
-    
+    alignItems: "center",
   },
   shared: {
-    alignItems: 'center',
+    alignItems: "center",
     padding: 10,
     maxWidth: 200,
     height: 50,
     flexDirection: "row",
   },
   currentTab: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
   },
   completed: {
     minHeight: 50,
     padding: 10,
-    alignItems: 'center',
-    flexDirection:' row',
+    alignItems: "center",
+    flexDirection: "row",
   },
   profileImage: {
     marginLeft: 10,
     minWidth: 40,
     minHeight: 40,
-    resizeMode: 'center',
+    resizeMode: "center",
   },
   subHeaderText: {
     fontSize: 22,
     alignItems: "center",
   },
   backgroundContainer: {
-    width: '100%',
-    backgroundColor: 'white',
+    width: "100%",
+    backgroundColor: "white",
     borderRadius: 8,
-    alignItems: 'center',
+    alignItems: "center",
   },
   taskCardContainer: {
-    width: '90%',
+    width: "90%",
   },
 });

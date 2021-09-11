@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -8,16 +8,59 @@ import {
   ScrollView,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-
 import MenuBar from "../components/MenuBar";
+import MyCalendar from "../components/MyCalendar";
+import EventCard from "../components/EventCard";
 
 export default function CalendarScreen({ navigation }) {
+  //holds an array of objects
+  const [event, setEvent] = useState([
+    {
+      eventName: "Award Ceremony",
+      eventDate: "MON, 20SEP",
+      eventTime: "2.30pm to 4.30pm",
+      eventLocation: "NTU",
+      important: true,
+    },
+    {
+      eventName: "Party",
+      eventDate: "FRI, 16 SEP",
+      eventTime: "5pm",
+      eventLocation: "Adam's house",
+      important: false,
+    },
+    {
+      eventName: "Hiking trail @ hillview",
+      eventDate: "SAT, 10 SEP",
+      eventTime: "9am",
+      eventLocation: "NTU",
+      important: false,
+    },
+  ]);
+
   return (
     <SafeAreaView style={styles.container}>
-      <MenuBar navigation = {navigation} />
-      <ScrollView>
-        {/* Write Your code here */}
-        <Text>Hello to Calendar Screen</Text>
+      <MenuBar navigation={navigation} />
+      <ScrollView showsVerticalScrollIndicator={false} style={{ width: "90%" }}>
+        <Text style={styles.calendarText}>Calendar</Text>
+        <View style={{ width: "100%", marginVertical: 10 }}>
+          <MyCalendar></MyCalendar>
+        </View>
+        <View style={styles.eventContainer}>
+          <Text style={styles.headerText}>Upcoming Events</Text>
+          {event.map((eventItem, index) => {
+            return (
+              <EventCard
+                key={index}
+                eventName={eventItem.eventName}
+                eventDate={eventItem.eventDate}
+                eventTime={eventItem.eventTime}
+                eventLocation={eventItem.eventLocation}
+                importantStatus={eventItem.important}
+              ></EventCard>
+            );
+          })}
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -43,5 +86,22 @@ const styles = StyleSheet.create({
     fontSize: 20,
     alignSelf: "center",
     right: 10,
+  },
+  calendarText: {
+    color: "#E16363",
+    fontSize: 20,
+    marginBottom: 10,
+    alignSelf: "center",
+  },
+  eventContainer: {
+    width: "100%",
+    height: 400,
+    marginTop: 10,
+    marginBottom: 20,
+  },
+  headerText: {
+    fontSize: 18,
+    color: "#826335",
+    fontWeight: "bold",
   },
 });
