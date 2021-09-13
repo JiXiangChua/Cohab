@@ -6,35 +6,46 @@ import NotificationButton from "../assets/NotificationButton.png";
 export default function MenuBar({ navigation }) {
     return(
         <View style={styles.menuBar}>
-            <TouchableOpacity
-                style={{ alignSelf: "flex-start", flexDirection: "row", right: 15 }}
-                onPress={navigation.goBack}
-            >
-                <Image source={backButton} style = {styles.walletButtonLogo}></Image>
-                <Text style={styles.backToRoomButtonStyle}>Home</Text>
+            <TouchableOpacity style={styles.backButton} onPress={navigation.goBack}>
+                <Image source={backButton} style = {styles.backButtonLogo} />
+                <Text style={styles.backButtonText}>Home</Text>
             </TouchableOpacity >
-            <TouchableOpacity style={{ alignSelf: "flex-end" }}>
-                <Image source={NotificationButton} style = {styles.walletButtonLogo}></Image>
+            <TouchableOpacity style={styles.notificationButton}>
+                <Image source={NotificationButton} style = {styles.notificationButtonLogo} />
             </TouchableOpacity>
       </View>
     )
 }
 
 const styles = StyleSheet.create({
-    walletButtonLogo: {
-        minHeight: 40,
-        minWidth: 40,
-        resizeMode: "center",
-      },
     menuBar: {
+        padding: 10,
         flexDirection: "row",
         justifyContent: "space-between",
         width: "100%",
     },
-    backToRoomButtonStyle: {
+    backButton: {
+        alignSelf: "flex-start",
+        flexDirection: "row",
+        right: 15,
+    },
+    backButtonLogo: {
+        minHeight: 40,
+        minWidth: 40,
+        resizeMode: "center",
+    },
+    backButtonText: {
         color: "#E16363",
         fontSize: 20,
         alignSelf: "center",
         right: 10,
+    },
+    notificationButton: {
+        alignSelf: 'flex-end',
+    },
+    notificationButtonLogo: {
+        minHeight: 40,
+        minWidth: 40,
+        resizeMode: "center",
     },
 });
