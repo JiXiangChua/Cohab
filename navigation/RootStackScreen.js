@@ -10,6 +10,7 @@ import {
   RegisterScreen,
   TaskScreen,
 } from "../screens";
+import NavigationDrawer from "./NavigationDrawer";
 import { useLoginContext } from "../LoginContext";
 
 const RootStack = createNativeStackNavigator();
@@ -38,7 +39,7 @@ export default function RootStackScreen({ navigation }) {
       <RootStack.Navigator screenOptions = {noHeader}>
         <RootStack.Screen name="Home" component={HomeScreen} />
         <RootStack.Screen name="Calendar" component={CalendarScreen} />
-        <RootStack.Screen name="Chore" component={ChoreScreen} />
+        <RootStack.Screen name="Chore" component={NavigationDrawer} />
         <RootStack.Group name="FinanceStack">
           <RootStack.Screen name="Finance" component={FinanceScreen} />
         </RootStack.Group>
