@@ -1,33 +1,29 @@
 import React from "react";
-import { Button, View } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+
+import {
+  CalendarScreen,
+  ChoreScreen,
+  FinanceScreen,
+  HomeScreen,
+  TaskScreen,
+} from "../screens";
 
 const Drawer = createDrawerNavigator();
 
 export default function NavigationDrawer() {
+  
+  const noHeader = {
+    headerShown: false,
+  };
+
   return (
-    <Drawer.Navigator initialRouteName="Home">
+    <Drawer.Navigator initialRouteName="Home" screenOptions = {noHeader}>
       <Drawer.Screen name="Home" component={HomeScreen} />
-      <Drawer.Screen name="Notifications" component={NotificationsScreen} />
+      <Drawer.Screen name="Calendar" component={CalendarScreen} />
+      <Drawer.Screen name="Chore" component={ChoreScreen} />
+      <Drawer.Screen name="Finance" component={FinanceScreen} />
+      <Drawer.Screen name="Task" component={TaskScreen} />
     </Drawer.Navigator>
-  );
-}
-
-function HomeScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button
-        onPress={() => navigation.navigate('Notifications')}
-        title="Go to notifications"
-      />
-    </View>
-  );
-}
-
-function NotificationsScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button onPress={() => navigation.goBack()} title="Go back home" />
-    </View>
   );
 }

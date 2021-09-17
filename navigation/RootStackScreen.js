@@ -2,13 +2,8 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import {
-  CalendarScreen,
-  ChoreScreen,
-  FinanceScreen,
-  HomeScreen,
   LoginScreen,
   RegisterScreen,
-  TaskScreen,
 } from "../screens";
 import NavigationDrawer from "./NavigationDrawer";
 import { useLoginContext } from "../LoginContext";
@@ -36,15 +31,7 @@ export default function RootStackScreen({ navigation }) {
     );
   } else {
     return(
-      <RootStack.Navigator screenOptions = {noHeader}>
-        <RootStack.Screen name="Home" component={HomeScreen} />
-        <RootStack.Screen name="Calendar" component={CalendarScreen} />
-        <RootStack.Screen name="Chore" component={NavigationDrawer} />
-        <RootStack.Group name="FinanceStack">
-          <RootStack.Screen name="Finance" component={FinanceScreen} />
-        </RootStack.Group>
-        <RootStack.Screen name="Task" component={TaskScreen} />
-      </RootStack.Navigator>
+      <NavigationDrawer />
     );
   }
 }
