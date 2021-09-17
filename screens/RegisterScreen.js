@@ -73,25 +73,18 @@ export default function RegisterScreen({ navigation }) {
         onTouchOutside={() => {
           setVisible(false);
         }}
-        dialogTitle={<DialogTitle title="Error Message" />}
         dialogAnimation={new ScaleAnimation({
           initialValue: 0, // optional
           useNativeDriver: true, // optional
         })}
-        footer={
-          <DialogFooter>
-            <>
-            <DialogButton
-              text="DISMISS"
-              onPress={() => {setVisible(false);}}
-            />
-            </>
-          </DialogFooter>
-        }
       >
-      <DialogContent>
-        <Text>{message}</Text>
-      </DialogContent>
+        <DialogTitle title="Error Message" />
+        <DialogContent>
+          <Text>{message}</Text>
+        </DialogContent>
+        <DialogFooter>
+          <DialogButton text="DISMISS" onPress={() => {setVisible(false);}} />
+        </DialogFooter>
       </Dialog>
     </View>
       <Image source={logo} style={styles.logo} />
