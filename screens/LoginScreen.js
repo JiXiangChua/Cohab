@@ -27,7 +27,7 @@ export default function LoginScreen({ navigation }) {
       body: JSON.stringify(loginPackage)
     };
 
-    if(email!=""&&password!=""){
+    if (email!=""&&password!="") {
       ;(async () => {
         try {
           const response = await fetch(loginURL , init);
@@ -45,12 +45,10 @@ export default function LoginScreen({ navigation }) {
         }
       })();
     }
-    else{
-      setMessage("Please key in the email and password.");
+    else {
+      setMessage("Please enter your email and password.");
       setVisible(true);
     }
-
-    
   }
 
   function cheatLogin() {
@@ -63,31 +61,24 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View>
       <Dialog
         visible={visible}
         onTouchOutside={() => {
           setVisible(false);
         }}
-        dialogTitle={<DialogTitle title="Error Message" />}
         dialogAnimation={new ScaleAnimation({
           initialValue: 0, // optional
           useNativeDriver: true, // optional
         })}
-        footer={
-          <DialogFooter>
-            <DialogButton
-              text="DISMISS"
-              onPress={() => {setVisible(false);}}
-            />
-          </DialogFooter>
-        }
       >
-      <DialogContent>
-        <Text>{message}</Text>
-      </DialogContent>
+        <DialogTitle title="Error Message" />
+        <DialogContent>
+          <Text>{message}</Text>
+        </DialogContent>
+        <DialogFooter>
+          <DialogButton text="DISMISS" onPress={() => {setVisible(false);}} />
+        </DialogFooter>
       </Dialog>
-    </View>
     
       <Image source={logo} style={styles.logo} />
       <TextInput
