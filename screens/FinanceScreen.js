@@ -10,8 +10,8 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import MenuBar from "../components/MenuBar";
-import RoommateCard from "../components/RoommateCard";
-import GroupPayCard from "../components/GroupPayCard";
+import RoommateCard from "../components/finance/RoommateCard";
+import GroupPayCard from "../components/finance/GroupPayCard";
 
 import addBillButton from "../assets/Finance-assets/AddBill.png";
 import TopUpLogo from "../assets/Finance-assets/TopUp.png";
@@ -29,9 +29,8 @@ export default function FinanceScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      
-      <MenuBar navigation = {navigation} />
-      
+      <MenuBar navigation={navigation} />
+
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{

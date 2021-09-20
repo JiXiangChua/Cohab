@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import ProfilePic from "../assets/Finance-assets/Kimberly.png";
+import ProfilePic from "../../assets/Finance-assets/Kimberly.png";
 
 export default function RoommateCard(props) {
   return (
