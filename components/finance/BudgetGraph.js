@@ -20,9 +20,9 @@ export default function BudgetGraph() {
             justifyContent: "space-evenly",
           }}
         >
-          <View
-            style={[styles.barChart, { backgroundColor: "#F6A9A9" }]}
-          ></View>
+          <View style={[styles.barChart, { backgroundColor: "#F6A9A9" }]}>
+            <Text>Hello</Text>
+          </View>
           <View
             style={[styles.barChart, { backgroundColor: "#FFBF86" }]}
           ></View>
