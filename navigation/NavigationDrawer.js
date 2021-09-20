@@ -9,6 +9,8 @@ import {
   TaskScreen,
 } from "../screens";
 
+import CustomDrawerContent from "../components/CustomDrawerContent";
+
 const Drawer = createDrawerNavigator();
 
 export default function NavigationDrawer() {
