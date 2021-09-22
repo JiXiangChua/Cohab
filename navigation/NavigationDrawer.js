@@ -15,12 +15,19 @@ const Drawer = createDrawerNavigator();
 
 export default function NavigationDrawer() {
   
-  const noHeader = {
+  const screenOptions = {
     headerShown: false,
+    drawerStyle: {
+      backgroundColor: '#6E2142',
+    },
+    drawerLabelStyle: {
+      color: '#FFD897',
+    },
+    drawerActiveTintColor: '#F7DBF0',
   };
 
   return (
-    <Drawer.Navigator initialRouteName="Home" screenOptions = {noHeader}>
+    <Drawer.Navigator initialRouteName="Home" screenOptions = {screenOptions}>
       <Drawer.Screen name="Home" component={HomeScreen} />
       <Drawer.Screen name="Calendar" component={CalendarScreen} />
       <Drawer.Screen name="Chore" component={ChoreScreen} />
