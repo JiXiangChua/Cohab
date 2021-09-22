@@ -1,13 +1,12 @@
 import React from "react";
 import {
-  View,
-  Text,
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from 'react-native-safe-area-context'
 
+import BasicText from "../components/BasicText";
 import HomeScreenHeader from "../components/HomeScreenHeader";
 
 export default function HomeScreen({ navigation }) {
@@ -35,19 +34,19 @@ export default function HomeScreen({ navigation }) {
       
       <ScrollView contentContainerStyle = {styles.scrollView}>
         <TouchableOpacity style={styles.buttonContainer} onPress={goToFinance}>
-          <Text style = {styles.buttonText}>GO TO FINANCE</Text>
+          <BasicText style = {styles.buttonText}>GO TO FINANCE</BasicText>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.buttonContainer} onPress={goToTask}>
-          <Text style = {styles.buttonText}>GO TO TASK</Text>
+          <BasicText style = {styles.buttonText}>GO TO TASK</BasicText>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.buttonContainer} onPress={goToChore}>
-          <Text style = {styles.buttonText}>GO TO CHORE</Text>
+          <BasicText style = {styles.buttonText}>GO TO CHORE</BasicText>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.buttonContainer} onPress={goToCalandar}>
-          <Text style = {styles.buttonText}>GO TO CALENDAR</Text>
+          <BasicText style = {styles.buttonText}>GO TO CALENDAR</BasicText>
         </TouchableOpacity>
       </ScrollView>
 
