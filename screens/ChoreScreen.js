@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import {View,Text,StyleSheet,TouchableOpacity,Image,ScrollView} from "react-native";
+import {View , StyleSheet , TouchableOpacity , Image , ScrollView} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-//header
-import MenuBar from "../components/MenuBar";
+
+//components
+import { MenuBar , ChoreCard , BasicText } from "../components";
 //assets
-import RoommateCard from "../components/ChoreCard";
 import NewChoresButton from "../assets/Chores-assets/Caddbutton.png";
 
 export default function ChoreScreen({ navigation }) {
@@ -18,9 +18,9 @@ export default function ChoreScreen({ navigation }) {
         justifyContent: "center",
         alignItems: "center",
       }}>
-        <Text style={styles.choreText}> Chores </Text>
+        <BasicText style={styles.choreText}> Chores </BasicText>
         <View style={styles.choreContainer}>
-          <Text style={styles.chorenewText}>New Chore</Text>
+          <BasicText style={styles.chorenewText}>New Chore</BasicText>
           <TouchableOpacity style={{ position: "absolute", right: 30}}>
             <Image source={NewChoresButton}></Image>
           </TouchableOpacity>
@@ -32,13 +32,13 @@ export default function ChoreScreen({ navigation }) {
           paddingVertical: 5,
           alignItems: "center",
         }}>
-        <RoommateCard
+        <ChoreCard
           duedate="14/7"
           dutyname="Wash the dishes"
           description="It's your turn!"
           choretype="Weekly"
           status="True"
-        ></RoommateCard>
+        ></ChoreCard>
       </View>
       </ScrollView>
     </SafeAreaView>

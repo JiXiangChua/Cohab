@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import {StyleSheet,Text,TextInput,TouchableOpacity,Image,View} from "react-native";
+import { StyleSheet , TextInput , TouchableOpacity , Image , View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import logo from "../assets/logo.png";
 import Dialog, {DialogTitle,DialogContent,DialogFooter,DialogButton,SlideAnimation,ScaleAnimation,}
  from 'react-native-popup-dialog';
+
 import { useLoginContext } from "../LoginContext";
+
+import { BasicText } from "../components";
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
@@ -73,7 +76,7 @@ export default function LoginScreen({ navigation }) {
       >
         <DialogTitle title="Error Message" />
         <DialogContent>
-          <Text>{message}</Text>
+          <BasicText>{message}</BasicText>
         </DialogContent>
         <DialogFooter>
           <DialogButton text="DISMISS" onPress={() => {setVisible(false);}} />
@@ -95,13 +98,13 @@ export default function LoginScreen({ navigation }) {
         secureTextEntry={true}
       />
       <TouchableOpacity style={styles.button} onPress={cheatLogin}>
-        <Text style={styles.buttonText}>Cheater Log In</Text>
+        <BasicText style={styles.buttonText}>Cheater Log In</BasicText>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={login}>
-        <Text style={styles.buttonText}>Log In</Text>
+        <BasicText style={styles.buttonText}>Log In</BasicText>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={goToRegister}>
-        <Text style={styles.buttonText}>Sign Up</Text>
+        <BasicText style={styles.buttonText}>Sign Up</BasicText>
       </TouchableOpacity>
     </SafeAreaView>
   );
