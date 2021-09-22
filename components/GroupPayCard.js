@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import ProfilePic from "../assets/Finance-assets/Kimberly.png";
 import nextButtonLogo from "../assets/Finance-assets/NextButton.png";
 
-export default function RoommateCard(props) {
+export default function GroupPayCard(props) {
   var [paidStatus, setPaidStatus] = useState(true);
   var [paidPercent, setPaidPercent] = useState(70);
 

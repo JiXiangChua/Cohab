@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import {View,Text,StyleSheet,TouchableOpacity,Image,ScrollView} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-//header
-import MenuBar from "../components/MenuBar";
+
+//components
+import { MenuBar , ChoreCard } from "../components";
 //assets
-import RoommateCard from "../components/ChoreCard";
 import NewChoresButton from "../assets/Chores-assets/Caddbutton.png";
 
 export default function ChoreScreen({ navigation }) {
@@ -32,13 +32,13 @@ export default function ChoreScreen({ navigation }) {
           paddingVertical: 5,
           alignItems: "center",
         }}>
-        <RoommateCard
+        <ChoreCard
           duedate="14/7"
           dutyname="Wash the dishes"
           description="It's your turn!"
           choretype="Weekly"
           status="True"
-        ></RoommateCard>
+        ></ChoreCard>
       </View>
       </ScrollView>
     </SafeAreaView>

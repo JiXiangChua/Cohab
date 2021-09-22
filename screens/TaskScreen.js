@@ -6,9 +6,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import MenuBar from "../components/MenuBar";
-import MyTasks from "../components/task/MyTasks";
-import SharedTasks from "../components/task/SharedTasks";
+import { MenuBar , MyTasks , SharedTasks } from "../components";
 
 export default function TaskScreen({ navigation }) {
   return (

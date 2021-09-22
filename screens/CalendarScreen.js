@@ -8,9 +8,8 @@ import {
   ScrollView,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import MenuBar from "../components/MenuBar";
-import MyCalendar from "../components/MyCalendar";
-import EventCard from "../components/EventCard";
+
+import { MenuBar , MyCalendar , EventCard } from "../components";
 
 export default function CalendarScreen({ navigation }) {
   //holds an array of objects

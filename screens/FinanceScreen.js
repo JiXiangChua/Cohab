@@ -9,9 +9,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import MenuBar from "../components/MenuBar";
-import RoommateCard from "../components/RoommateCard";
-import GroupPayCard from "../components/GroupPayCard";
+import { MenuBar , RoommateCard , GroupPayCard } from "../components";
 
 import addBillButton from "../assets/Finance-assets/AddBill.png";
 import TopUpLogo from "../assets/Finance-assets/TopUp.png";

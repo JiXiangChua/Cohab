@@ -11,7 +11,7 @@ import {
 import ProfilePic from "../assets/Finance-assets/Kimberly.png";
 import choreSoap from "../assets/Chores-assets/soap.png";
 
-export default function RoommateCard(props) {
+export default function ChoreCard(props) {
   return (
     <View
       style={[styles.card, styles.shadowProp, {

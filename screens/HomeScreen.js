@@ -6,8 +6,7 @@ import {
 import { ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from 'react-native-safe-area-context'
 
-import BasicText from "../components/BasicText";
-import HomeScreenHeader from "../components/HomeScreenHeader";
+import { BasicText , HomeScreenHeader } from "../components";
 
 export default function HomeScreen({ navigation }) {
 
