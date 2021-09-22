@@ -5,7 +5,10 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from 'react-native-safe-area-context'
+
+import HomeScreenHeader from "../components/HomeScreenHeader";
 
 export default function HomeScreen({ navigation }) {
 
@@ -28,21 +31,25 @@ export default function HomeScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.backgroundContainer}>
 
-      <TouchableOpacity style={styles.buttonContainer} onPress={goToFinance}>
-        <Text style = {styles.buttonText}>GO TO FINANCE</Text>
-      </TouchableOpacity>
+      <HomeScreenHeader navigation = {navigation} />
+      
+      <ScrollView contentContainerStyle = {styles.scrollView}>
+        <TouchableOpacity style={styles.buttonContainer} onPress={goToFinance}>
+          <Text style = {styles.buttonText}>GO TO FINANCE</Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity style={styles.buttonContainer} onPress={goToTask}>
-        <Text style = {styles.buttonText}>GO TO TASK</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.buttonContainer} onPress={goToTask}>
+          <Text style = {styles.buttonText}>GO TO TASK</Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity style={styles.buttonContainer} onPress={goToChore}>
-        <Text style = {styles.buttonText}>GO TO CHORE</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.buttonContainer} onPress={goToChore}>
+          <Text style = {styles.buttonText}>GO TO CHORE</Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity style={styles.buttonContainer} onPress={goToCalandar}>
-        <Text style = {styles.buttonText}>GO TO CALENDAR</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.buttonContainer} onPress={goToCalandar}>
+          <Text style = {styles.buttonText}>GO TO CALENDAR</Text>
+        </TouchableOpacity>
+      </ScrollView>
 
     </SafeAreaView>
   );
@@ -55,10 +62,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  scrollView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    width:400,
+  },
   buttonContainer: {
     margin: 20,
     height: 75,
-    width: "75%",
+    width: "90%",
     justifyContent: "center",
     alignContent: "center",
     alignItems: "center",
