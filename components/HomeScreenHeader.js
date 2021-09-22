@@ -1,11 +1,13 @@
 import React from "react";
-import { View , Text , StyleSheet , TouchableOpacity } from "react-native";
+import { View , StyleSheet , TouchableOpacity } from "react-native";
+
+import { BasicText } from ".";
 
 export default function HomeScreenHeader({ navigation }) {
     return(
         <View style={styles.menuBar}>
             <TouchableOpacity style={styles.navigationButton} onPress = {navigation.openDrawer}>
-                <Text style={styles.navigationButtonText}>navigation</Text>
+                <BasicText style={styles.navigationButtonText}>navigation</BasicText>
             </TouchableOpacity >
         </View>
     )

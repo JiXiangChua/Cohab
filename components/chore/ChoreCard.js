@@ -1,17 +1,16 @@
 import React from "react";
 import {
   View,
-  Text,
   StyleSheet,
   Image,
-  Touchable,
-  TouchableOpacity,
-  ScrollView,
 } from "react-native";
-import ProfilePic from "../assets/Finance-assets/Kimberly.png";
-import choreSoap from "../assets/Chores-assets/soap.png";
 
-export default function RoommateCard(props) {
+import ProfilePic from "../../assets/Finance-assets/Kimberly.png";
+import choreSoap from "../../assets/Chores-assets/soap.png";
+
+import { BasicText } from "..";
+
+export default function ChoreCard(props) {
   return (
     <View
       style={[styles.card, styles.shadowProp, {
@@ -21,7 +20,7 @@ export default function RoommateCard(props) {
     >
       <View style={{flexDirection:"row", justifyContent:"flex-end", marginVertical: -10}}>
         <View style={styles.duedatecont}>
-          <Text style={styles.choreduty}>Due on:{props.duedate}</Text>
+          <BasicText style={styles.choreduty}>Due on:{props.duedate}</BasicText>
         </View>
       </View>
 
@@ -35,19 +34,19 @@ export default function RoommateCard(props) {
         {/* Column for Name and Description */}
         <View style={[styles.cardDisplayColumnFormat, {marginHorizontal: 10}]}>
           <View style={styles.choredutycont}>
-            <Text style={styles.choreduty}>{props.dutyname}</Text>
+            <BasicText style={styles.choreduty}>{props.dutyname}</BasicText>
           </View>
           <Image
           source={ProfilePic}
           style={styles.profileimg}
           ></Image>
-          <Text style={styles.chorebasictxt}>{props.description}</Text>
+          <BasicText style={styles.chorebasictxt}>{props.description}</BasicText>
         </View>
 
         <View style={[styles.cardDisplayColumnFormat, { marginHorizontal: 20 }]}>
-          <Text style={styles.chorebasictxt}>{props.choretype}</Text>
+          <BasicText style={styles.chorebasictxt}>{props.choretype}</BasicText>
             <View style={styles.whosnextcont}>
-              <Text>Next:</Text>
+              <BasicText>Next:</BasicText>
               <Image source={ProfilePic} style={styles.profileimgsmall}></Image>
             </View>
         </View>

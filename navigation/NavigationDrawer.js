@@ -1,5 +1,6 @@
 import React from "react";
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { useFonts } from 'expo-font';
 
 import {
   CalendarScreen,
@@ -14,6 +15,10 @@ import CustomDrawerContent from "../components/CustomDrawerContent";
 const Drawer = createDrawerNavigator();
 
 export default function NavigationDrawer() {
+
+  const [loaded] = useFonts({
+    Montserrat: require('../assets/fonts/Montserrat-Regular.ttf'),
+  });
   
   const screenOptions = {
     headerShown: false,
@@ -21,6 +26,7 @@ export default function NavigationDrawer() {
       backgroundColor: '#6E2142',
     },
     drawerLabelStyle: {
+      fontFamily: 'Montserrat',
       color: '#FFD897',
     },
     drawerActiveTintColor: '#F7DBF0',
