@@ -27,7 +27,7 @@ export default function NavigationDrawer() {
   };
 
   return (
-    <Drawer.Navigator initialRouteName="Home" screenOptions = {screenOptions}>
+    <Drawer.Navigator initialRouteName="Home" screenOptions = {screenOptions} drawerContent = {(props) => <CustomDrawerContent {...props} />}>
       <Drawer.Screen name="Home" component={HomeScreen} />
       <Drawer.Screen name="Calendar" component={CalendarScreen} />
       <Drawer.Screen name="Chore" component={ChoreScreen} />
