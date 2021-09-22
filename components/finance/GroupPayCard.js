@@ -1,7 +1,10 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { View , StyleSheet, Image, TouchableOpacity } from "react-native";
+
 import ProfilePic from "../../assets/Finance-assets/Kimberly.png";
 import nextButtonLogo from "../../assets/Finance-assets/NextButton.png";
+
+import { BasicText } from "..";
 
 export default function GroupPayCard(props) {
   var [paidStatus, setPaidStatus] = useState(true);
@@ -27,7 +30,7 @@ export default function GroupPayCard(props) {
     >
       {/* Title + Next Button */}
       <View style={styles.contentFormat}>
-        <Text style={styles.cardText}>{props.description}</Text>
+        <BasicText style={styles.cardText}>{props.description}</BasicText>
         <TouchableOpacity>
           <Image source={nextButtonLogo} style={styles.nextButtonStyle}></Image>
         </TouchableOpacity>
@@ -54,7 +57,7 @@ export default function GroupPayCard(props) {
             ]}
           ></View>
         </View>
-        <Text style={styles.cardAmountText}>{props.amountPaid}</Text>
+        <BasicText style={styles.cardAmountText}>{props.amountPaid}</BasicText>
       </View>
 
       {/* ProfileImage + Status + Total Amount */}
@@ -74,21 +77,21 @@ export default function GroupPayCard(props) {
         ></Image>
         {/* If more than 3 image then put (+ how many more) */}
         <TouchableOpacity style={styles.numberOfPayees}>
-          <Text style={{ alignSelf: "center", color: "white" }}>
+          <BasicText style={{ alignSelf: "center", color: "white" }}>
             +{numberOfAdditionalPayees}
-          </Text>
+          </BasicText>
         </TouchableOpacity>
 
-        <Text style={{ paddingLeft: 10 }}> 3/4 Paid</Text>
-        <Text style={{ fontSize: 24, alignSelf: "flex-end" }}>
+        <BasicText style={{ paddingLeft: 10 }}> 3/4 Paid</BasicText>
+        <BasicText style={{ fontSize: 24, alignSelf: "flex-end" }}>
           / {props.totalAmount}
-        </Text>
+        </BasicText>
       </View>
 
       {/* Status Message */}
-      <Text style={{ color: "#8A8585" }}>
+      <BasicText style={{ color: "#8A8585" }}>
         {paidStatus === true ? "Fully paid on 26 Jul" : null}
-      </Text>
+      </BasicText>
     </View>
   );
 }

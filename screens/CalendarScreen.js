@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   View,
-  Text,
   StyleSheet,
   TouchableOpacity,
   Image,
@@ -9,7 +8,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { MenuBar , MyCalendar , EventCard } from "../components";
+import { MenuBar , MyCalendar , EventCard , BasicText } from "../components";
 
 export default function CalendarScreen({ navigation }) {
   //holds an array of objects
@@ -41,12 +40,12 @@ export default function CalendarScreen({ navigation }) {
     <SafeAreaView style={styles.container}>
       <MenuBar navigation={navigation} />
       <ScrollView showsVerticalScrollIndicator={false} style={{ width: "90%" }}>
-        <Text style={styles.calendarText}>Calendar</Text>
+        <BasicText style={styles.calendarText}>Calendar</BasicText>
         <View style={{ width: "100%", marginVertical: 10 }}>
           <MyCalendar></MyCalendar>
         </View>
         <View style={styles.eventContainer}>
-          <Text style={styles.headerText}>Upcoming Events</Text>
+          <BasicText style={styles.headerText}>Upcoming Events</BasicText>
           {event.map((eventItem, index) => {
             return (
               <EventCard

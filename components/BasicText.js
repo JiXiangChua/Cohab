@@ -12,10 +12,8 @@ export default function BasicText({ children , style }) {
     };
 
     return(
-        <Text style = {styles.basicText}>
-            <Text style = {style}>
-                {children}
-            </Text>
+        <Text style = {[styles.basicText , style]}>
+            {children}
         </Text>
     );
 };

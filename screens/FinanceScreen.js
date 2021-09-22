@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   View,
-  Text,
   StyleSheet,
   TouchableOpacity,
   Image,
@@ -9,7 +8,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { MenuBar , RoommateCard , GroupPayCard } from "../components";
+import { MenuBar , RoommateCard , GroupPayCard  , BasicText} from "../components";
 
 import addBillButton from "../assets/Finance-assets/AddBill.png";
 import TopUpLogo from "../assets/Finance-assets/TopUp.png";
@@ -39,37 +38,37 @@ export default function FinanceScreen({ navigation }) {
       >
         {/* Balance Section */}
 
-        <Text style={styles.balanceText}> Wallet </Text>
-        <Text style={{ color: "#943855", fontSize: 50 }}>$100.00</Text>
-        <Text style={{ color: "#943855", opacity: 0.7, fontSize: 18 }}>
+        <BasicText style={styles.balanceText}> Wallet </BasicText>
+        <BasicText style={{ color: "#943855", fontSize: 50 }}>$100.00</BasicText>
+        <BasicText style={{ color: "#943855", opacity: 0.7, fontSize: 18 }}>
           Current Balance
-        </Text>
+        </BasicText>
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.walletButton}>
             <Image source={TopUpLogo} style={styles.walletButtonLogo}></Image>
-            <Text>Top Up</Text>
+            <BasicText>Top Up</BasicText>
           </TouchableOpacity>
           <TouchableOpacity style={styles.walletButton}>
             <Image source={ScanLogo} style={styles.walletButtonLogo}></Image>
-            <Text>Scan</Text>
+            <BasicText>Scan</BasicText>
           </TouchableOpacity>
           <TouchableOpacity style={styles.walletButton}>
             <Image
               source={TransferLogo}
               style={[styles.walletButtonLogo, { marginBottom: 14 }]}
             ></Image>
-            <Text>Transfer</Text>
+            <BasicText>Transfer</BasicText>
           </TouchableOpacity>
         </View>
 
         {/* Monthly Budget Section */}
 
         <View style={styles.budgetContainer}>
-          <Text style={{ position: "absolute", left: 0, fontSize: 24 }}>
+          <BasicText style={{ position: "absolute", left: 0, fontSize: 24 }}>
             Monthly Budget
-          </Text>
+          </BasicText>
           <TouchableOpacity style={styles.budgetManageButton}>
-            <Text style={styles.budgetManageButtonText}>Manage</Text>
+            <BasicText style={styles.budgetManageButtonText}>Manage</BasicText>
           </TouchableOpacity>
           <TouchableOpacity style={styles.progressBar}>
             <TouchableOpacity
@@ -85,14 +84,14 @@ export default function FinanceScreen({ navigation }) {
 
         {/* Monthly Budget Display */}
         <View>
-          <Text style={{ color: "#8A8585" }}> $ 710 / $1000</Text>
+          <BasicText style={{ color: "#8A8585" }}> $ 710 / $1000</BasicText>
         </View>
 
         {/* Roommate Section */}
         <View style={styles.roommateContainer}>
           <View style={{ width: "100%", height: 50, flexDirection: "row" }}>
-            <Text style={styles.createNewTitle}>Pay Roommates</Text>
-            <Text style={styles.createNewButton}>Pay Me</Text>
+            <BasicText style={styles.createNewTitle}>Pay Roommates</BasicText>
+            <BasicText style={styles.createNewButton}>Pay Me</BasicText>
             <TouchableOpacity
               style={{ position: "absolute", right: 0, fontSize: 18 }}
             >
@@ -150,8 +149,8 @@ export default function FinanceScreen({ navigation }) {
         {/* Group Pay Section */}
         <View style={styles.roommateContainer}>
           <View style={{ width: "100%", height: 50, flexDirection: "row" }}>
-            <Text style={styles.createNewTitle}>Group Payment</Text>
-            <Text style={styles.createNewButton}>New Split</Text>
+            <BasicText style={styles.createNewTitle}>Group Payment</BasicText>
+            <BasicText style={styles.createNewButton}>New Split</BasicText>
             <TouchableOpacity
               style={{ position: "absolute", right: 0, fontSize: 18 }}
             >

@@ -1,14 +1,16 @@
 import React from 'react';
-import { View , Text , StyleSheet , TouchableOpacity , Image } from "react-native";
+import { View , StyleSheet , TouchableOpacity , Image } from "react-native";
 import backButton from '../assets/back-to-room-button.png';
 import NotificationButton from "../assets/NotificationButton.png";
+
+import { BasicText } from '.';
 
 export default function MenuBar({ navigation }) {
     return(
         <View style={styles.menuBar}>
             <TouchableOpacity style={styles.backButton} onPress={navigation.goBack}>
                 <Image source={backButton} style = {styles.backButtonLogo} />
-                <Text style={styles.backButtonText}>Home</Text>
+                <BasicText style={styles.backButtonText}>Home</BasicText>
             </TouchableOpacity >
             <TouchableOpacity style={styles.notificationButton}>
                 <Image source={NotificationButton} style = {styles.notificationButtonLogo} />
