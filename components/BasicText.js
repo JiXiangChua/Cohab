@@ -4,7 +4,7 @@ import { useFonts } from 'expo-font';
 
 export default function BasicText({ children , style }) {
     const [loaded] = useFonts({
-        Montserrat: require('../assets/fonts/Montserrat/Montserrat-Regular.ttf'),
+        Montserrat: require('../assets/fonts/Montserrat-Regular.ttf'),
     });
     
     if (!loaded) {

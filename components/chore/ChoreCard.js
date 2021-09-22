@@ -8,8 +8,8 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import ProfilePic from "../assets/Finance-assets/Kimberly.png";
-import choreSoap from "../assets/Chores-assets/soap.png";
+import ProfilePic from "../../assets/Finance-assets/Kimberly.png";
+import choreSoap from "../../assets/Chores-assets/soap.png";
 
 export default function ChoreCard(props) {
   return (

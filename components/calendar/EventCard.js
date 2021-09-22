@@ -7,8 +7,9 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import locationIcon from "../assets/Calendar-assets/locationIcon.png";
-import ProfileImage from "../assets/Calendar-assets/ProfileImage2.png";
+
+import locationIcon from "../../assets/Calendar-assets/locationIcon.png";
+import ProfileImage from "../../assets/Calendar-assets/ProfileImage2.png";
 
 export default function EventCard(props) {
   return (
