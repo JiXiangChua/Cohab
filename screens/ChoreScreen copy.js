@@ -6,8 +6,6 @@ import {
   Image , 
   ScrollView, 
   Modal, 
-  Button, 
-  Pressable,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 //components
@@ -16,27 +14,9 @@ import { MenuBar , ChoreCard , BasicText, ChoreModalAlt, } from "../components";
 import NewChoresButton from "../assets/Chores-assets/Caddbutton.png";
 
 export default function ChoreScreen({ navigation }) {
-  // Values needed for Add Chore Screen Popup (Modal)
-  var daysOfTheWeek = ["M", "T", "W", "T", "F", "S","S"];
-  var repeatOptions = ["Weekly", "Monthly"];
-  var displayDaysOfTheWeek = [];
-  var displayRepeatOptions = [];
-  
-  //Toggle on and off modal screeen
-  const [modalVisible, setModalVisible] = useState(false);
 
-  // To display options to repeat weekly or monthly
-  for (let i=0; i<2;i++){
-    displayRepeatOptions.push(
-      <Button title= {repeatOptions[i]}/>
-    )
-  }
-  // To display days of the week
-  for (let i=0; i<7;i++){
-    displayDaysOfTheWeek.push(
-      <Button title= {daysOfTheWeek[i]}/>
-    )
-  }
+  //Toggle on and off modal screeen
+  const [modalalt, setModalAlt] = useState(false);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -53,82 +33,43 @@ export default function ChoreScreen({ navigation }) {
           <BasicText style={styles.chorenewText}>New Chore</BasicText>
           <TouchableOpacity 
           style={{ position: "absolute", right: 30}}
-          onPress={() => setModalVisible(true)}
+          onPress={() => setModalAlt(true)}
           >
             <Image source={NewChoresButton}></Image>
           </TouchableOpacity>
         </View>
         {/* Roommate Bill Container */}
-      <View
+        <View
         style={{
           width: "95%",
           paddingVertical: 5,
           alignItems: "center",
         }}>
-        <ChoreCard
+          <ChoreCard
           duedate="14/7"
           dutyname="Wash the dishes"
           description="It's your turn!"
           choretype="Weekly"
           status="True"
-        ></ChoreCard>
-        <ChoreCard
+          ></ChoreCard>
+          <ChoreCard
           duedate="5/8"
           dutyname="Clean the clothes"
           description="It's your turn!"
           choretype="Weekly"
           status="True"
-        ></ChoreCard>
-      </View>
-      <Modal
-      animationType="slide" 
-      transparent = {true} 
-      visible={modalVisible}
-      onRequestClose={() => {
-        setModalVisible(!modalVisible);}}>
-          {/*Rest of screen will darken*/}
-          <View style={{backgroundColor: "#000000aa", flex: 1}}>
-            {/*Pop up screen will show*/}
-            <View style={{backgroundColor: "#ffffff", margin: 30, padding: 30, borderRadius: 10}}> 
-              {/*Type in Chore name*/}
-              <TextInput 
-              style={{ borderBottomWidth: 0.5, width: "50%"}}
-              placeholder="Chore Title"
-              />
-              {/*Type in Chore description*/}
-              <TextInput 
-              style={{paddingTop: 10, borderBottomWidth: 0.5}}
-              placeholder="Description"
-              />
-
-
-              <BasicText style={{paddingTop:20}}>Select the order</BasicText>
-
-
-              <BasicText style={{paddingTop:20}}>Repeat</BasicText>
-
-              <View style={{ paddingTop:20, flexDirection: "row", marginHorizontal: 10, justifyContent: 'space-around'}}>
-              {displayRepeatOptions}
-              </View>
-
-
-              <BasicText style={{paddingTop:20}}>Select the day</BasicText>
-
-              <View style={{ paddingTop:20, flexDirection: "row", marginHorizontal: 10, justifyContent: 'space-around'}}>
-              {displayDaysOfTheWeek}
-              </View>
-
-              <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}>
-                <BasicText style={styles.textStyle}>Save Changes</BasicText>
-              </Pressable>
-
-            </View>
-          </View>
-      </Modal>
-    </ScrollView>
-  </SafeAreaView>
+          ></ChoreCard>
+        </View>
+        <Modal 
+        animationType="slide" 
+        transparent = {true} 
+        visible={modalalt} 
+        onRequestClose={() => {
+        setModalVisible(!modalalt);}}>
+          <ChoreModalAlt></ChoreModalAlt>
+        </Modal>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 const styles = StyleSheet.create({
