@@ -10,6 +10,7 @@ import BasicText from "./BasicText";
 import MyTasks from "./task/MyTasks";
 import SharedTasks from "./task/SharedTasks";
 import TaskCard from "./task/TaskCard";
+import ChoreModal from "./chore/ChoreModal";
 
 export {
     MenuBar,
@@ -24,4 +25,5 @@ export {
     MyTasks,
     SharedTasks,
     TaskCard,
+    ChoreModal,
 }
