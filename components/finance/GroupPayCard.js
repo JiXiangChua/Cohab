@@ -4,7 +4,7 @@ import { View , StyleSheet, Image, TouchableOpacity } from "react-native";
 import ProfilePic from "../../assets/Finance-assets/Kimberly.png";
 import nextButtonLogo from "../../assets/Finance-assets/NextButton.png";
 
-import { BasicText } from "..";
+import BasicText from "../BasicText.js";
 
 export default function GroupPayCard(props) {
   var [paidStatus, setPaidStatus] = useState(true);

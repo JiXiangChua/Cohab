@@ -3,7 +3,8 @@ import { View, TouchableOpacity, StyleSheet, Image } from "react-native";
 
 import Kimberly from "../../assets/Finance-assets/Kimberly.png";
 
-import { TaskCard , BasicText } from "..";
+import BasicText from "../BasicText.js";
+import TaskCard from './TaskCard.js';
 
 export default function SharedTasks() {
   const [currentTab, setCurrentTab] = useState("shared");

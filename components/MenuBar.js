@@ -3,7 +3,7 @@ import { View , StyleSheet , TouchableOpacity , Image } from "react-native";
 import backButton from '../assets/back-to-room-button.png';
 import NotificationButton from "../assets/NotificationButton.png";
 
-import { BasicText } from '.';
+import BasicText from "./BasicText.js";
 
 export default function MenuBar({ navigation }) {
     return(

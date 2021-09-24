@@ -1,7 +1,7 @@
 import React from "react";
 import { View , StyleSheet , TouchableOpacity } from "react-native";
 
-import { BasicText } from ".";
+import BasicText from "./BasicText.js";
 
 export default function HomeScreenHeader({ navigation }) {
     return(

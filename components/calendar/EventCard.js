@@ -10,7 +10,7 @@ import {
 import locationIcon from "../../assets/Calendar-assets/locationIcon.png";
 import ProfileImage from "../../assets/Calendar-assets/ProfileImage2.png";
 
-import { BasicText } from "..";
+import BasicText from "../BasicText.js";
 
 export default function EventCard(props) {
   return (

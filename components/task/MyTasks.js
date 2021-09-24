@@ -2,7 +2,9 @@ import React from "react";
 import { View, Image, TouchableOpacity, StyleSheet } from "react-native";
 
 import newTaskButton from "../../assets/Task-assets/NewTaskButton.png";
-import { TaskCard , BasicText } from "..";
+
+import BasicText from "../BasicText.js";
+import TaskCard from './TaskCard.js';
 
 export default function MyTasks() {
   return (
