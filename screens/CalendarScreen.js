@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { MenuBar , MyCalendar , EventCard , BasicText } from "../components";
+import { MenuBar , MyCalendar , EventCard , BasicText , CalendarModal } from "../components";
 
 export default function CalendarScreen({ navigation }) {
   //holds an array of objects
@@ -36,13 +36,21 @@ export default function CalendarScreen({ navigation }) {
     },
   ]);
 
+  const [modalVisible , setModalVisible] = useState(false);
+  const [modalDate , setModalDate] = useState();
+
+  function openModalWithDate(date) {
+    setModalDate(date);
+    setModalVisible(true);
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <MenuBar navigation={navigation} />
       <ScrollView showsVerticalScrollIndicator={false} style={{ width: "90%" }}>
         <BasicText style={styles.calendarText}>Calendar</BasicText>
         <View style={{ width: "100%", marginVertical: 10 }}>
-          <MyCalendar></MyCalendar>
+          <MyCalendar openModalWithDate = {openModalWithDate} />
         </View>
         <View style={styles.eventContainer}>
           <BasicText style={styles.headerText}>Upcoming Events</BasicText>
@@ -55,10 +63,12 @@ export default function CalendarScreen({ navigation }) {
                 eventTime={eventItem.eventTime}
                 eventLocation={eventItem.eventLocation}
                 importantStatus={eventItem.important}
-              ></EventCard>
+              />
             );
           })}
         </View>
+        
+        <CalendarModal modalVisible = {modalVisible} setModalVisible = {setModalVisible} modalDate = {modalDate} />
       </ScrollView>
     </SafeAreaView>
   );

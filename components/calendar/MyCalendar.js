@@ -1,16 +1,12 @@
 import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-  ScrollView,
-} from "react-native";
 
-import { Calendar, CalendarList, Agenda } from "react-native-calendars";
+import { Calendar , CalendarList , Agenda } from "react-native-calendars";
 
-export default function MyCalendar() {
+export default function MyCalendar({ openModalWithDate }) {
+  function handleDayPress(date) {
+    console.log(date);
+    openModalWithDate(date)
+  }
   return (
     <Calendar
       markedDates={{
@@ -50,6 +46,7 @@ export default function MyCalendar() {
         textMonthFontSize: 16,
         textDayHeaderFontSize: 16,
       }}
+      onDayPress={handleDayPress}
     ></Calendar>
   );
 }
