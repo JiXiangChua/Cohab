@@ -73,7 +73,9 @@ export default function FinanceScreen({ navigation }) {
         {/* Balance Section */}
 
         <BasicText style={styles.balanceText}> Wallet </BasicText>
-        <BasicText style={{ color: "#943855", fontSize: 50 }}>$100.00</BasicText>
+        <BasicText style={{ color: "#943855", fontSize: 50 }}>
+          $100.00
+        </BasicText>
         <BasicText style={{ color: "#943855", opacity: 0.7, fontSize: 18 }}>
           Current Balance
         </BasicText>
@@ -204,10 +206,10 @@ export default function FinanceScreen({ navigation }) {
           ref={refRBSheet}
           closeOnDragDown={true}
           closeOnPressMask={true}
-          height={400}
+          height={650}
           customStyles={{
             wrapper: {
-              backgroundColor: "transparent",
+              backgroundColor: "rgba(0, 0, 0, 0.7)",
             },
             container: {
               borderRadius: 20,
