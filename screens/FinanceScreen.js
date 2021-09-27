@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   View,
   StyleSheet,
@@ -7,8 +7,13 @@ import {
   ScrollView,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import RBSheet from "react-native-raw-bottom-sheet";
 
-import { MenuBar , RoommateCard , GroupPayCard  , BasicText} from "../components";
+import MenuBar from "../components/MenuBar";
+import RoommateCard from "../components/finance/RoommateCard";
+import GroupPayCard from "../components/finance/GroupPayCard";
+import BudgetGraph from "../components/finance/BudgetGraph";
+import BasicText from "../components/BasicText";
 
 import addBillButton from "../assets/Finance-assets/AddBill.png";
 import TopUpLogo from "../assets/Finance-assets/TopUp.png";
@@ -20,15 +25,44 @@ import PayeeLogo from "../assets/Finance-assets/Payee.png";
 export default function FinanceScreen({ navigation }) {
   const [budget, setBudget] = useState(100);
   const [shopping, setShopping] = useState(20);
+  const [roommate, setRoommate] = useState([
+    {
+      name: "Jixiang",
+      profileImage: "",
+      description: "Air-Con Fee",
+      amount: "$20.00",
+      status: "True",
+    },
+    {
+      name: "Mavis",
+      profileImage: "",
+      description: "Grocery",
+      amount: "$50.00",
+      status: "True",
+    },
+  ]);
+  const [groupMate, setGroupMate] = useState([
+    {
+      totalAmount: "$20.00",
+      amountPaid: "$15.00",
+      description: "Frozen yoghurt @ llaollao",
+    },
+    {
+      totalAmount: "$45.00",
+      amountPaid: "$45.00",
+      description: "Din Tai Fung",
+    },
+  ]);
 
   var shoppingBudget = (shopping / budget) * 100;
   console.log(shoppingBudget);
 
+  const refRBSheet = useRef();
+
   return (
     <SafeAreaView style={styles.container}>
-      
-      <MenuBar navigation = {navigation} />
-      
+      <MenuBar navigation={navigation} />
+
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
@@ -70,7 +104,10 @@ export default function FinanceScreen({ navigation }) {
           <TouchableOpacity style={styles.budgetManageButton}>
             <BasicText style={styles.budgetManageButtonText}>Manage</BasicText>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.progressBar}>
+          <TouchableOpacity
+            style={styles.progressBar}
+            onPress={() => refRBSheet.current.open()}
+          >
             <TouchableOpacity
               style={{
                 backgroundColor: "red",
@@ -121,28 +158,18 @@ export default function FinanceScreen({ navigation }) {
             </View>
 
             {/* Display each roommate and how much  */}
-            {/* Here may need an array to store the information and then use javascript map function  */}
-            <RoommateCard
-              name="Jixiang"
-              profileImage=""
-              description="Air-Con Fee"
-              amount="$20.00"
-              status="True"
-            ></RoommateCard>
-            <RoommateCard
-              name="Jixiang"
-              profileImage=""
-              description="Air-Con Fee"
-              amount="$20.00"
-              status="True"
-            ></RoommateCard>
-            <RoommateCard
-              name="Jixiang"
-              profileImage=""
-              description="Air-Con Fee"
-              amount="$20.00"
-              status="True"
-            ></RoommateCard>
+            {roommate.map((items, index) => {
+              return (
+                <RoommateCard
+                  key={index}
+                  name={items.name}
+                  profileImage={items.profileImage}
+                  description={items.description}
+                  amount={items.amount}
+                  status={items.status}
+                ></RoommateCard>
+              );
+            })}
           </View>
         </View>
 
@@ -159,19 +186,40 @@ export default function FinanceScreen({ navigation }) {
           </View>
           <View style={styles.roommateBillPanel}>
             {/* Display each roommate and how much  */}
-            {/* Here may need an array to store the information and then use javascript map function  */}
-            <GroupPayCard
-              totalAmount="$20.00"
-              amountPaid="$15.00"
-              description="Frozen yoghurt @ llaollao"
-            ></GroupPayCard>
-            <GroupPayCard
-              totalAmount="$45.00"
-              amountPaid="$45.00"
-              description="Din Tai Fung"
-            ></GroupPayCard>
+            {groupMate.map((items, index) => {
+              return (
+                <GroupPayCard
+                  key={index}
+                  totalAmount={items.totalAmount}
+                  amountPaid={items.amountPaid}
+                  description={items.description}
+                ></GroupPayCard>
+              );
+            })}
           </View>
         </View>
+
+        {/* Bottom Sheet Render */}
+        <RBSheet
+          ref={refRBSheet}
+          closeOnDragDown={true}
+          closeOnPressMask={true}
+          height={400}
+          customStyles={{
+            wrapper: {
+              backgroundColor: "transparent",
+            },
+            container: {
+              borderRadius: 20,
+              backgroundColor: "#6E2142",
+            },
+            draggableIcon: {
+              backgroundColor: "#000",
+            },
+          }}
+        >
+          <BudgetGraph></BudgetGraph>
+        </RBSheet>
       </ScrollView>
     </SafeAreaView>
   );

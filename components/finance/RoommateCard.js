@@ -12,6 +12,7 @@ import ProfilePic from "../../assets/Finance-assets/Kimberly.png";
 
 import BasicText from "../BasicText.js";
 
+
 export default function RoommateCard(props) {
   return (
     <View
@@ -26,6 +27,7 @@ export default function RoommateCard(props) {
 
         {/* Column for Name and Description */}
         <View style={styles.cardDisplayColumnFormat}>
+
           <BasicText style={styles.cardText}>{props.name}</BasicText>
           <BasicText style={[styles.cardText, { fontSize: 14, color: "#8A8585" }]}>
             {props.description}
