@@ -12,36 +12,47 @@ import BudgetCard from "./BudgetCard";
 export default function BudgetGraph() {
   const [category, setCategory] = useState([
     {
-      label: "Education", //category name
-      x: 1, //id of category
-      y: 100.25, //amount of expense
+      name: "Education", //category name
+      id: 1, //id of category
+      amount: 100.25, //amount of expense
       image: "",
     },
     {
-      label: "Food",
-      x: 2,
-      y: 80.3,
+      name: "Food",
+      id: 2,
+      amount: 80.3,
       image: "",
     },
     {
-      label: "Shopping",
-      x: 3,
-      y: 300.0,
+      name: "Shopping",
+      id: 3,
+      amount: 300.0,
       image: "",
     },
     {
-      label: "Travel",
-      x: 4,
-      y: 150.5,
+      name: "Travel",
+      id: 4,
+      amount: 150.5,
       image: "",
     },
   ]);
 
+  //To convert category state variable to Victory-Native Pie chart props
+  let chartData = category.map((item) => {
+    return {
+      label: item.name,
+      x: item.id,
+      y: item.amount,
+      image: item.image,
+    };
+  });
+
   function renderChart() {
     var total = 0;
-    for (let index = 0; index < category.length; index++) {
-      total = total + category[index].y;
+    for (let index = 0; index < chartData.length; index++) {
+      total = total + chartData[index].y;
     }
+
     return (
       <View
         style={{
@@ -52,7 +63,7 @@ export default function BudgetGraph() {
       >
         <VictoryPie
           colorScale={"qualitative"}
-          data={category}
+          data={chartData}
           innerRadius={70}
           height={350}
           padding={{ top: 80, bottom: 70 }}
@@ -93,7 +104,7 @@ export default function BudgetGraph() {
           {renderChart()}
         </View>
         <View style={styles.topContainer}>
-          {category.map((item, index) => {
+          {chartData.map((item, index) => {
             return (
               <BudgetCard
                 key={index}
