@@ -1,14 +1,17 @@
 import React from "react";
 import {
   View,
-  Text,
   StyleSheet,
   Image,
   Touchable,
   TouchableOpacity,
   ScrollView,
 } from "react-native";
+
 import ProfilePic from "../../assets/Finance-assets/Kimberly.png";
+
+import BasicText from "../BasicText.js";
+
 
 export default function RoommateCard(props) {
   return (
@@ -24,21 +27,22 @@ export default function RoommateCard(props) {
 
         {/* Column for Name and Description */}
         <View style={styles.cardDisplayColumnFormat}>
-          <Text style={styles.cardText}>{props.name}</Text>
-          <Text style={[styles.cardText, { fontSize: 14, color: "#8A8585" }]}>
+
+          <BasicText style={styles.cardText}>{props.name}</BasicText>
+          <BasicText style={[styles.cardText, { fontSize: 14, color: "#8A8585" }]}>
             {props.description}
-          </Text>
+          </BasicText>
         </View>
 
         {/* Column for Amount and Pay Button */}
         <View style={[styles.cardDisplayColumnFormat, { marginLeft: 25 }]}>
-          <Text style={[styles.cardText, { marginRight: 10 }]}>
+          <BasicText style={[styles.cardText, { marginRight: 10 }]}>
             {props.amount}
-          </Text>
+          </BasicText>
           <TouchableOpacity style={[styles.payButton, styles.shadowProp]}>
-            <Text style={{ color: "#FFF", fontSize: 18, fontWeight: "bold" }}>
+            <BasicText style={{ color: "#FFF", fontSize: 18, fontWeight: "bold" }}>
               Pay
-            </Text>
+            </BasicText>
           </TouchableOpacity>
         </View>
       </View>

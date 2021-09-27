@@ -1,21 +1,18 @@
 import React from "react";
 import {
-  Text,
   StyleSheet,
   ScrollView,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import MenuBar from "../components/MenuBar";
-import MyTasks from "../components/task/MyTasks";
-import SharedTasks from "../components/task/SharedTasks";
+import { MenuBar , MyTasks , SharedTasks , BasicText } from "../components";
 
 export default function TaskScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <MenuBar navigation = {navigation} />
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollViewStyle}>
-        <Text style = {styles.taskText}> Tasks </Text>
+        <BasicText style = {styles.taskText}> Tasks </BasicText>
         <MyTasks />
         <SharedTasks />
       </ScrollView>
@@ -39,6 +36,5 @@ const styles = StyleSheet.create({
   taskText: {
     color: "#E16363",
     fontSize: 20,
-    fontWeight: "bold",
   },
 });

@@ -1,14 +1,16 @@
 import React from "react";
 import {
   View,
-  Text,
   StyleSheet,
   Image,
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import locationIcon from "../assets/Calendar-assets/locationIcon.png";
-import ProfileImage from "../assets/Calendar-assets/ProfileImage2.png";
+
+import locationIcon from "../../assets/Calendar-assets/locationIcon.png";
+import ProfileImage from "../../assets/Calendar-assets/ProfileImage2.png";
+
+import BasicText from "../BasicText.js";
 
 export default function EventCard(props) {
   return (
@@ -30,21 +32,21 @@ export default function EventCard(props) {
           alignItems: "center",
         }}
       >
-        <Text>{props.eventName}</Text>
+        <BasicText>{props.eventName}</BasicText>
         <TouchableOpacity style={styles.acceptButton}>
-          <Text
+          <BasicText
             style={{ padding: 10, paddingHorizontal: 15, color: "#0F98C3" }}
           >
             Accepted
-          </Text>
+          </BasicText>
         </TouchableOpacity>
       </View>
 
       {/* Other Details in the card */}
       <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
         <View style={{ justifyContent: "flex-end", alignItems: "flex-start" }}>
-          <Text style={{ color: "#8A8585" }}>{props.eventDate}</Text>
-          <Text>{props.eventTime}</Text>
+          <BasicText style={{ color: "#8A8585" }}>{props.eventDate}</BasicText>
+          <BasicText>{props.eventTime}</BasicText>
         </View>
 
         <View
@@ -55,9 +57,9 @@ export default function EventCard(props) {
             alignItems: "flex-end",
           }}
         >
-          <Text style={{ alignSelf: "center", color: "#8A8585" }}>
+          <BasicText style={{ alignSelf: "center", color: "#8A8585" }}>
             {props.eventLocation}
-          </Text>
+          </BasicText>
           <TouchableOpacity>
             <Image
               source={locationIcon}
