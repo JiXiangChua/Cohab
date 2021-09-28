@@ -12,7 +12,7 @@ import { MenuBar , MyCalendar , EventCard , BasicText , CalendarModal } from "..
 
 export default function CalendarScreen({ navigation }) {
   //holds an array of objects
-  const [event, setEvent] = useState([
+  const [events, setEvents] = useState([
     {
       eventName: "Award Ceremony",
       eventDate: "MON, 20SEP",
@@ -36,6 +36,18 @@ export default function CalendarScreen({ navigation }) {
     },
   ]);
 
+  function addEvent(eventName , eventDate , eventTime , eventLocation , important) {
+    const event = {
+      eventName: eventName,
+      eventDate: eventDate,
+      eventTime: eventTime,
+      eventLocation: eventLocation,
+      important: important,
+    }
+    setEvents([...events , event]);
+  }
+
+  //modal
   const [modalVisible , setModalVisible] = useState(false);
   const [modalDate , setModalDate] = useState();
 
@@ -43,6 +55,20 @@ export default function CalendarScreen({ navigation }) {
     setModalDate(date);
     setModalVisible(true);
   }
+
+  //eventsList
+  const eventsList = events.map((event , index) => {
+    return(
+      <EventCard
+        key={index}
+        eventName={event.eventName}
+        eventDate={event.eventDate}
+        eventTime={event.eventTime}
+        eventLocation={event.eventLocation}
+        importantStatus={event.important}
+      />
+    );
+  });
 
   return (
     <SafeAreaView style={styles.container}>
@@ -54,18 +80,7 @@ export default function CalendarScreen({ navigation }) {
         </View>
         <View style={styles.eventContainer}>
           <BasicText style={styles.headerText}>Upcoming Events</BasicText>
-          {event.map((eventItem, index) => {
-            return (
-              <EventCard
-                key={index}
-                eventName={eventItem.eventName}
-                eventDate={eventItem.eventDate}
-                eventTime={eventItem.eventTime}
-                eventLocation={eventItem.eventLocation}
-                importantStatus={eventItem.important}
-              />
-            );
-          })}
+          {eventsList}
         </View>
         
         <CalendarModal modalVisible = {modalVisible} setModalVisible = {setModalVisible} modalDate = {modalDate} />
