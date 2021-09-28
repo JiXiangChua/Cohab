@@ -4,7 +4,6 @@ import { Calendar , CalendarList , Agenda } from "react-native-calendars";
 
 export default function MyCalendar({ openModalWithDate }) {
   function handleDayPress(date) {
-    console.log(date);
     openModalWithDate(date)
   }
   return (
