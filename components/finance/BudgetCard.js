@@ -2,11 +2,12 @@ import React from "react";
 import { View, StyleSheet, Text, Image } from "react-native";
 
 export default function BudgetCard(props) {
+  console.log(props.image);
   return (
     <View style={styles.budgetCardContainer}>
       <View style={{ justifyContent: "flex-start", flexDirection: "row" }}>
-        <Image />
-        <Text style={{ paddingRight: 20 }}>ImageFile</Text>
+        <Image source={props.image} style={{ width: 50, height: 50 }} />
+        {/* <Text style={{ paddingRight: 20 }}>ImageFile</Text> */}
         <Text style={{ fontWeight: "bold", fontSize: 20 }}>
           {props.category}
         </Text>

@@ -9,20 +9,22 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import RBSheet from "react-native-raw-bottom-sheet";
 
-import MenuBar from "../components/MenuBar";
-import RoommateCard from "../components/finance/RoommateCard";
-import GroupPayCard from "../components/finance/GroupPayCard";
-import BudgetGraph from "../components/finance/BudgetGraph";
-import BasicText from "../components/BasicText";
+import MenuBar from "../../components/MenuBar";
+import RoommateCard from "../../components/finance/RoommateCard";
+import GroupPayCard from "../../components/finance/GroupPayCard";
+import BudgetGraph from "../../components/finance/BudgetGraph";
+import BasicText from "../../components/BasicText";
 
-import addBillButton from "../assets/Finance-assets/AddBill.png";
-import TopUpLogo from "../assets/Finance-assets/TopUp.png";
-import ScanLogo from "../assets/Finance-assets/Scan.png";
-import TransferLogo from "../assets/Finance-assets/Transfer.png";
-import PayerLogo from "../assets/Finance-assets/Payers.png";
-import PayeeLogo from "../assets/Finance-assets/Payee.png";
+import addBillButton from "../../assets/Finance-assets/AddBill.png";
+import TopUpLogo from "../../assets/Finance-assets/TopUp.png";
+import ScanLogo from "../../assets/Finance-assets/Scan.png";
+import TransferLogo from "../../assets/Finance-assets/Transfer.png";
+import PayerLogo from "../../assets/Finance-assets/Payers.png";
+import PayeeLogo from "../../assets/Finance-assets/Payee.png";
 
 export default function FinanceScreen({ navigation }) {
+  const refRBSheet = useRef();
+
   const [budget, setBudget] = useState(100);
   const [shopping, setShopping] = useState(20);
   const [roommate, setRoommate] = useState([
@@ -57,7 +59,12 @@ export default function FinanceScreen({ navigation }) {
   var shoppingBudget = (shopping / budget) * 100;
   console.log(shoppingBudget);
 
-  const refRBSheet = useRef();
+  function renderPayRoomateScreen() {
+    navigation.navigate("PayRoommate");
+  }
+  function renderPayGroupScreen() {
+    navigation.navigate("PayGroup");
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -133,6 +140,7 @@ export default function FinanceScreen({ navigation }) {
             <BasicText style={styles.createNewButton}>Pay Me</BasicText>
             <TouchableOpacity
               style={{ position: "absolute", right: 0, fontSize: 18 }}
+              onPress={renderPayRoomateScreen}
             >
               <Image source={addBillButton}></Image>
             </TouchableOpacity>
@@ -182,6 +190,7 @@ export default function FinanceScreen({ navigation }) {
             <BasicText style={styles.createNewButton}>New Split</BasicText>
             <TouchableOpacity
               style={{ position: "absolute", right: 0, fontSize: 18 }}
+              onPress={renderPayGroupScreen}
             >
               <Image source={addBillButton}></Image>
             </TouchableOpacity>
