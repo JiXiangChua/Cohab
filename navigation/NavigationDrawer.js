@@ -10,8 +10,8 @@ import {
   HomeScreen,
   TaskScreen,
 } from "../screens";
-import FinancePayRMScreen from "../screens/FinancePayRMScreen";
-
+import FinancePayRMScreen from "../screens/Finance/FinancePayRMScreen";
+import FinancePayGroupScreen from "../screens/Finance/FinancePayGroupScreen";
 import CustomDrawerContent from "../components/CustomDrawerContent";
 
 const Drawer = createDrawerNavigator();
@@ -46,6 +46,7 @@ export default function NavigationDrawer() {
       <Drawer.Group>
         <Drawer.Screen name="Finance" component={FinanceScreen} />
         <Drawer.Screen name="PayRoommate" component={FinancePayRMScreen} />
+        <Drawer.Screen name="PayGroup" component={FinancePayGroupScreen} />
       </Drawer.Group>
       <Drawer.Screen name="Task" component={TaskScreen} />
     </Drawer.Navigator>

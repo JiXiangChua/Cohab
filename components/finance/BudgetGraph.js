@@ -15,25 +15,33 @@ export default function BudgetGraph() {
       name: "Education", //category name
       id: 1, //id of category
       amount: 100.25, //amount of expense
-      image: "",
+      image: {
+        uri: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==",
+      },
     },
     {
       name: "Food",
       id: 2,
       amount: 80.3,
-      image: "",
+      image: {
+        uri: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==",
+      },
     },
     {
       name: "Shopping",
       id: 3,
       amount: 300.0,
-      image: "",
+      image: {
+        uri: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==",
+      },
     },
     {
       name: "Travel",
       id: 4,
       amount: 150.5,
-      image: "",
+      image: {
+        uri: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==",
+      },
     },
   ]);
 

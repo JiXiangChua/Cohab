@@ -8,16 +8,10 @@ import {
   SafeAreaView,
   TextInput,
 } from "react-native";
-import { BasicText } from "../components";
-import backButton from "../assets/back-to-room-button.png";
+import { BasicText } from "../../components";
+import backButton from "../../assets/back-to-room-button.png";
 
 export default function FinancePayRMScreen({ navigation }) {
-  const [selectedState, setSelectedState] = useState({
-    selectedColor: "green",
-    deselectedColor: "white",
-    pressed: false,
-  });
-
   const [roommateName, setRoommateName] = useState([
     {
       name: "Alexa",
@@ -25,14 +19,26 @@ export default function FinancePayRMScreen({ navigation }) {
     {
       name: "Thomas",
     },
+    {
+      name: "Claudia",
+    },
   ]);
+
+  let initialStateArray = [];
+  for (var index = 0; index < roommateName.length; index++) {
+    initialStateArray.push(false);
+  }
+
+  const [selectedState, setSelectedState] = useState(initialStateArray);
+  console.log(selectedState);
 
   function goToFinanceScreen() {
     navigation.navigate("Finance");
   }
 
-  function selectedButton() {
-    setSelectedState({ pressed: !selectedState.pressed });
+  function selectedButton(index) {
+    selectedState[index] = !selectedState[index];
+    setSelectedState([...selectedState]);
   }
 
   function requestButtonPressed() {
@@ -60,14 +66,15 @@ export default function FinancePayRMScreen({ navigation }) {
                 key={index}
                 style={[
                   styles.card,
+                  styles.index,
                   {
                     alignSelf: "center",
                   },
-                  selectedState.pressed
+                  selectedState[index]
                     ? { backgroundColor: "green" }
                     : { backgroundColor: "white" },
                 ]}
-                onPress={selectedButton}
+                onPress={() => selectedButton(index)}
               >
                 <BasicText>{roommate.name}</BasicText>
               </TouchableOpacity>
@@ -188,4 +195,5 @@ const styles = StyleSheet.create({
     marginTop: 30,
     borderRadius: 20,
   },
+  index: {},
 });
