@@ -14,7 +14,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 //components
 import { MenuBar , ChoreCard , BasicText, ChoreModal } from "../components";
 //assets
-import NewChoresButton from "../assets/Chores-assets/Caddbutton.png";
+import NewChoresButton from "../assets/icons/icon_designs-03.png";
 
 export default function ChoreScreen({ navigation }) {
   /**
@@ -61,10 +61,10 @@ export default function ChoreScreen({ navigation }) {
         <View style={styles.choreContainer}>
           <BasicText style={styles.chorenewText}>New Chore</BasicText>
           <TouchableOpacity 
-          style={{ position: "absolute", right: 30}}
+          style={{ position: "absolute", right: 10, top:-10}}
           onPress={() => setModalVisible(true)}
           >
-            <Image source={NewChoresButton}></Image>
+            <Image style={styles.newChoreButton} source={NewChoresButton}></Image>
           </TouchableOpacity>
         </View>
         {/* Roommate Bill Container */}
@@ -121,10 +121,11 @@ const styles = StyleSheet.create({
   },
   choreText: {
     flexWrap: "wrap",
-    //fontFamily: "Montserrat-Regular",
+    //fontFamily: "Montserrat",
     color: "#E16363",
     fontSize: 20,
     marginVertical: 10,
+    paddingBottom: 20,
   },
   choreContainer: {
     width: "95%",
@@ -138,6 +139,11 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     color: "#826335",
     fontSize: 18,
+  },
+
+  newChoreButton: {
+    width: 35,
+    height: 35,
   },
   button: {
     borderRadius: 20,
