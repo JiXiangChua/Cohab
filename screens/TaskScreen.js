@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
+
 import {
-  StyleSheet,
+  View ,
+  StyleSheet ,
+  TouchableOpacity ,
+  Image ,
   ScrollView,
+  Modal,
+  Button,
+  Pressable,
+  TextInput,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 

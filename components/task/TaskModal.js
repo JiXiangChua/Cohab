@@ -7,9 +7,7 @@ import BasicText from '../BasicText.js';
 export default function TaskModal({ modalVisible , setModalVisible }) {
 
     // Values needed for Add Task Screen Popup (Modal)
-    var daysOfTheWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat","Sun"];
     var repeatOptions = ["Weekly", "Monthly"];
-    var displayDaysOfTheWeek = [];
     var displayRepeatOptions = [];
 
     // To display options to repeat weekly or monthly
@@ -19,12 +17,6 @@ export default function TaskModal({ modalVisible , setModalVisible }) {
         )
     }
 
-    // To display days of the week
-    for (let i=0; i<7;i++){
-        displayDaysOfTheWeek.push(
-            <Button title = {daysOfTheWeek[i]} key = {daysOfTheWeek[i]} />
-        )
-    }
 
     return(
         <Modal
@@ -44,25 +36,17 @@ export default function TaskModal({ modalVisible , setModalVisible }) {
                 />
                 {/*Type in Task description*/}
                 <TextInput
-                style={{paddingTop: 10, borderBottomWidth: 0.5}}
+                style={{paddingTop: 20, borderBottomWidth: 0.5}}
                 placeholder="Description"
                 />
 
 
-                <BasicText style={{paddingTop:20}}>Select the order</BasicText>
-
+                <BasicText style={{paddingTop:20}}>Choose a Date: </BasicText>
 
                 <BasicText style={{paddingTop:20}}>Repeat</BasicText>
 
                 <View style={{ paddingTop:20, flexDirection: "row", marginHorizontal: 10, justifyContent: 'space-around'}}>
                     {displayRepeatOptions}
-                </View>
-
-
-                <BasicText style={{paddingTop:20}}>Select the day</BasicText>
-
-                <View style={{ paddingTop:20, flexDirection: "row", marginHorizontal: 10, justifyContent: 'space-around'}}>
-                    {displayDaysOfTheWeek}
                 </View>
 
                 <Pressable
