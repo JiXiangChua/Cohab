@@ -41,6 +41,7 @@ export default function NavigationDrawer() {
       screenOptions={screenOptions}
       drawerContent={(props) => <CustomDrawerContent {...props} />}
     >
+      <Drawer.Screen name="Home" component={HomeScreen} />
       <Drawer.Screen
         name="GroupSelect"
         component={GroupSelectScreen}
@@ -48,7 +49,6 @@ export default function NavigationDrawer() {
           drawerLabel: () => null,
         })}
       />
-      <Drawer.Screen name="Home" component={HomeScreen} />
       <Drawer.Screen name="Calendar" component={CalendarScreen} />
       <Drawer.Screen name="Chore" component={ChoreScreen} />
       <Drawer.Group>
