@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
-import TaskCard from "./TaskCard";
+import { View, TouchableOpacity, StyleSheet, Image } from "react-native";
+
 import Kimberly from "../../assets/Finance-assets/Kimberly.png";
+
+import { TaskCard , BasicText } from "..";
 
 export default function SharedTasks() {
   const [currentTab, setCurrentTab] = useState("shared");
@@ -29,11 +31,11 @@ export default function SharedTasks() {
     <View style={styles.taskContainer}>
       <View style={styles.title}>
         <TouchableOpacity style={shared} onPress={handleShared}>
-          <Text style={styles.subHeaderText}>Shared</Text>
+          <BasicText style={styles.subHeaderText}>Shared</BasicText>
           <Image source={Kimberly} style={styles.profileImage} />
         </TouchableOpacity>
         <TouchableOpacity style={completed} onPress={handleCompleted}>
-          <Text style={styles.subHeaderText}>Completed</Text>
+          <BasicText style={styles.subHeaderText}>Completed</BasicText>
         </TouchableOpacity>
       </View>
 

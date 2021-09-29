@@ -1,17 +1,17 @@
 import React from "react";
-import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Image, TouchableOpacity, StyleSheet } from "react-native";
 
 import newTaskButton from "../../assets/Task-assets/NewTaskButton.png";
-import TaskCard from "./TaskCard";
+import { TaskCard , BasicText } from "..";
 
 export default function MyTasks() {
   return (
     <View style={styles.myTasks}>
       <View style={styles.title}>
-        <Text style={styles.subHeaderText}>Claim Tasks</Text>
+        <BasicText style={styles.subHeaderText}>Claim Tasks</BasicText>
 
         <TouchableOpacity style={styles.newTask}>
-          <Text style={styles.subHeaderText}>New Task</Text>
+          <BasicText style={styles.subHeaderText}>New Task</BasicText>
           <Image source={newTaskButton} style={styles.newTaskButton} />
           {/*icon is a lil off center cause the image is off center. if the new icon is centered it should be centered*/}
         </TouchableOpacity>
