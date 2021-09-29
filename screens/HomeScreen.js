@@ -1,15 +1,11 @@
 import React from "react";
-import {
-  TouchableOpacity,
-  StyleSheet,
-} from "react-native";
+import { TouchableOpacity, StyleSheet } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { SafeAreaView } from "react-native-safe-area-context";
 
-import { BasicText , HomeScreenHeader } from "../components";
+import { BasicText, HomeScreenHeader } from "../components";
 
 export default function HomeScreen({ navigation }) {
-
   function goToFinance() {
     navigation.navigate("Finance");
   }
@@ -28,27 +24,25 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.backgroundContainer}>
+      <HomeScreenHeader navigation={navigation} />
 
-      <HomeScreenHeader navigation = {navigation} />
-      
-      <ScrollView contentContainerStyle = {styles.scrollView}>
+      <ScrollView contentContainerStyle={styles.scrollView}>
         <TouchableOpacity style={styles.buttonContainer} onPress={goToFinance}>
-          <BasicText style = {styles.buttonText}>GO TO FINANCE</BasicText>
+          <BasicText style={styles.buttonText}>GO TO FINANCE</BasicText>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.buttonContainer} onPress={goToTask}>
-          <BasicText style = {styles.buttonText}>GO TO TASK</BasicText>
+          <BasicText style={styles.buttonText}>GO TO TASK</BasicText>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.buttonContainer} onPress={goToChore}>
-          <BasicText style = {styles.buttonText}>GO TO CHORE</BasicText>
+          <BasicText style={styles.buttonText}>GO TO CHORE</BasicText>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.buttonContainer} onPress={goToCalandar}>
-          <BasicText style = {styles.buttonText}>GO TO CALENDAR</BasicText>
+          <BasicText style={styles.buttonText}>GO TO CALENDAR</BasicText>
         </TouchableOpacity>
       </ScrollView>
-
     </SafeAreaView>
   );
 }
@@ -64,7 +58,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    width:400,
+    width: 400,
   },
   buttonContainer: {
     margin: 20,

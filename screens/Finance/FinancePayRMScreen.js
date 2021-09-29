@@ -37,6 +37,9 @@ export default function FinancePayRMScreen({ navigation }) {
   }
 
   function selectedButton(index) {
+    for (var arrayId = 0; arrayId < selectedState.length; arrayId++) {
+      selectedState[arrayId] = false;
+    }
     selectedState[index] = !selectedState[index];
     setSelectedState([...selectedState]);
   }
