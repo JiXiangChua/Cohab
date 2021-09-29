@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from "react";
-import { View , TextInput , Modal , Button , Pressable , StyleSheet } from 'react-native';
+import { View , TextInput , Modal , Button , Pressable , StyleSheet, Platform, } from 'react-native';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 import BasicText from '../BasicText.js';
 
@@ -12,6 +13,25 @@ export default function ChoreModal({ modalVisible , setModalVisible }) {
     var repeatOptions = ["Weekly", "Monthly"];
     var displayDaysOfTheWeek = [];
     var displayRepeatOptions = [];
+
+    const [date, setDate] = useState(new Date());
+    const [mode, setMode] = useState('date');
+    const [show, setShow] = useState(false);
+    //onChange receives datechange-->What does it do when receive new change add later when database clear
+    const onChange = (event, selectedDate) => {
+      const currentDate = selectedDate || date;
+      setShow(false);
+      setDate(currentDate);
+    };
+
+    const showMode = (currentMode) => {
+      setShow(true);
+      setMode(currentMode);
+    };
+  
+    const showDatepicker = () => {
+      showMode('date');
+    };
 
     // To display options to repeat weekly or monthly
     for (let i=0; i<2;i++){
@@ -45,10 +65,23 @@ export default function ChoreModal({ modalVisible , setModalVisible }) {
       
     } else if ( repeatByWeekOrMonth == "Monthly") {
       
-      repeatChoice[0] = <BasicText style={{paddingTop:20}}>This displays when monthly is selected</BasicText>;
+      repeatChoice[0] = 
+      <View>
+        <BasicText style={{paddingTop:20}}>When would the cycle start?</BasicText>
+        <Button onPress={showDatepicker} title="Show date picker!" />
+        {show && (
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={date}
+          mode={mode}
+          is24Hour={true}
+          display="default"
+          onChange={onChange}
+        />
+      )}
+      </View>;
     }
     
-
     return(
         <Modal
         animationType="slide" 
@@ -71,7 +104,6 @@ export default function ChoreModal({ modalVisible , setModalVisible }) {
                 placeholder="Description"
                 />
                           
-
                 <BasicText style={{paddingTop:20}}>Select the order</BasicText>
   
                   <BasicText style={{paddingTop:20}}>Repeat</BasicText>
