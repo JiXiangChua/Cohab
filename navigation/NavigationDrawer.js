@@ -13,6 +13,7 @@ import {
 import FinancePayRMScreen from "../screens/Finance/FinancePayRMScreen";
 import FinancePayGroupScreen from "../screens/Finance/FinancePayGroupScreen";
 import CustomDrawerContent from "../components/CustomDrawerContent";
+import GroupSelectScreen from "../screens/GroupSelectScreen";
 
 const Drawer = createDrawerNavigator();
 const Stack = createNativeStackNavigator();
@@ -36,11 +37,18 @@ export default function NavigationDrawer() {
 
   return (
     <Drawer.Navigator
-      initialRouteName="Home"
+      initialRouteName="GroupSelect"
       screenOptions={screenOptions}
       drawerContent={(props) => <CustomDrawerContent {...props} />}
     >
       <Drawer.Screen name="Home" component={HomeScreen} />
+      <Drawer.Screen
+        name="GroupSelect"
+        component={GroupSelectScreen}
+        options={() => ({
+          drawerLabel: () => null,
+        })}
+      />
       <Drawer.Screen name="Calendar" component={CalendarScreen} />
       <Drawer.Screen name="Chore" component={ChoreScreen} />
       <Drawer.Group>
