@@ -16,11 +16,12 @@ export default function ChoreCard(props) {
       style={[styles.card, styles.shadowProp, {
         display: "flex",
         justifyContent: "center",
+        alignContent: "center",
      }]}
     >
       <View style={{flexDirection:"row", justifyContent:"flex-end", marginVertical: -10}}>
         <View style={styles.duedatecont}>
-          <BasicText style={styles.choreduty}>Due on:{props.duedate}</BasicText>
+          <BasicText style={styles.choreduty}>Due: {props.duedate}</BasicText>
         </View>
       </View>
 
@@ -43,7 +44,7 @@ export default function ChoreCard(props) {
           <BasicText style={styles.chorebasictxt}>{props.description}</BasicText>
         </View>
 
-        <View style={[styles.cardDisplayColumnFormat, { marginHorizontal: 20 }]}>
+        <View style={[styles.cardDisplayColumnFormat, { marginHorizontal: 20, flexDirection:"column", justifyContent: "space-between" }]}>
           <BasicText style={styles.chorebasictxt}>{props.choretype}</BasicText>
             <View style={styles.whosnextcont}>
               <BasicText>Next:</BasicText>
@@ -60,7 +61,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 10,
     paddingBottom: 5,
-    paddingHorizontal: 15,
+    paddingHorizontal: 10,
     width: "100%",
     marginTop: 10,
     marginBottom: 10,

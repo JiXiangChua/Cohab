@@ -1,7 +1,7 @@
 import React from 'react';
 import { View , StyleSheet , TouchableOpacity , Image } from "react-native";
 import backButton from '../assets/back-to-room-button.png';
-import NotificationButton from "../assets/NotificationButton.png";
+import NotificationButton from "../assets/icons/icon_designs-07.png";
 
 import { BasicText } from '.';
 
@@ -46,8 +46,8 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-end',
     },
     notificationButtonLogo: {
-        minHeight: 40,
-        minWidth: 40,
+        height: 40,
+        width: 40,
         resizeMode: "center",
     },
 });

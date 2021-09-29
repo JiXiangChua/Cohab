@@ -74,8 +74,11 @@ export default function ChoreModal({ modalVisible , setModalVisible }) {
       
       repeatChoice[0] = 
       <View>
-        <BasicText style={{paddingTop:20}}>When would the cycle start?</BasicText>
-        <Button onPress={showDatepicker} title="Show date picker!" />
+        <BasicText style={{paddingTop:20}}>Select the start date of the cycle</BasicText>
+        <Pressable style={[styles.optionButton, styles.buttonClose]}
+        onPress={showDatepicker}>
+          <BasicText style={styles.optionButtonText}>Pick a date</BasicText>
+        </Pressable> 
         {show && (
         <DateTimePicker
           testID="dateTimePicker"
@@ -107,7 +110,7 @@ export default function ChoreModal({ modalVisible , setModalVisible }) {
                 />
                 {/*Type in Chore description*/}
                 <TextInput 
-                style={{paddingTop: 10, borderBottomWidth: 0.5}}
+                style={{paddingTop: 10, borderBottomWidth: 0.3}}
                 placeholder="Description"
                 />
                           

@@ -9,48 +9,25 @@ import {
   Button, 
   Pressable,
   TextInput,
+  ImageBackground,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 //components
 import { MenuBar , ChoreCard , BasicText, ChoreModal } from "../components";
 //assets
 import NewChoresButton from "../assets/icons/icon_designs-03.png";
+import placeholderBG from "../assets/sampleappbg.jpg";
 
 export default function ChoreScreen({ navigation }) {
-  /**
-  // Values needed for Add Chore Screen Popup (Modal)
-  var daysOfTheWeek = ["M", "T", "W", "T", "F", "S","S"];
-  var repeatOptions = ["Weekly", "Monthly"];
-  var displayDaysOfTheWeek = [];
-  var displayRepeatOptions = [];
-
-  **/
-  
+   
   //Toggle on and off modal screeen
   const [modalVisible, setModalVisible] = useState(false);
-
-  /**  
-  // To display options to repeat weekly or monthly
-  for (let i=0; i<2;i++){
-    displayRepeatOptions.push(
-      <Button title= {repeatOptions[i]}/>
-    )
-  }
-  // To display days of the week
-  for (let i=0; i<7;i++){
-    displayDaysOfTheWeek.push(
-      <Button title= {daysOfTheWeek[i]}/>
-    )
-  }
-
-  **/
-
-  
 
   return (
     <SafeAreaView style={styles.container}>
       <MenuBar navigation = {navigation} />
       {/*stuff*/}
+      {/*<ImageBackground source={placeholderBG} style = {{flex:1}}resizeMode="cover">*/}
       <ScrollView
       showsVerticalScrollIndicator={false}
       contentContainerStyle={{
@@ -75,14 +52,14 @@ export default function ChoreScreen({ navigation }) {
           alignItems: "center",
         }}>
         <ChoreCard
-          duedate="14/7"
+          duedate="14 Sep"
           dutyname="Wash the dishes"
           description="It's your turn!"
           choretype="Weekly"
           status="True"
         ></ChoreCard>
         <ChoreCard
-          duedate="5/8"
+          duedate="5 Nov"
           dutyname="Clean the clothes"
           description="It's your turn!"
           choretype="Weekly"
@@ -91,6 +68,7 @@ export default function ChoreScreen({ navigation }) {
       </View>
       <ChoreModal modalVisible = {modalVisible} setModalVisible = {setModalVisible} />
     </ScrollView>
+    {/*</ImageBackground>*/}
   </SafeAreaView>
   );
 }
@@ -135,7 +113,8 @@ const styles = StyleSheet.create({
   chorenewText: {
     //fontFamily: "Montserrat-Regular",
     position: "absolute", 
-    right: 60,
+    right: 55,
+    top: -5,
     flexWrap: "wrap",
     color: "#826335",
     fontSize: 18,
