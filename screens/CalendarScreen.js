@@ -14,36 +14,14 @@ export default function CalendarScreen({ navigation }) {
   //holds an array of objects
   const [events, setEvents] = useState([
     {
-      eventName: "Award Ceremony",
-      eventDate: "MON, 20SEP",
-      eventTime: "2.30pm to 4.30pm",
-      eventLocation: "NTU",
-      important: true,
-    },
-    {
       eventName: "Party",
-      eventDate: "FRI, 16 SEP",
-      eventTime: "5pm",
-      eventLocation: "Adam's house",
-      important: false,
-    },
-    {
-      eventName: "Hiking trail @ hillview",
-      eventDate: "SAT, 10 SEP",
-      eventTime: "9am",
-      eventLocation: "NTU",
-      important: false,
+      date: new Date(41241241),
+      eventLocation: "house",
+      important: true,
     },
   ]);
 
-  function addEvent(eventName , eventDate , eventTime , eventLocation , important) {
-    const event = {
-      eventName: eventName,
-      eventDate: eventDate,
-      eventTime: eventTime,
-      eventLocation: eventLocation,
-      important: important,
-    }
+  function addEvent(event) {
     setEvents([...events , event]);
   }
 
@@ -60,12 +38,11 @@ export default function CalendarScreen({ navigation }) {
   const eventsList = events.map((event , index) => {
     return(
       <EventCard
-        key={index}
-        eventName={event.eventName}
-        eventDate={event.eventDate}
-        eventTime={event.eventTime}
-        eventLocation={event.eventLocation}
-        importantStatus={event.important}
+        key = {index}
+        eventName = {event.eventName}
+        date = {event.date}
+        eventLocation = {event.eventLocation}
+        importantStatus = {event.important}
       />
     );
   });
@@ -78,12 +55,10 @@ export default function CalendarScreen({ navigation }) {
         <View style={{ width: "100%", marginVertical: 10 }}>
           <MyCalendar openModalWithDate = {openModalWithDate} />
         </View>
-        <View style={styles.eventContainer}>
-          <BasicText style={styles.headerText}>Upcoming Events</BasicText>
-          {eventsList}
-        </View>
+        <BasicText style={styles.headerText}>Upcoming Events</BasicText>
+        {eventsList}
         
-        <CalendarModal modalVisible = {modalVisible} setModalVisible = {setModalVisible} modalDate = {modalDate} />
+        <CalendarModal modalVisible = {modalVisible} setModalVisible = {setModalVisible} modalDate = {modalDate} addEvent = {addEvent} />
       </ScrollView>
     </SafeAreaView>
   );
@@ -115,12 +90,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginBottom: 10,
     alignSelf: "center",
-  },
-  eventContainer: {
-    width: "100%",
-    height: 400,
-    marginTop: 10,
-    marginBottom: 20,
   },
   headerText: {
     fontSize: 18,
