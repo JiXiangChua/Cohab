@@ -21,14 +21,14 @@
   		`password` VARCHAR(255) NULL,
   		PRIMARY KEY (`userid`));
 		
-5>Current api
+5>call api examples
 	http://<ip address>:9999/cohab/register
 	sample data:{
 		"email":"test@a.com",
 		"password":"aaa",
 		"username":"qqq"
 	}
-	http://localhost:9999/cohab/login
+	http://<ip address>:9999/cohab/login
 	sample data:{
 		"email":"test@a.com",
 		"password":"aaa"
