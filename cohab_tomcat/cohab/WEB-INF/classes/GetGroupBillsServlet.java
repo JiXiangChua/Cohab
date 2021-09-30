@@ -10,41 +10,44 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
-@WebServlet("/getGroupsByName")
-public class GetGroupsByNameServlet extends HttpServlet {
+@WebServlet("/getGroupBills")
+public class GetGroupBillsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
-                String groupname = request.getParameter("groupname");
-                JSONObject groupObject = searchGroupByName(groupname);
-                System.out.println("---------------------------------------->"+groupObject);
+                String groupid = request.getParameter("groupid");
+                JSONObject groupBillsObject = getGroupBillsById(groupid);
+
+                System.out.println("---------------------------------------->"+groupBillsObject);
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
-                response.getWriter().write(groupObject.toString());
+                response.getWriter().write(groupBillsObject.toString());
     }
 
-    public JSONObject searchGroupByName(String groupname){
+    public JSONObject getGroupBillsById(String groupid){
         Connection connection = null;
         Statement statement = null;
         ResultSet resultset = null;
-        JSONObject groupObject = new JSONObject();
+        JSONObject billsObject = new JSONObject();
 
         try{
-            String sqlGetGroup = "SELECT * FROM cohab_db.group WHERE groupname = '"+ groupname +"'";
+            String sqlGetBills = "SELECT * FROM cohab_db.bill where type = 'group' and groupid = "+groupid;
+            //String sqlGetBills = "SELECT a.status, a.timestamp, b.portion,b.totalamt,b.type,b.description, c.username FROM cohab_db.billstatus AS a JOIN cohab_db.bill AS b ON a.billid = b.billid JOIN cohab_db.user AS c ON c.id = b.userid WHERE a.userid = "+ userid +" AND b.groupid = "+groupid+" and b.type = 'group'";
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/cohab_db?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC","root", "ziyi");
             statement = connection.createStatement();
-            resultset = statement.executeQuery(sqlGetGroup);
+            resultset = statement.executeQuery(sqlGetBills);
     
             while(resultset.next()){
-                groupObject.put("id", resultset.getInt("id"));
-                groupObject.put("groupname", resultset.getString("groupname"));
-                groupObject.put("description", resultset.getString("description"));
+                //billsObject.put("status", resultset.getInt("status"));
+                billsObject.put("totalamt", resultset.getInt("totalamt"));
+                billsObject.put("description", resultset.getString("description"));
+                billsObject.put("portion", resultset.getInt("portion"));
             }
         
         }catch(Exception ex)
         {
-            groupObject = null;
+            billsObject = null;
             System.err.println(ex.getMessage());     
         }finally{
             if(resultset !=null) 
@@ -68,7 +71,7 @@ public class GetGroupsByNameServlet extends HttpServlet {
                     System.err.println(ex.getMessage()); 
                 }    
         }
-        return groupObject;
+        return billsObject;
     }
 }
 

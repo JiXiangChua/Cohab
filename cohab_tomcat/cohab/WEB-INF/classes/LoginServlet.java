@@ -38,13 +38,13 @@ public class LoginServlet extends HttpServlet {
             if(!loginReasult.isEmpty()){
                 switch (loginReasult) {
                     case "invalideEmail":
-                        jObject.put("status", "invalideEmail");
+                        jObject.put("status", "Invalid Email");
                         break;
                     case "invalidePassword":
-                        jObject.put("status", "invalidePassword");
+                        jObject.put("status", "Invalid Password");
                         break;
                     case "loginFailed":
-                        jObject.put("status", "loginFailed");
+                        jObject.put("status", "Login Failed");
                         break;
                     case "valideUser":
                         jObject.put("status", "OK");
