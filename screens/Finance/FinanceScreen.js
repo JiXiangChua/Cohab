@@ -5,9 +5,11 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
+  TextInput,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import RBSheet from "react-native-raw-bottom-sheet";
+import Modal from "react-native-modal";
 
 import MenuBar from "../../components/MenuBar";
 import RoommateCard from "../../components/finance/RoommateCard";
@@ -25,8 +27,8 @@ import PayeeLogo from "../../assets/Finance-assets/Payee.png";
 export default function FinanceScreen({ navigation }) {
   const refRBSheet = useRef();
 
-  const [budget, setBudget] = useState(100);
-  const [shopping, setShopping] = useState(20);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [budget, setBudget] = useState(1000);
   const [roommate, setRoommate] = useState([
     {
       name: "Jixiang",
@@ -56,8 +58,67 @@ export default function FinanceScreen({ navigation }) {
     },
   ]);
 
-  var shoppingBudget = (shopping / budget) * 100;
-  console.log(shoppingBudget);
+  console.log("Entered Finance Screen");
+
+  function toggleBudgetModal() {
+    setModalVisible(!modalVisible);
+  }
+
+  function renderBudgetModal() {
+    const [budgetAmount, setBudgetAmount] = useState("");
+
+    return (
+      <Modal isVisible={modalVisible} avoidKeyboard={true}>
+        <View style={styles.budgetModal}>
+          <BasicText style={{ fontSize: 20, textAlign: "center" }}>
+            What is your new monthly budget?
+          </BasicText>
+          <View style={{ flexDirection: "row", marginVertical: "9%" }}>
+            <BasicText
+              style={{ fontSize: 20, marginRight: 5, alignSelf: "center" }}
+            >
+              $
+            </BasicText>
+            <TextInput
+              style={styles.modalBudgetTextInput}
+              placeholder="1000"
+              keyboardType="numeric"
+              onChangeText={(text) => setBudgetAmount(text)}
+            ></TextInput>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "center",
+            }}
+          >
+            <TouchableOpacity
+              onPress={toggleBudgetModal}
+              style={[
+                styles.modalButton,
+                {
+                  backgroundColor: "#FFF",
+                  borderWidth: 1,
+                  borderColor: "#7B98FF",
+                },
+              ]}
+            >
+              <BasicText style={{ color: "#7B98FF" }}>Cancel</BasicText>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                setBudget(budgetAmount);
+                toggleBudgetModal();
+              }}
+              style={[styles.modalButton, { backgroundColor: "#36BC7C" }]}
+            >
+              <BasicText style={{ color: "#FFF" }}>Confirm</BasicText>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+    );
+  }
 
   function renderPayRoomateScreen() {
     navigation.navigate("PayRoommate");
@@ -110,7 +171,10 @@ export default function FinanceScreen({ navigation }) {
           <BasicText style={{ position: "absolute", left: 0, fontSize: 24 }}>
             Monthly Budget
           </BasicText>
-          <TouchableOpacity style={styles.budgetManageButton}>
+          <TouchableOpacity
+            style={styles.budgetManageButton}
+            onPress={toggleBudgetModal}
+          >
             <BasicText style={styles.budgetManageButtonText}>Manage</BasicText>
           </TouchableOpacity>
           <TouchableOpacity
@@ -127,10 +191,14 @@ export default function FinanceScreen({ navigation }) {
             ></TouchableOpacity>
           </TouchableOpacity>
         </View>
+        {renderBudgetModal()}
 
         {/* Monthly Budget Display */}
         <View>
-          <BasicText style={{ color: "#8A8585" }}> $ 710 / $1000</BasicText>
+          <BasicText style={{ color: "#8A8585" }}>
+            {" "}
+            $ 710 / $ {budget}
+          </BasicText>
         </View>
 
         {/* Roommate Section */}
@@ -339,5 +407,31 @@ const styles = StyleSheet.create({
     width: "90%",
     height: 10,
     borderRadius: 10,
+  },
+  budgetModal: {
+    height: 200,
+    width: "90%",
+    backgroundColor: "#FFFAF2",
+    alignSelf: "center",
+    borderRadius: 30,
+    padding: 20,
+    alignItems: "center",
+  },
+  modalButton: {
+    width: 97,
+    height: 32,
+    borderRadius: 10,
+    marginHorizontal: 15,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  modalBudgetTextInput: {
+    height: 35,
+    width: "40%",
+    backgroundColor: "#FFF",
+    borderWidth: 1,
+    borderColor: "#6E2142",
+    borderRadius: 20,
+    textAlign: "center",
   },
 });
