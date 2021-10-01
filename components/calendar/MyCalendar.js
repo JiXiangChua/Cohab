@@ -1,25 +1,60 @@
-import React from "react";
+import React , { useState , useEffect } from "react";
 
-import { Calendar , CalendarList , Agenda } from "react-native-calendars";
+import { Calendar } from "react-native-calendars";
 
-export default function MyCalendar({ openModalWithDate }) {
+export default function MyCalendar({ openModalWithDate , events }) {
   function handleDayPress(date) {
     openModalWithDate(date)
+    setSelectedDate(formatDate(new Date(date.timestamp)));
   }
+
+  function formatDate(date) {
+    var todayUTC = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+    return todayUTC.toISOString().slice(0, 10);
+  }
+
+  const [markedDates , setMarkedDates] = useState({});
+  const [selectedDate , setSelectedDate] = useState(formatDate(new Date(Date.now())));
+
+  useEffect(() => {
+    console.log(markedDates);
+    for (let i in events) {
+      let date = formatDate(events[i]['date']);
+      let newMarkedDates = {...markedDates};
+      newMarkedDates[date] = {
+        ...newMarkedDates[date],
+        marked: true,
+      }
+      setMarkedDates(newMarkedDates);
+    }
+  },[events]);
+
+  useEffect(() => {
+    let newMarkedDates = {...markedDates};
+    for (let date in newMarkedDates) {
+      if (newMarkedDates[date]['marked']) {
+        newMarkedDates[date] = {
+          'marked': true,
+        }
+      } else {
+        delete newMarkedDates[date];
+      }
+    }
+    newMarkedDates[selectedDate] = {
+      ...newMarkedDates[selectedDate],
+      selected: true,
+    }
+    setMarkedDates(newMarkedDates);
+  },[selectedDate])
+
   return (
     <Calendar
-      markedDates={{
-        "2021-06-30": {
-          selected: true,
-          marked: true,
-          selectedColor: "red",
-        },
-      }}
+      markedDates={markedDates}
       // Specify style for calendar container element. Default = {}
       style={{
         borderWidth: 1,
         borderColor: "gray",
-        height: 350,
+        borderRadius: 5,
       }}
       // Specify theme properties to override specific styles for calendar parts. Default = {}
       theme={{
@@ -45,7 +80,7 @@ export default function MyCalendar({ openModalWithDate }) {
         textMonthFontSize: 16,
         textDayHeaderFontSize: 16,
       }}
-      onDayPress={handleDayPress}
+      onDayPress = {handleDayPress}
     ></Calendar>
   );
 }

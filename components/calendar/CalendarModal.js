@@ -12,11 +12,6 @@ export default function CalendarModal({ modalVisible , setModalVisible , modalDa
         setEventLocation('');
     }
 
-    var selectedDate;
-    if (modalDate) {
-        selectedDate = `${modalDate.day}/${modalDate.month}/${modalDate.year}`
-    }
-
     useEffect(() => {
         setDate(new Date(modalDate.timestamp ?? Date.now()));
     },[modalDate]);
@@ -84,7 +79,7 @@ export default function CalendarModal({ modalVisible , setModalVisible , modalDa
                     <BasicText style = {styles.fieldTitle}>Date:</BasicText>
                     <Text onPress = {showDatePicker} style = {styles.inputField}>{date.toDateString()}</Text>
                     <BasicText style = {styles.fieldTitle}>Time:</BasicText>
-                    <Text onPress = {showTimePicker} style = {styles.inputField}>{date.toTimeString()}</Text>
+                    <Text onPress = {showTimePicker} style = {styles.inputField}>{date.toLocaleTimeString()}</Text>
                     {visibleDateTimePicker}
                     <View style = {styles.buttons}>
                         <TouchableOpacity onPress = {saveEvent} style = {styles.button}><BasicText>Save</BasicText></TouchableOpacity>

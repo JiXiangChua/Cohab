@@ -53,7 +53,7 @@ export default function CalendarScreen({ navigation }) {
       <ScrollView showsVerticalScrollIndicator={false} style={{ width: "90%" }}>
         <BasicText style={styles.calendarText}>Calendar</BasicText>
         <View style={{ width: "100%", marginVertical: 10 }}>
-          <MyCalendar openModalWithDate = {openModalWithDate} />
+          <MyCalendar openModalWithDate = {openModalWithDate} events = {events} />
         </View>
         <BasicText style={styles.headerText}>Upcoming Events</BasicText>
         {eventsList}
