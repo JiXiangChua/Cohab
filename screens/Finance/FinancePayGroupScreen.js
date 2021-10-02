@@ -8,6 +8,7 @@ import {
   SafeAreaView,
   TextInput,
 } from "react-native";
+import DropDownPicker from "react-native-dropdown-picker";
 import { BasicText } from "../../components";
 import backButton from "../../assets/back-to-room-button.png";
 
@@ -25,6 +26,19 @@ export default function FinancePayGroupScreen({ navigation }) {
     },
   ]);
 
+  const [openDropDown, setOpenDropDown] = useState(false);
+  const [valueDropDown, setValueDropDown] = useState(null);
+  const [itemsDropDown, setItemsDropDown] = useState([
+    { label: "Food", value: "food" },
+    { label: "Transport", value: "transport" },
+    { label: "Shopping", value: "shopping" },
+    { label: "Utility", value: "utility" },
+  ]);
+
+  function goToFinanceScreen() {
+    navigation.navigate("Finance");
+  }
+
   let initialStateArray = [];
   for (var index = 0; index < roommateName.length; index++) {
     initialStateArray.push(false);
@@ -32,10 +46,6 @@ export default function FinancePayGroupScreen({ navigation }) {
 
   const [selectedState, setSelectedState] = useState(initialStateArray);
   console.log(selectedState);
-
-  function goToFinanceScreen() {
-    navigation.navigate("Finance");
-  }
 
   function selectedButton(index) {
     selectedState[index] = !selectedState[index];
@@ -47,6 +57,7 @@ export default function FinancePayGroupScreen({ navigation }) {
     console.log(amount);
     console.log(numberOfPeople);
     console.log(amountPerPerson);
+    console.log(valueDropDown);
   }
 
   function handleAmountChange(text) {
@@ -76,7 +87,7 @@ export default function FinancePayGroupScreen({ navigation }) {
       <View>
         <ScrollView
           contentContainerStyle={{
-            height: 280,
+            height: 250,
             marginBottom: 10,
           }}
         >
@@ -119,6 +130,18 @@ export default function FinancePayGroupScreen({ navigation }) {
           onChangeText={handleAmountChange}
         ></TextInput>
       </View>
+
+      <DropDownPicker
+        open={openDropDown}
+        value={valueDropDown}
+        items={itemsDropDown}
+        setOpen={setOpenDropDown}
+        setValue={setValueDropDown}
+        maxHeight={100}
+        style={{ height: 35 }}
+        containerStyle={styles.dropDownPickerFormat}
+      />
+
       <TextInput
         style={styles.inputNoteField}
         placeholder="Add a note"
@@ -228,5 +251,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 20,
     borderRadius: 20,
+  },
+  dropDownPickerFormat: {
+    width: "50%",
+    alignSelf: "center",
+    marginTop: 20,
   },
 });
