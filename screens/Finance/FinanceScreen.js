@@ -10,7 +10,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import RBSheet from "react-native-raw-bottom-sheet";
 import Modal from "react-native-modal";
-import Swipeable from "react-native-gesture-handler/Swipeable";
+import DropDownPicker from "react-native-dropdown-picker";
 
 import MenuBar from "../../components/MenuBar";
 import RoommateCard from "../../components/finance/RoommateCard";
@@ -29,8 +29,9 @@ export default function FinanceScreen({ navigation }) {
   const refRBSheet = useRef();
 
   const [modalVisible, setModalVisible] = useState(false);
-  const [budget, setBudget] = useState(1000);
+  const [expenseModalVisible, setExpenseModalVisible] = useState(false);
   const [payListButtonState, setPayListButtonState] = useState(false);
+  const [budget, setBudget] = useState(1000);
   const [roommate, setRoommate] = useState([
     {
       name: "Jixiang",
@@ -89,6 +90,100 @@ export default function FinanceScreen({ navigation }) {
   ]);
 
   console.log("Entered Finance Screen");
+
+  function renderExpenseModal() {
+    const [openDropDown, setOpenDropDown] = useState(false);
+    const [valueDropDown, setValueDropDown] = useState(null);
+    const [itemsDropDown, setItemsDropDown] = useState([
+      { label: "Food", value: "food" },
+      { label: "Transport", value: "transport" },
+      { label: "Shopping", value: "shopping" },
+      { label: "Utility", value: "utility" },
+    ]);
+    const [expenseAmount, setExpenseAmount] = useState();
+
+    function handleAmountChange(text) {
+      //console.log(text);
+      setExpenseAmount(parseFloat(text).toFixed(2));
+    }
+
+    function pressedConfirmButton() {
+      console.log(expenseAmount);
+      console.log(valueDropDown);
+    }
+
+    return (
+      <Modal
+        isVisible={expenseModalVisible}
+        avoidKeyboard={true}
+        animationIn="fadeIn"
+        animationOut="fadeOut"
+      >
+        <View style={[styles.budgetModal, { height: 250 }]}>
+          <BasicText style={[styles.subHeader, { fontSize: 30 }]}>
+            Amount
+          </BasicText>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
+              marginTop: 20,
+            }}
+          >
+            <BasicText style={styles.subHeader}>$</BasicText>
+            <TextInput
+              style={styles.inputMoneyField}
+              placeholder="0"
+              maxLength={7}
+              onChangeText={handleAmountChange}
+              keyboardType="numeric"
+            ></TextInput>
+          </View>
+          <DropDownPicker
+            open={openDropDown}
+            value={valueDropDown}
+            items={itemsDropDown}
+            setOpen={setOpenDropDown}
+            setValue={setValueDropDown}
+            maxHeight={100}
+            style={{ height: 35, marginBottom: 10 }}
+            containerStyle={styles.dropDownPickerFormat}
+          />
+          {/* Cancel and Confirm Button */}
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "center",
+            }}
+          >
+            <TouchableOpacity
+              onPress={() => setExpenseModalVisible(!expenseModalVisible)}
+              style={[
+                styles.modalButton,
+                {
+                  backgroundColor: "#FFF",
+                  borderWidth: 1,
+                  borderColor: "#7B98FF",
+                },
+              ]}
+            >
+              <BasicText style={{ color: "#7B98FF" }}>Cancel</BasicText>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                setExpenseModalVisible(!expenseModalVisible);
+                pressedConfirmButton();
+              }}
+              style={[styles.modalButton, { backgroundColor: "#36BC7C" }]}
+            >
+              <BasicText style={{ color: "#FFF" }}>Confirm</BasicText>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+    );
+  }
 
   function toggleBudgetModal() {
     setModalVisible(!modalVisible);
@@ -237,23 +332,29 @@ export default function FinanceScreen({ navigation }) {
         <BasicText style={{ color: "#943855", opacity: 0.7, fontSize: 18 }}>
           Current Balance
         </BasicText>
+
+        {/* 3 Buttons Styles */}
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.walletButton}>
-            <Image source={TopUpLogo} style={styles.walletButtonLogo}></Image>
+            <Image source={TopUpLogo} style={[styles.walletButtonLogo]}></Image>
             <BasicText>Top Up</BasicText>
           </TouchableOpacity>
           <TouchableOpacity style={styles.walletButton}>
             <Image source={ScanLogo} style={styles.walletButtonLogo}></Image>
             <BasicText>Scan</BasicText>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.walletButton}>
+          <TouchableOpacity
+            style={styles.walletButton}
+            onPress={() => setExpenseModalVisible(!expenseModalVisible)}
+          >
             <Image
               source={TransferLogo}
               style={[styles.walletButtonLogo, { marginBottom: 14 }]}
             ></Image>
-            <BasicText>Transfer</BasicText>
+            <BasicText>Update</BasicText>
           </TouchableOpacity>
         </View>
+        {renderExpenseModal()}
 
         {/* Monthly Budget Section */}
 
@@ -525,5 +626,22 @@ const styles = StyleSheet.create({
     borderColor: "#6E2142",
     borderRadius: 20,
     textAlign: "center",
+  },
+  subHeader: {
+    color: "#943855",
+    fontSize: 30,
+    alignSelf: "center",
+    fontWeight: "900",
+  },
+  inputMoneyField: {
+    height: 30,
+    width: "20%",
+    textAlign: "center",
+    fontSize: 40,
+  },
+  dropDownPickerFormat: {
+    width: "50%",
+    alignSelf: "center",
+    marginVertical: 20,
   },
 });
