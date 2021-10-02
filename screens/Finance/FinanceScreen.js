@@ -10,6 +10,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import RBSheet from "react-native-raw-bottom-sheet";
 import Modal from "react-native-modal";
+import Swipeable from "react-native-gesture-handler/Swipeable";
 
 import MenuBar from "../../components/MenuBar";
 import RoommateCard from "../../components/finance/RoommateCard";
@@ -17,32 +18,61 @@ import GroupPayCard from "../../components/finance/GroupPayCard";
 import BudgetGraph from "../../components/finance/BudgetGraph";
 import BasicText from "../../components/BasicText";
 
-import addBillButton from "../../assets/Finance-assets/AddBill.png";
+import addBillButton from "../../assets/icons/icon_designs-09.png";
 import TopUpLogo from "../../assets/Finance-assets/TopUp.png";
 import ScanLogo from "../../assets/Finance-assets/Scan.png";
 import TransferLogo from "../../assets/Finance-assets/Transfer.png";
-import PayerLogo from "../../assets/Finance-assets/Payers.png";
-import PayeeLogo from "../../assets/Finance-assets/Payee.png";
+import PayerLogo from "../../assets/icons/icon_designs-06.png";
+import PayeeLogo from "../../assets/icons/icon_designs-05.png";
 
 export default function FinanceScreen({ navigation }) {
   const refRBSheet = useRef();
 
   const [modalVisible, setModalVisible] = useState(false);
   const [budget, setBudget] = useState(1000);
+  const [payListButtonState, setPayListButtonState] = useState(false);
   const [roommate, setRoommate] = useState([
     {
       name: "Jixiang",
       profileImage: "",
       description: "Air-Con Fee",
       amount: "$20.00",
-      status: "True",
+      status: "false", //true means paid already
     },
     {
       name: "Mavis",
       profileImage: "",
       description: "Grocery",
       amount: "$50.00",
-      status: "True",
+      status: "false",
+    },
+    {
+      name: "Mavis",
+      profileImage: "",
+      description: "Grocery",
+      amount: "$50.00",
+      status: "false",
+    },
+    {
+      name: "James",
+      profileImage: "",
+      description: "Air-Con Fee",
+      amount: "$20.00",
+      status: "true",
+    },
+    {
+      name: "Corner",
+      profileImage: "",
+      description: "Grocery",
+      amount: "$50.00",
+      status: "true",
+    },
+    {
+      name: "Ali",
+      profileImage: "",
+      description: "Grocery",
+      amount: "$50.00",
+      status: "true",
     },
   ]);
   const [groupMate, setGroupMate] = useState([
@@ -68,7 +98,12 @@ export default function FinanceScreen({ navigation }) {
     const [budgetAmount, setBudgetAmount] = useState("");
 
     return (
-      <Modal isVisible={modalVisible} avoidKeyboard={true}>
+      <Modal
+        isVisible={modalVisible}
+        avoidKeyboard={true}
+        animationIn="fadeIn"
+        animationOut="fadeOut"
+      >
         <View style={styles.budgetModal}>
           <BasicText style={{ fontSize: 20, textAlign: "center" }}>
             What is your new monthly budget?
@@ -107,7 +142,9 @@ export default function FinanceScreen({ navigation }) {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                setBudget(budgetAmount);
+                if (budgetAmount != null) {
+                  setBudget(budgetAmount);
+                }
                 toggleBudgetModal();
               }}
               style={[styles.modalButton, { backgroundColor: "#36BC7C" }]}
@@ -125,6 +162,59 @@ export default function FinanceScreen({ navigation }) {
   }
   function renderPayGroupScreen() {
     navigation.navigate("PayGroup");
+  }
+
+  function renderRoommateBill() {
+    return (
+      <ScrollView
+        contentContainerStyle={{ justifyContent: "center" }}
+        showsVerticalScrollIndicator={false}
+      >
+        {roommate.map((items, index) => {
+          if (payListButtonState === false && items.status == "false") {
+            return (
+              <View
+                key={index}
+                style={{
+                  width: "100%",
+                  alignItems: "center",
+                }}
+              >
+                <RoommateCard
+                  key={index}
+                  name={items.name}
+                  profileImage={items.profileImage}
+                  description={items.description}
+                  amount={items.amount}
+                  status={items.status}
+                  payText="Pay"
+                ></RoommateCard>
+              </View>
+            );
+          } else if (payListButtonState === true && items.status == "true") {
+            return (
+              <View
+                key={index}
+                style={{
+                  width: "100%",
+                  alignItems: "center",
+                }}
+              >
+                <RoommateCard
+                  key={index}
+                  name={items.name}
+                  profileImage={items.profileImage}
+                  description={items.description}
+                  amount={items.amount}
+                  status={items.status}
+                  payText="Paid"
+                ></RoommateCard>
+              </View>
+            );
+          }
+        })}
+      </ScrollView>
+    );
   }
 
   return (
@@ -207,10 +297,13 @@ export default function FinanceScreen({ navigation }) {
             <BasicText style={styles.createNewTitle}>Pay Roommates</BasicText>
             <BasicText style={styles.createNewButton}>Pay Me</BasicText>
             <TouchableOpacity
-              style={{ position: "absolute", right: 0, fontSize: 18 }}
+              style={{ position: "absolute", right: -5, fontSize: 18 }}
               onPress={renderPayRoomateScreen}
             >
-              <Image source={addBillButton}></Image>
+              <Image
+                source={addBillButton}
+                style={{ width: 50, height: 50 }}
+              ></Image>
             </TouchableOpacity>
           </View>
 
@@ -220,34 +313,29 @@ export default function FinanceScreen({ navigation }) {
             <View
               style={{
                 width: "90%",
-                paddingVertical: 5,
                 alignItems: "center",
               }}
             >
               <View
                 style={{ flexDirection: "row", justifyContent: "space-evenly" }}
               >
-                <Image source={PayerLogo} style={styles.payLogoStyle}></Image>
-                <Image source={PayeeLogo} style={styles.payLogoStyle}></Image>
+                <TouchableOpacity onPress={() => setPayListButtonState(false)}>
+                  <Image
+                    source={PayerLogo}
+                    style={[styles.payLogoStyle, { marginRight: 80 }]}
+                  ></Image>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => setPayListButtonState(true)}>
+                  <Image source={PayeeLogo} style={styles.payLogoStyle}></Image>
+                </TouchableOpacity>
               </View>
 
               {/* TODO - Maybe the bar need to use Carousel, need to explore */}
-              <View style={styles.payProgressBar}></View>
+              {/* <View style={styles.payProgressBar}></View> */}
             </View>
 
             {/* Display each roommate and how much  */}
-            {roommate.map((items, index) => {
-              return (
-                <RoommateCard
-                  key={index}
-                  name={items.name}
-                  profileImage={items.profileImage}
-                  description={items.description}
-                  amount={items.amount}
-                  status={items.status}
-                ></RoommateCard>
-              );
-            })}
+            {renderRoommateBill()}
           </View>
         </View>
 
@@ -257,10 +345,13 @@ export default function FinanceScreen({ navigation }) {
             <BasicText style={styles.createNewTitle}>Group Payment</BasicText>
             <BasicText style={styles.createNewButton}>New Split</BasicText>
             <TouchableOpacity
-              style={{ position: "absolute", right: 0, fontSize: 18 }}
+              style={{ position: "absolute", right: -5, fontSize: 18 }}
               onPress={renderPayGroupScreen}
             >
-              <Image source={addBillButton}></Image>
+              <Image
+                source={addBillButton}
+                style={{ width: 50, height: 50 }}
+              ></Image>
             </TouchableOpacity>
           </View>
           <View style={styles.roommateBillPanel}>
@@ -380,6 +471,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#FFFAF2",
     width: "95%",
+    height: 420,
     borderRadius: 20,
     paddingVertical: 10,
   },
@@ -398,8 +490,8 @@ const styles = StyleSheet.create({
   },
   payLogoStyle: {
     marginVertical: 10,
-    width: 120,
-    height: 50,
+    width: 70,
+    height: 65,
   },
   payProgressBar: {
     backgroundColor: "#696363",
