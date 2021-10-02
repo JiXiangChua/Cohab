@@ -35,7 +35,7 @@ export default function TaskCard(props) {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Text style={styles.modalText}>
-              Would you like to edit the task 'Mop the floor'?
+             <Text style={styles.cardText}>{props.name}</Text>
             </Text>
 
             <View
@@ -155,13 +155,6 @@ export default function TaskCard(props) {
               </Pressable>
             </View>
             <View style={{ flexDirection: "row", marginTop: 20 }}>
-              {/* UNLOAD BUTTON */}
-              <Pressable
-                style={[styles.buttonUnload]}
-                onPress={() => setModalVisible(!modalVisible)}
-              >
-                <Text style={styles.textStyle2}>Unload</Text>
-              </Pressable>
             </View>
           </View>
         </View>
