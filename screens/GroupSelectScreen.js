@@ -42,7 +42,7 @@ export default function GroupSelectScreen({ navigation }) {
           ]}
           onPress={goToHome}
         >
-          <BasicText style={styles.groupButtonText}>Hello</BasicText>
+          <BasicText style={styles.groupButtonText}>Hall</BasicText>
         </TouchableOpacity>
         <TouchableOpacity
           style={[

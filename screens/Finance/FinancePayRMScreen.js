@@ -8,6 +8,7 @@ import {
   SafeAreaView,
   TextInput,
 } from "react-native";
+import DropDownPicker from "react-native-dropdown-picker";
 import { BasicText } from "../../components";
 import backButton from "../../assets/back-to-room-button.png";
 
@@ -23,6 +24,20 @@ export default function FinancePayRMScreen({ navigation }) {
       name: "Claudia",
     },
   ]);
+  const [selectedName, setSelectedName] = useState("");
+
+  const [openDropDown, setOpenDropDown] = useState(false);
+  const [valueDropDown, setValueDropDown] = useState(null);
+  const [itemsDropDown, setItemsDropDown] = useState([
+    { label: "Food", value: "food" },
+    { label: "Transport", value: "transport" },
+    { label: "Shopping", value: "shopping" },
+    { label: "Utility", value: "utility" },
+  ]);
+
+  function goToFinanceScreen() {
+    navigation.navigate("Finance");
+  }
 
   let initialStateArray = [];
   for (var index = 0; index < roommateName.length; index++) {
@@ -32,20 +47,19 @@ export default function FinancePayRMScreen({ navigation }) {
   const [selectedState, setSelectedState] = useState(initialStateArray);
   console.log(selectedState);
 
-  function goToFinanceScreen() {
-    navigation.navigate("Finance");
-  }
-
   function selectedButton(index) {
     for (var arrayId = 0; arrayId < selectedState.length; arrayId++) {
       selectedState[arrayId] = false;
     }
+    setSelectedName(roommateName[index].name);
     selectedState[index] = !selectedState[index];
     setSelectedState([...selectedState]);
   }
 
   function requestButtonPressed() {
     //update database
+    console.log(valueDropDown);
+    console.log(selectedName);
   }
 
   return (
@@ -61,6 +75,8 @@ export default function FinancePayRMScreen({ navigation }) {
       <BasicText style={{ color: "#943855", fontSize: 40, paddingLeft: 20 }}>
         Room Mates
       </BasicText>
+
+      {/* Roommate contact list */}
       <View>
         <ScrollView contentContainerStyle={{ height: 300, marginBottom: 10 }}>
           {roommateName.map((roommate, index) => {
@@ -85,6 +101,8 @@ export default function FinancePayRMScreen({ navigation }) {
           })}
         </ScrollView>
       </View>
+
+      {/* Amount and Submit Section */}
       <BasicText style={[styles.subHeader, { fontSize: 30 }]}>Amount</BasicText>
       <View
         style={{
@@ -101,6 +119,18 @@ export default function FinancePayRMScreen({ navigation }) {
           maxLength={7}
         ></TextInput>
       </View>
+
+      <DropDownPicker
+        open={openDropDown}
+        value={valueDropDown}
+        items={itemsDropDown}
+        setOpen={setOpenDropDown}
+        setValue={setValueDropDown}
+        maxHeight={100}
+        style={{ height: 35 }}
+        containerStyle={styles.dropDownPickerFormat}
+      />
+
       <TextInput
         style={styles.inputNoteField}
         placeholder="Add a note"
@@ -198,5 +228,9 @@ const styles = StyleSheet.create({
     marginTop: 30,
     borderRadius: 20,
   },
-  index: {},
+  dropDownPickerFormat: {
+    width: "50%",
+    alignSelf: "center",
+    marginTop: 20,
+  },
 });
