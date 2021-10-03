@@ -88,6 +88,23 @@ export default function FinanceScreen({ navigation }) {
       description: "Din Tai Fung",
     },
   ]);
+  const [expenseCategory, SetExpenseCategory] = useState([
+    {
+      expenseName: "food",
+      color: "#F6A9A9",
+      amount: 350,
+    },
+    {
+      expenseName: "transport",
+      color: "#FFF47D",
+      amount: 250,
+    },
+    {
+      expenseName: "shopping",
+      color: "#C2F784",
+      amount: 120,
+    },
+  ]);
 
   console.log("Entered Finance Screen");
 
@@ -252,6 +269,52 @@ export default function FinanceScreen({ navigation }) {
     );
   }
 
+  function renderBudgetProgressBar() {
+    const totalMarginLeftAdjustment = 15; //if you changed the margin in style, please update this
+    const marginLeftAdjust = totalMarginLeftAdjustment / expenseCategory.length;
+    const expenseObject = [];
+
+    for (var index = 0; index < expenseCategory.length; index++) {
+      expenseObject.push({
+        expenseName: expenseCategory[index].expenseName,
+        color: expenseCategory[index].color,
+        width: (
+          (expenseCategory[index].amount / budget) * 100 +
+          marginLeftAdjust
+        ).toFixed(2),
+      });
+    }
+
+    return (
+      <View style={{ flexDirection: "row", justifyContent: "flex-start" }}>
+        {expenseObject.map((item, index) => {
+          return (
+            <TouchableOpacity
+              key={index}
+              activeOpacity={1}
+              onPress={() => refRBSheet.current.open()}
+              style={[
+                styles.progressBarIndividualBar,
+                {
+                  backgroundColor: item.color,
+                  width: `${item.width}%`,
+                },
+              ]}
+            ></TouchableOpacity>
+          );
+        })}
+      </View>
+    );
+  }
+
+  function getTotalExpense() {
+    var sum = 0;
+    for (var index = 0; index < expenseCategory.length; index++) {
+      sum += expenseCategory[index].amount;
+    }
+    return sum;
+  }
+
   function renderPayRoomateScreen() {
     navigation.navigate("PayRoommate");
   }
@@ -372,14 +435,7 @@ export default function FinanceScreen({ navigation }) {
             style={styles.progressBar}
             onPress={() => refRBSheet.current.open()}
           >
-            <TouchableOpacity
-              style={{
-                backgroundColor: "red",
-                width: "20%",
-                height: 20,
-                borderRadius: 10,
-              }}
-            ></TouchableOpacity>
+            {renderBudgetProgressBar()}
           </TouchableOpacity>
         </View>
         {renderBudgetModal()}
@@ -387,8 +443,7 @@ export default function FinanceScreen({ navigation }) {
         {/* Monthly Budget Display */}
         <View>
           <BasicText style={{ color: "#8A8585" }}>
-            {" "}
-            $ 710 / $ {budget}
+            $ {getTotalExpense()} / $ {budget}
           </BasicText>
         </View>
 
@@ -562,6 +617,11 @@ const styles = StyleSheet.create({
     width: "90%",
     height: 20,
     borderRadius: 10,
+  },
+  progressBarIndividualBar: {
+    height: 20,
+    borderRadius: 10,
+    marginLeft: -15,
   },
   roommateContainer: {
     marginTop: 20,
