@@ -1,9 +1,10 @@
 import React from 'react';
 import { useState } from "react";
-import { View , TextInput , Modal , Button , Pressable , StyleSheet, Platform, } from 'react-native';
+import { View , TextInput , Modal , Button , Pressable , StyleSheet, Platform, Image, TouchableOpacity, } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 import BasicText from '../BasicText.js';
+import ProfilePic from "../../assets/Finance-assets/Kimberly.png";
 
 
 export default function ChoreModal({ modalVisible , setModalVisible }) {
@@ -116,7 +117,25 @@ export default function ChoreModal({ modalVisible , setModalVisible }) {
                           
                 <BasicText style={{paddingTop:20}}>Select the order</BasicText>
   
-                  <BasicText style={{paddingTop:20}}>Repeat</BasicText>
+                <BasicText style={{paddingTop:20}}>Repeat</BasicText>
+
+                <View style={{flexDirection:"row", paddingTop:20}}> 
+                  
+                  <TouchableOpacity onPress={()=> setOrder(false)}>  
+                    <Image style={styles.image} source={ProfilePic}/>
+                  </TouchableOpacity>
+                
+                  <TouchableOpacity onPress={()=> setOrder2(false)}>  
+                    <Image style={styles.image} source={ProfilePic}/>
+                  </TouchableOpacity>
+               
+                </View> 
+
+                
+                <View style={{flexDirection:"row"}}>  
+                  <BasicText>Order: {order ? "0": "1"}</BasicText>
+                  <BasicText>                           {order2 ? "0" : "2"}</BasicText>
+                </View>
   
                 <View style={{flexDirection: "row", marginHorizontal:35, justifyContent: 'space-around'}}>
                     {displayRepeatOptions}
@@ -152,6 +171,13 @@ const styles = StyleSheet.create({
       marginTop: 10,
       marginBottom: 10,
       borderWidth: 0, //0.1 on JX's ver
+    },
+    image: {
+      resizeMode: "contain",
+      height: 50,
+      width: 100,
+      borderRadius: 10 ,
+  
     },
     shadowProp: {
       shadowColor: "#000",
