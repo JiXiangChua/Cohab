@@ -3,20 +3,23 @@ import { View , StyleSheet , TouchableOpacity , Image } from "react-native";
 import backButton from '../assets/back-to-room-button.png';
 import NotificationButton from "../assets/icons/icon_designs-07.png";
 
-import { BasicText } from '.';
+import BasicText from "./BasicText.js";
 
 export default function MenuBar({ navigation }) {
-    return(
-        <View style={styles.menuBar}>
-            <TouchableOpacity style={styles.backButton} onPress={navigation.goBack}>
-                <Image source={backButton} style = {styles.backButtonLogo} />
-                <BasicText style={styles.backButtonText}>Home</BasicText>
-            </TouchableOpacity >
-            <TouchableOpacity style={styles.notificationButton}>
-                <Image source={NotificationButton} style = {styles.notificationButtonLogo} />
-            </TouchableOpacity>
-      </View>
-    )
+  return (
+    <View style={styles.menuBar}>
+      <TouchableOpacity style={styles.backButton} onPress={navigation.goBack}>
+        <Image source={backButton} style={styles.backButtonLogo} />
+        <BasicText style={styles.backButtonText}>Home</BasicText>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.notificationButton}>
+        <Image
+          source={NotificationButton}
+          style={styles.notificationButtonLogo}
+        />
+      </TouchableOpacity>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

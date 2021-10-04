@@ -1,13 +1,17 @@
 import React, { useState } from "react";
-import { StyleSheet , TextInput , TouchableOpacity , Image , View } from "react-native";
+import {
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  Image,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import logo from "../assets/logo.png";
-import Dialog, {DialogTitle,DialogContent,DialogFooter,DialogButton,SlideAnimation,ScaleAnimation,}
- from 'react-native-popup-dialog';
 
 import { useLoginContext } from "../LoginContext";
-
 import { BasicText } from "../components";
+import ModalScreen from "../components/ModalScreen";
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
@@ -15,31 +19,33 @@ export default function LoginScreen({ navigation }) {
   const [visible, setVisible] = useState(false);
   const [message, setMessage] = useState("");
   const { setIsSignedIn } = useLoginContext();
-  
+
   function login() {
-    const loginURL = 'http://10.27.124.66:9999/cohab/login';
+    const loginURL = "http://10.27.124.66:9999/cohab/login";
 
     const loginPackage = {
       email: email,
-      password: password
+      password: password,
     };
 
     const init = {
-      method: 'POST',
-      headers: { 'Accept': 'application/json' , 'Content-Type': 'application/json' },
-      body: JSON.stringify(loginPackage)
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(loginPackage),
     };
 
-    if (email!=""&&password!="") {
-      ;(async () => {
+    if (email != "" && password != "") {
+      (async () => {
         try {
-          const response = await fetch(loginURL , init);
+          const response = await fetch(loginURL, init);
           const json = await response.json();
           console.log(json);
-          if(json.status=="OK"){
+          if (json.status == "OK") {
             setIsSignedIn(true);
-          }
-          else{
+          } else {
             setMessage(json.status);
             setVisible(true);
           }
@@ -47,8 +53,7 @@ export default function LoginScreen({ navigation }) {
           console.log(error);
         }
       })();
-    }
-    else {
+    } else {
       setMessage("Please enter your email and password.");
       setVisible(true);
     }
@@ -56,33 +61,20 @@ export default function LoginScreen({ navigation }) {
 
   function cheatLogin() {
     setIsSignedIn(true);
-  };
+  }
 
   function goToRegister() {
-    navigation.navigate('Register');
-  };
+    navigation.navigate("Register");
+  }
 
   return (
     <SafeAreaView style={styles.container}>
-      <Dialog
-        visible={visible}
-        onTouchOutside={() => {
-          setVisible(false);
-        }}
-        dialogAnimation={new ScaleAnimation({
-          initialValue: 0, // optional
-          useNativeDriver: true, // optional
-        })}
-      >
-        <DialogTitle title="Error Message" />
-        <DialogContent>
-          <BasicText>{message}</BasicText>
-        </DialogContent>
-        <DialogFooter>
-          <DialogButton text="DISMISS" onPress={() => {setVisible(false);}} />
-        </DialogFooter>
-      </Dialog>
-    
+      <ModalScreen
+        isVisible={visible}
+        setVisible={setVisible}
+        message={message}
+        buttonText="Try Again"
+      />
       <Image source={logo} style={styles.logo} />
       <TextInput
         style={styles.inputField}
@@ -141,5 +133,22 @@ const styles = StyleSheet.create({
     color: "#FFD692",
     textAlign: "center",
     fontSize: 18,
+  },
+  modalStyle: {
+    height: 200,
+    width: "90%",
+    backgroundColor: "#FFFAF2",
+    alignSelf: "center",
+    borderRadius: 30,
+    padding: 20,
+    alignItems: "center",
+  },
+  modalButton: {
+    width: 97,
+    height: 32,
+    borderRadius: 10,
+    marginHorizontal: 15,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

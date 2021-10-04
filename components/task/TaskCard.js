@@ -6,7 +6,7 @@ import {
 
 import ProfilePic from "../../assets/Finance-assets/Kimberly.png";
 
-import { BasicText } from "..";
+import BasicText from "../BasicText.js";
 
 export default function TaskCard(props) {
   return (

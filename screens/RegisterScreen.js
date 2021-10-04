@@ -1,11 +1,16 @@
-import React , { useState } from "react";
-import { StyleSheet , TextInput , Image , TouchableOpacity, View } from "react-native";
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  TextInput,
+  Image,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useLoginContext } from "../LoginContext";
-import Dialog, {DialogButton,DialogFooter,ScaleAnimation, DialogTitle,DialogContent } from 'react-native-popup-dialog';
 import logo from "../assets/logo.png";
-
 import { BasicText } from "../components";
+import ModalScreen from "../components/ModalScreen";
 
 export default function RegisterScreen({ navigation }) {
   const [username, setUsername] = useState("");
@@ -17,7 +22,7 @@ export default function RegisterScreen({ navigation }) {
   const { setIsSignedIn } = useLoginContext();
 
   function signup() {
-    const registerURL = 'http://10.27.124.66:9999/cohab/register';
+    const registerURL = "http://10.27.124.66:9999/cohab/register";
 
     const registerPackage = {
       email: email,
@@ -26,28 +31,28 @@ export default function RegisterScreen({ navigation }) {
     };
 
     const init = {
-      method: 'POST',
-      headers: { 'Accept': 'application/json' , 'Content-Type': 'application/json' },
-      body: JSON.stringify(registerPackage)
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(registerPackage),
     };
 
-
-    if(username==""||email==""||password==""||password2==""){
+    if (username == "" || email == "" || password == "" || password2 == "") {
       setMessage("Please fill in all the required field.");
       setVisible(true);
-    }
-    else{
-      if(password==password2){
-        ;(async () => {
+    } else {
+      if (password == password2) {
+        (async () => {
           try {
-            const response = await fetch(registerURL , init);
+            const response = await fetch(registerURL, init);
             const json = await response.json();
             console.log(json);
-            if(json.status=="OK"){
+            if (json.status == "OK") {
               setIsSignedIn(true);
-              navigation.navigate('Home');
-            }
-            else{
+              navigation.navigate("Home");
+            } else {
               setMessage(json.status);
               setVisible(true);
             }
@@ -55,8 +60,7 @@ export default function RegisterScreen({ navigation }) {
             console.log(error);
           }
         })();
-      }
-      else{
+      } else {
         setMessage("Passwords don't match.");
         setVisible(true);
       }
@@ -64,31 +68,17 @@ export default function RegisterScreen({ navigation }) {
   }
 
   function goToLogin() {
-    navigation.navigate('Login');
+    navigation.navigate("Login");
   }
 
   return (
     <SafeAreaView style={styles.container}>
-      <View>
-      <Dialog
-        visible={visible}
-        onTouchOutside={() => {
-          setVisible(false);
-        }}
-        dialogAnimation={new ScaleAnimation({
-          initialValue: 0, // optional
-          useNativeDriver: true, // optional
-        })}
-      >
-        <DialogTitle title="Error Message" />
-        <DialogContent>
-          <BasicText>{message}</BasicText>
-        </DialogContent>
-        <DialogFooter>
-          <DialogButton text="DISMISS" onPress={() => {setVisible(false);}} />
-        </DialogFooter>
-      </Dialog>
-    </View>
+      <ModalScreen
+        isVisible={visible}
+        setVisible={setVisible}
+        message={message}
+        buttonText="DISMISS"
+      />
       <Image source={logo} style={styles.logo} />
       <TextInput
         style={styles.inputField}
@@ -116,15 +106,14 @@ export default function RegisterScreen({ navigation }) {
         defaultValue={password2}
         secureTextEntry={true}
       />
-      <TouchableOpacity style={styles.button} onPress = {signup}>
+      <TouchableOpacity style={styles.button} onPress={signup}>
         <BasicText style={styles.buttonText}>Sign Up</BasicText>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress = {goToLogin}>
+      <TouchableOpacity style={styles.button} onPress={goToLogin}>
         <BasicText style={styles.buttonText}>Back to Login</BasicText>
       </TouchableOpacity>
     </SafeAreaView>
   );
-
 }
 
 const styles = StyleSheet.create({

@@ -11,6 +11,7 @@ import MyTasks from "./task/MyTasks";
 import SharedTasks from "./task/SharedTasks";
 import TaskCard from "./task/TaskCard";
 import ChoreModal from "./chore/ChoreModal";
+import CalendarModal from "./calendar/CalendarModal";
 
 export {
     MenuBar,
@@ -26,4 +27,5 @@ export {
     SharedTasks,
     TaskCard,
     ChoreModal,
+    CalendarModal,
 }
