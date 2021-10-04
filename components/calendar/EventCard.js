@@ -45,8 +45,8 @@ export default function EventCard(props) {
       {/* Other Details in the card */}
       <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
         <View style={{ justifyContent: "flex-end", alignItems: "flex-start" }}>
-          <BasicText style={{ color: "#8A8585" }}>{props.eventDate}</BasicText>
-          <BasicText>{props.eventTime}</BasicText>
+          <BasicText style={{ color: "#8A8585" }}>{props.date.toDateString()}</BasicText>
+          <BasicText>{props.date.toLocaleTimeString()}</BasicText>
         </View>
 
         <View

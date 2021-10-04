@@ -8,33 +8,64 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { MenuBar , MyCalendar , EventCard , BasicText } from "../components";
+import { MenuBar , MyCalendar , EventCard , BasicText , CalendarModal } from "../components";
 
 export default function CalendarScreen({ navigation }) {
-  //holds an array of objects
-  const [event, setEvent] = useState([
+
+  const [events, setEvents] = useState([ //holds an array of objects
     {
-      eventName: "Award Ceremony",
-      eventDate: "MON, 20SEP",
-      eventTime: "2.30pm to 4.30pm",
-      eventLocation: "NTU",
+      eventName: 'Party',
+      eventLocation: 'My House',
+      date: new Date('11/11/2021'),
       important: true,
-    },
-    {
-      eventName: "Party",
-      eventDate: "FRI, 16 SEP",
-      eventTime: "5pm",
-      eventLocation: "Adam's house",
-      important: false,
-    },
-    {
-      eventName: "Hiking trail @ hillview",
-      eventDate: "SAT, 10 SEP",
-      eventTime: "9am",
-      eventLocation: "NTU",
-      important: false,
-    },
+    }
   ]);
+  const [modalVisible , setModalVisible] = useState(false);
+  const [modalDate , setModalDate] = useState();
+  const [selectedDate , setSelectedDate] = useState(new Date(Date.now()));
+
+  function addEvent(event) {
+    setEvents([...events , event]);
+  }
+
+  function openModalWithDate(date) {
+    setModalDate(date);
+    setModalVisible(true);
+  }
+
+  function isSameDay(date1 , date2) {
+    if (date1.getFullYear() === date2.getFullYear() && date1.getMonth() === date2.getMonth() && date1.getDate() === date2.getDate()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
+  const selectedDayEventsList = events.map((event , index) => {
+    if (isSameDay(selectedDate , event.date)) {
+      return(
+        <EventCard
+          key = {index}
+          eventName = {event.eventName}
+          date = {event.date}
+          eventLocation = {event.eventLocation}
+          importantStatus = {event.important}
+        />
+      );
+    }
+  })
+  
+  const eventsList = events.map((event , index) => {
+    return(
+      <EventCard
+        key = {index}
+        eventName = {event.eventName}
+        date = {event.date}
+        eventLocation = {event.eventLocation}
+        importantStatus = {event.important}
+      />
+    );
+  });
 
   return (
     <SafeAreaView style={styles.container}>
@@ -42,23 +73,11 @@ export default function CalendarScreen({ navigation }) {
       <ScrollView showsVerticalScrollIndicator={false} style={{ width: "90%" }}>
         <BasicText style={styles.calendarText}>Calendar</BasicText>
         <View style={{ width: "100%", marginVertical: 10 }}>
-          <MyCalendar></MyCalendar>
+          <MyCalendar openModalWithDate = {openModalWithDate} events = {events} selectedDate = {selectedDate} setSelectedDate = {setSelectedDate} />
         </View>
-        <View style={styles.eventContainer}>
-          <BasicText style={styles.headerText}>Upcoming Events</BasicText>
-          {event.map((eventItem, index) => {
-            return (
-              <EventCard
-                key={index}
-                eventName={eventItem.eventName}
-                eventDate={eventItem.eventDate}
-                eventTime={eventItem.eventTime}
-                eventLocation={eventItem.eventLocation}
-                importantStatus={eventItem.important}
-              ></EventCard>
-            );
-          })}
-        </View>
+        <BasicText style={styles.headerText}>{selectedDate.toDateString()}</BasicText>
+        {selectedDayEventsList}
+        <CalendarModal modalVisible = {modalVisible} setModalVisible = {setModalVisible} modalDate = {modalDate} addEvent = {addEvent} />
       </ScrollView>
     </SafeAreaView>
   );
@@ -90,12 +109,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginBottom: 10,
     alignSelf: "center",
-  },
-  eventContainer: {
-    width: "100%",
-    height: 400,
-    marginTop: 10,
-    marginBottom: 20,
   },
   headerText: {
     fontSize: 18,

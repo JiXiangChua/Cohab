@@ -10,41 +10,45 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
-@WebServlet("/getGroupsByName")
-public class GetGroupsByNameServlet extends HttpServlet {
+@WebServlet("/getEvents")
+public class GetEventsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
-                String groupname = request.getParameter("groupname");
-                JSONObject groupObject = searchGroupByName(groupname);
-                System.out.println("---------------------------------------->"+groupObject);
+                String groupid = request.getParameter("groupid");
+                JSONObject eventsObject = getGroupEvents(groupid);
+                System.out.println("---------------------------------------->"+eventsObject);
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
-                response.getWriter().write(groupObject.toString());
+                response.getWriter().write(eventsObject.toString());
     }
 
-    public JSONObject searchGroupByName(String groupname){
+    public JSONObject getGroupEvents(String groupid){
         Connection connection = null;
         Statement statement = null;
         ResultSet resultset = null;
-        JSONObject groupObject = new JSONObject();
+        JSONObject eventsObject = new JSONObject();
 
         try{
-            String sqlGetGroup = "SELECT * FROM cohab_db.group WHERE groupname = '"+ groupname +"'";
+            String sqlGetEvents = "SELECT a.eventid,a.title,a.description,a.dateTime,a.location,b.profileimage,c.status FROM cohab_db.event as a join cohab_db.user as b on a.hostid = b.id join cohab_db.eventresponce as c on a.eventid = c.eventid where a.groupid = "+groupid;
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/cohab_db?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC","root", "ziyi");
             statement = connection.createStatement();
-            resultset = statement.executeQuery(sqlGetGroup);
+            resultset = statement.executeQuery(sqlGetEvents);
     
             while(resultset.next()){
-                groupObject.put("id", resultset.getInt("id"));
-                groupObject.put("groupname", resultset.getString("groupname"));
-                groupObject.put("description", resultset.getString("description"));
+                eventsObject.put("id", resultset.getInt("eventid"));
+                eventsObject.put("title", resultset.getString("title"));
+                eventsObject.put("description", resultset.getString("description"));
+                eventsObject.put("dateTime", resultset.getString("dateTime"));
+                eventsObject.put("location", resultset.getString("location"));
+                eventsObject.put("status", resultset.getString("status"));
+                eventsObject.put("profileimage", resultset.getString("profileimage"));
             }
         
         }catch(Exception ex)
         {
-            groupObject = null;
+            eventsObject = null;
             System.err.println(ex.getMessage());     
         }finally{
             if(resultset !=null) 
@@ -68,7 +72,7 @@ public class GetGroupsByNameServlet extends HttpServlet {
                     System.err.println(ex.getMessage()); 
                 }    
         }
-        return groupObject;
+        return eventsObject;
     }
 }
 
