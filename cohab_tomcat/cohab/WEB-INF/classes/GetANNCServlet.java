@@ -10,41 +10,42 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
-@WebServlet("/getGroupsByName")
-public class GetGroupsByNameServlet extends HttpServlet {
+@WebServlet("/getANNC")
+public class GetANNCServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
-                String groupname = request.getParameter("groupname");
-                JSONObject groupObject = searchGroupByName(groupname);
-                System.out.println("---------------------------------------->"+groupObject);
+                String groupid = request.getParameter("groupid");
+                JSONObject anncObject = getGroupANNC(groupid);
+                System.out.println("---------------------------------------->"+anncObject);
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
-                response.getWriter().write(groupObject.toString());
+                response.getWriter().write(anncObject.toString());
     }
 
-    public JSONObject searchGroupByName(String groupname){
+    public JSONObject getGroupANNC(String groupid){
         Connection connection = null;
         Statement statement = null;
         ResultSet resultset = null;
-        JSONObject groupObject = new JSONObject();
+        JSONObject anncObject = new JSONObject();
 
         try{
-            String sqlGetGroup = "SELECT * FROM cohab_db.group WHERE groupname = '"+ groupname +"'";
+            String sqlGetANNC = "SELECT a.announcementid,a.description,a.timestamp,b.profileimage FROM cohab_db.announcement as a join cohab_db.user as b on a.userid = b.id where a.groupid = "+ groupid;
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/cohab_db?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC","root", "ziyi");
             statement = connection.createStatement();
-            resultset = statement.executeQuery(sqlGetGroup);
+            resultset = statement.executeQuery(sqlGetANNC);
     
             while(resultset.next()){
-                groupObject.put("id", resultset.getInt("id"));
-                groupObject.put("groupname", resultset.getString("groupname"));
-                groupObject.put("description", resultset.getString("description"));
+                anncObject.put("id", resultset.getInt("announcementid"));
+                anncObject.put("description", resultset.getString("description"));
+                anncObject.put("timestamp", resultset.getString("timestamp"));
+                anncObject.put("profileimage", resultset.getString("profileimage"));
             }
         
         }catch(Exception ex)
         {
-            groupObject = null;
+            anncObject = null;
             System.err.println(ex.getMessage());     
         }finally{
             if(resultset !=null) 
@@ -68,7 +69,7 @@ public class GetGroupsByNameServlet extends HttpServlet {
                     System.err.println(ex.getMessage()); 
                 }    
         }
-        return groupObject;
+        return anncObject;
     }
 }
 

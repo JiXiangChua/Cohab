@@ -21,25 +21,35 @@ export default function RoommateCard(props) {
         {/* Here the image need change when the database is ready */}
         <Image
           source={ProfilePic}
-          style={{ marginRight: 10, alignSelf: "center" }}
+          style={styles.cardDisplayColumnLeftFormat}
         ></Image>
 
         {/* Column for Name and Description */}
-        <View style={styles.cardDisplayColumnFormat}>
+        <View style={styles.cardDisplayColumnCenterFormat}>
           <BasicText style={styles.cardText}>{props.name}</BasicText>
-          <BasicText style={[styles.cardText, { fontSize: 14, color: "#8A8585" }]}>
+          <BasicText
+            style={[styles.cardText, { fontSize: 14, color: "#8A8585" }]}
+          >
             {props.description}
           </BasicText>
         </View>
 
         {/* Column for Amount and Pay Button */}
-        <View style={[styles.cardDisplayColumnFormat, { marginLeft: 25 }]}>
-          <BasicText style={[styles.cardText, { marginRight: 10 }]}>
-            {props.amount}
-          </BasicText>
-          <TouchableOpacity style={[styles.payButton, styles.shadowProp]}>
-            <BasicText style={{ color: "#FFF", fontSize: 18, fontWeight: "bold" }}>
-              Pay
+        <View style={[styles.cardDisplayColumnRightFormat]}>
+          <BasicText style={[styles.amountText]}>{props.amount}</BasicText>
+          <TouchableOpacity
+            style={[
+              styles.payButton,
+              styles.shadowProp,
+              props.status == "false"
+                ? { backgroundColor: "#FFA903" }
+                : { backgroundColor: "#316A05" },
+            ]}
+          >
+            <BasicText
+              style={{ color: "#FFF", fontSize: 18, fontWeight: "bold" }}
+            >
+              {props.payText}
             </BasicText>
           </TouchableOpacity>
         </View>
@@ -54,7 +64,8 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingVertical: 25,
     paddingHorizontal: 25,
-    width: "90%",
+    width: 320,
+    height: 120,
     marginVertical: 10,
     borderWidth: 0.1,
   },
@@ -64,13 +75,30 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3,
   },
-  cardDisplayColumnFormat: {
+  cardDisplayColumnLeftFormat: {
+    marginRight: 10,
+    alignSelf: "center",
+    width: 50,
+    height: 50,
+  },
+  cardDisplayColumnCenterFormat: {
     flexDirection: "column",
     justifyContent: "center",
+    width: 110,
+  },
+  cardDisplayColumnRightFormat: {
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "flex-end",
+    width: 120,
   },
   cardText: {
-    alignSelf: "center",
     marginRight: 20,
+    fontSize: 25,
+    textAlign: "left",
+  },
+  amountText: {
+    marginRight: 10,
     fontSize: 25,
   },
   payButton: {

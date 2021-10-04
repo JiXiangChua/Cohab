@@ -30,6 +30,7 @@ export default function GroupPayCard(props) {
     >
       {/* Title + Next Button */}
       <View style={styles.contentFormat}>
+
         <BasicText style={styles.cardText}>{props.description}</BasicText>
         <TouchableOpacity>
           <Image source={nextButtonLogo} style={styles.nextButtonStyle}></Image>
@@ -57,6 +58,7 @@ export default function GroupPayCard(props) {
             ]}
           ></View>
         </View>
+
         <BasicText style={styles.cardAmountText}>{props.amountPaid}</BasicText>
       </View>
 
@@ -77,6 +79,7 @@ export default function GroupPayCard(props) {
         ></Image>
         {/* If more than 3 image then put (+ how many more) */}
         <TouchableOpacity style={styles.numberOfPayees}>
+
           <BasicText style={{ alignSelf: "center", color: "white" }}>
             +{numberOfAdditionalPayees}
           </BasicText>
