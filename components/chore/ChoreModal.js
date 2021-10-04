@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from "react";
-import { View , TextInput , Modal , Button , Pressable , StyleSheet, Platform, Image, TouchableOpacity, } from 'react-native';
+import { View , TextInput , Modal , Button , Pressable , StyleSheet, Platform, Image, TouchableOpacity, AppRegistry, } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 import BasicText from '../BasicText.js';
@@ -33,6 +33,9 @@ export default function ChoreModal({ modalVisible , setModalVisible }) {
     const showDatepicker = () => {
       showMode('date');
     };
+
+    const [order, setOrder] = useState(true);
+    const [order2, setOrder2] = useState(true);
 
     // To display options to repeat weekly or monthly
     for (let i=0; i<2;i++){
