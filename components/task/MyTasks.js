@@ -39,8 +39,18 @@ export default function MyTasks() {
       </View>
 
       <View style={styles.tasksContainer}>
-        <TaskCard />
-        <TaskCard />
+        <TaskCard 
+          name="Laundry"
+          description="we have no clothes :(("
+          set="Set own deadline"
+          date_created = "18 Aug"
+        />
+        <TaskCard 
+          name="Do the dishes"
+          description="our sink is clogging !!!"
+          deadline="Deadline:26 Aug"
+          date_created = "18 Aug"
+        />
       </View>
       <TaskModal modalVisible = {modalVisible} setModalVisible = {setModalVisible} />
     </View>

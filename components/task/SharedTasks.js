@@ -1,25 +1,42 @@
 import React, { useState } from "react";
-import { View, TouchableOpacity, StyleSheet, Image } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
+
+import CompletedTab from "./CompletedTab";
+import SharedTab from "./SharedTab";
+import Individual1Tab from "./Individual1Tab";
 
 import Kimberly from "../../assets/Finance-assets/Kimberly.png";
-
-import BasicText from "../BasicText.js";
-import TaskCard from './TaskCard.js';
 
 export default function SharedTasks() {
   const [currentTab, setCurrentTab] = useState("shared");
 
   var shared = [styles.shared];
+  var individual1 = [styles.individual1];
+  var individual2 = [styles.individual2];
   var completed = [styles.completed];
 
   if (currentTab === "shared") {
     shared.push(styles.currentTab);
+  } else if (currentTab === "individual1") {
+    individual1.push(styles.currentTab);
+  } else if (currentTab === "individual2") {
+    individual2.push(styles.currentTab);
   } else if (currentTab === "completed") {
     completed.push(styles.currentTab);
   }
 
   function handleShared() {
     setCurrentTab("shared");
+    console.log(currentTab);
+  }
+
+  function handleIndividual1() {
+    setCurrentTab("individual1");
+    console.log(currentTab);
+  }
+
+  function handleIndividual2() {
+    setCurrentTab("individual2");
     console.log(currentTab);
   }
 
@@ -32,21 +49,26 @@ export default function SharedTasks() {
     <View style={styles.taskContainer}>
       <View style={styles.title}>
         <TouchableOpacity style={shared} onPress={handleShared}>
-          <BasicText style={styles.subHeaderText}>Shared</BasicText>
+          <Text style={styles.subHeaderText}>Shared</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={individual1} onPress={handleIndividual1}>
           <Image source={Kimberly} style={styles.profileImage} />
         </TouchableOpacity>
+
+        <TouchableOpacity style={individual2} onPress={handleIndividual2}>
+          <Image source={Kimberly} style={styles.profileImage} />
+        </TouchableOpacity>
+
         <TouchableOpacity style={completed} onPress={handleCompleted}>
-          <BasicText style={styles.subHeaderText}>Completed</BasicText>
+          <Text style={styles.subHeaderText}>Completed</Text>
         </TouchableOpacity>
       </View>
 
       {/* Shared Task Container */}
-      <View style={styles.backgroundContainer}>
-        <View style={styles.taskCardContainer}>
-          <TaskCard></TaskCard>
-          <TaskCard></TaskCard>
-        </View>
-      </View>
+      <SharedTab visible={currentTab === "shared"} />
+      <CompletedTab visible={currentTab === "completed"} />
+      <Individual1Tab visible={currentTab === "individual1"} />
     </View>
   );
 }
@@ -54,7 +76,7 @@ export default function SharedTasks() {
 const styles = StyleSheet.create({
   taskContainer: {
     marginTop: 20,
-    width: "95%",
+    width: "100%",
     alignItems: "center",
   },
   title: {
@@ -68,14 +90,26 @@ const styles = StyleSheet.create({
   shared: {
     alignItems: "center",
     padding: 10,
-    maxWidth: 200,
+    maxWidth: 100,
     height: 50,
     flexDirection: "row",
   },
   currentTab: {
     backgroundColor: "white",
-    borderTopLeftRadius: 8,
-    borderTopRightRadius: 8,
+    borderTopLeftRadius: 6,
+    borderTopRightRadius: 6,
+  },
+  individual1: {
+    minHeight: 20,
+    padding: 10,
+    alignItems: "center",
+    flexDirection: "row",
+  },
+  individual2: {
+    minHeight: 20,
+    padding: 10,
+    alignItems: "center",
+    flexDirection: "row",
   },
   completed: {
     minHeight: 50,
@@ -84,17 +118,17 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   profileImage: {
-    marginLeft: 10,
-    minWidth: 40,
-    minHeight: 40,
-    resizeMode: "center",
+    marginLeft: 5,
+    minWidth: 8,
+    minHeight: 8,
+    alignSelf: "center",
   },
   subHeaderText: {
     fontSize: 22,
     alignItems: "center",
   },
   backgroundContainer: {
-    width: "100%",
+    width: "105%",
     backgroundColor: "white",
     borderRadius: 8,
     alignItems: "center",
