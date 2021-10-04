@@ -1,17 +1,33 @@
 import React, { useState } from "react";
-import {View , StyleSheet , TouchableOpacity , Image , ScrollView} from "react-native";
+import {
+  View , 
+  StyleSheet , 
+  TouchableOpacity , 
+  Image , 
+  ScrollView, 
+  Modal, 
+  Button, 
+  Pressable,
+  TextInput,
+  ImageBackground,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-
 //components
-import { MenuBar , ChoreCard , BasicText } from "../components";
+import { MenuBar , ChoreCard , BasicText, ChoreModal } from "../components";
 //assets
-import NewChoresButton from "../assets/Chores-assets/Caddbutton.png";
+import NewChoresButton from "../assets/icons/icon_designs-03.png";
+import placeholderBG from "../assets/sampleappbg.jpg";
 
 export default function ChoreScreen({ navigation }) {
+   
+  //Toggle on and off modal screeen
+  const [modalVisible, setModalVisible] = useState(false);
+
   return (
     <SafeAreaView style={styles.container}>
       <MenuBar navigation = {navigation} />
       {/*stuff*/}
+      {/*<ImageBackground source={placeholderBG} style = {{flex:1}}resizeMode="cover">*/}
       <ScrollView
       showsVerticalScrollIndicator={false}
       contentContainerStyle={{
@@ -21,8 +37,11 @@ export default function ChoreScreen({ navigation }) {
         <BasicText style={styles.choreText}> Chores </BasicText>
         <View style={styles.choreContainer}>
           <BasicText style={styles.chorenewText}>New Chore</BasicText>
-          <TouchableOpacity style={{ position: "absolute", right: 30}}>
-            <Image source={NewChoresButton}></Image>
+          <TouchableOpacity 
+          style={{ position: "absolute", right: 10, top:-10}}
+          onPress={() => setModalVisible(true)}
+          >
+            <Image style={styles.newChoreButton} source={NewChoresButton}></Image>
           </TouchableOpacity>
         </View>
         {/* Roommate Bill Container */}
@@ -33,15 +52,24 @@ export default function ChoreScreen({ navigation }) {
           alignItems: "center",
         }}>
         <ChoreCard
-          duedate="14/7"
+          duedate="14 Sep"
           dutyname="Wash the dishes"
           description="It's your turn!"
           choretype="Weekly"
           status="True"
         ></ChoreCard>
+        <ChoreCard
+          duedate="5 Nov"
+          dutyname="Clean the clothes"
+          description="It's your turn!"
+          choretype="Weekly"
+          status="True"
+        ></ChoreCard>
       </View>
-      </ScrollView>
-    </SafeAreaView>
+      <ChoreModal modalVisible = {modalVisible} setModalVisible = {setModalVisible} />
+    </ScrollView>
+    {/*</ImageBackground>*/}
+  </SafeAreaView>
   );
 }
 const styles = StyleSheet.create({
@@ -71,10 +99,11 @@ const styles = StyleSheet.create({
   },
   choreText: {
     flexWrap: "wrap",
-    //fontFamily: "Montserrat-Regular",
+    //fontFamily: "Montserrat",
     color: "#E16363",
     fontSize: 20,
     marginVertical: 10,
+    paddingBottom: 20,
   },
   choreContainer: {
     width: "95%",
@@ -84,9 +113,29 @@ const styles = StyleSheet.create({
   chorenewText: {
     //fontFamily: "Montserrat-Regular",
     position: "absolute", 
-    right: 60,
+    right: 55,
+    top: -5,
     flexWrap: "wrap",
     color: "#826335",
     fontSize: 18,
+  },
+
+  newChoreButton: {
+    width: 35,
+    height: 35,
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+    marginTop:20,
+  },
+  buttonClose: {
+    backgroundColor: "#2196F3",
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center"
   },
 });
