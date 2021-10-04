@@ -2,10 +2,18 @@ import React , { useState , useEffect } from "react";
 
 import { Calendar } from "react-native-calendars";
 
-export default function MyCalendar({ openModalWithDate , events }) {
+export default function MyCalendar({ openModalWithDate , events , selectedDate , setSelectedDate }) {
+  
+  const [markedDates , setMarkedDates] = useState({});
+  
   function handleDayPress(date) {
-    openModalWithDate(date)
-    setSelectedDate(formatDate(new Date(date.timestamp)));
+    const newDate = new Date(date.timestamp);
+    if (newDate.getTime() === selectedDate.getTime()) {
+      openModalWithDate(date);
+    }
+    else {
+      setSelectedDate(newDate);
+    }
   }
 
   function formatDate(date) {
@@ -13,11 +21,7 @@ export default function MyCalendar({ openModalWithDate , events }) {
     return todayUTC.toISOString().slice(0, 10);
   }
 
-  const [markedDates , setMarkedDates] = useState({});
-  const [selectedDate , setSelectedDate] = useState(formatDate(new Date(Date.now())));
-
   useEffect(() => {
-    console.log(markedDates);
     for (let i in events) {
       let date = formatDate(events[i]['date']);
       let newMarkedDates = {...markedDates};
@@ -40,12 +44,12 @@ export default function MyCalendar({ openModalWithDate , events }) {
         delete newMarkedDates[date];
       }
     }
-    newMarkedDates[selectedDate] = {
-      ...newMarkedDates[selectedDate],
+    newMarkedDates[formatDate(selectedDate)] = {
+      ...newMarkedDates[formatDate(selectedDate)],
       selected: true,
     }
     setMarkedDates(newMarkedDates);
-  },[selectedDate])
+  },[formatDate(selectedDate)])
 
   return (
     <Calendar

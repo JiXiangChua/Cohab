@@ -11,30 +11,50 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { MenuBar , MyCalendar , EventCard , BasicText , CalendarModal } from "../components";
 
 export default function CalendarScreen({ navigation }) {
-  //holds an array of objects
-  const [events, setEvents] = useState([
+
+  const [events, setEvents] = useState([ //holds an array of objects
     {
-      eventName: "Party",
-      date: new Date(41241241),
-      eventLocation: "house",
+      eventName: 'Party',
+      eventLocation: 'My House',
+      date: new Date('11/11/2021'),
       important: true,
-    },
+    }
   ]);
+  const [modalVisible , setModalVisible] = useState(false);
+  const [modalDate , setModalDate] = useState();
+  const [selectedDate , setSelectedDate] = useState(new Date(Date.now()));
 
   function addEvent(event) {
     setEvents([...events , event]);
   }
-
-  //modal
-  const [modalVisible , setModalVisible] = useState(false);
-  const [modalDate , setModalDate] = useState();
 
   function openModalWithDate(date) {
     setModalDate(date);
     setModalVisible(true);
   }
 
-  //eventsList
+  function isSameDay(date1 , date2) {
+    if (date1.getFullYear() === date2.getFullYear() && date1.getMonth() === date2.getMonth() && date1.getDate() === date2.getDate()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
+  const selectedDayEventsList = events.map((event , index) => {
+    if (isSameDay(selectedDate , event.date)) {
+      return(
+        <EventCard
+          key = {index}
+          eventName = {event.eventName}
+          date = {event.date}
+          eventLocation = {event.eventLocation}
+          importantStatus = {event.important}
+        />
+      );
+    }
+  })
+  
   const eventsList = events.map((event , index) => {
     return(
       <EventCard
@@ -53,11 +73,10 @@ export default function CalendarScreen({ navigation }) {
       <ScrollView showsVerticalScrollIndicator={false} style={{ width: "90%" }}>
         <BasicText style={styles.calendarText}>Calendar</BasicText>
         <View style={{ width: "100%", marginVertical: 10 }}>
-          <MyCalendar openModalWithDate = {openModalWithDate} events = {events} />
+          <MyCalendar openModalWithDate = {openModalWithDate} events = {events} selectedDate = {selectedDate} setSelectedDate = {setSelectedDate} />
         </View>
-        <BasicText style={styles.headerText}>Upcoming Events</BasicText>
-        {eventsList}
-        
+        <BasicText style={styles.headerText}>{selectedDate.toDateString()}</BasicText>
+        {selectedDayEventsList}
         <CalendarModal modalVisible = {modalVisible} setModalVisible = {setModalVisible} modalDate = {modalDate} addEvent = {addEvent} />
       </ScrollView>
     </SafeAreaView>
