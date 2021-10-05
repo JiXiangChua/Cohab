@@ -9,10 +9,18 @@ import {
 } from "react-native";
 
 import ProfilePic from "../../assets/Finance-assets/Kimberly.png";
-
+import GeneralButton from "../GeneralButton";
 import BasicText from "../BasicText.js";
 
 export default function RoommateCard(props) {
+  const color = () => {
+    if (props.status == "false") {
+      return "#FFB82E";
+    } else {
+      return "#36BC7C";
+    }
+  };
+
   return (
     <View
       style={[styles.card, styles.shadowProp, { justifyContent: "center" }]}
@@ -37,21 +45,13 @@ export default function RoommateCard(props) {
         {/* Column for Amount and Pay Button */}
         <View style={[styles.cardDisplayColumnRightFormat]}>
           <BasicText style={[styles.amountText]}>{props.amount}</BasicText>
-          <TouchableOpacity
-            style={[
-              styles.payButton,
-              styles.shadowProp,
-              props.status == "false"
-                ? { backgroundColor: "#FFA903" }
-                : { backgroundColor: "#316A05" },
-            ]}
-          >
-            <BasicText
-              style={{ color: "#FFF", fontSize: 18, fontWeight: "bold" }}
-            >
-              {props.payText}
-            </BasicText>
-          </TouchableOpacity>
+          <View style={{ marginTop: 10 }}>
+            <GeneralButton
+              buttonText={props.payText}
+              status={props.status}
+              color={color()}
+            />
+          </View>
         </View>
       </View>
     </View>
