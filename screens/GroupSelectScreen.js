@@ -22,7 +22,7 @@ export default function GroupSelectScreen({ navigation }) {
         style={{
           justifyContent: "center",
           width: "100%",
-          height: 500,
+          height: "60%",
           marginTop: 40,
         }}
       >
