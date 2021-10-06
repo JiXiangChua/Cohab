@@ -12,6 +12,8 @@ import {
 } from "react-native";
 
 import ProfilePic from "../../assets/Finance-assets/Kimberly.png";
+import BorderColorButton from "../BorderColorButton";
+import GeneralButton from "../GeneralButton";
 
 export default function CompletedTaskCard(props) {
   return (
@@ -25,9 +27,14 @@ export default function CompletedTaskCard(props) {
           <Text style={[styles.cardText, { fontSize: 15, color: "#8A8585" }]}>
             {props.description}
           </Text>
-          <TouchableOpacity style={[styles.reviveButton, styles.shadowProp]}>
+
+          <View style={{ marginTop: 10 }}>
+            <BorderColorButton buttonText={"Revive"} color={"#36BC7C"} />
+          </View>
+
+          {/* <TouchableOpacity style={[styles.reviveButton, styles.shadowProp]}>
             <Text style={{ color: "#FFF", fontSize: 16 }}>Revive</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
 
         {/* Column for set deadline  */}
