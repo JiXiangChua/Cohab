@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { View , Text, TextInput , Modal , Button , Pressable , StyleSheet, CheckBox } from 'react-native';
+import GeneralButton from "../GeneralButton";
+import BorderColorButton from "../BorderColorButton";
 
 import BasicText from '../BasicText.js';
 import { Picker } from "@react-native-picker/picker";
@@ -8,14 +10,21 @@ import { Picker } from "@react-native-picker/picker";
 export default function TaskModal({ modalVisible , setModalVisible }) {
 
     // Values needed for Add Task Screen Popup (Modal)
-    var repeatOptions = ["Weekly", "Monthly"];
+    var repeatOptions = ["Fixed Deadline", "Set Own Deadline"];
     var displayRepeatOptions = [];
 
-    // To display options to repeat weekly or monthly
-    for (let i=0; i<2;i++){
-        displayRepeatOptions.push(
-            <Button title = {repeatOptions[i]} key = {repeatOptions[i]} />
-        )
+
+    for (let i = 0; i < 2; i++) {
+      displayRepeatOptions.push(
+        <Pressable
+          key={i}
+          style={[styles.optionButton, styles.buttonClose]}
+        >
+          <BasicText style={styles.optionButtonText}>
+            {repeatOptions[i]}
+          </BasicText>
+        </Pressable>
+      );
     }
     const [isSelected, setSelection] = useState(false);
 
@@ -41,12 +50,16 @@ export default function TaskModal({ modalVisible , setModalVisible }) {
                 />
                 {/*Type in Task description*/}
                 <TextInput
-                style={{paddingTop: 20, borderBottomWidth: 0.5}}
+                style={{paddingTop: 20, height: 200, borderBottomWidth: 0.5, textAlignVertical: "top"}}
                 placeholder="Description"
                 />
 
+                <BasicText style={{paddingTop:30}}>Choose Deadline: </BasicText>
+                <View style={{ paddingTop:10 , paddingBottom:20, flexDirection: "row", marginHorizontal: 10, justifyContent: 'space-around'}}>
+                    {displayRepeatOptions}
+                </View>
 
-                <BasicText style={{paddingTop:20}}>Choose a Date: </BasicText>
+                <BasicText style={{paddingTop:30, paddingBottom: 10}}>Choose a Date: </BasicText>
                 <View
                               style={{
                                 flexDirection: "column",
@@ -147,14 +160,10 @@ export default function TaskModal({ modalVisible , setModalVisible }) {
                               </View>
                             </View>
 
-                <BasicText style={{paddingTop:20}}>Repeat</BasicText>
 
-                <View style={{ paddingTop:20, paddingBottom:20, flexDirection: "row", marginHorizontal: 10, justifyContent: 'space-around'}}>
-                    {displayRepeatOptions}
-                </View>
                 <View style={styles.container}>
                     <View style={styles.checkboxContainer}>
-                        <View style={{flexDirection: "row",}}>
+                        <View style={{flexDirection: "row", paddingTop: 80, paddingBottom: 20}}>
                             <CheckBox
                                 value={isSelected}
                                 onValueChange={setSelection}
@@ -164,11 +173,16 @@ export default function TaskModal({ modalVisible , setModalVisible }) {
                         </View>
                     </View>
                 </View>
-                <Pressable
-                style={[styles.button, styles.buttonClose]}
-                onPress={() => setModalVisible(!modalVisible)}>
-                  <BasicText style={styles.textStyle}>Save Changes</BasicText>
-                </Pressable>
+
+                    <View style={{flexDirection: "row"}}>
+                    <View style={{marginTop: 10 , paddingRight: 10}}>
+                        <BorderColorButton buttonText={"Cancel"} color={"#7B98FF"} onPress={() => setModalVisible(!modalVisible)}/>
+                    </View>
+
+                    <View style={{marginTop: 10 }}>
+                        <GeneralButton buttonText={"Add Entry"} color={"#36BC7C"} onPress={() => setModalVisible(!modalVisible)}/>
+                    </View>
+                </View>
 
               </View>
             </View>
@@ -177,43 +191,62 @@ export default function TaskModal({ modalVisible , setModalVisible }) {
 }
 
 const styles = StyleSheet.create({
-    card: {
-      backgroundColor: "white",
-      borderRadius: 10,
-      paddingBottom: 5,
-      paddingHorizontal: 15,
-      width: "100%",
-      marginTop: 10,
-      marginBottom: 10,
-      borderWidth: 0, //0.1 on JX's ver
+  card: {
+    backgroundColor: "white",
+    borderRadius: 10,
+    paddingBottom: 5,
+    paddingHorizontal: 15,
+    width: "100%",
+    marginTop: 10,
+    marginBottom: 10,
+    borderWidth: 0, //0.1 on JX's ver
+  },
+  shadowProp: {
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 6,
     },
-    shadowProp: {
-      shadowColor: "#000",
-      shadowOffset: {
-        width: 0,
-        height: 6,
-        },
-        shadowOpacity: 0.37,
-        shadowRadius: 7.49,
-        elevation: 12,
-    },
-    cardDisplayColumnFormat: {
-      flexDirection: "column",
-      alignContent: "center",
-      marginHorizontal: 10,
-    },
-    button: {
-        borderRadius: 20,
-        padding: 10,
-        elevation: 2,
-        marginTop:20,
-      },
-    buttonClose: {
-        backgroundColor: "#2196F3",
-      },
-    textStyle: {
-        color: "white",
-        fontWeight: "bold",
-        textAlign: "center"
-      },
-  });
+    shadowOpacity: 0.37,
+    shadowRadius: 7.49,
+    elevation: 12,
+  },
+  cardDisplayColumnFormat: {
+    flexDirection: "column",
+    alignContent: "center",
+    marginHorizontal: 10,
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+    marginTop: 20,
+    backgroundColor: "#36BC7C",
+  },
+  buttonClose: {
+    minWidth: 100,
+  },
+
+  optionButton: {
+    borderRadius: 20,
+    borderStyle: "solid",
+    borderWidth: 1,
+    borderColor: "#2196F3",
+    backgroundColor: "white",
+    padding: 10,
+    elevation: 2,
+    marginTop: 20,
+  },
+
+  optionButtonText: {
+    color: "#2196F3",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+});
