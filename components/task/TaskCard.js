@@ -167,10 +167,17 @@ export default function TaskCard(props) {
           <Text style={[styles.cardText, { fontSize: 15, color: "#8A8585" }]}>
             {props.description}
           </Text>
-          <GeneralButton buttonText={"Claim me"} color={"#36BC7C"} onPress={() => {
+
+          <View style={{ marginTop: 10 }}>
+            <GeneralButton
+              buttonText={"Claim me"}
+              color={"#36BC7C"}
+              onPress={() => {
                 setModalVisible(!modalVisible);
-              }}/>
-            
+              }}
+            />
+          </View>
+
           {/* <TouchableOpacity style={[styles.claimButton, styles.shadowProp]}>
             <Text
               style={{ color: "#FFF", fontSize: 16 }}

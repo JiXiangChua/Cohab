@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
 import {
-  View ,
-  StyleSheet ,
-  TouchableOpacity ,
-  Image ,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
   ScrollView,
   Modal,
   Button,
@@ -15,12 +15,12 @@ import {
 import newTaskButton from "../../assets/Task-assets/NewTaskButton.png";
 
 import BasicText from "../BasicText.js";
-import TaskCard from './TaskCard.js';
+import TaskCard from "./TaskCard.js";
 
-import TaskModal from './TaskModal.js';
+import TaskModal from "./TaskModal.js";
 
 export default function MyTasks() {
-  const [modalVisible, setModalVisible] = useState(false)
+  const [modalVisible, setModalVisible] = useState(false);
   //Toggle on and off modal screeen
 
   return (
@@ -29,8 +29,8 @@ export default function MyTasks() {
         <BasicText style={styles.subHeaderText}>Claim Tasks</BasicText>
 
         <TouchableOpacity
-        style={styles.newTask}
-        onPress={() => setModalVisible(true)}
+          style={styles.newTask}
+          onPress={() => setModalVisible(true)}
         >
           <BasicText style={styles.subHeaderText}>New Task</BasicText>
           <Image source={newTaskButton} style={styles.newTaskButton} />
@@ -39,20 +39,23 @@ export default function MyTasks() {
       </View>
 
       <View style={styles.tasksContainer}>
-        <TaskCard 
+        <TaskCard
           name="Laundry"
           description="we have no clothes :(("
           set="Set own deadline"
-          date_created = "18 Aug"
+          date_created="18 Aug"
         />
-        <TaskCard 
+        <TaskCard
           name="Do the dishes"
           description="our sink is clogging !!!"
           deadline="Deadline:26 Aug"
-          date_created = "18 Aug"
+          date_created="18 Aug"
         />
       </View>
-      <TaskModal modalVisible = {modalVisible} setModalVisible = {setModalVisible} />
+      <TaskModal
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+      />
     </View>
   );
 }

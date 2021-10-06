@@ -11,43 +11,30 @@ export default function SharedTab({ visible }) {
   return (
     <View style={styles.backgroundContainer}>
       <View style={styles.taskCardContainer}>
+        {/* Missed Task */}
+        <View style={styles.missedContainer}>
+          <MissedTaskCard
+            name="Clean the sheets"
+            description="sweat stains everywheree"
+            deadline="Overdue:16 Aug"
+            date_created="Created:"
+          ></MissedTaskCard>
+        </View>
+
+        {/* Shared Task */}
         <SharedTaskCard
           name="Mop the floor"
           description="guests coming over this weekend"
           deadline="Deadline:20 Aug"
-          date_created="16 Aug"
+          date_created="Created"
         ></SharedTaskCard>
         <SharedTaskCard
           name="Go ntuc buy toilet paper"
           description="we ran out :0"
           deadline="Deadline:25 Aug"
-          date_created="21 Aug"
+          date_created="Created"
         ></SharedTaskCard>
       </View>
-
-      {/* See all button*/}
-      <TouchableOpacity style={[styles.SeeAll, { marginLeft: 300 }]}>
-        <Text style={styles.SeeAllText}>See All</Text>
-      </TouchableOpacity>
-
-      {/* Missed Task*/}
-      <View style={styles.title}>
-        <Text style={styles.subHeaderText}> Missed Tasks</Text>
-      </View>
-
-      <View style={styles.missedContainer}>
-        <MissedTaskCard
-          name="Clean the sheets"
-          description="sweat stains everywheree"
-          deadline="Overdue:16 Aug"
-          date_created="14 Aug"
-        ></MissedTaskCard>
-      </View>
-
-      {/* See all button*/}
-      <TouchableOpacity style={[styles.SeeAll, { marginLeft: 300 }]}>
-        <Text style={styles.SeeAllText}>See All</Text>
-      </TouchableOpacity>
     </View>
   );
 }
@@ -84,7 +71,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   missedContainer: {
-    width: "95%",
-    padding: 10,
+    width: "100%",
   },
 });

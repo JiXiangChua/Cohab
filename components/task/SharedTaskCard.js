@@ -12,6 +12,7 @@ import {
 } from "react-native";
 
 import ProfilePic from "../../assets/Finance-assets/Kimberly.png";
+import GeneralButton from "../GeneralButton";
 
 export default function SharedTaskCard(props) {
   return (
@@ -25,15 +26,29 @@ export default function SharedTaskCard(props) {
           <Text style={[styles.cardText, { fontSize: 14, color: "#8A8585" }]}>
             {props.description}
           </Text>
+
           {/* Edit button */}
           <View style={{ flexDirection: "row" }}>
-            <TouchableOpacity style={[styles.editButton, styles.shadowProp]}>
-              <Text style={{ color: "#FFF", fontSize: 16 }}>Edit</Text>
-            </TouchableOpacity>
+            <View style={{ marginTop: 10 }}>
+              <GeneralButton
+                buttonText={"Edit"}
+                color={"#7D98FF"}
+                onPress={() => {
+                  setModalVisible(!modalVisible);
+                }}
+              />
+            </View>
+
             {/* Done button */}
-            <TouchableOpacity style={[styles.claimButton, styles.shadowProp]}>
-              <Text style={{ color: "#FFF", fontSize: 16 }}>Done</Text>
-            </TouchableOpacity>
+            <View style={{ marginTop: 10, marginLeft: 5 }}>
+              <GeneralButton
+                buttonText={"Done"}
+                color={"#36BC7C"}
+                onPress={() => {
+                  setModalVisible(!modalVisible);
+                }}
+              />
+            </View>
           </View>
         </View>
 

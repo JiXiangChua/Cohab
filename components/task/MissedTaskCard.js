@@ -12,6 +12,7 @@ import {
 } from "react-native";
 
 import ProfilePic from "../../assets/Finance-assets/Kimberly.png";
+import GeneralButton from "../GeneralButton";
 
 export default function MissedTaskCard(props) {
   return (
@@ -25,9 +26,33 @@ export default function MissedTaskCard(props) {
           <Text style={[styles.cardText, { fontSize: 15, color: "#8A8585" }]}>
             {props.description}
           </Text>
-          <TouchableOpacity style={[styles.reviveButton, styles.shadowProp]}>
+
+          {/* Edit button */}
+          <View style={{ flexDirection: "row" }}>
+            <View style={{ marginTop: 10 }}>
+              <GeneralButton
+                buttonText={"Edit"}
+                color={"#7D98FF"}
+                onPress={() => {
+                  setModalVisible(!modalVisible);
+                }}
+              />
+            </View>
+
+            {/* Done button */}
+            <View style={{ marginTop: 10, marginLeft: 5 }}>
+              <GeneralButton
+                buttonText={"Done"}
+                color={"#36BC7C"}
+                onPress={() => {
+                  setModalVisible(!modalVisible);
+                }}
+              />
+            </View>
+          </View>
+          {/* <TouchableOpacity style={[styles.reviveButton, styles.shadowProp]}>
             <Text style={{ color: "#FFF", fontSize: 16 }}>Revive</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
 
         {/* Column for set deadline  */}
@@ -49,7 +74,7 @@ export default function MissedTaskCard(props) {
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: "white",
+    backgroundColor: "#FFDCD1",
     borderRadius: 10,
     paddingVertical: 20,
     paddingHorizontal: 25,

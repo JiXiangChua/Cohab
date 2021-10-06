@@ -12,15 +12,12 @@ export default function SharedTasks() {
 
   var shared = [styles.shared];
   var individual1 = [styles.individual1];
-  var individual2 = [styles.individual2];
   var completed = [styles.completed];
 
   if (currentTab === "shared") {
     shared.push(styles.currentTab);
   } else if (currentTab === "individual1") {
     individual1.push(styles.currentTab);
-  } else if (currentTab === "individual2") {
-    individual2.push(styles.currentTab);
   } else if (currentTab === "completed") {
     completed.push(styles.currentTab);
   }
@@ -35,11 +32,6 @@ export default function SharedTasks() {
     console.log(currentTab);
   }
 
-  function handleIndividual2() {
-    setCurrentTab("individual2");
-    console.log(currentTab);
-  }
-
   function handleCompleted() {
     setCurrentTab("completed");
     console.log(currentTab);
@@ -49,15 +41,11 @@ export default function SharedTasks() {
     <View style={styles.taskContainer}>
       <View style={styles.title}>
         <TouchableOpacity style={shared} onPress={handleShared}>
-          <Text style={styles.subHeaderText}>Shared</Text>
+          <Text style={styles.subHeaderText}>Others</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={individual1} onPress={handleIndividual1}>
-          <Image source={Kimberly} style={styles.profileImage} />
-        </TouchableOpacity>
-
-        <TouchableOpacity style={individual2} onPress={handleIndividual2}>
-          <Image source={Kimberly} style={styles.profileImage} />
+          <Text style={styles.subHeaderText}>My Task</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={completed} onPress={handleCompleted}>
