@@ -15,6 +15,7 @@ export default function GeneralButton(props) {
     <View>
       <TouchableOpacity
         style={[styles.ButtonStyle, { backgroundColor: props.color }]}
+        onPress={props.onPress}
       >
         <BasicText style={styles.ButtonTextStyle}>{props.buttonText}</BasicText>
       </TouchableOpacity>

@@ -13,13 +13,13 @@ import {
 
 import { Picker } from "@react-native-picker/picker";
 import ProfilePic from "../../assets/Finance-assets/Kimberly.png";
+import GeneralButton from "../GeneralButton";
 
 export default function TaskCard(props) {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedDay, setSelectedDay] = useState("1");
   const [selectedMonth, setSelectedMonth] = useState("Jan");
   const [selectedYear, setSelectedYear] = useState("2021");
-  console.log("taskcard");
 
   return (
     <View
@@ -168,7 +168,11 @@ export default function TaskCard(props) {
           <Text style={[styles.cardText, { fontSize: 15, color: "#8A8585" }]}>
             {props.description}
           </Text>
-          <TouchableOpacity style={[styles.claimButton, styles.shadowProp]}>
+          <GeneralButton buttonText={"Claim me"} color={"#36BC7C"} onPress={() => {
+                setModalVisible(!modalVisible);
+              }}/>
+            
+          {/* <TouchableOpacity style={[styles.claimButton, styles.shadowProp]}>
             <Text
               style={{ color: "#FFF", fontSize: 16 }}
               onPress={() => {
@@ -177,7 +181,7 @@ export default function TaskCard(props) {
             >
               Claim me
             </Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
 
         {/* Column for set deadline  */}
