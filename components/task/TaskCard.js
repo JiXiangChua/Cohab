@@ -19,6 +19,7 @@ export default function TaskCard(props) {
   const [selectedDay, setSelectedDay] = useState("1");
   const [selectedMonth, setSelectedMonth] = useState("Jan");
   const [selectedYear, setSelectedYear] = useState("2021");
+  console.log("taskcard");
 
   return (
     <View
