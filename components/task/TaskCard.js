@@ -36,7 +36,7 @@ export default function TaskCard(props) {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Text style={styles.modalText}>
-             <Text style={styles.cardText}>{props.name}</Text>
+              <Text style={styles.cardText}>{props.name}</Text>
             </Text>
 
             <View
@@ -117,7 +117,7 @@ export default function TaskCard(props) {
 
                 <Picker
                   selectedValue={selectedYear}
-                  style={{ height: 50, width: 110}}
+                  style={{ height: 50, width: 110 }}
                   onValueChange={(itemValue, itemIndex) =>
                     setSelectedYear(itemValue)
                   }
@@ -155,8 +155,7 @@ export default function TaskCard(props) {
                 <Text style={styles.textStyle1}>Save</Text>
               </Pressable>
             </View>
-            <View style={{ flexDirection: "row", marginTop: 20 }}>
-            </View>
+            <View style={{ flexDirection: "row", marginTop: 20 }}></View>
           </View>
         </View>
       </Modal>
