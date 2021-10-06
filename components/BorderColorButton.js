@@ -1,23 +1,18 @@
 import React from "react";
-import {
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-  ScrollView,
-  TextInput,
-} from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 
 import BasicText from "./BasicText";
 
-export default function GeneralButton(props) {
+export default function BorderColorButton(props) {
   return (
     <View>
       <TouchableOpacity
-        style={[styles.ButtonStyle, { backgroundColor: props.color }]}
+        style={[styles.ButtonStyle, { borderColor: props.color }]}
         onPress={props.onPress}
       >
-        <BasicText style={styles.ButtonTextStyle}>{props.buttonText}</BasicText>
+        <BasicText style={[styles.ButtonTextStyle, { color: props.color }]}>
+          {props.buttonText}
+        </BasicText>
       </TouchableOpacity>
     </View>
   );
@@ -29,6 +24,7 @@ const styles = StyleSheet.create({
     height: 32,
     borderRadius: 10,
     justifyContent: "center",
+    borderWidth: 1,
   },
   ButtonTextStyle: {
     textAlign: "center",

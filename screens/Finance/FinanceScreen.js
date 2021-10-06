@@ -109,6 +109,26 @@ export default function FinanceScreen({ navigation }) {
 
   console.log("Entered Finance Screen");
 
+  // TODO if need to
+  // function getRequest() {
+  //   const getRequestPackage = {
+  //     // properties to update database
+  //   };
+
+  //   const init = {
+  //     method: "POST",
+  //     headers: {
+  //       Accept: "application/json",
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(getRequestPackage),
+  //   };
+  // }
+
+  // function updateRequest() {}
+
+  // function deleteRequest() {}
+
   function renderExpenseModal() {
     const [openDropDown, setOpenDropDown] = useState(false);
     const [valueDropDown, setValueDropDown] = useState(null);
