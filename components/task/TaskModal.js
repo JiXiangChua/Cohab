@@ -160,7 +160,7 @@ export default function TaskModal({ modalVisible , setModalVisible }) {
                                 onValueChange={setSelection}
                                 style={styles.checkbox}
                             />
-                            <Text style={{}}>I will Do it!</Text>
+                            <Text style={{}}>I will do it!</Text>
                         </View>
                     </View>
                 </View>
