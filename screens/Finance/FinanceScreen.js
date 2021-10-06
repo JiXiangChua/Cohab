@@ -17,6 +17,7 @@ import RoommateCard from "../../components/finance/RoommateCard";
 import GroupPayCard from "../../components/finance/GroupPayCard";
 import BudgetGraph from "../../components/finance/BudgetGraph";
 import BasicText from "../../components/BasicText";
+import GeneralButton from "../../components/GeneralButton";
 
 import addBillButton from "../../assets/icons/icon_designs-09.png";
 import TopUpLogo from "../../assets/Finance-assets/TopUp.png";
