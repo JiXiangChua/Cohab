@@ -7,6 +7,7 @@ import {
 
 import ProfilePic from "../../assets/Finance-assets/Kimberly.png";
 import choreSoap from "../../assets/Chores-assets/soap.png";
+import GeneralButton from "../GeneralButton";
 
 import BasicText from "../BasicText.js";
 
@@ -37,18 +38,24 @@ export default function ChoreCard(props) {
           <View style={styles.choredutycont}>
             <BasicText style={styles.choreduty}>{props.dutyname}</BasicText>
           </View>
-          <Image
-          source={ProfilePic}
-          style={styles.profileimg}
-          ></Image>
-          <BasicText style={styles.chorebasictxt}>{props.description}</BasicText>
+          <View style={{paddingHorizontal: 10, paddingVertical: 10, marginTop: 20}}>
+            <GeneralButton
+                buttonText= "Edit"
+                color="#FF8C8C"
+                //onPress={}
+            />
+          </View>
         </View>
 
-        <View style={[styles.cardDisplayColumnFormat, { marginHorizontal: 20, flexDirection:"column", justifyContent: "space-between" }]}>
-          <BasicText style={styles.chorebasictxt}>{props.choretype}</BasicText>
+        <View style={[styles.cardDisplayColumnFormat, {
+          marginHorizontal: 5, 
+          flexDirection:"column", 
+          justifyContent: "space-between",
+          }]}>
+          <BasicText style={styles.chorebasictxt}>{"Every " + props.choretype}</BasicText>
             <View style={styles.whosnextcont}>
-              <BasicText>Next:</BasicText>
               <Image source={ProfilePic} style={styles.profileimgsmall}></Image>
+              <Image source={ProfilePic} style={styles.profileimg}></Image>
             </View>
         </View>
       </View>
@@ -85,7 +92,7 @@ const styles = StyleSheet.create({
   choredutycont: {
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#FF8C8C",
+    //backgroundColor: "#FF8C8C",
     display: "flex",
     paddingHorizontal: 10,
     paddingVertical: 5,
@@ -102,7 +109,7 @@ const styles = StyleSheet.create({
   choreduty: {
     flexWrap: "wrap",
     fontSize: 18,
-    color: "white",
+    color: "#FF8C8C",
     fontWeight: "bold",
   },
   chorebasictxt:{
@@ -114,21 +121,22 @@ const styles = StyleSheet.create({
   profileimg: {
     marginVertical: 10, 
     alignSelf: "center" ,
-    borderWidth: 4,
+    //borderWidth: 4,
     borderColor: "#FF8C8C",
     borderRadius: 25
   },
   profileimgsmall: {
     marginHorizontal:0,
-    height: 20,
-    width: 20,
+    height: 30,
+    width: 30,
+    marginLeft: -10,
     marginVertical: 0, 
     alignSelf: "center" ,
   },
   whosnextcont: {
     width: "100%",
     paddingVertical: 5,
-    flexDirection: "row",
+    flexDirection: "row-reverse",
     flexWrap: "wrap",
   },
 });

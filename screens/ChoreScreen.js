@@ -55,14 +55,14 @@ export default function ChoreScreen({ navigation }) {
           duedate="14 Sep"
           dutyname="Wash the dishes"
           description="It's your turn!"
-          choretype="Weekly"
+          choretype="Sat"
           status="True"
         ></ChoreCard>
         <ChoreCard
           duedate="5 Nov"
           dutyname="Clean the clothes"
           description="It's your turn!"
-          choretype="Weekly"
+          choretype="19th"
           status="True"
         ></ChoreCard>
       </View>
