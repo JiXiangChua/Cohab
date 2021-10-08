@@ -6,12 +6,17 @@ import {
 } from "react-native";
 
 import ProfilePic from "../../assets/Finance-assets/Kimberly.png";
-import choreSoap from "../../assets/Chores-assets/soap.png";
+import cleaning from "../../assets/Chores-assets/cleaning.png";
+import household from "../../assets/Chores-assets/household.png";
 import GeneralButton from "../GeneralButton";
 
 import BasicText from "../BasicText.js";
 
 export default function ChoreCard(props) {
+
+  let iconObj = {"cleaning": cleaning, "household": household,}
+  //let mode = this.props.iconselect
+
   return (
     <View
       style={[styles.card, styles.shadowProp, {
@@ -28,9 +33,8 @@ export default function ChoreCard(props) {
 
       <View style={{ flexDirection: "row", marginVertical: 20 }}>
         <Image
-          source={choreSoap}
-          style={{
-          }}
+          source={iconObj[props.iconselect]}
+          style={styles.image}
         ></Image>
 
         {/* Column for Name and Description */}
@@ -88,6 +92,12 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignContent: "center",
     marginHorizontal: 10,
+  },
+  image: {
+    resizeMode: "contain",
+    height: 80,
+    width: 80,
+    borderRadius: 10,
   },
   choredutycont: {
     justifyContent: "center",

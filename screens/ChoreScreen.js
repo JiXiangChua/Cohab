@@ -54,6 +54,7 @@ export default function ChoreScreen({ navigation }) {
         <ChoreCard
           duedate="14 Sep"
           dutyname="Wash the dishes"
+          iconselect = "cleaning"
           description="It's your turn!"
           choretype="Sat"
           status="True"
@@ -62,6 +63,7 @@ export default function ChoreScreen({ navigation }) {
           duedate="5 Nov"
           dutyname="Clean the clothes"
           description="It's your turn!"
+          iconselect = "cleaning"
           choretype="19th"
           status="True"
         ></ChoreCard>

@@ -16,15 +16,12 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 
 import BasicText from "../BasicText.js";
 import ProfilePic from "../../assets/Finance-assets/Kimberly.png";
-import cleaning from "../../assets/Chores-assets/cleaning.png";
-import household from "../../assets/Chores-assets/household.png";
-import heart from "../../assets/Chores-assets/heart.png";
-import shopping from "../../assets/Chores-assets/online-shopping.png";
-import grocery from "../../assets/Chores-assets/grocery.png";
 
-export default function ChoreModal({ modalVisible, setModalVisible }) {
+export default function ChoreModalOldVersion({ modalVisible, setModalVisible }) {
   // Values needed for Add Chore Screen Popup (Modal)
+  var daysOfTheWeek = ["M", "T", "W", "T", "F", "S", "S"];
   var repeatOptions = ["Weekly", "Monthly"];
+  var displayDaysOfTheWeek = [];
   var displayRepeatOptions = [];
 
   const [date, setDate] = useState(new Date());
@@ -64,6 +61,17 @@ export default function ChoreModal({ modalVisible, setModalVisible }) {
     );
   }
 
+  // To display days of the week
+  for (let i = 0; i < 7; i++) {
+    displayDaysOfTheWeek.push(
+      <Pressable key={i} style={[styles.optionButton]}>
+        <BasicText style={styles.optionButtonText}>
+          {daysOfTheWeek[i]}
+        </BasicText>
+      </Pressable>
+    );
+  }
+
   var repeatChoice = [];
 
   //Toggle between weekly or monthly options based on user choice
@@ -73,25 +81,16 @@ export default function ChoreModal({ modalVisible, setModalVisible }) {
   if (repeatByWeekOrMonth == "Weekly") {
     repeatChoice[0] = (
       <View>
-        <BasicText style={{ paddingTop: 20 }}>
-          Select the start date of the cycle
-        </BasicText>
-        <Pressable
-          style={[styles.optionButton, styles.buttonClose]}
-          onPress={showDatepicker}
+        <BasicText style={{ paddingTop: 20 }}>Select the day</BasicText>
+        <View
+          style={{
+            flexDirection: "row",
+            marginHorizontal: 10,
+            justifyContent: "space-around",
+          }}
         >
-          <BasicText style={styles.optionButtonText}>Pick a date</BasicText>
-        </Pressable>
-        {show && (
-          <DateTimePicker
-            testID="dateTimePicker"
-            value={date}
-            mode={mode}
-            is24Hour={true}
-            display="default"
-            onChange={onChange}
-          />
-        )}
+          {displayDaysOfTheWeek}
+        </View>
       </View>
     );
   } else if (repeatByWeekOrMonth == "Monthly") {
@@ -118,80 +117,6 @@ export default function ChoreModal({ modalVisible, setModalVisible }) {
         )}
       </View>
     );
-  }
-
- const [state, setState] = useState({
-   switchone: false,
-   switchtwo: false,
-   switchthree: false,
-   switchfour: false,
-   switchfive: false,
-  });
- const handleClick=(flag)=>{
-  switch(flag) {
-    case 0:
-      setState({
-        switchone: false,
-        switchtwo: false,
-        switchthree: false,
-        switchfour: false,
-        switchfive: false,
-      });
-      break;
-
-    case 1:
-      setState({
-        switchone: true,
-        switchtwo: false,
-        switchthree: false,
-        switchfour: false,
-        switchfive: false,
-      });
-      break;
-    
-    case 2:
-      setState({
-        switchone: false,
-        switchtwo: true,
-        switchthree: false,
-        switchfour: false,
-        switchfive: false,
-      });
-      break;
-
-    case 3:
-      setState({
-        switchone: false,
-        switchtwo: false,
-        switchthree: true,
-        switchfour: false,
-        switchfive: false,
-      });
-      break;
-
-    case 4:
-      setState({
-        switchone: false,
-        switchtwo: false,
-        switchthree: false,
-        switchfour: true,
-        switchfive: false,
-      });
-      break;
-
-    case 5:
-      setState({
-        switchone: false,
-        switchtwo: false,
-        switchthree: false,
-        switchfour: false,
-        switchfive: true,
-      });
-      break;
-
-    default:
-      setState({switchone: false,});
-    }
   }
 
   return (
@@ -226,28 +151,6 @@ export default function ChoreModal({ modalVisible, setModalVisible }) {
             style={{ paddingTop: 10, borderBottomWidth: 0.3 }}
             placeholder="Description"
           />
-          
-          <View style={styles.gridcont}>
-            <TouchableOpacity onPress={() => handleClick(1)}>
-              <Image source={cleaning} style={[styles.gridimage,{borderWidth: (state.switchone === false ? 0 : 4)}]}/>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => handleClick(2)}>
-              <Image source={household} style={[styles.gridimage,{borderWidth: (state.switchtwo === false ? 0 : 4)}]}/>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => handleClick(3)}>
-              <Image source={grocery} style={[styles.gridimage,{borderWidth: (state.switchthree === false ? 0 : 4)}]}/>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => handleClick(4)}>
-              <Image source={heart} style={[styles.gridimage,{borderWidth: (state.switchfour === false ? 0 : 4)}]}/>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => handleClick(5)}>
-              <Image source={shopping} style={[styles.gridimage,{borderWidth: (state.switchfive === false ? 0 : 4)}]}/>
-            </TouchableOpacity>
-          </View>
 
           <BasicText style={{ paddingTop: 20 }}>Select the order</BasicText>
 
@@ -317,17 +220,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
     borderWidth: 0, //0.1 on JX's ver
-  },
-  gridcont: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-  },
-  gridimage: {
-    resizeMode: "contain",
-    height: 80,
-    width: 80,
-    borderRadius: 10,
-    borderColor: "#FF8C8C",
   },
   image: {
     resizeMode: "contain",
