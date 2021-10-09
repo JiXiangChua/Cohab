@@ -21,6 +21,7 @@ import household from "../../assets/Chores-assets/household.png";
 import heart from "../../assets/Chores-assets/heart.png";
 import shopping from "../../assets/Chores-assets/online-shopping.png";
 import grocery from "../../assets/Chores-assets/grocery.png";
+import payment from "../../assets/Chores-assets/cash-payment.png";
 
 export default function ChoreModal({ modalVisible, setModalVisible }) {
   // Values needed for Add Chore Screen Popup (Modal)
@@ -136,6 +137,7 @@ export default function ChoreModal({ modalVisible, setModalVisible }) {
         switchthree: false,
         switchfour: false,
         switchfive: false,
+        switchsix: false,
       });
       break;
 
@@ -146,6 +148,7 @@ export default function ChoreModal({ modalVisible, setModalVisible }) {
         switchthree: false,
         switchfour: false,
         switchfive: false,
+        switchsix: false,
       });
       break;
     
@@ -156,6 +159,7 @@ export default function ChoreModal({ modalVisible, setModalVisible }) {
         switchthree: false,
         switchfour: false,
         switchfive: false,
+        switchsix: false,
       });
       break;
 
@@ -166,6 +170,7 @@ export default function ChoreModal({ modalVisible, setModalVisible }) {
         switchthree: true,
         switchfour: false,
         switchfive: false,
+        switchsix: false,
       });
       break;
 
@@ -176,6 +181,7 @@ export default function ChoreModal({ modalVisible, setModalVisible }) {
         switchthree: false,
         switchfour: true,
         switchfive: false,
+        switchsix: false,
       });
       break;
 
@@ -186,8 +192,20 @@ export default function ChoreModal({ modalVisible, setModalVisible }) {
         switchthree: false,
         switchfour: false,
         switchfive: true,
+        switchsix: false,
       });
       break;
+
+    case 6:
+       setState({
+         switchone: false,
+         switchtwo: false,
+         switchthree: false,
+         switchfour: false,
+         switchfive: false,
+         switchsix: true,
+       });
+       break;
 
     default:
       setState({switchone: false,});
@@ -205,7 +223,7 @@ export default function ChoreModal({ modalVisible, setModalVisible }) {
     >
       {/*Rest of screen will darken*/}
       <View
-        style={{ backgroundColor: "#000000aa", flex: 1, paddingVertical: 100 }}
+        style={{ backgroundColor: "#000000aa", flex: 1}}
       >
         {/*Pop up screen will show*/}
         <View
@@ -226,32 +244,53 @@ export default function ChoreModal({ modalVisible, setModalVisible }) {
             style={{ paddingTop: 10, borderBottomWidth: 0.3 }}
             placeholder="Description"
           />
+
+          <BasicText style={{ paddingTop: 20 }}>Select an icon</BasicText>
           
           <View style={styles.gridcont}>
+
+            
             <TouchableOpacity onPress={() => handleClick(1)}>
-              <Image source={cleaning} style={[styles.gridimage,{borderWidth: (state.switchone === false ? 0 : 4)}]}/>
+            <View style={[styles.iconSquare,{backgroundColor: "#FFCDF4", borderWidth: (state.switchone === false ? 0 : 4)}]}>
+              <Image source={cleaning} style={styles.gridimage}/>
+              </View>
             </TouchableOpacity>
+           
+            
 
             <TouchableOpacity onPress={() => handleClick(2)}>
-              <Image source={household} style={[styles.gridimage,{borderWidth: (state.switchtwo === false ? 0 : 4)}]}/>
+            <View style={[styles.iconSquare,{backgroundColor: "#ECC3FF", borderWidth: (state.switchtwo === false ? 0 : 4)}]}>
+              <Image source={household} style={styles.gridimage}/>
+              </View>
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => handleClick(3)}>
-              <Image source={grocery} style={[styles.gridimage,{borderWidth: (state.switchthree === false ? 0 : 4)}]}/>
+            <View style={[styles.iconSquare,{backgroundColor: "#FFDBA5", borderWidth: (state.switchthree === false ? 0 : 4)}]}>
+              <Image source={grocery} style={styles.gridimage}/>
+              </View>
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => handleClick(4)}>
-              <Image source={heart} style={[styles.gridimage,{borderWidth: (state.switchfour === false ? 0 : 4)}]}/>
+            <View style={[styles.iconSquare,{backgroundColor: "#A0FC80", borderWidth: (state.switchfour === false ? 0 : 4)}]}>
+              <Image source={payment} style={styles.gridimage}/>
+              </View>
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => handleClick(5)}>
-              <Image source={shopping} style={[styles.gridimage,{borderWidth: (state.switchfive === false ? 0 : 4)}]}/>
+            <View style={[styles.iconSquare, {backgroundColor: "#7DE7DA", borderWidth: (state.switchfive === false ? 0 : 4)}]}>
+              <Image source={shopping} style={styles.gridimage}/>
+              </View>
             </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => handleClick(6)}>
+            <View style={[styles.iconSquare,{backgroundColor: "#BDFFC4", borderWidth: (state.switchsix === false ? 0 : 4)}]}>
+              <Image source={heart} style={styles.gridimage}/>
+              </View>
+            </TouchableOpacity>
+
           </View>
 
           <BasicText style={{ paddingTop: 20 }}>Select the order</BasicText>
-
-          <BasicText style={{ paddingTop: 20 }}>Repeat</BasicText>
 
           <View style={{ flexDirection: "row", paddingTop: 20 }}>
             <TouchableOpacity onPress={() => setOrder(false)}>
@@ -267,6 +306,8 @@ export default function ChoreModal({ modalVisible, setModalVisible }) {
             <BasicText>Order: {order ? "0" : "1"}</BasicText>
             <BasicText> {order2 ? "0" : "2"}</BasicText>
           </View>
+
+          <BasicText style={{ paddingTop: 20 }}>Repeat</BasicText>
 
           <View
             style={{
@@ -319,15 +360,28 @@ const styles = StyleSheet.create({
     borderWidth: 0, //0.1 on JX's ver
   },
   gridcont: {
+    paddingTop:20,
     flexDirection: "row",
     flexWrap: "wrap",
+    width: 290,
+    alignContent: "center",
+    justifyContent: "center",
+  },
+  iconSquare: {
+    alignContent: "center",
+    justifyContent: "center",
+    margin:5, 
+    width: 70, 
+    height: 70, 
+    padding:10, 
+    borderRadius: 20,
+    borderColor: "blue",
   },
   gridimage: {
+    alignSelf: "center",
     resizeMode: "contain",
-    height: 80,
-    width: 80,
-    borderRadius: 10,
-    borderColor: "#FF8C8C",
+    height: 50,
+    width: 50,
   },
   image: {
     resizeMode: "contain",

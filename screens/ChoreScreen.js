@@ -47,26 +47,36 @@ export default function ChoreScreen({ navigation }) {
         {/* Roommate Bill Container */}
       <View
         style={{
-          width: "95%",
-          paddingVertical: 5,
+          minWidth: "95%",
+          width: "100%",
           alignItems: "center",
+          minHeight: 600,
         }}>
         <ChoreCard
           duedate="14 Sep"
-          dutyname="Wash the dishes"
-          iconselect = "cleaning"
-          description="It's your turn!"
-          choretype="Sat"
-          status="True"
+          dutyname="Vacuum the floor"
+          iconselect = "household"
+          iconColour = "#ECC3FF"
+          choretype= "Weekly"
+          cycleStart="Sat"
         ></ChoreCard>
         <ChoreCard
-          duedate="5 Nov"
-          dutyname="Clean the clothes"
-          description="It's your turn!"
-          iconselect = "cleaning"
-          choretype="19th"
-          status="True"
+          duedate="20 Oct"
+          dutyname="Kitchen Duty"
+          iconselect = "grocery"
+          iconColour = "#FFDBA5"
+          choretype= "Monthly"
+          cycleStart="19th"
         ></ChoreCard>
+        <ChoreCard
+          duedate="31 Oct"
+          dutyname="Scrub toilet bowl"
+          iconselect = "cleaning"
+          iconColour = "#FFCDF4"
+          choretype= "Weekly"
+          cycleStart="Sun"
+        ></ChoreCard>
+        
       </View>
       <ChoreModal modalVisible = {modalVisible} setModalVisible = {setModalVisible} />
     </ScrollView>
@@ -108,8 +118,8 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   choreContainer: {
-    width: "95%",
-    height: 30,
+    width: "100%",
+    height: 15,
     flexDirection: "row",
   },
   chorenewText: {

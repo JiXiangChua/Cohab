@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import {
   View,
   StyleSheet,
@@ -8,14 +9,40 @@ import {
 import ProfilePic from "../../assets/Finance-assets/Kimberly.png";
 import cleaning from "../../assets/Chores-assets/cleaning.png";
 import household from "../../assets/Chores-assets/household.png";
+import grocery from "../../assets/Chores-assets/grocery.png";
 import GeneralButton from "../GeneralButton";
 
 import BasicText from "../BasicText.js";
 
 export default function ChoreCard(props) {
 
-  let iconObj = {"cleaning": cleaning, "household": household,}
+  let iconObj = {"cleaning": cleaning, "household": household, "grocery": grocery}
   //let mode = this.props.iconselect
+
+  // variable to hold icon colour
+  var iconColour = props.iconColour;
+  // variable to hold colour of 'Every XXX' text
+  var cycleColour = "#E16363";
+  // variable to display deadline tab (if need)
+  var deadlineTab  = [];
+
+ // Check whether it's a weekly or monthly chore
+  if (props.choretype == "Weekly") {
+    // Set text colour to pink
+    cycleColour = "#E16363"; 
+    // Display deadline
+    deadlineTab[0] = (
+    <View style={{flexDirection:"row", justifyContent:"flex-start", marginVertical:-10}}>
+    <View style={styles.duedatecont}>
+      <BasicText style={styles.duedatetext}>Due: {props.duedate}</BasicText>
+    </View>
+    </View>);
+  } else if (props.choretype == "Monthly"){
+    // Set text colour to blue
+    cycleColour = "#04ACE1"; 
+    // Do not display deadline
+    deadlineTab[0] = null;
+  } 
 
   return (
     <View
@@ -25,17 +52,17 @@ export default function ChoreCard(props) {
         alignContent: "center",
      }]}
     >
-      <View style={{flexDirection:"row", justifyContent:"flex-end", marginVertical: -10}}>
-        <View style={styles.duedatecont}>
-          <BasicText style={styles.choreduty}>Due: {props.duedate}</BasicText>
-        </View>
-      </View>
-
-      <View style={{ flexDirection: "row", marginVertical: 20 }}>
+      {deadlineTab[0]}
+      
+      <View style={{ flexDirection: "row", paddingTop: 0}}>
+        
+        <View style={{backgroundColor: iconColour, alignContent:"center",justifyContent:"center", alignSelf: "center", marginLeft: 5, width: 90, height: 90, padding:10, borderRadius: 20}}>
         <Image
           source={iconObj[props.iconselect]}
           style={styles.image}
         ></Image>
+        </View>
+        
 
         {/* Column for Name and Description */}
         <View style={[styles.cardDisplayColumnFormat, {marginHorizontal: 10}]}>
@@ -45,7 +72,7 @@ export default function ChoreCard(props) {
           <View style={{paddingHorizontal: 10, paddingVertical: 10, marginTop: 20}}>
             <GeneralButton
                 buttonText= "Edit"
-                color="#FF8C8C"
+                color="#7B98FF"
                 //onPress={}
             />
           </View>
@@ -56,7 +83,7 @@ export default function ChoreCard(props) {
           flexDirection:"column", 
           justifyContent: "space-between",
           }]}>
-          <BasicText style={styles.chorebasictxt}>{"Every " + props.choretype}</BasicText>
+          <BasicText style={[styles.chorebasictxt, {color: cycleColour}]}>{"Every " + props.cycleStart}</BasicText>
             <View style={styles.whosnextcont}>
               <Image source={ProfilePic} style={styles.profileimgsmall}></Image>
               <Image source={ProfilePic} style={styles.profileimg}></Image>
@@ -71,11 +98,11 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: "white",
     borderRadius: 10,
-    paddingBottom: 5,
-    paddingHorizontal: 10,
+    padding: 10,
     width: "100%",
-    marginTop: 10,
-    marginBottom: 10,
+    minHeight: 130,
+    marginTop: 20,
+    marginBottom: 0,
     borderWidth: 0, //0.1 on JX's ver
   },
   shadowProp: {
@@ -93,38 +120,47 @@ const styles = StyleSheet.create({
     alignContent: "center",
     marginHorizontal: 10,
   },
+
+
   image: {
     resizeMode: "contain",
-    height: 80,
-    width: 80,
-    borderRadius: 10,
+    height: 60,
+    width: 60,
   },
   choredutycont: {
     justifyContent: "center",
-    alignItems: "center",
-    //backgroundColor: "#FF8C8C",
     display: "flex",
+    width: 170,
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderRadius: 15,
   },
+
   duedatecont: {
     alignContent: "center",
     backgroundColor: "#E65444",
     display: "flex",
     paddingHorizontal: 10,
-    paddingVertical: 5,
+    paddingVertical: 2,
     borderRadius: 7,
+    top: 8,
+    zIndex: 999,
+  },
+  duedatetext: {
+    flexWrap: "wrap",
+    fontSize: 16,
+    color: "#FFFFFF",
+    fontFamily: "Roboto",
+    //fontWeight: "bold",
   },
   choreduty: {
     flexWrap: "wrap",
     fontSize: 18,
-    color: "#FF8C8C",
+    color: "#6F6F6F",
     fontWeight: "bold",
   },
   chorebasictxt:{
-    fontSize: 14, 
-    color: "#FF8C8C", 
+    fontSize: 15,  
     textAlign: "center",
     flexWrap: "wrap",
   },
