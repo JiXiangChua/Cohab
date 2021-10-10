@@ -11,11 +11,18 @@ import {
   Pressable,
 } from "react-native";
 
+import newTaskButton from "../../assets/Task-assets/NewTaskButton.png";
+import BasicText from "../BasicText.js";
+import TaskCard from "./TaskCard.js";
 import ProfilePic from "../../assets/Finance-assets/Kimberly.png";
 import BorderColorButton from "../BorderColorButton";
 import GeneralButton from "../GeneralButton";
+import RestoreTask from "./RestoreTask.js";
 
 export default function CompletedTaskCard(props) {
+
+  const [restoreVisible, setRestoreVisible] = useState(false);
+
   return (
     <View
       style={[styles.card, styles.shadowProp, { justifyContent: "center" }]}
@@ -28,9 +35,12 @@ export default function CompletedTaskCard(props) {
             {props.description}
           </Text>
 
-          <View style={{ marginTop: 10 }}>
-            <BorderColorButton buttonText={"Revive"} color={"#36BC7C"} />
-          </View>
+          <TouchableOpacity
+             style={styles.newTask}
+             onPress={() => setRestoreVisible(true)}
+            >
+            <BorderColorButton buttonText={"Revive"} color={"#36BC7C"} onPress={() => setRestoreVisible(true)} />
+          </TouchableOpacity>
 
           {/* <TouchableOpacity style={[styles.reviveButton, styles.shadowProp]}>
             <Text style={{ color: "#FFF", fontSize: 16 }}>Revive</Text>
@@ -50,6 +60,12 @@ export default function CompletedTaskCard(props) {
           </View>
         </View>
       </View>
+
+      <RestoreTask
+        restoreVisible={restoreVisible}
+        setRestoreVisible={setRestoreVisible}
+      />
+
     </View>
   );
 }
