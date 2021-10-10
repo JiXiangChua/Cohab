@@ -32,8 +32,16 @@ export default function ChoreModal({ modalVisible, setModalVisible }) {
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
   //onChange receives datechange-->What does it do when receive new change add later when database clear
+  const [selectcheck, setSelectCheck] = useState(false);
+  const [showSelectDate, setSelectDate] = useState("heya");
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
+    var weekday = selectedDate.toString().split(' ')[0];
+    var dateday = selectedDate.toString().split(' ')[2];
+    var datemonth = selectedDate.toString().split(' ')[1];
+    var dateyear = selectedDate.toString().split(' ')[3];
+    setSelectDate(weekday+", "+dateday+" "+datemonth+" "+dateyear);
+    setSelectCheck(true);
     setShow(false);
     setDate(currentDate);
   };
@@ -209,14 +217,11 @@ export default function ChoreModal({ modalVisible, setModalVisible }) {
           
           <View style={styles.gridcont}>
 
-            
             <TouchableOpacity onPress={() => handleClick(1)}>
             <View style={[styles.iconSquare,{backgroundColor: "#FFCDF4", borderWidth: (state.switchone === false ? 0 : 4)}]}>
               <Image source={cleaning} style={styles.gridimage}/>
               </View>
             </TouchableOpacity>
-           
-            
 
             <TouchableOpacity onPress={() => handleClick(2)}>
             <View style={[styles.iconSquare,{backgroundColor: "#ECC3FF", borderWidth: (state.switchtwo === false ? 0 : 4)}]}>
@@ -288,7 +293,7 @@ export default function ChoreModal({ modalVisible, setModalVisible }) {
               style={[styles.optionButton, styles.buttonClose]}
               onPress={showDatepicker}
             >
-              <BasicText style={styles.optionButtonText}>Pick a date</BasicText>
+              <BasicText style={styles.optionButtonText}>{selectcheck == true ? showSelectDate : "Pick a date"}</BasicText>
             </Pressable>
             {show && (
               <DateTimePicker
@@ -318,7 +323,7 @@ export default function ChoreModal({ modalVisible, setModalVisible }) {
             </Pressable>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
+              onPress={() => {setModalVisible(!modalVisible); setSelectCheck(false);}}
             >
               <BasicText style={styles.textStyle}>Confirm</BasicText>
             </Pressable>
