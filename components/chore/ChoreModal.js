@@ -50,77 +50,37 @@ export default function ChoreModal({ modalVisible, setModalVisible }) {
   const [order, setOrder] = useState(true);
   const [order2, setOrder2] = useState(true);
 
-  // To display options to repeat weekly or monthly
+  // Variables to indicate if monthly or weekly button selected
+  var monthlySelected = false;
+  var weeklySelected = false;
+
+  // Change variables as user selects between weekly or monthly
+  const [repeatByWeekOrMonth, setWeeklyOrMonthly] = useState("Weekly");
+
+  if (repeatByWeekOrMonth == "Weekly") {
+    monthlySelected = false;
+    weeklySelected = true;
+  } else if (repeatByWeekOrMonth == "Monthly") {
+    monthlySelected = true;
+    weeklySelected = false;
+  }
+
+  // Display "Weekly" and "Monthly" buttons
   for (let i = 0; i < 2; i++) {
     displayRepeatOptions.push(
       <Pressable
         key={i}
-        style={[styles.optionButton, styles.buttonClose]}
         onPress={() => setWeeklyOrMonthly(repeatOptions[i])}
+        style={[styles.optionButton, styles.buttonClose, {backgroundColor: ( repeatByWeekOrMonth == repeatOptions[i] ? "#2196F3" : "white")}]}
       >
-        <BasicText style={styles.optionButtonText}>
+        <BasicText style={[styles.optionButtonText, {color: (repeatByWeekOrMonth == repeatOptions[i] ? "white" : "#2196F3")}]}>
           {repeatOptions[i]}
         </BasicText>
       </Pressable>
     );
   }
 
-  var repeatChoice = [];
-
-  //Toggle between weekly or monthly options based on user choice
-
-  const [repeatByWeekOrMonth, setWeeklyOrMonthly] = useState("Weekly");
-
-  if (repeatByWeekOrMonth == "Weekly") {
-    repeatChoice[0] = (
-      <View>
-        <BasicText style={{ paddingTop: 20 }}>
-          Select the start date of the cycle
-        </BasicText>
-        <Pressable
-          style={[styles.optionButton, styles.buttonClose]}
-          onPress={showDatepicker}
-        >
-          <BasicText style={styles.optionButtonText}>Pick a date</BasicText>
-        </Pressable>
-        {show && (
-          <DateTimePicker
-            testID="dateTimePicker"
-            value={date}
-            mode={mode}
-            is24Hour={true}
-            display="default"
-            onChange={onChange}
-          />
-        )}
-      </View>
-    );
-  } else if (repeatByWeekOrMonth == "Monthly") {
-    repeatChoice[0] = (
-      <View>
-        <BasicText style={{ paddingTop: 20 }}>
-          Select the start date of the cycle
-        </BasicText>
-        <Pressable
-          style={[styles.optionButton, styles.buttonClose]}
-          onPress={showDatepicker}
-        >
-          <BasicText style={styles.optionButtonText}>Pick a date</BasicText>
-        </Pressable>
-        {show && (
-          <DateTimePicker
-            testID="dateTimePicker"
-            value={date}
-            mode={mode}
-            is24Hour={true}
-            display="default"
-            onChange={onChange}
-          />
-        )}
-      </View>
-    );
-  }
-
+  // for choosing the chore icon
  const [state, setState] = useState({
    switchone: false,
    switchtwo: false,
@@ -319,7 +279,28 @@ export default function ChoreModal({ modalVisible, setModalVisible }) {
             {displayRepeatOptions}
           </View>
 
-          {repeatChoice[0]}
+         {/*repeatChoice[0]*/}
+            <View>
+            <BasicText style={{ paddingTop: 20 }}>
+              Select start of cycle
+            </BasicText>
+            <Pressable
+              style={[styles.optionButton, styles.buttonClose]}
+              onPress={showDatepicker}
+            >
+              <BasicText style={styles.optionButtonText}>Pick a date</BasicText>
+            </Pressable>
+            {show && (
+              <DateTimePicker
+                testID="dateTimePicker"
+                value={date}
+                mode={mode}
+                is24Hour={true}
+                display="default"
+                onChange={onChange}
+              />
+            )}
+          </View>
 
           <View
             style={{
@@ -375,7 +356,7 @@ const styles = StyleSheet.create({
     height: 70, 
     padding:10, 
     borderRadius: 20,
-    borderColor: "blue",
+    borderColor: "#2196F3",
   },
   gridimage: {
     alignSelf: "center",
