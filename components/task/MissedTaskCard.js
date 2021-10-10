@@ -27,29 +27,6 @@ export default function MissedTaskCard(props) {
             {props.description}
           </Text>
 
-          {/* Edit button */}
-          <View style={{ flexDirection: "row" }}>
-            <View style={{ marginTop: 10 }}>
-              <GeneralButton
-                buttonText={"Edit"}
-                color={"#7D98FF"}
-                onPress={() => {
-                  setModalVisible(!modalVisible);
-                }}
-              />
-            </View>
-
-            {/* Done button */}
-            <View style={{ marginTop: 10, marginLeft: 5 }}>
-              <GeneralButton
-                buttonText={"Done"}
-                color={"#36BC7C"}
-                onPress={() => {
-                  setModalVisible(!modalVisible);
-                }}
-              />
-            </View>
-          </View>
           {/* <TouchableOpacity style={[styles.reviveButton, styles.shadowProp]}>
             <Text style={{ color: "#FFF", fontSize: 16 }}>Revive</Text>
           </TouchableOpacity> */}

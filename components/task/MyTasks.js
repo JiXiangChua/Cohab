@@ -20,8 +20,17 @@ import TaskCard from "./TaskCard.js";
 import TaskModal from "./TaskModal.js";
 
 export default function MyTasks() {
-  const [modalVisible, setModalVisible] = useState(false);
-  //Toggle on and off modal screeen
+  const [modalVisible, setModalVisible] = useState(false); //Toggle on and off modal screeen
+  const [laundryCard, setlaundryCard] = useState(true);
+  const [dishCard, setdishCard] = useState(true);
+
+  function toggleLaundryTask() {
+    setlaundryCard(!laundryCard);
+  }
+
+  function toggleDishTask() {
+    setdishCard(!dishCard);
+  }
 
   return (
     <View style={styles.myTasks}>
@@ -39,18 +48,27 @@ export default function MyTasks() {
       </View>
 
       <View style={styles.tasksContainer}>
-        <TaskCard
-          name="Laundry"
-          description="we have no clothes :(("
-          set="Set own deadline"
-          date_created="18 Aug"
-        />
-        <TaskCard
-          name="Do the dishes"
-          description="our sink is clogging !!!"
-          deadline="Deadline:26 Aug"
-          date_created="18 Aug"
-        />
+        {laundryCard && (
+          <TaskCard
+            name="Laundry"
+            description="we have no clothes :(("
+            set="Set own deadline"
+            date_created="18 Aug"
+            toggle={toggleLaundryTask}
+            fdCheck={false}
+          />
+        )}
+
+        {dishCard && (
+          <TaskCard
+            name="Do the dishes"
+            description="our sink is clogging !!!"
+            deadline="Deadline:26 Aug"
+            date_created="18 Aug"
+            fdCheck={true}
+            toggle={toggleDishTask}
+          />
+        )}
       </View>
       <TaskModal
         modalVisible={modalVisible}

@@ -13,12 +13,37 @@ import {
 
 import ProfilePic from "../../assets/Finance-assets/Kimberly.png";
 import GeneralButton from "../GeneralButton";
+import EditModal from "./EditModal";
 
 export default function Individual1TaskCard(props) {
+  const [editModalVisible, setEditModalVisible] = useState(false);
+  const [day, setDay] = useState("28");
+  const [month, setMonth] = useState("Aug");
+
+  function onCancel() {
+    setEditModalVisible(!editModalVisible);
+  }
+  function onSave() {
+    setEditModalVisible(!editModalVisible);
+    // props.toggle();
+  }
   return (
     <View
       style={[styles.card, styles.shadowProp, { justifyContent: "center" }]}
     >
+      {editModalVisible && (
+        <EditModal
+          cancelButton={onCancel}
+          saveButton={onSave}
+          dateChange={setDay}
+          monthChange={setMonth}
+          dayUpdated={day}
+          monthUpdated={month}
+        >
+          {props}
+        </EditModal>
+      )}
+
       <View style={{ flexDirection: "row" }}>
         {/* Column for Name, Description & buttons */}
         <View style={styles.cardDisplayColumnFormat}>
@@ -35,7 +60,7 @@ export default function Individual1TaskCard(props) {
                 buttonText={"Edit"}
                 color={"#7D98FF"}
                 onPress={() => {
-                  setModalVisible(!modalVisible);
+                  setEditModalVisible(!editModalVisible);
                 }}
               />
             </View>
@@ -56,7 +81,7 @@ export default function Individual1TaskCard(props) {
         {/* Column for set deadline  */}
         <View style={[styles.cardDisplayColumnFormat, { marginLeft: 0 }]}>
           <Text style={[styles.setText, { marginRight: 10 }]}>
-            {props.deadline}
+            {"Deadline:" + day + " " + month}
           </Text>
           <View style={{ flexDirection: "row" }}>
             <Text style={[styles.cardText, { fontSize: 15, color: "#8A8585" }]}>

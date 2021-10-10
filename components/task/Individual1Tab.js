@@ -13,7 +13,7 @@ export default function Individual1Tab({ visible }) {
         <Individual1TaskCard
           name="Kitchen Duty"
           description="vacuum the floor"
-          deadline="Deadline:28 Aug"
+          deadline="28 Aug"
           date_created="Created"
         ></Individual1TaskCard>
         {/* <Individual1TaskCard></Individual1TaskCard> */}

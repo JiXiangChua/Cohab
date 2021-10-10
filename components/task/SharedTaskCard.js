@@ -26,30 +26,6 @@ export default function SharedTaskCard(props) {
           <Text style={[styles.cardText, { fontSize: 14, color: "#8A8585" }]}>
             {props.description}
           </Text>
-
-          {/* Edit button */}
-          <View style={{ flexDirection: "row" }}>
-            <View style={{ marginTop: 10 }}>
-              <GeneralButton
-                buttonText={"Edit"}
-                color={"#7D98FF"}
-                onPress={() => {
-                  setModalVisible(!modalVisible);
-                }}
-              />
-            </View>
-
-            {/* Done button */}
-            <View style={{ marginTop: 10, marginLeft: 5 }}>
-              <GeneralButton
-                buttonText={"Done"}
-                color={"#36BC7C"}
-                onPress={() => {
-                  setModalVisible(!modalVisible);
-                }}
-              />
-            </View>
-          </View>
         </View>
 
         {/* Column for set deadline  */}
