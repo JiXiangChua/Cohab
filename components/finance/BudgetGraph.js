@@ -8,6 +8,10 @@ import {
 } from "react-native";
 import { VictoryPie } from "victory-native";
 import BudgetCard from "./BudgetCard";
+import FoodIcon from "../../assets/Finance-assets/meal.png";
+import ShoppingIcon from "../../assets/Chores-assets/online-shopping.png";
+import EducationIcon from "../../assets/Finance-assets/book-stack.png";
+import TransportIcon from "../../assets/Finance-assets/vehicles.png";
 
 export default function BudgetGraph() {
   const [category, setCategory] = useState([
@@ -15,33 +19,32 @@ export default function BudgetGraph() {
       name: "Education", //category name
       id: 1, //id of category
       amount: 100.25, //amount of expense
-      image: {
-        uri: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==",
-      },
+      // image: {
+      //   uri: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==",
+      // },
+      image: EducationIcon,
+      color: "#BDFFC4",
     },
     {
       name: "Food",
       id: 2,
       amount: 80.3,
-      image: {
-        uri: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==",
-      },
+      image: FoodIcon,
+      color: "#FFDBA5",
     },
     {
       name: "Shopping",
       id: 3,
       amount: 300.0,
-      image: {
-        uri: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==",
-      },
+      image: ShoppingIcon,
+      color: "#7DE7DA",
     },
     {
       name: "Travel",
       id: 4,
       amount: 150.5,
-      image: {
-        uri: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==",
-      },
+      image: TransportIcon,
+      color: "#FFCDF4",
     },
   ]);
 
@@ -52,6 +55,7 @@ export default function BudgetGraph() {
       x: item.id,
       y: item.amount,
       image: item.image,
+      color: item.color,
     };
   });
 
@@ -119,6 +123,7 @@ export default function BudgetGraph() {
                 category={item.label}
                 amount={item.y.toFixed(2)}
                 image={item.image}
+                color={item.color}
               ></BudgetCard>
             );
           })}

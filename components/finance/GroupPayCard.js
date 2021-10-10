@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { View , StyleSheet, Image, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
 
-import ProfilePic from "../../assets/Finance-assets/Kimberly.png";
+import KimberlyPic from "../../assets/Finance-assets/Kimberly.png";
+import SharonPic from "../../assets/Finance-assets/Sharon.png";
+import NickPic from "../../assets/Finance-assets/Nick.png";
 import nextButtonLogo from "../../assets/Finance-assets/NextButton.png";
 
 import BasicText from "../BasicText.js";
@@ -10,7 +12,7 @@ export default function GroupPayCard(props) {
   var [paidStatus, setPaidStatus] = useState(true);
   var [paidPercent, setPaidPercent] = useState(70);
 
-  var numberOfAdditionalPayees = 2;
+  var numberOfAdditionalPayees = 1;
 
   function getBarColor() {
     var color;
@@ -19,7 +21,7 @@ export default function GroupPayCard(props) {
     } else if (paidPercent == 0) {
       color = "#C4C4C4";
     } else {
-      color = "#14CCD8";
+      color = "#A1285C";
     }
     return color;
   }
@@ -30,7 +32,6 @@ export default function GroupPayCard(props) {
     >
       {/* Title + Next Button */}
       <View style={styles.contentFormat}>
-
         <BasicText style={styles.cardText}>{props.description}</BasicText>
         <TouchableOpacity>
           <Image source={nextButtonLogo} style={styles.nextButtonStyle}></Image>
@@ -66,27 +67,41 @@ export default function GroupPayCard(props) {
       <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
         {/* Here the image need change when the database is ready */}
         <Image
-          source={ProfilePic}
+          source={KimberlyPic}
           style={[styles.profilePicture, styles.shadowPropPic]}
         ></Image>
         <Image
-          source={ProfilePic}
-          style={[styles.profilePicture, styles.shadowPropPic]}
+          source={SharonPic}
+          style={[
+            styles.profilePicture,
+            styles.shadowPropPic,
+            { marginLeft: -10 },
+          ]}
         ></Image>
         <Image
-          source={ProfilePic}
-          style={[styles.profilePicture, styles.shadowPropPic]}
+          source={NickPic}
+          style={[
+            styles.profilePicture,
+            styles.shadowPropPic,
+            { marginLeft: -10 },
+          ]}
         ></Image>
         {/* If more than 3 image then put (+ how many more) */}
         <TouchableOpacity style={styles.numberOfPayees}>
-
           <BasicText style={{ alignSelf: "center", color: "white" }}>
             +{numberOfAdditionalPayees}
           </BasicText>
         </TouchableOpacity>
 
         <BasicText style={{ paddingLeft: 10 }}> 3/4 Paid</BasicText>
-        <BasicText style={{ fontSize: 24, alignSelf: "flex-end" }}>
+        <BasicText
+          style={{
+            fontSize: 24,
+            alignSelf: "flex-end",
+            color: "#A1285C",
+            marginRight: -10,
+          }}
+        >
           / {props.totalAmount}
         </BasicText>
       </View>
@@ -153,10 +168,11 @@ const styles = StyleSheet.create({
   },
   numberOfPayees: {
     alignSelf: "center",
-    backgroundColor: "#6E2142",
+    backgroundColor: "#FFB82E",
     width: 26,
     height: 26,
     borderRadius: 16,
     justifyContent: "center",
+    marginLeft: -10,
   },
 });
