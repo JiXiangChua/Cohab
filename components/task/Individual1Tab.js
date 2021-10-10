@@ -16,7 +16,6 @@ export default function Individual1Tab({ visible }) {
           deadline="28 Aug"
           date_created="Created"
         ></Individual1TaskCard>
-        {/* <Individual1TaskCard></Individual1TaskCard> */}
       </View>
     </View>
   );

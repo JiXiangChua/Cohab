@@ -19,23 +19,29 @@ import ClaimTaskFDModal from "./ClaimTaskFDModal";
 export default function TaskCard(props) {
   const [claimModalVisible, setClaimModalVisible] = useState(false);
 
-  function onCancel(){
-      setClaimModalVisible(!claimModalVisible);
+  function onCancel() {
+    setClaimModalVisible(!claimModalVisible);
   }
 
-  function onConfirmed(){
-      setClaimModalVisible(!claimModalVisible);
-      props.toggle();
-
+  function onConfirmed() {
+    setClaimModalVisible(!claimModalVisible);
+    props.toggle();
   }
 
   return (
     <View
       style={[styles.card, styles.shadowProp, { justifyContent: "center" }]}
     >
-      
-      {(claimModalVisible && !props.fdCheck) && <ClaimTaskSDModal cancelButton={onCancel} confirmedButton={onConfirmed}>{props}</ClaimTaskSDModal>}
-      {(claimModalVisible && props.fdCheck) && <ClaimTaskFDModal cancelButton={onCancel} confirmedButton={onConfirmed}>{props}</ClaimTaskFDModal>}
+      {claimModalVisible && !props.fdCheck && (
+        <ClaimTaskSDModal cancelButton={onCancel} confirmedButton={onConfirmed}>
+          {props}
+        </ClaimTaskSDModal>
+      )}
+      {claimModalVisible && props.fdCheck && (
+        <ClaimTaskFDModal cancelButton={onCancel} confirmedButton={onConfirmed}>
+          {props}
+        </ClaimTaskFDModal>
+      )}
 
       <View style={{ flexDirection: "row" }}>
         {/* Column for Name, Description & Claim me */}

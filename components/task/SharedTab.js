@@ -14,7 +14,7 @@ export default function SharedTab({ visible }) {
         {/* Missed Task */}
         <View style={styles.missedContainer}>
           <MissedTaskCard
-            name="Clean the sheets"
+            name="Clean the sheets      "
             description="sweat stains everywheree"
             deadline="Overdue:16 Aug"
             date_created="Created:"
@@ -29,7 +29,7 @@ export default function SharedTab({ visible }) {
           date_created="Created"
         ></SharedTaskCard>
         <SharedTaskCard
-          name="Go ntuc buy toilet paper"
+          name="Go ntuc buy toilet paper    "
           description="we ran out :0"
           deadline="Deadline:25 Aug"
           date_created="Created"

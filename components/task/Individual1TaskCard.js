@@ -79,7 +79,7 @@ export default function Individual1TaskCard(props) {
         </View>
 
         {/* Column for set deadline  */}
-        <View style={[styles.cardDisplayColumnFormat, { marginLeft: 0 }]}>
+        <View style={[styles.cardDisplayColumnFormat, { marginLeft: 15 }]}>
           <Text style={[styles.setText, { marginRight: 10 }]}>
             {"Deadline:" + day + " " + month}
           </Text>

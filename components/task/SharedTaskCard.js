@@ -11,7 +11,7 @@ import {
   Pressable,
 } from "react-native";
 
-import ProfilePic from "../../assets/Finance-assets/Kimberly.png";
+import ProfilePic from "../../assets/Calendar-assets/ProfileImage2.png";
 import GeneralButton from "../GeneralButton";
 
 export default function SharedTaskCard(props) {
@@ -73,35 +73,15 @@ const styles = StyleSheet.create({
   },
   deadlineText: {
     alignSelf: "center",
-    marginRight: 10,
+    marginRight: 15,
     fontSize: 14,
     color: "#FF0000",
     marginBottom: 45,
   },
-  editButton: {
-    backgroundColor: "#0038FF",
-    height: 38,
-    width: 100,
-    borderRadius: 10,
-    marginRight: 10,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 10,
-  },
-  claimButton: {
-    backgroundColor: "#36BC7C",
-    height: 38,
-    width: 100,
-    borderRadius: 10,
-    marginRight: 10,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 10,
-  },
   profileImage: {
     marginLeft: -15,
-    minWidth: 15,
-    minHeight: 15,
+    minWidth: 50,
+    minHeight: 50,
     marginTop: -20,
     alignSelf: "center",
   },
