@@ -25,6 +25,9 @@ import ScanLogo from "../../assets/Finance-assets/Scan.png";
 import TransferLogo from "../../assets/Finance-assets/Transfer.png";
 import PayerLogo from "../../assets/icons/icon_designs-06.png";
 import PayeeLogo from "../../assets/icons/icon_designs-05.png";
+import KimberlyPic from "../../assets/Finance-assets/Kimberly.png";
+import SharonPic from "../../assets/Finance-assets/Sharon.png";
+import NickPic from "../../assets/Finance-assets/Nick.png";
 
 export default function FinanceScreen({ navigation }) {
   const refRBSheet = useRef();
@@ -35,45 +38,45 @@ export default function FinanceScreen({ navigation }) {
   const [budget, setBudget] = useState(1000);
   const [roommate, setRoommate] = useState([
     {
-      name: "Jixiang",
-      profileImage: "",
+      name: "Kim",
+      profileImage: KimberlyPic,
       description: "Air-Con Fee",
       amount: "$20.00",
       status: "false", //true means paid already
     },
     {
-      name: "Mavis",
-      profileImage: "",
+      name: "Sharon",
+      profileImage: SharonPic,
       description: "Grocery",
       amount: "$50.00",
       status: "false",
     },
     {
-      name: "Mavis",
-      profileImage: "",
-      description: "Grocery",
-      amount: "$50.00",
+      name: "Nick",
+      profileImage: NickPic,
+      description: "Movie",
+      amount: "$14.00",
       status: "false",
     },
     {
-      name: "James",
-      profileImage: "",
-      description: "Air-Con Fee",
+      name: "Nick",
+      profileImage: NickPic,
+      description: "Korean-BBQ",
       amount: "$20.00",
       status: "true",
     },
     {
-      name: "Corner",
-      profileImage: "",
-      description: "Grocery",
+      name: "Kim",
+      profileImage: KimberlyPic,
+      description: "Grab",
       amount: "$50.00",
       status: "true",
     },
     {
-      name: "Ali",
-      profileImage: "",
+      name: "Sharon",
+      profileImage: SharonPic,
       description: "Grocery",
-      amount: "$50.00",
+      amount: "$9.00",
       status: "true",
     },
   ]);
@@ -85,25 +88,35 @@ export default function FinanceScreen({ navigation }) {
     },
     {
       totalAmount: "$45.00",
-      amountPaid: "$45.00",
+      amountPaid: "$33.75",
       description: "Din Tai Fung",
+    },
+    {
+      totalAmount: "$230.00",
+      amountPaid: "$172.5",
+      description: "Benedict's Birthday",
     },
   ]);
   const [expenseCategory, SetExpenseCategory] = useState([
     {
-      expenseName: "food",
+      expenseName: "Education",
       color: "#F6A9A9",
-      amount: 350,
+      amount: 100.25,
     },
     {
-      expenseName: "transport",
+      expenseName: "Food",
       color: "#FFF47D",
-      amount: 250,
+      amount: 80.3,
     },
     {
-      expenseName: "shopping",
+      expenseName: "Shopping",
+      color: "#82F3FB",
+      amount: 300,
+    },
+    {
+      expenseName: "Travel",
       color: "#C2F784",
-      amount: 120,
+      amount: 150.5,
     },
   ]);
 
@@ -501,9 +514,26 @@ export default function FinanceScreen({ navigation }) {
                     source={PayerLogo}
                     style={[styles.payLogoStyle, { marginRight: 80 }]}
                   ></Image>
+                  <View
+                    style={[
+                      styles.PanelBar,
+                      { width: "45%" },
+                      payListButtonState
+                        ? { backgroundColor: "#C4C4C4" }
+                        : { backgroundColor: "#6E2142" },
+                    ]}
+                  ></View>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => setPayListButtonState(true)}>
                   <Image source={PayeeLogo} style={styles.payLogoStyle}></Image>
+                  <View
+                    style={[
+                      styles.PanelBar,
+                      payListButtonState
+                        ? { backgroundColor: "#6E2142" }
+                        : { backgroundColor: "#C4C4C4" },
+                    ]}
+                  ></View>
                 </TouchableOpacity>
               </View>
 
@@ -532,17 +562,25 @@ export default function FinanceScreen({ navigation }) {
             </TouchableOpacity>
           </View>
           <View style={styles.roommateBillPanel}>
-            {/* Display each roommate and how much  */}
-            {groupMate.map((items, index) => {
-              return (
-                <GroupPayCard
-                  key={index}
-                  totalAmount={items.totalAmount}
-                  amountPaid={items.amountPaid}
-                  description={items.description}
-                ></GroupPayCard>
-              );
-            })}
+            <ScrollView
+              contentContainerStyle={{
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+              showsVerticalScrollIndicator={false}
+            >
+              {/* Display each roommate and how much  */}
+              {groupMate.map((items, index) => {
+                return (
+                  <GroupPayCard
+                    key={index}
+                    totalAmount={items.totalAmount}
+                    amountPaid={items.amountPaid}
+                    description={items.description}
+                  ></GroupPayCard>
+                );
+              })}
+            </ScrollView>
           </View>
         </View>
 
@@ -648,6 +686,12 @@ const styles = StyleSheet.create({
     marginTop: 20,
     width: "95%",
     alignItems: "center",
+  },
+  PanelBar: {
+    width: "100%",
+    height: 10,
+    backgroundColor: "#C4C4C4",
+    borderRadius: 5,
   },
   roommateBillPanel: {
     alignItems: "center",
