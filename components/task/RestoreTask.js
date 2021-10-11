@@ -43,23 +43,12 @@ export default function RestoreTask({ restoreVisible, setRestoreVisible }) {
         setRestoreVisible(!restoreVisible);
       }}
     >
-      {/*Rest of screen will darken*/}
-      <View style={{ backgroundColor: "#000000aa", flex: 1 }}>
-        {/*Pop up screen will show*/}
-        <View
-          style={{
-            backgroundColor: "#ffffff",
-            margin: 30,
-            padding: 30,
-            borderRadius: 10,
-          }}
-        >
-          <BasicText style={styles.centered}>Restore the task</BasicText>
-          <BasicText style={styles.centered}>"Install Shelves"?</BasicText>
+      <View style={styles.centeredView}>
+      <View style={styles.modalView}>
 
-          <BasicText style={styles.centered}>
-            Choose a Date:{" "}
-          </BasicText>
+          <BasicText style={styles.modalText}>Restore the task</BasicText>
+          <BasicText style={styles.modalText}>"Install Shelves"?</BasicText>
+
           <View
             style={{
               flexDirection: "column",
@@ -260,4 +249,34 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
+
+  modalView: {
+      margin: 30,
+      backgroundColor: "white",
+      borderRadius: 20,
+      padding: 35,
+      alignItems: "center",
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 4,
+      elevation: 5,
+    },
+
+  modalText: {
+      marginBottom: 10,
+      textAlign: "center",
+      fontSize: 18,
+  },
+
+  centeredView: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      marginTop: 22,
+      backgroundColor: "#000000aa",
+    },
 });
