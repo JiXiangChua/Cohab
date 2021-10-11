@@ -155,7 +155,8 @@ export default function EditDModal(props) {
             >
               <Text style={styles.textStyle1}>Save</Text>
             </Pressable>
-
+          </View>
+          <View style={{ flexDirection: "row", marginTop: 20 }}>
             {/* UNLOAD BUTTON */}
             <Pressable
               style={[styles.buttonUnload]}
@@ -164,7 +165,6 @@ export default function EditDModal(props) {
               <Text style={styles.textStyle2}>Unload</Text>
             </Pressable>
           </View>
-          <View style={{ flexDirection: "row", marginTop: 20 }}></View>
         </View>
       </View>
     </Modal>
