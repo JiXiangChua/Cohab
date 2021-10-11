@@ -40,12 +40,12 @@ export default function SharedTasks() {
   return (
     <View style={styles.taskContainer}>
       <View style={styles.title}>
-        <TouchableOpacity style={shared} onPress={handleShared}>
-          <Text style={styles.subHeaderText}>Others</Text>
-        </TouchableOpacity>
-
         <TouchableOpacity style={individual1} onPress={handleIndividual1}>
           <Text style={styles.subHeaderText}>My Task</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={shared} onPress={handleShared}>
+          <Text style={styles.subHeaderText}>Others</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={completed} onPress={handleCompleted}>

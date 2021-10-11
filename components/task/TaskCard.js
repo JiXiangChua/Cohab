@@ -91,7 +91,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 25,
     width: "105%",
     marginVertical: 10,
-    borderWidth: 0.1,
   },
   shadowProp: {
     shadowColor: "#171717",

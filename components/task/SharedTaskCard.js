@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     borderWidth: 1,
     borderColor: "#0038FF",
+    alignSelf: "center",
   },
   shadowProp: {
     shadowColor: "#171717",
