@@ -6,6 +6,7 @@ import {
   Modal,
   Button,
   Pressable,
+  ScrollView,
   StyleSheet,
   Platform,
   Image,
@@ -193,6 +194,7 @@ export default function ChoreModal({ modalVisible, setModalVisible }) {
       <View
         style={{ backgroundColor: "#000000aa", flex: 1}}
       >
+        <ScrollView>
         {/*Pop up screen will show*/}
         <View
           style={{
@@ -329,6 +331,7 @@ export default function ChoreModal({ modalVisible, setModalVisible }) {
             </Pressable>
           </View>
         </View>
+        </ScrollView>
       </View>
     </Modal>
   );
