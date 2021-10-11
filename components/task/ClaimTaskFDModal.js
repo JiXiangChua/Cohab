@@ -1,18 +1,7 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  Modal,
-  Button,
-  Pressable,
-  StyleSheet,
-  CheckBox,
-} from "react-native";
+import { View, Text, Modal, StyleSheet } from "react-native";
 import GeneralButton from "../GeneralButton";
 import BorderColorButton from "../BorderColorButton";
-
-import BasicText from "../BasicText.js";
 
 export default function ClaimTaskFDModal(props) {
   return (
@@ -32,7 +21,6 @@ export default function ClaimTaskFDModal(props) {
             <Text style={styles.deadlineText}>
               {"\n\n" + props.children.deadline}
             </Text>
-            {/*need styling*/}
           </Text>
 
           <View
@@ -55,23 +43,23 @@ export default function ClaimTaskFDModal(props) {
             }}
           >
             {/* CANCEL BUTTON */}
-            <Pressable
-              style={[styles.buttonCancel]}
-              onPress={props.cancelButton}
-            >
-              <Text style={styles.textStyle}>Cancel</Text>
-            </Pressable>
+            <View style={{ marginTop: 10, paddingRight: 10 }}>
+              <BorderColorButton
+                buttonText={"Cancel"}
+                color={"#7B98FF"}
+                onPress={props.cancelButton}
+              />
+            </View>
 
             {/* SAVE BUTTON */}
-
-            <Pressable
-              style={[styles.buttonSave]}
-              onPress={props.confirmedButton}
-            >
-              <Text style={styles.textStyle1}>Save</Text>
-            </Pressable>
+            <View style={{ marginTop: 10 }}>
+              <GeneralButton
+                buttonText={"Save"}
+                color={"#36BC7C"}
+                onPress={props.confirmedButton}
+              />
+            </View>
           </View>
-          <View style={{ flexDirection: "row", marginTop: 20 }}></View>
         </View>
       </View>
     </Modal>
@@ -109,33 +97,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
-  },
-
-  buttonCancel: {
-    width: 70,
-    backgroundColor: "#FFFFFF",
-    borderWidth: 1,
-    borderColor: "#7B98FF",
-    borderRadius: 10,
-    padding: 8,
-    margin: 10,
-  },
-  buttonSave: {
-    width: 70,
-    backgroundColor: "#36BC7C",
-    borderRadius: 10,
-    padding: 8,
-    margin: 10,
-  },
-  textStyle: {
-    color: "#7B98FF",
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-  textStyle1: {
-    color: "#FFFFFF",
-    fontWeight: "bold",
-    textAlign: "center",
   },
   modalText: {
     marginBottom: 40,

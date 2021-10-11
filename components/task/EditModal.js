@@ -1,18 +1,8 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  Modal,
-  Button,
-  Pressable,
-  StyleSheet,
-  CheckBox,
-} from "react-native";
+import { View, Text, Modal, Pressable, StyleSheet } from "react-native";
 import GeneralButton from "../GeneralButton";
 import BorderColorButton from "../BorderColorButton";
 
-import BasicText from "../BasicText.js";
 import { Picker } from "@react-native-picker/picker";
 
 export default function EditDModal(props) {
@@ -137,33 +127,36 @@ export default function EditDModal(props) {
             }}
           >
             {/* CANCEL BUTTON */}
-            <Pressable
-              style={[styles.buttonCancel]}
-              onPress={props.cancelButton}
-            >
-              <Text style={styles.textStyle}>Cancel</Text>
-            </Pressable>
+            <View style={{ marginTop: 10, paddingRight: 10 }}>
+              <BorderColorButton
+                buttonText={"Cancel"}
+                color={"#7B98FF"}
+                onPress={props.cancelButton}
+              />
+            </View>
 
             {/* SAVE BUTTON */}
-            <Pressable
-              style={[styles.buttonSave]}
-              onPress={() => {
-                props.dateChange(selectedDay);
-                props.monthChange(selectedMonth);
-                props.saveButton();
-              }}
-            >
-              <Text style={styles.textStyle1}>Save</Text>
-            </Pressable>
+            <View style={{ marginTop: 10 }}>
+              <GeneralButton
+                buttonText={"Save"}
+                color={"#36BC7C"}
+                onPress={() => {
+                  props.dateChange(selectedDay);
+                  props.monthChange(selectedMonth);
+                  props.saveButton();
+                }}
+              />
+            </View>
           </View>
           <View style={{ flexDirection: "row", marginTop: 20 }}>
             {/* UNLOAD BUTTON */}
-            <Pressable
-              style={[styles.buttonUnload]}
-              onPress={() => setModalVisible(!modalVisible)}
-            >
-              <Text style={styles.textStyle2}>Unload</Text>
-            </Pressable>
+            <View style={{ marginTop: 10 }}>
+              <GeneralButton
+                buttonText={"Unload"}
+                color={"#FF1A1A"}
+                onPress={() => setModalVisible(!modalVisible)}
+              />
+            </View>
           </View>
         </View>
       </View>

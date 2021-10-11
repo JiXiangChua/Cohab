@@ -60,17 +60,6 @@ export default function TaskCard(props) {
               }}
             />
           </View>
-
-          {/* <TouchableOpacity style={[styles.claimButton, styles.shadowProp]}>
-            <Text
-              style={{ color: "#FFF", fontSize: 16 }}
-              onPress={() => {
-                setModalVisible(!modalVisible);
-              }}
-            >
-              Claim me
-            </Text>
-          </TouchableOpacity> */}
         </View>
 
         {/* Column for set deadline  */}
