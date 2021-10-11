@@ -91,6 +91,11 @@ export default function FinanceScreen({ navigation }) {
       amountPaid: "$33.75",
       description: "Din Tai Fung",
     },
+    {
+      totalAmount: "$230.00",
+      amountPaid: "$172.5",
+      description: "Benedict's Birthday",
+    },
   ]);
   const [expenseCategory, SetExpenseCategory] = useState([
     {
@@ -557,17 +562,25 @@ export default function FinanceScreen({ navigation }) {
             </TouchableOpacity>
           </View>
           <View style={styles.roommateBillPanel}>
-            {/* Display each roommate and how much  */}
-            {groupMate.map((items, index) => {
-              return (
-                <GroupPayCard
-                  key={index}
-                  totalAmount={items.totalAmount}
-                  amountPaid={items.amountPaid}
-                  description={items.description}
-                ></GroupPayCard>
-              );
-            })}
+            <ScrollView
+              contentContainerStyle={{
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+              showsVerticalScrollIndicator={false}
+            >
+              {/* Display each roommate and how much  */}
+              {groupMate.map((items, index) => {
+                return (
+                  <GroupPayCard
+                    key={index}
+                    totalAmount={items.totalAmount}
+                    amountPaid={items.amountPaid}
+                    description={items.description}
+                  ></GroupPayCard>
+                );
+              })}
+            </ScrollView>
           </View>
         </View>
 
