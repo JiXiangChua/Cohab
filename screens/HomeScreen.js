@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   TouchableOpacity,
@@ -13,7 +13,14 @@ import {
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Modal from "react-native-modal";
+
 import { BasicText, HomeScreenHeader } from "../components";
+import CardboardLogo from "../assets/Home-assets/cardboard.png";
+import BackButton from "../assets/back-to-room-button.png";
+import GeneralButton from "../components/GeneralButton";
+
+// import CustomizeFurniture from "./CustomizeFurniture";
 
 // import RoomPicture from "../assets/Home-assets/roomdraft.png";
 // import BankPicture from "../assets/Home-assets/pigdraft.png";
@@ -24,6 +31,264 @@ import { BasicText, HomeScreenHeader } from "../components";
 // import CloudGif from "../assets/Home-assets/clouds.gif";
 
 export default function HomeScreen({ navigation }) {
+  const [modalVisible, setModalVisible] = useState(false);
+
+  function CustomizeFurniture() {
+    const [furnitureModal, setFurnitureModal] = useState(true);
+    const [overviewModal, setOverviewModal] = useState(false);
+    const [functionModal, setFunctionModal] = useState(false);
+
+    const furniture = [
+      {
+        id: 1,
+        image: "green",
+      },
+      {
+        id: 2,
+        image: "red",
+      },
+      {
+        id: 3,
+        image: "yellow",
+      },
+      {
+        id: 4,
+        image: "black",
+      },
+      {
+        id: 5,
+        image: "blue",
+      },
+      {
+        image: "brown",
+      },
+      {
+        image: "green",
+      },
+      {
+        image: "red",
+      },
+      {
+        image: "yellow",
+      },
+    ];
+
+    const furnitureFunction = [
+      {
+        name: "Wallet",
+        Description: "This is a Wallet",
+      },
+      {
+        name: "Chore",
+        Description: "This is a Chore",
+      },
+      {
+        name: "Task",
+        Description: "This is a Task",
+      },
+      {
+        name: "Calandar",
+        Description: "This is a Calandar",
+      },
+    ];
+
+    function renderChooseFurniture() {
+      if (furnitureModal == true) {
+        return (
+          <ScrollView style={{ width: "100%" }}>
+            <BasicText style={{ color: "#E16363" }}>
+              Customise your furniture!
+            </BasicText>
+            <View
+              style={{
+                flexDirection: "row",
+                resizeMode: "contain",
+                flexWrap: "wrap",
+                justifyContent: "flex-start",
+                marginLeft: "6%",
+              }}
+            >
+              {furniture.map((item, index) => {
+                return (
+                  <TouchableOpacity
+                    key={index}
+                    style={[
+                      styles.furnitureButton,
+                      { backgroundColor: item.image },
+                    ]}
+                    onPress={() => {
+                      setFurnitureModal(!furnitureModal);
+                      setOverviewModal(!overviewModal);
+                      renderOverviewModal(item.image);
+                    }}
+                  ></TouchableOpacity>
+                );
+              })}
+            </View>
+          </ScrollView>
+        );
+      }
+    }
+
+    function renderOverviewModal(image) {
+      console.log(image);
+      if (overviewModal == true) {
+        return (
+          <View style={{ width: "100%" }}>
+            {/* Menu Items */}
+            <View style={{ flexDirection: "row" }}>
+              <TouchableOpacity
+                onPress={() => {
+                  setOverviewModal(!overviewModal);
+                  setFurnitureModal(!furnitureModal);
+                }}
+              >
+                <Image
+                  source={BackButton}
+                  style={{ width: 30, height: 30 }}
+                ></Image>
+              </TouchableOpacity>
+              <BasicText
+                style={{ color: "#E16363", fontSize: 18, alignSelf: "center" }}
+              >
+                Television Set
+              </BasicText>
+            </View>
+
+            <View style={{ flexDirection: "row" }}>
+              <View
+                style={[
+                  styles.furnitureButton,
+                  { width: 120, height: 120, marginRight: 30 },
+                ]}
+              />
+              <View style={{ flexDirection: "column", width: "50%" }}>
+                <View style={styles.functionCardStyle}>
+                  <BasicText style={{ fontSize: 18 }}>Event Planner</BasicText>
+                </View>
+                <BasicText style={{ marginVertical: 10 }}>
+                  Planning a huge party and need your housemate(s)’ approval?
+                  Send a polite request here!
+                </BasicText>
+              </View>
+            </View>
+
+            {/* Buttons Section */}
+            <View
+              style={{ flexDirection: "row", justifyContent: "space-evenly" }}
+            >
+              <TouchableOpacity
+                style={styles.functionModalButtonStyle}
+                onPress={() => {
+                  setOverviewModal(!overviewModal);
+                  setFunctionModal(!functionModal);
+                }}
+              >
+                <BasicText style={styles.functionModalButtonText}>
+                  Change Function
+                </BasicText>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.functionModalButtonStyle}
+                onPress={() => {
+                  setOverviewModal(!overviewModal);
+                  setModalVisible(!modalVisible);
+                }}
+              >
+                <BasicText style={styles.functionModalButtonText}>
+                  Add to Room
+                </BasicText>
+              </TouchableOpacity>
+            </View>
+          </View>
+        );
+      }
+    }
+    function renderChooseFunction() {
+      if (functionModal == true) {
+        return (
+          <View>
+            {/* Menu Items */}
+            <View style={{ flexDirection: "row" }}>
+              <TouchableOpacity
+                onPress={() => {
+                  setOverviewModal(!overviewModal);
+                  setFunctionModal(!functionModal);
+                }}
+              >
+                <Image
+                  source={BackButton}
+                  style={{ width: 30, height: 30 }}
+                ></Image>
+              </TouchableOpacity>
+              <BasicText
+                style={{ color: "#E16363", fontSize: 18, alignSelf: "center" }}
+              >
+                Television Set
+              </BasicText>
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <View
+                style={[
+                  styles.furnitureButton,
+                  { width: 120, height: 120, marginRight: 30 },
+                ]}
+              />
+              <ScrollView>
+                {furnitureFunction.map((item, index) => {
+                  return (
+                    <TouchableOpacity
+                      key={index}
+                      style={[
+                        styles.functionModalButtonStyle,
+                        { marginBottom: 10 },
+                      ]}
+                    >
+                      <BasicText style={styles.functionModalButtonText}>
+                        {item.name}
+                      </BasicText>
+                    </TouchableOpacity>
+                  );
+                })}
+              </ScrollView>
+            </View>
+          </View>
+        );
+      }
+    }
+
+    return (
+      <View>
+        <TouchableOpacity
+          style={styles.CardboardButton}
+          onPress={() => setModalVisible(!modalVisible)}
+        >
+          <Image source={CardboardLogo} style={styles.CardboardStyle}></Image>
+        </TouchableOpacity>
+        <Modal
+          isVisible={modalVisible}
+          avoidKeyboard={true}
+          animationIn="fadeIn"
+          animationOut="fadeOut"
+          backdropOpacity={0.1}
+          onBackdropPress={() => setModalVisible(!modalVisible)}
+        >
+          <View style={[styles.furnitureModal, { height: 260 }]}>
+            {renderChooseFurniture()}
+            {renderOverviewModal()}
+            {renderChooseFunction()}
+          </View>
+        </Modal>
+      </View>
+    );
+  }
+
   function goToFinance() {
     navigation.navigate("Finance");
   }
@@ -131,6 +396,7 @@ export default function HomeScreen({ navigation }) {
           </View>
         </ScrollView>
       </ScrollView>
+      <CustomizeFurniture />
     </SafeAreaView>
   );
 }
@@ -188,5 +454,54 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 42,
     zIndex: 1,
+  },
+  CardboardButton: {
+    // backgroundColor: "#FFF",
+    justifyContent: "center",
+    marginLeft: "60%",
+  },
+  CardboardStyle: {
+    width: 180,
+    height: 150,
+  },
+  furnitureModal: {
+    height: 200,
+    width: "100%",
+    backgroundColor: "#FFFAF2",
+    alignSelf: "center",
+    borderRadius: 30,
+    padding: 20,
+    alignItems: "center",
+    top: "17%",
+  },
+  furnitureButton: {
+    backgroundColor: "#000",
+    height: 80,
+    width: 80,
+    margin: 10,
+  },
+  functionCardStyle: {
+    backgroundColor: "#F8F0DF",
+    width: "100%",
+    height: 40,
+    borderRadius: 30,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  functionModalButtonStyle: {
+    backgroundColor: "#FFD897",
+    borderRadius: 30,
+    width: 150,
+    height: 35,
+    alignItems: "center",
+    justifyContent: "center",
+    shadowColor: "#171717",
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3,
+  },
+  functionModalButtonText: {
+    color: "#8F201D",
+    fontSize: 15,
   },
 });
