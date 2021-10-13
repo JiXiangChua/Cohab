@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     resizeMode: "center",
   },
   tasksContainer: {
-    width: "90%",
+    width: "100%",
     alignItems: "center",
     flexDirection: "column",
     justifyContent: "space-evenly",
