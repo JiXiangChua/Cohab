@@ -58,12 +58,66 @@
 		   "userId":12,
 		   "groupid":"8",
 		   "title":"Mop the floor",
-		   "seqs":{
+		   "seqs":[{
 				"seqNo":1,
 				"userId":1,
-		   },
+		   },{
+				"seqNo":2,
+				"userId":2,
+		   }],
 		   "type":"Weekly"
 		   "date":"2021-10-11"
+		}
+		POST:http://<ID>/cohab/updateChore
+		dataPost:{
+		   "choreid":1,
+		   "userId":12,
+		   "groupid":"8",
+		   "title":"Mop the floor",
+		   "seqs":[{
+				"seqNo":1,
+				"userId":1,
+		   },{
+				"seqNo":2,
+				"userId":3,
+		   }],
+		   "type":"Weekly"
+		   "date":"2021-10-11"
+		}
+		GET:http://<ID>/cohab/deleteChore?choreid=1
+		response:
+		{
+			"status":"done"
+		}
+		GET:http://<ID>/cohab/getChoreTypeIcon
+		response:
+		{
+			"icons":[
+				{"icon": "img base64data"},
+				{"icon": "img base64data"},
+				{"icon": "img base64data"},
+				{"icon": "img base64data"},
+				{"icon": "img base64data"},
+				{"icon": "img base64data"}
+			]
+		}
+		GET:http://<ID>/cohab/getGroupMembers?groupId=1
+		response:
+		{
+			"members":[
+				{
+					"userid": 15,
+					"profileimg": "img base64data"
+				},
+				{
+					"userid": 16,
+					"profileimg": "img base64data"
+				},
+				{
+					"userid": 17,
+					"profileimg": "img base64data"
+				}
+			]
 		}
 		
 2>Database (tables&cols)
