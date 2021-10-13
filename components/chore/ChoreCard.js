@@ -16,8 +16,8 @@ import BasicText from "../BasicText.js";
 
 export default function ChoreCard(props) {
 
-  let iconObj = {"cleaning": cleaning, "household": household, "grocery": grocery}
-  //let mode = this.props.iconselect
+  //let iconObj = {"cleaning": cleaning, "household": household, "grocery": grocery}
+  let iconObj = props.iconselect
 
   // variable to hold icon colour
   var iconColour = props.iconColour;
@@ -58,7 +58,8 @@ export default function ChoreCard(props) {
         
         <View style={{backgroundColor: iconColour, alignContent:"center",justifyContent:"center", alignSelf: "center", marginLeft: 5, width: 90, height: 90, padding:10, borderRadius: 20}}>
         <Image
-          source={iconObj[props.iconselect]}
+          //source={iconObj[props.iconselect]}
+          source={iconObj}
           style={styles.image}
         ></Image>
         </View>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View , 
   StyleSheet , 
@@ -17,11 +17,91 @@ import { MenuBar , ChoreCard , BasicText, ChoreModal } from "../components";
 //assets
 import NewChoresButton from "../assets/icons/icon_designs-03.png";
 import placeholderBG from "../assets/sampleappbg.jpg";
+import { parse } from "react-native-svg";
 
 export default function ChoreScreen({ navigation }) {
    
   //Toggle on and off modal screeen
   const [modalVisible, setModalVisible] = useState(false);
+
+  //function displayChores(){
+  const choresURL = "http://fbe4-111-65-70-7.ngrok.io/cohab/getChores?groupId=1";
+
+    //const loginPackage = {
+    //  email: email,
+    //  password: password,
+    //};
+  
+  const init = {
+    method: "GET",
+    headers: {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+    },
+    //body: JSON.stringify(loginPackage),
+  };
+
+  //code to store data from response
+  const [chores, setdateChores] = useState([]);
+  function ChoresList () {
+    var entry=0;
+    //update chores add here later on
+    useEffect(() => {
+      async function fetchChore() {
+        try {
+          const response = await fetch(choresURL, init);
+          const json = await response.json();
+          console.log(json);
+          setdateChores(json.chores);
+          if (json.status == "OK") {
+            console.log("Successfully connected!");
+          } else {
+            console.log("NOPE");
+            console.log(json.status);
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      fetchChore();
+      for(entry=0;entry<chores.Length;entry++){
+        currentUser.push(chores[entry]["currentUser"]);
+        repeatType.push(chores[entry]["repeatType"]);
+        icon.push(chores[entry]["icon"]);
+        nextUser.push(chores[entry]["nextUser"]);
+        choreid.push(chores[entry]["choreid"]);
+        title.push(chores[entry]["title"]);
+        dueOn.push(chores[entry]["dueOn"]);
+      };
+    }, [])
+
+    return(
+      chores.map((roomie) => {
+        return(
+          <View
+          key = {roomie.choreid}
+          style={{
+            minWidth: "95%",
+            width: "100%",
+            alignItems: "center",
+            //minHeight: "10%",
+          }}>
+            <ChoreCard
+              key ={roomie.choreid}
+              currentUser={roomie.currentUser}
+              choretype= {roomie.repeatType}
+              iconselect = {roomie.icon}
+              nextUser={roomie.nextUser}
+              dutyname={roomie.title}
+              duedate={roomie.dueOn}
+              iconColour = "#FFDBA5"
+              cycleStart="19th"
+            ></ChoreCard>
+          </View>
+        );
+      })
+    );
+ }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -45,6 +125,7 @@ export default function ChoreScreen({ navigation }) {
           </TouchableOpacity>
         </View>
         {/* Roommate Bill Container */}
+        {ChoresList()}
       <View
         style={{
           minWidth: "95%",
@@ -52,31 +133,6 @@ export default function ChoreScreen({ navigation }) {
           alignItems: "center",
           minHeight: 600,
         }}>
-        <ChoreCard
-          duedate="14 Sep"
-          dutyname="Vacuum the floor"
-          iconselect = "household"
-          iconColour = "#ECC3FF"
-          choretype= "Weekly"
-          cycleStart="Sat"
-        ></ChoreCard>
-        <ChoreCard
-          duedate="20 Oct"
-          dutyname="Kitchen Duty"
-          iconselect = "grocery"
-          iconColour = "#FFDBA5"
-          choretype= "Monthly"
-          cycleStart="19th"
-        ></ChoreCard>
-        <ChoreCard
-          duedate="31 Oct"
-          dutyname="Scrub toilet bowl"
-          iconselect = "cleaning"
-          iconColour = "#FFCDF4"
-          choretype= "Weekly"
-          cycleStart="Sun"
-        ></ChoreCard>
-        
       </View>
       <ChoreModal modalVisible = {modalVisible} setModalVisible = {setModalVisible} />
     </ScrollView>
