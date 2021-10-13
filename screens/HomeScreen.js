@@ -247,7 +247,7 @@ export default function HomeScreen({ navigation }) {
                       key={index}
                       style={[
                         styles.functionModalButtonStyle,
-                        { marginBottom: 10 },
+                        { marginBottom: 10, marginLeft: 4.5 },
                       ]}
                     >
                       <BasicText style={styles.functionModalButtonText}>
