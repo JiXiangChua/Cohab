@@ -78,7 +78,7 @@ export default function FinancePayRMScreen({ navigation }) {
 
       {/* Roommate contact list */}
       <View>
-        <ScrollView contentContainerStyle={{ height: 300, marginBottom: 10 }}>
+        <ScrollView contentContainerStyle={{ height: 300, marginBottom: 20 }}>
           {roommateName.map((roommate, index) => {
             return (
               <TouchableOpacity
@@ -90,12 +90,21 @@ export default function FinancePayRMScreen({ navigation }) {
                     alignSelf: "center",
                   },
                   selectedState[index]
-                    ? { backgroundColor: "green" }
+                    ? { backgroundColor: "#943855" }
                     : { backgroundColor: "white" },
                 ]}
                 onPress={() => selectedButton(index)}
               >
-                <BasicText>{roommate.name}</BasicText>
+                <BasicText
+                  style={[
+                    { fontSize: 18 },
+                    selectedState[index]
+                      ? { color: "#FFF" }
+                      : { color: "#000" },
+                  ]}
+                >
+                  {roommate.name}
+                </BasicText>
               </TouchableOpacity>
             );
           })}
@@ -179,6 +188,7 @@ const styles = StyleSheet.create({
     width: "90%",
     marginVertical: 10,
     borderWidth: 0.1,
+    height: 70,
   },
   shadowProp: {
     shadowColor: "#171717",

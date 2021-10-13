@@ -52,12 +52,12 @@ export default function HomeScreen({ navigation }) {
         <BasicText style={{ color: "#E16363", fontSize: 30 }}>Hall</BasicText>
       </View>
       <View style={styles.backgroundAnimContainer}>
-        <Image source={CloudGif} style={styles.backgroundAnim} />
+        <Image style={styles.backgroundAnim} />
       </View>
       <ScrollView style={styles.scrollView} horizontal={true}>
         <ScrollView style={styles.scrollView}>
           <View style={styles.roomContainer}>
-            <Image source={RoomPicture} style={styles.roomStyle} />
+            <Image style={styles.roomStyle} />
             <TouchableOpacity
               onPress={goToFinance}
               style={[
@@ -70,7 +70,7 @@ export default function HomeScreen({ navigation }) {
                 },
               ]}
             >
-              <Image source={BankPicture} style={styles.buttonStyle} />
+              <Image style={styles.buttonStyle} />
             </TouchableOpacity>
             <TouchableOpacity
               onPress={goToTask}
@@ -84,7 +84,7 @@ export default function HomeScreen({ navigation }) {
                 },
               ]}
             >
-              <Image source={TaskPicture} style={styles.buttonStyle} />
+              <Image style={styles.buttonStyle} />
             </TouchableOpacity>
             <TouchableOpacity
               onPress={goToChore}
@@ -98,7 +98,7 @@ export default function HomeScreen({ navigation }) {
                 },
               ]}
             >
-              <Image source={ChorePicture} style={styles.buttonStyle} />
+              <Image style={styles.buttonStyle} />
             </TouchableOpacity>
             <TouchableOpacity
               onPress={goToCalendar}
@@ -112,7 +112,7 @@ export default function HomeScreen({ navigation }) {
                 },
               ]}
             >
-              <Image source={CalendarPicture} style={styles.buttonStyle} />
+              <Image style={styles.buttonStyle} />
             </TouchableOpacity>
             <TouchableOpacity
               onPress={goToGroupSelect}
@@ -126,7 +126,7 @@ export default function HomeScreen({ navigation }) {
                 },
               ]}
             >
-              <Image source={GroupPicture} style={styles.buttonStyle} />
+              <Image style={styles.buttonStyle} />
             </TouchableOpacity>
           </View>
         </ScrollView>
@@ -172,6 +172,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     zIndex: 3,
+    backgroundColor: "black",
   },
   roomStyle: {
     resizeMode: "contain",

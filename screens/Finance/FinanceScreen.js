@@ -17,14 +17,13 @@ import RoommateCard from "../../components/finance/RoommateCard";
 import GroupPayCard from "../../components/finance/GroupPayCard";
 import BudgetGraph from "../../components/finance/BudgetGraph";
 import BasicText from "../../components/BasicText";
-import GeneralButton from "../../components/GeneralButton";
 
-import addBillButton from "../../assets/icons/icon_designs-09.png";
-import TopUpLogo from "../../assets/Finance-assets/TopUp.png";
-import ScanLogo from "../../assets/Finance-assets/Scan.png";
-import TransferLogo from "../../assets/Finance-assets/Transfer.png";
+import TopUpLogo from "../../assets/Finance-assets/TopUp2.png";
+import ScanLogo from "../../assets/Finance-assets/Scan2.png";
+import TransferLogo from "../../assets/Finance-assets/Transfer2.png";
 import PayerLogo from "../../assets/icons/icon_designs-06.png";
 import PayeeLogo from "../../assets/icons/icon_designs-05.png";
+import AddButton from "../../assets/icons/icon_designs-03.png";
 import KimberlyPic from "../../assets/Finance-assets/Kimberly.png";
 import SharonPic from "../../assets/Finance-assets/Sharon.png";
 import NickPic from "../../assets/Finance-assets/Nick.png";
@@ -446,7 +445,7 @@ export default function FinanceScreen({ navigation }) {
           >
             <Image
               source={TransferLogo}
-              style={[styles.walletButtonLogo, { marginBottom: 14 }]}
+              style={[styles.walletButtonLogo]}
             ></Image>
             <BasicText>Update</BasicText>
           </TouchableOpacity>
@@ -484,14 +483,16 @@ export default function FinanceScreen({ navigation }) {
         {/* Roommate Section */}
         <View style={styles.roommateContainer}>
           <View style={{ width: "100%", height: 50, flexDirection: "row" }}>
-            <BasicText style={styles.createNewTitle}>Pay Roommates</BasicText>
-            <BasicText style={styles.createNewButton}>Pay Me</BasicText>
+            <BasicText style={styles.createNewTitle}>ROOMMATE</BasicText>
+            <BasicText style={[styles.createNewButton, { marginRight: 5 }]}>
+              NEW
+            </BasicText>
             <TouchableOpacity
               style={{ position: "absolute", right: -5, fontSize: 18 }}
               onPress={renderPayRoomateScreen}
             >
               <Image
-                source={addBillButton}
+                source={AddButton}
                 style={{ width: 50, height: 50 }}
               ></Image>
             </TouchableOpacity>
@@ -549,14 +550,16 @@ export default function FinanceScreen({ navigation }) {
         {/* Group Pay Section */}
         <View style={styles.roommateContainer}>
           <View style={{ width: "100%", height: 50, flexDirection: "row" }}>
-            <BasicText style={styles.createNewTitle}>Group Payment</BasicText>
-            <BasicText style={styles.createNewButton}>New Split</BasicText>
+            <BasicText style={styles.createNewTitle}>GROUP</BasicText>
+            <BasicText style={[styles.createNewButton, { marginRight: 5 }]}>
+              NEW
+            </BasicText>
             <TouchableOpacity
               style={{ position: "absolute", right: -5, fontSize: 18 }}
               onPress={renderPayGroupScreen}
             >
               <Image
-                source={addBillButton}
+                source={AddButton}
                 style={{ width: 50, height: 50 }}
               ></Image>
             </TouchableOpacity>
@@ -646,10 +649,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   walletButtonLogo: {
-    width: "100%",
+    width: 80,
     alignSelf: "center",
     marginRight: 5,
     marginBottom: 5,
+    height: 60,
   },
   budgetContainer: {
     width: "95%",
