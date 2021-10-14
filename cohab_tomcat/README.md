@@ -1,4 +1,5 @@
 1>APIs example
+
 	GROUP:
 		POST:http://<ID>/cohab/addGroup
 		dataPost:{
@@ -121,6 +122,7 @@
 		}
 		
 2>Database (tables&cols)
+	
 		CREATE TABLE `announcement` (
 		  `announcementid` int NOT NULL AUTO_INCREMENT,
 		  `userid` int NOT NULL,
