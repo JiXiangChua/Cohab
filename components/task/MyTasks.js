@@ -33,47 +33,50 @@ export default function MyTasks() {
   }
 
   return (
-    <View style={styles.myTasks}>
-      <View style={styles.title}>
-        <BasicText style={styles.subHeaderText}>Claim Tasks</BasicText>
+    <View style={styles.tasksContainer}>
+      <View style={styles.myTasks}>
+        <View style={styles.title}>
+          <BasicText style={styles.subHeaderText}>Claim Tasks</BasicText>
 
-        <TouchableOpacity
-          style={styles.newTask}
-          onPress={() => setModalVisible(true)}
-        >
-          <BasicText style={styles.subHeaderText}>New Task</BasicText>
-          <Image source={newTaskButton} style={styles.newTaskButton} />
-          {/*icon is a lil off center cause the image is off center. if the new icon is centered it should be centered*/}
-        </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.newTask}
+            onPress={() => setModalVisible(true)}
+          >
+            <BasicText style={styles.subHeaderText}>New Task</BasicText>
+            <Image source={newTaskButton} style={styles.newTaskButton} />
+            {/*icon is a lil off center cause the image is off center. if the new icon is centered it should be centered*/}
+          </TouchableOpacity>
+        </View>
+
+        {/* <View style={styles.tasksContainer}> */}
+        <View style={styles.laundryContainer}>
+          {laundryCard && (
+            <TaskCard
+              name="Laundry"
+              description="we have no clothes :(("
+              set="Set own deadline"
+              date_created="18 Aug"
+              toggle={toggleLaundryTask}
+              fdCheck={false}
+            />
+          )}
+
+          {dishCard && (
+            <TaskCard
+              name="Do the dishes"
+              description="our sink is clogging !!!"
+              deadline="Deadline:26 Aug"
+              date_created="18 Aug"
+              fdCheck={true}
+              toggle={toggleDishTask}
+            />
+          )}
+        </View>
+        <TaskModal
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
+        />
       </View>
-
-      <View style={styles.tasksContainer}>
-        {laundryCard && (
-          <TaskCard
-            name="Laundry"
-            description="we have no clothes :(("
-            set="Set own deadline"
-            date_created="18 Aug"
-            toggle={toggleLaundryTask}
-            fdCheck={false}
-          />
-        )}
-
-        {dishCard && (
-          <TaskCard
-            name="Do the dishes"
-            description="our sink is clogging !!!"
-            deadline="Deadline:26 Aug"
-            date_created="18 Aug"
-            fdCheck={true}
-            toggle={toggleDishTask}
-          />
-        )}
-      </View>
-      <TaskModal
-        modalVisible={modalVisible}
-        setModalVisible={setModalVisible}
-      />
     </View>
   );
 }
@@ -111,5 +114,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "column",
     justifyContent: "space-evenly",
+  },
+  laundryContainer: {
+    height: 300,
   },
 });
