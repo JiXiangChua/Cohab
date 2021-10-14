@@ -25,7 +25,7 @@ export default function ChoreScreen({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
 
   //function displayChores(){
-  const choresURL = "http://fbe4-111-65-70-7.ngrok.io/cohab/getChores?groupId=1";
+  const choresURL = "http://10.27.129.14:9999/cohab/getChores?groupId=1";
 
     //const loginPackage = {
     //  email: email,
