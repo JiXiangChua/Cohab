@@ -23,6 +23,7 @@ import heart from "../../assets/Chores-assets/heart.png";
 import shopping from "../../assets/Chores-assets/online-shopping.png";
 import grocery from "../../assets/Chores-assets/grocery.png";
 import payment from "../../assets/Chores-assets/cash-payment.png";
+import SelectOrder from "../../components/chore/SelectOrder";
 
 export default function ChoreModal({ modalVisible, setModalVisible }) {
   // Values needed for Add Chore Screen Popup (Modal)
@@ -56,8 +57,6 @@ export default function ChoreModal({ modalVisible, setModalVisible }) {
     showMode("date");
   };
 
-  const [order, setOrder] = useState(true);
-  const [order2, setOrder2] = useState(true);
 
   // Variables to indicate if monthly or weekly button selected
   var monthlySelected = false;
@@ -259,20 +258,7 @@ export default function ChoreModal({ modalVisible, setModalVisible }) {
 
           <BasicText style={{ paddingTop: 20 }}>Select the order</BasicText>
 
-          <View style={{ flexDirection: "row", paddingTop: 20 }}>
-            <TouchableOpacity onPress={() => setOrder(false)}>
-              <Image style={styles.image} source={ProfilePic} />
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => setOrder2(false)}>
-              <Image style={styles.image} source={ProfilePic} />
-            </TouchableOpacity>
-          </View>
-
-          <View style={{ flexDirection: "row" }}>
-            <BasicText>Order: {order ? "0" : "1"}</BasicText>
-            <BasicText> {order2 ? "0" : "2"}</BasicText>
-          </View>
+         <SelectOrder onOrderChange={(newOrder)=> console.log(newOrder)}/>
 
           <BasicText style={{ paddingTop: 20 }}>Repeat</BasicText>
 
