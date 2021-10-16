@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   TouchableOpacity,
@@ -19,6 +19,10 @@ import { BasicText, HomeScreenHeader } from "../components";
 import CardboardLogo from "../assets/Home-assets/cardboard.png";
 import BackButton from "../assets/back-to-room-button.png";
 import GeneralButton from "../components/GeneralButton";
+import WashingMachineLogo from "../assets/Home-assets/washingmachinerender.png";
+import CalendarLogo from "../assets/Home-assets/calendarrender.png";
+import TaskBoardLogo from "../assets/Home-assets/taskboardrender.png";
+import PiggyBankLogo from "../assets/Home-assets/piggybankrender.png";
 
 // import CustomizeFurniture from "./CustomizeFurniture";
 
@@ -37,41 +41,42 @@ export default function HomeScreen({ navigation }) {
     const [furnitureModal, setFurnitureModal] = useState(true);
     const [overviewModal, setOverviewModal] = useState(false);
     const [functionModal, setFunctionModal] = useState(false);
+    const [itemID, setItemID] = useState(-1);
 
-    const furniture = [
+    const [furniture, setFurniture] = useState([
       {
         id: 1,
-        image: "green",
+        name: "Washing Machine",
+        image: WashingMachineLogo,
+        functionName: "Chore",
+        description:
+          "Planning a huge party and need your housemate(s)’ approval? Send a polite request here!",
       },
       {
         id: 2,
-        image: "red",
+        name: "Task Board",
+        image: TaskBoardLogo,
+        functionName: "Task",
+        description:
+          "Planning a huge party and need your housemate(s)’ approval? Send a polite request here!",
       },
       {
         id: 3,
-        image: "yellow",
+        name: "Calendar",
+        image: CalendarLogo,
+        functionName: "Calendar",
+        description:
+          "Planning a huge party and need your housemate(s)’ approval? Send a polite request here!",
       },
       {
         id: 4,
-        image: "black",
+        name: "Piggy Bank",
+        image: PiggyBankLogo,
+        functionName: "Finance",
+        description:
+          "Planning a huge party and need your housemate(s)’ approval? Send a polite request here!",
       },
-      {
-        id: 5,
-        image: "blue",
-      },
-      {
-        image: "brown",
-      },
-      {
-        image: "green",
-      },
-      {
-        image: "red",
-      },
-      {
-        image: "yellow",
-      },
-    ];
+    ]);
 
     const furnitureFunction = [
       {
@@ -87,7 +92,7 @@ export default function HomeScreen({ navigation }) {
         Description: "This is a Task",
       },
       {
-        name: "Calandar",
+        name: "Calendar",
         Description: "This is a Calandar",
       },
     ];
@@ -106,6 +111,7 @@ export default function HomeScreen({ navigation }) {
                 flexWrap: "wrap",
                 justifyContent: "flex-start",
                 marginLeft: "6%",
+                marginBottom: 20,
               }}
             >
               {furniture.map((item, index) => {
@@ -114,14 +120,21 @@ export default function HomeScreen({ navigation }) {
                     key={index}
                     style={[
                       styles.furnitureButton,
-                      { backgroundColor: item.image },
+                      // { backgroundColor: item.image },
                     ]}
                     onPress={() => {
                       setFurnitureModal(!furnitureModal);
                       setOverviewModal(!overviewModal);
-                      renderOverviewModal(item.image);
+                      // renderOverviewModal(item.id);
+                      setItemID(item.id);
                     }}
-                  ></TouchableOpacity>
+                  >
+                    <Image
+                      source={item.image}
+                      style={{ width: "100%", height: "120%" }}
+                      resizeMode="contain"
+                    ></Image>
+                  </TouchableOpacity>
                 );
               })}
             </View>
@@ -130,9 +143,9 @@ export default function HomeScreen({ navigation }) {
       }
     }
 
-    function renderOverviewModal(image) {
-      console.log(image);
-      if (overviewModal == true) {
+    function renderOverviewModal() {
+      console.log(itemID);
+      if (overviewModal == true && itemID > 0) {
         return (
           <View style={{ width: "100%" }}>
             {/* Menu Items */}
@@ -151,7 +164,7 @@ export default function HomeScreen({ navigation }) {
               <BasicText
                 style={{ color: "#E16363", fontSize: 18, alignSelf: "center" }}
               >
-                Television Set
+                {furniture[itemID - 1].name}
               </BasicText>
             </View>
 
@@ -159,17 +172,43 @@ export default function HomeScreen({ navigation }) {
               <View
                 style={[
                   styles.furnitureButton,
-                  { width: 120, height: 120, marginRight: 30 },
+                  {
+                    width: 100,
+                    height: 100,
+                    marginRight: 30,
+                  },
                 ]}
-              />
+              >
+                {furniture.map((item, index) => {
+                  if (item.id == itemID) {
+                    return (
+                      <Image
+                        key={index}
+                        source={item.image}
+                        style={{ width: "100%", height: "120%" }}
+                        resizeMode="contain"
+                      ></Image>
+                    );
+                  }
+                })}
+              </View>
               <View style={{ flexDirection: "column", width: "50%" }}>
-                <View style={styles.functionCardStyle}>
-                  <BasicText style={{ fontSize: 18 }}>Event Planner</BasicText>
-                </View>
-                <BasicText style={{ marginVertical: 10 }}>
-                  Planning a huge party and need your housemate(s)’ approval?
-                  Send a polite request here!
-                </BasicText>
+                {furniture.map((item, index) => {
+                  if (item.id == itemID) {
+                    return (
+                      <View key={index}>
+                        <View style={styles.functionCardStyle}>
+                          <BasicText style={{ fontSize: 18 }}>
+                            {item.functionName}
+                          </BasicText>
+                        </View>
+                        <BasicText style={{ marginVertical: 10 }}>
+                          {item.description}
+                        </BasicText>
+                      </View>
+                    );
+                  }
+                })}
               </View>
             </View>
 
@@ -205,6 +244,7 @@ export default function HomeScreen({ navigation }) {
       }
     }
     function renderChooseFunction() {
+      console.log(furniture);
       if (functionModal == true) {
         return (
           <View>
@@ -224,7 +264,7 @@ export default function HomeScreen({ navigation }) {
               <BasicText
                 style={{ color: "#E16363", fontSize: 18, alignSelf: "center" }}
               >
-                Television Set
+                {furniture[itemID - 1].name}
               </BasicText>
             </View>
             <View
@@ -237,9 +277,26 @@ export default function HomeScreen({ navigation }) {
               <View
                 style={[
                   styles.furnitureButton,
-                  { width: 120, height: 120, marginRight: 30 },
+                  {
+                    width: 140,
+                    height: 140,
+                    marginRight: 30,
+                  },
                 ]}
-              />
+              >
+                {furniture.map((item, index) => {
+                  if (item.id == itemID) {
+                    return (
+                      <Image
+                        key={index}
+                        source={item.image}
+                        style={{ width: "100%", height: "120%" }}
+                        resizeMode="contain"
+                      ></Image>
+                    );
+                  }
+                })}
+              </View>
               <ScrollView>
                 {furnitureFunction.map((item, index) => {
                   return (
@@ -249,6 +306,20 @@ export default function HomeScreen({ navigation }) {
                         styles.functionModalButtonStyle,
                         { marginBottom: 10, marginLeft: 4.5 },
                       ]}
+                      onPress={() => {
+                        var updatedFurniture = furniture.map((object) =>
+                          object.id == itemID
+                            ? {
+                                ...object,
+                                functionName: item.name,
+                              }
+                            : object
+                        );
+
+                        setFurniture(updatedFurniture);
+                        setFunctionModal(!functionModal);
+                        setOverviewModal(!overviewModal);
+                      }}
                     >
                       <BasicText style={styles.functionModalButtonText}>
                         {item.name}
@@ -475,9 +546,8 @@ const styles = StyleSheet.create({
     top: "17%",
   },
   furnitureButton: {
-    backgroundColor: "#000",
-    height: 80,
-    width: 80,
+    height: 120,
+    width: 120,
     margin: 10,
   },
   functionCardStyle: {
