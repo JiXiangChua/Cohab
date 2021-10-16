@@ -15,13 +15,14 @@ import { ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { BasicText, HomeScreenHeader } from "../components";
 
+import TreePicture from "../assets/Home-assets/background.png";
 import RoomPicture from "../assets/Home-assets/roomPicture.png";
 import BankPicture from "../assets/Home-assets/piggybank.png";
 import ChorePicture from "../assets/Home-assets/washingmachine.png";
 import GroupPicture from "../assets/Home-assets/door.png";
 import TaskPicture from "../assets/Home-assets/taskboard.png";
 import CalendarPicture from "../assets/Home-assets/calendar.png";
-// import CloudGif from "../assets/Home-assets/clouds.gif";
+import dog1Gif from "../assets/Home-assets/dog1.gif";
 
 export default function HomeScreen({ navigation }) {
   function goToFinance() {
@@ -51,12 +52,11 @@ export default function HomeScreen({ navigation }) {
       <View style={styles.header}>
         <BasicText style={{ color: "#E16363", fontSize: 30 }}>Hall</BasicText>
       </View>
-      <View style={styles.backgroundAnimContainer}>
-        {/*<Image source={CloudGif} style={styles.backgroundAnim} />*/}
-      </View>
+      
       <ScrollView style={styles.scrollView} horizontal={true}>
         <ScrollView style={styles.scrollView}>
           <View style={styles.roomContainer}>
+            <Image source={TreePicture} style={styles.backgroundStyle} />
             <Image source={RoomPicture} style={styles.roomStyle} />
             <TouchableOpacity
               onPress={goToFinance}
@@ -158,6 +158,7 @@ export default function HomeScreen({ navigation }) {
                 <Image source={GroupPicture} style={styles.buttonImageStyle} />
               </View>
             </TouchableOpacity>
+            <Image source={dog1Gif} style={styles.mascotStyle} />
           </View>
         </ScrollView>
       </ScrollView>
@@ -189,7 +190,7 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   scrollView: {
-    zIndex: 1,
+    zIndex: 0,
   },
   roomContainer: {
     height: Dimensions.get("window").height * 1,
@@ -203,6 +204,14 @@ const styles = StyleSheet.create({
     width: "120%",
     zIndex: 2,
     marginBottom: 100,
+  },
+  backgroundStyle: {
+    position: "absolute",
+    top: "-15%",
+    resizeMode: "cover",
+    height: "120%",
+    width: "120%",
+    zIndex: 1,
   },
   buttonStyle: {
     position: "absolute",
@@ -219,6 +228,14 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
     height: "120%",
     width: "120%",
+  },
+  mascotStyle: {
+    position: "absolute",
+    height: "11%",
+    width: "11%",
+    top: "59%",
+    left: "37%",
+    zIndex: 3,
   },
   text: {
     fontSize: 42,
