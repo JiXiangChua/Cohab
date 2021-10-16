@@ -1,22 +1,29 @@
 import React, { useState } from "react";
-import { View, Text, Modal, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Pressable } from "react-native";
 import GeneralButton from "../GeneralButton";
 import BorderColorButton from "../BorderColorButton";
 
 import { Picker } from "@react-native-picker/picker";
-import BasicText from "../BasicText";
+import Modal from "react-native-modal";
+import BasicText from "../BasicText.js";
 
-export default function EditDModal(props) {
+export default function EditModal(props) {
   const [selectedDay, setSelectedDay] = useState(props.dayUpdated);
   const [selectedMonth, setSelectedMonth] = useState(props.monthUpdated);
   const [selectedYear, setSelectedYear] = useState("2021");
 
   return (
+    // <Modal
+    //   animationType="fade"
+    //   transparent={true}
+    //   visible={true}
+    //   onRequestClose={props.cancelButton}
+    // >
     <Modal
-      animationType="fade"
-      transparent={true}
-      visible={true}
-      onRequestClose={props.cancelButton}
+      isVisible={true}
+      avoidKeyboard={true}
+      animationIn="slideInUp"
+      animationOut="slideOutDown"
     >
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
@@ -30,14 +37,17 @@ export default function EditDModal(props) {
           <View
             style={{
               flexDirection: "row",
+              marginTop: -20,
             }}
           >
             <Picker
               selectedValue={selectedDay}
+              collapsable={true}
               style={{
-                height: 50,
-                width: 90,
+                height: 150,
+                width: "35%",
               }}
+              itemStyle={{ height: 150 }}
               onValueChange={(itemValue, itemIndex) => {
                 setSelectedDay(itemValue);
               }}
@@ -78,7 +88,12 @@ export default function EditDModal(props) {
 
             <Picker
               selectedValue={selectedMonth}
-              style={{ height: 50, width: 100 }}
+              collapsable={true}
+              style={{
+                height: 150,
+                width: "35%",
+              }}
+              itemStyle={{ height: 150 }}
               onValueChange={(itemValue, itemIndex) => {
                 setSelectedMonth(itemValue);
               }}
@@ -100,10 +115,15 @@ export default function EditDModal(props) {
 
             <Picker
               selectedValue={selectedYear}
-              style={{ height: 50, width: 110 }}
-              onValueChange={(itemValue, itemIndex) =>
-                setSelectedYear(itemValue)
-              }
+              collapsable={true}
+              style={{
+                height: 150,
+                width: "40%",
+              }}
+              itemStyle={{ height: 150 }}
+              onValueChange={(itemValue, itemIndex) => {
+                setSelectedYear(itemValue);
+              }}
               mode={"dropdown"}
             >
               <Picker.Item label={"2021"} value={"2021"} />
@@ -117,7 +137,7 @@ export default function EditDModal(props) {
           <View
             style={{
               flexDirection: "row",
-              marginTop: 50,
+              marginTop: -20,
               justifyContent: "space-around",
             }}
           >
@@ -149,7 +169,7 @@ export default function EditDModal(props) {
               <GeneralButton
                 buttonText={"Unload"}
                 color={"#FF1A1A"}
-                onPress={() => setModalVisible(!modalVisible)}
+                onPress={props.cancelButton}
               />
             </View>
           </View>
@@ -168,8 +188,6 @@ const styles = StyleSheet.create({
     width: "105%",
     marginVertical: 10,
     borderWidth: 0.1,
-  },
-  shadowProp: {
     shadowColor: "#171717",
     shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.25,
@@ -179,12 +197,13 @@ const styles = StyleSheet.create({
     margin: 20,
     backgroundColor: "white",
     borderRadius: 20,
-    padding: 35,
+    paddingVertical: 25,
+    paddingHorizontal: 25,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
-      width: 0,
-      height: 2,
+      width: -2,
+      height: 4,
     },
     shadowOpacity: 0.25,
     shadowRadius: 4,
@@ -200,6 +219,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 22,
-    backgroundColor: "#000000aa",
   },
 });

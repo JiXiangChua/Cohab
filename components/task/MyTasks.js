@@ -44,7 +44,6 @@ export default function MyTasks() {
           >
             <BasicText style={styles.subHeaderText}>New Task</BasicText>
             <Image source={newTaskButton} style={styles.newTaskButton} />
-            {/*icon is a lil off center cause the image is off center. if the new icon is centered it should be centered*/}
           </TouchableOpacity>
         </View>
 

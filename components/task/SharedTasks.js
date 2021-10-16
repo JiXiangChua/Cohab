@@ -8,7 +8,7 @@ import Individual1Tab from "./Individual1Tab";
 import Kimberly from "../../assets/Finance-assets/Kimberly.png";
 
 export default function SharedTasks() {
-  const [currentTab, setCurrentTab] = useState("shared");
+  const [currentTab, setCurrentTab] = useState("individual1");
 
   var shared = [styles.shared];
   var individual1 = [styles.individual1];

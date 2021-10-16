@@ -1,44 +1,49 @@
 import React, { useState } from "react";
-import { View, Text, Modal, StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import GeneralButton from "../GeneralButton";
 import BorderColorButton from "../BorderColorButton";
 
+import { Picker } from "@react-native-picker/picker";
+import Modal from "react-native-modal";
+import BasicText from "../BasicText.js";
+
 export default function ClaimTaskFDModal(props) {
   return (
+    // <Modal
+    //   animationType="fade"
+    //   transparent={true}
+    //   visible={true}
+    //   onRequestClose={props.cancelButton}
+    // >
     <Modal
-      animationType="fade"
-      transparent={true}
-      visible={true}
-      onRequestClose={props.cancelButton}
+      isVisible={true}
+      avoidKeyboard={true}
+      animationIn="slideInUp"
+      animationOut="slideOutDown"
     >
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
-          <Text style={styles.modalText}>
+          <BasicText style={styles.modalText}>
             {"Take up the task\n"}
-            <Text style={styles.cardText}>
+            <BasicText style={styles.cardText}>
               {'"' + props.children.name + '" ?'}
-            </Text>
-            <Text style={styles.deadlineText}>
+            </BasicText>
+            <BasicText style={styles.deadlineText}>
               {"\n\n" + props.children.deadline}
-            </Text>
-          </Text>
-
-          <View
-            style={{
-              flexDirection: "column",
-            }}
-          >
-            <View
-              style={{
-                flexDirection: "row",
-              }}
-            ></View>
-          </View>
+            </BasicText>
+          </BasicText>
 
           <View
             style={{
               flexDirection: "row",
-              marginTop: 50,
+              marginTop: -20,
+            }}
+          ></View>
+
+          <View
+            style={{
+              flexDirection: "row",
+              marginTop: 10,
               justifyContent: "space-around",
             }}
           >
@@ -75,24 +80,22 @@ const styles = StyleSheet.create({
     width: "105%",
     marginVertical: 10,
     borderWidth: 0.1,
-  },
-  shadowProp: {
     shadowColor: "#171717",
     shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.25,
     shadowRadius: 3,
   },
   modalView: {
-    width: 350,
     margin: 20,
     backgroundColor: "white",
     borderRadius: 20,
-    padding: 35,
+    paddingVertical: 35,
+    paddingHorizontal: 35,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
-      width: 0,
-      height: 2,
+      width: -2,
+      height: 4,
     },
     shadowOpacity: 0.25,
     shadowRadius: 4,
@@ -103,17 +106,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 18,
   },
-  cardText: {
-    alignSelf: "flex-start",
-    marginRight: 20,
-    fontSize: 18,
-  },
   centeredView: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     marginTop: 22,
-    backgroundColor: "#000000aa",
   },
   deadlineText: {
     color: "#FF0000",

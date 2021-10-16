@@ -44,8 +44,7 @@ export default function RestoreTask({ restoreVisible, setRestoreVisible }) {
       }}
     >
       <View style={styles.centeredView}>
-      <View style={styles.modalView}>
-
+        <View style={styles.modalView}>
           <BasicText style={styles.modalText}>Restore the task</BasicText>
           <BasicText style={styles.modalText}>"Install Shelves"?</BasicText>
 
@@ -157,8 +156,7 @@ export default function RestoreTask({ restoreVisible, setRestoreVisible }) {
                   paddingTop: 10,
                   paddingBottom: 20,
                 }}
-              >
-              </View>
+              ></View>
             </View>
           </View>
 
@@ -251,32 +249,32 @@ const styles = StyleSheet.create({
   },
 
   modalView: {
-      margin: 30,
-      backgroundColor: "white",
-      borderRadius: 20,
-      padding: 35,
-      alignItems: "center",
-      shadowColor: "#000",
-      shadowOffset: {
-        width: 0,
-        height: 2,
-      },
-      shadowOpacity: 0.25,
-      shadowRadius: 4,
-      elevation: 5,
+    margin: 30,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
     },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
 
   modalText: {
-      marginBottom: 10,
-      textAlign: "center",
-      fontSize: 18,
+    marginBottom: 10,
+    textAlign: "center",
+    fontSize: 18,
   },
 
   centeredView: {
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-      marginTop: 22,
-      backgroundColor: "#000000aa",
-    },
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+    backgroundColor: "#000000aa",
+  },
 });

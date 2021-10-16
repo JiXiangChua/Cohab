@@ -71,7 +71,7 @@ export default function Individual1TaskCard(props) {
                 buttonText={"Done"}
                 color={"#36BC7C"}
                 onPress={() => {
-                  setModalVisible(!modalVisible);
+                  // setModalVisible(!modalVisible);
                 }}
               />
             </View>

@@ -15,6 +15,7 @@ import ProfilePic from "../../assets/Finance-assets/Kimberly.png";
 import GeneralButton from "../GeneralButton";
 import ClaimTaskSDModal from "./ClaimTaskSDModal";
 import ClaimTaskFDModal from "./ClaimTaskFDModal";
+import BasicText from "../BasicText";
 
 export default function TaskCard(props) {
   const [claimModalVisible, setClaimModalVisible] = useState(false);
@@ -91,8 +92,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 25,
     width: "105%",
     marginVertical: 10,
-  },
-  shadowProp: {
     shadowColor: "#171717",
     shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.25,
@@ -104,7 +103,7 @@ const styles = StyleSheet.create({
   },
   cardText: {
     alignSelf: "flex-start",
-    marginRight: 20,
+    marginRight: 15,
     fontSize: 18,
   },
   setText: {
@@ -132,7 +131,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   profileImage: {
-    marginLeft: -10,
+    marginLeft: 5,
     minWidth: 15,
     minHeight: 15,
     marginTop: -15,
