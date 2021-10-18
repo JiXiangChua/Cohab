@@ -18,10 +18,9 @@ export default function EventCard(props) {
       style={[
         styles.card,
         styles.shadowProp,
-        { justifyContent: "center" },
         props.importantStatus
-          ? { borderColor: "#FF4D4D", borderWidth: 1 }
-          : null,
+          ? { borderColor: "#FF4D4D" , borderWidth: 1 }
+          : { borderColor: "#grey" , borderWidth: 1 }
       ]}
     >
       {/* Event Name and Accept Button */}
@@ -84,6 +83,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     borderWidth: 0.1,
     alignSelf: "center",
+    justifyContent: "center",
   },
   shadowProp: {
     shadowColor: "#171717",
