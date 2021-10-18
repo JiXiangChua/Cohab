@@ -37,6 +37,7 @@ import dog1Gif from "../assets/Home-assets/dog1.gif";
 
 export default function HomeScreen({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
+  const [dogImage, setDogImage] = useState(false);
 
   function CustomizeFurniture() {
     const [furnitureModal, setFurnitureModal] = useState(true);
@@ -389,7 +390,7 @@ export default function HomeScreen({ navigation }) {
       <View style={styles.header}>
         <BasicText style={{ color: "#E16363", fontSize: 30 }}>Hall</BasicText>
       </View>
-      
+
       <ScrollView style={styles.scrollView} horizontal={true}>
         <ScrollView style={styles.scrollView}>
           <View style={styles.roomContainer}>
@@ -408,14 +409,17 @@ export default function HomeScreen({ navigation }) {
                 },
               ]}
             >
-              <View style={[styles.buttonContainer, {
-                  top: Dimensions.get("window").height * -0.60 -50.4,
-                  left: Dimensions.get("window").height * -0.455 -0.7,
-                },
-              ]}>
+              <View
+                style={[
+                  styles.buttonContainer,
+                  {
+                    top: Dimensions.get("window").height * -0.6 - 50.4,
+                    left: Dimensions.get("window").height * -0.455 - 0.7,
+                  },
+                ]}
+              >
                 <Image source={BankPicture} style={styles.buttonImageStyle} />
               </View>
-
             </TouchableOpacity>
             <TouchableOpacity
               onPress={goToTask}
@@ -429,12 +433,15 @@ export default function HomeScreen({ navigation }) {
                 },
               ]}
             >
-
-              <View style={[styles.buttonContainer, {
-                  top: Dimensions.get("window").height * -0.58 -50.8,
-                  left: Dimensions.get("window").height * -0.575 -1.3,
-                },
-              ]}>
+              <View
+                style={[
+                  styles.buttonContainer,
+                  {
+                    top: Dimensions.get("window").height * -0.58 - 50.8,
+                    left: Dimensions.get("window").height * -0.575 - 1.3,
+                  },
+                ]}
+              >
                 <Image source={TaskPicture} style={styles.buttonImageStyle} />
               </View>
             </TouchableOpacity>
@@ -451,15 +458,17 @@ export default function HomeScreen({ navigation }) {
                 },
               ]}
             >
-
-              <View style={[styles.buttonContainer, {
-                  top: Dimensions.get("window").height * -0.50 -50.8,
-                  left: Dimensions.get("window").height * -0.17 -1.3,
-                },
-              ]}>
+              <View
+                style={[
+                  styles.buttonContainer,
+                  {
+                    top: Dimensions.get("window").height * -0.5 - 50.8,
+                    left: Dimensions.get("window").height * -0.17 - 1.3,
+                  },
+                ]}
+              >
                 <Image source={ChorePicture} style={styles.buttonImageStyle} />
               </View>
-
             </TouchableOpacity>
             <TouchableOpacity
               onPress={goToCalendar}
@@ -473,15 +482,20 @@ export default function HomeScreen({ navigation }) {
                 },
               ]}
             >
-
-              <View style={[styles.buttonContainer, {
-                  top: Dimensions.get("window").height * -0.44 -50.8,
-                  left: Dimensions.get("window").height * -0.62 -1.3,
-                },
-              ]}>
-                <Image source={CalendarPicture} style={styles.buttonImageStyle} />
+              <View
+                style={[
+                  styles.buttonContainer,
+                  {
+                    top: Dimensions.get("window").height * -0.44 - 50.8,
+                    left: Dimensions.get("window").height * -0.62 - 1.3,
+                  },
+                ]}
+              >
+                <Image
+                  source={CalendarPicture}
+                  style={styles.buttonImageStyle}
+                />
               </View>
-
             </TouchableOpacity>
             <TouchableOpacity
               onPress={goToGroupSelect}
@@ -495,17 +509,19 @@ export default function HomeScreen({ navigation }) {
                 },
               ]}
             >
-
-              <View style={[styles.buttonContainer, {
-                  top: Dimensions.get("window").height * -0.372 -50.8,
-                  left: Dimensions.get("window").height * -0.512 -1.3,
-                },
-              ]}>
+              <View
+                style={[
+                  styles.buttonContainer,
+                  {
+                    top: Dimensions.get("window").height * -0.372 - 50.8,
+                    left: Dimensions.get("window").height * -0.512 - 1.3,
+                  },
+                ]}
+              >
                 <Image source={GroupPicture} style={styles.buttonImageStyle} />
               </View>
-
             </TouchableOpacity>
-            <Image source={dog1Gif} style={styles.mascotStyle} />
+            {dogImage && <Image source={dog1Gif} style={styles.mascotStyle} />}
           </View>
         </ScrollView>
       </ScrollView>
@@ -590,7 +606,7 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   CardboardButton: {
-    // backgroundColor: "#FFF",
+    //backgroundColor: "#FFF",
     justifyContent: "center",
     marginLeft: "60%",
   },
