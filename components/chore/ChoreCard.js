@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     fontSize: 18,
     color: "#6F6F6F",
-    fontWeight: "bold",
+    fontFamily: 'MontserratBold',
   },
   chorebasictxt:{
     fontSize: 15,  

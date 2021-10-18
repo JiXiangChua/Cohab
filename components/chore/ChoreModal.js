@@ -403,13 +403,13 @@ const styles = StyleSheet.create({
 
   optionButtonText: {
     color: "#2196F3",
-    fontWeight: "bold",
+    fontFamily: 'MontserratBold',
     textAlign: "center",
   },
 
   textStyle: {
     color: "white",
-    fontWeight: "bold",
+    fontFamily: 'MontserratBold',
     textAlign: "center",
   },
 });
