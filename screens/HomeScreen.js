@@ -26,13 +26,14 @@ import PiggyBankLogo from "../assets/Home-assets/piggybankrender.png";
 
 // import CustomizeFurniture from "./CustomizeFurniture";
 
-// import RoomPicture from "../assets/Home-assets/roomdraft.png";
-// import BankPicture from "../assets/Home-assets/pigdraft.png";
-// import ChorePicture from "../assets/Home-assets/washingmachinedraft.png";
-// import GroupPicture from "../assets/Home-assets/doordraft.png";
-// import TaskPicture from "../assets/Home-assets/boarddraft.png";
-// import CalendarPicture from "../assets/Home-assets/cardboard.png";
-// import CloudGif from "../assets/Home-assets/clouds.gif";
+import TreePicture from "../assets/Home-assets/background.png";
+import RoomPicture from "../assets/Home-assets/roomPicture.png";
+import BankPicture from "../assets/Home-assets/piggybank.png";
+import ChorePicture from "../assets/Home-assets/washingmachine.png";
+import GroupPicture from "../assets/Home-assets/door.png";
+import TaskPicture from "../assets/Home-assets/taskboard.png";
+import CalendarPicture from "../assets/Home-assets/calendar.png";
+import dog1Gif from "../assets/Home-assets/dog1.gif";
 
 export default function HomeScreen({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -388,83 +389,123 @@ export default function HomeScreen({ navigation }) {
       <View style={styles.header}>
         <BasicText style={{ color: "#E16363", fontSize: 30 }}>Hall</BasicText>
       </View>
-      <View style={styles.backgroundAnimContainer}>
-        <Image style={styles.backgroundAnim} />
-      </View>
+      
       <ScrollView style={styles.scrollView} horizontal={true}>
         <ScrollView style={styles.scrollView}>
           <View style={styles.roomContainer}>
-            <Image style={styles.roomStyle} />
+            <Image source={TreePicture} style={styles.backgroundStyle} />
+            <Image source={RoomPicture} style={styles.roomStyle} />
+
             <TouchableOpacity
               onPress={goToFinance}
               style={[
-                styles.buttonContainer,
+                styles.buttonStyle,
                 {
-                  top: "57%",
-                  left: "42%",
-                  width: "4%",
-                  height: "4%",
+                  top: "60%",
+                  left: "45.5%",
+                  width: "11.8%",
+                  height: "9%",
                 },
               ]}
             >
-              <Image style={styles.buttonStyle} />
+              <View style={[styles.buttonContainer, {
+                  top: Dimensions.get("window").height * -0.60 -50.4,
+                  left: Dimensions.get("window").height * -0.455 -0.7,
+                },
+              ]}>
+                <Image source={BankPicture} style={styles.buttonImageStyle} />
+              </View>
+
             </TouchableOpacity>
             <TouchableOpacity
               onPress={goToTask}
               style={[
-                styles.buttonContainer,
+                styles.buttonStyle,
                 {
-                  top: "48%",
-                  left: "57%",
-                  width: "8%",
-                  height: "8%",
+                  top: "58%",
+                  left: "57.5%",
+                  width: "6.5%",
+                  height: "9%",
                 },
               ]}
             >
-              <Image style={styles.buttonStyle} />
+
+              <View style={[styles.buttonContainer, {
+                  top: Dimensions.get("window").height * -0.58 -50.8,
+                  left: Dimensions.get("window").height * -0.575 -1.3,
+                },
+              ]}>
+                <Image source={TaskPicture} style={styles.buttonImageStyle} />
+              </View>
             </TouchableOpacity>
+
             <TouchableOpacity
               onPress={goToChore}
               style={[
-                styles.buttonContainer,
+                styles.buttonStyle,
                 {
-                  top: "48%",
-                  left: "22%",
-                  width: "12%",
-                  height: "12%",
+                  top: "50%",
+                  left: "17%",
+                  width: "14%",
+                  height: "14%",
                 },
               ]}
             >
-              <Image style={styles.buttonStyle} />
+
+              <View style={[styles.buttonContainer, {
+                  top: Dimensions.get("window").height * -0.50 -50.8,
+                  left: Dimensions.get("window").height * -0.17 -1.3,
+                },
+              ]}>
+                <Image source={ChorePicture} style={styles.buttonImageStyle} />
+              </View>
+
             </TouchableOpacity>
             <TouchableOpacity
               onPress={goToCalendar}
               style={[
-                styles.buttonContainer,
+                styles.buttonStyle,
                 {
-                  top: "48%",
-                  left: "37%",
-                  width: "6%",
-                  height: "6%",
+                  top: "44%",
+                  left: "62%",
+                  width: "9%",
+                  height: "11%",
                 },
               ]}
             >
-              <Image style={styles.buttonStyle} />
+
+              <View style={[styles.buttonContainer, {
+                  top: Dimensions.get("window").height * -0.44 -50.8,
+                  left: Dimensions.get("window").height * -0.62 -1.3,
+                },
+              ]}>
+                <Image source={CalendarPicture} style={styles.buttonImageStyle} />
+              </View>
+
             </TouchableOpacity>
             <TouchableOpacity
               onPress={goToGroupSelect}
               style={[
-                styles.buttonContainer,
+                styles.buttonStyle,
                 {
-                  top: "36.9%",
-                  left: "50.7%",
+                  top: "37.2%",
+                  left: "51.2%",
                   width: "10%",
-                  height: "10%",
+                  height: "19%",
                 },
               ]}
             >
-              <Image style={styles.buttonStyle} />
+
+              <View style={[styles.buttonContainer, {
+                  top: Dimensions.get("window").height * -0.372 -50.8,
+                  left: Dimensions.get("window").height * -0.512 -1.3,
+                },
+              ]}>
+                <Image source={GroupPicture} style={styles.buttonImageStyle} />
+              </View>
+
             </TouchableOpacity>
+            <Image source={dog1Gif} style={styles.mascotStyle} />
           </View>
         </ScrollView>
       </ScrollView>
@@ -497,7 +538,7 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   scrollView: {
-    zIndex: 1,
+    zIndex: 0,
   },
   roomContainer: {
     height: Dimensions.get("window").height * 1,
@@ -505,23 +546,44 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  buttonContainer: {
-    position: "absolute",
-    justifyContent: "center",
-    alignItems: "center",
-    zIndex: 3,
-    backgroundColor: "black",
-  },
   roomStyle: {
     resizeMode: "contain",
     height: "120%",
     width: "120%",
     zIndex: 2,
+    marginBottom: 100,
+  },
+  backgroundStyle: {
+    position: "absolute",
+    top: "-15%",
+    resizeMode: "cover",
+    height: "120%",
+    width: "120%",
+    zIndex: 1,
   },
   buttonStyle: {
+    position: "absolute",
+    zIndex: 3,
+  },
+  buttonContainer: {
+    position: "absolute",
+    height: Dimensions.get("window").height * 1,
+    width: Dimensions.get("window").height * 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttonImageStyle: {
     resizeMode: "contain",
-    height: "200%",
-    width: "200%",
+    height: "120%",
+    width: "120%",
+  },
+  mascotStyle: {
+    position: "absolute",
+    height: "11%",
+    width: "11%",
+    top: "59%",
+    left: "37%",
+    zIndex: 3,
   },
   text: {
     fontSize: 42,
