@@ -87,15 +87,19 @@ export default function TaskCard(props) {
 const styles = StyleSheet.create({
   card: {
     backgroundColor: "white",
-    borderRadius: 6,
+    borderRadius: 10,
     paddingVertical: 20,
     paddingHorizontal: 25,
     width: "105%",
     marginVertical: 10,
-    shadowColor: "#171717",
-    shadowOffset: { width: -2, height: 4 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 6,
+    },
+    shadowOpacity: 0.37,
+    shadowRadius: 7.49,
+    elevation: 12,
   },
   cardDisplayColumnFormat: {
     flexDirection: "column",

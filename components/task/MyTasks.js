@@ -104,9 +104,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   newTaskButton: {
-    minWidth: 30,
-    minHeight: 30,
-    resizeMode: "center",
+    width: 30,
+    height: 30,
+    marginLeft: 10,
+    // resizeMode: "center",
   },
   tasksContainer: {
     width: "100%",

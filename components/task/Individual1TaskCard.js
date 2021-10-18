@@ -108,10 +108,14 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   shadowProp: {
-    shadowColor: "#171717",
-    shadowOffset: { width: -2, height: 4 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 6,
+    },
+    shadowOpacity: 0.37,
+    shadowRadius: 7.49,
+    elevation: 12,
   },
   cardDisplayColumnFormat: {
     flexDirection: "column",

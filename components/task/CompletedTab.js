@@ -41,7 +41,7 @@ export default function CompletedTab({ visible }) {
 const styles = StyleSheet.create({
   backgroundContainer: {
     width: "100%",
-    backgroundColor: "white",
+    backgroundColor: "#FFFAF2",
     borderRadius: 8,
     alignItems: "center",
   },

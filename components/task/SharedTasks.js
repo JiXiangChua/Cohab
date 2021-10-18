@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   currentTab: {
-    backgroundColor: "white",
+    backgroundColor: "#FFFAF2",
     borderTopLeftRadius: 6,
     borderTopRightRadius: 6,
   },
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
   },
   backgroundContainer: {
     width: "105%",
-    backgroundColor: "white",
+    backgroundColor: "#FFFAF2",
     borderRadius: 8,
     alignItems: "center",
   },
