@@ -145,6 +145,7 @@ export default function HomeScreen({ navigation }) {
 
     function renderOverviewModal() {
       console.log(itemID);
+      console.log(furniture);
       if (overviewModal == true && itemID > 0) {
         return (
           <View style={{ width: "100%" }}>
