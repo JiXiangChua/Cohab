@@ -15,7 +15,7 @@ import BorderColorButton from "../BorderColorButton";
 import BasicText from "../BasicText.js";
 import { Picker } from "@react-native-picker/picker";
 
-export default function TaskModal({ modalVisible, setModalVisible }) {
+export default function RestoreTask({ restoreVisible, setRestoreVisible }) {
   // Values needed for Add Task Screen Popup (Modal)
   var repeatOptions = ["Fixed Deadline", "Set Own Deadline"];
   var displayRepeatOptions = [];
@@ -38,54 +38,16 @@ export default function TaskModal({ modalVisible, setModalVisible }) {
     <Modal
       animationType="fade"
       transparent={true}
-      visible={modalVisible}
+      visible={restoreVisible}
       onRequestClose={() => {
-        setModalVisible(!modalVisible);
+        setRestoreVisible(!restoreVisible);
       }}
     >
-      {/*Rest of screen will darken*/}
-      <View style={{ backgroundColor: "#000000aa", flex: 1 }}>
-        {/*Pop up screen will show*/}
-        <View
-          style={{
-            backgroundColor: "#ffffff",
-            margin: 30,
-            padding: 30,
-            borderRadius: 10,
-          }}
-        >
-          {/*Type in Task name*/}
-          <TextInput
-            style={{ borderBottomWidth: 0.5, width: "50%" }}
-            placeholder="Task Title"
-          />
-          {/*Type in Task description*/}
-          <TextInput
-            style={{
-              paddingTop: 20,
-              height: 200,
-              borderBottomWidth: 0.5,
-              textAlignVertical: "top",
-            }}
-            placeholder="Description"
-          />
+      <View style={styles.centeredView}>
+        <View style={styles.modalView}>
+          <BasicText style={styles.modalText}>Restore the task</BasicText>
+          <BasicText style={styles.modalText}>"Install Shelves"?</BasicText>
 
-          <BasicText style={{ paddingTop: 30 }}>Choose Deadline: </BasicText>
-          <View
-            style={{
-              paddingTop: 10,
-              paddingBottom: 20,
-              flexDirection: "row",
-              marginHorizontal: 10,
-              justifyContent: "space-around",
-            }}
-          >
-            {displayRepeatOptions}
-          </View>
-
-          <BasicText style={{ paddingTop: 30, paddingBottom: 10 }}>
-            Choose a Date:{" "}
-          </BasicText>
           <View
             style={{
               flexDirection: "column",
@@ -191,17 +153,10 @@ export default function TaskModal({ modalVisible, setModalVisible }) {
               <View
                 style={{
                   flexDirection: "row",
-                  paddingTop: 80,
+                  paddingTop: 10,
                   paddingBottom: 20,
                 }}
-              >
-                <CheckBox
-                  value={isSelected}
-                  onValueChange={setSelection}
-                  style={styles.checkbox}
-                />
-                <Text style={{}}>I will do it!</Text>
-              </View>
+              ></View>
             </View>
           </View>
 
@@ -210,15 +165,15 @@ export default function TaskModal({ modalVisible, setModalVisible }) {
               <BorderColorButton
                 buttonText={"Cancel"}
                 color={"#7B98FF"}
-                onPress={() => setModalVisible(!modalVisible)}
+                onPress={() => setRestoreVisible(!restoreVisible)}
               />
             </View>
 
             <View style={{ marginTop: 10 }}>
               <GeneralButton
-                buttonText={"Add Entry"}
+                buttonText={"Restore"}
                 color={"#36BC7C"}
-                onPress={() => setModalVisible(!modalVisible)}
+                onPress={() => setRestoreVisible(!restoreVisible)}
               />
             </View>
           </View>
@@ -229,6 +184,11 @@ export default function TaskModal({ modalVisible, setModalVisible }) {
 }
 
 const styles = StyleSheet.create({
+  centered: {
+    paddingTop: 10,
+    textAlign: "center",
+  },
+
   card: {
     backgroundColor: "white",
     borderRadius: 10,
@@ -286,5 +246,35 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "bold",
     textAlign: "center",
+  },
+
+  modalView: {
+    margin: 30,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+
+  modalText: {
+    marginBottom: 10,
+    textAlign: "center",
+    fontSize: 18,
+  },
+
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+    backgroundColor: "#000000aa",
   },
 });
