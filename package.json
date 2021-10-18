@@ -30,8 +30,7 @@
     "react-native-svg": "^12.1.1",
     "react-native-swipe-gestures": "^1.0.5",
     "react-native-web": "~0.13.12",
-    "victory-native": "^35.5.5",
-    "undefined": "..."
+    "victory-native": "^35.5.5"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"
