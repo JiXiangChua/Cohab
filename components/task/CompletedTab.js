@@ -26,7 +26,7 @@ export default function CompletedTab({ visible }) {
           name="Install shelves"
           description="package in the living room"
           deadline="Completed:3 Aug"
-          date_created="Created"
+          date_created="Claimed:"
         ></CompletedTaskCard>
       </View>
 

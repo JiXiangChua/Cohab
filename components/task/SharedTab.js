@@ -17,7 +17,7 @@ export default function SharedTab({ visible }) {
             name="Clean the sheets      "
             description="sweat stains everywheree"
             deadline="Overdue:16 Aug"
-            date_created="Created:"
+            date_created="Claimed:"
           ></MissedTaskCard>
         </View>
 
@@ -26,13 +26,13 @@ export default function SharedTab({ visible }) {
           name="Mop the floor"
           description="guests coming over this weekend"
           deadline="Deadline:20 Aug"
-          date_created="Created"
+          date_created="Claimed:"
         ></SharedTaskCard>
         <SharedTaskCard
           name="Go ntuc buy toilet paper    "
           description="we ran out :0"
           deadline="Deadline:25 Aug"
-          date_created="Created"
+          date_created="Claimed:"
         ></SharedTaskCard>
       </View>
     </View>

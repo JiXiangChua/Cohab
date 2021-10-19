@@ -14,7 +14,7 @@ export default function Individual1Tab({ visible }) {
           name="Kitchen Duty"
           description="vacuum the floor"
           deadline="28 Aug"
-          date_created="Created"
+          date_created="Claimed:"
         ></Individual1TaskCard>
       </View>
     </View>
