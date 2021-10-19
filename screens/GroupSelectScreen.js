@@ -7,8 +7,25 @@ import BuildingPicture from "../assets/Building.png";
 import AddButtonLogo from "../assets/Finance-assets/AddButton.png";
 
 export default function GroupSelectScreen({ navigation }) {
+
   function goToHome() {
     navigation.navigate("Home");
+  }
+
+  function handleAddGroup() {
+
+  }
+
+  function handleGroup1() {
+
+  }
+  
+  function handleGroup2() {
+
+  }
+
+  function handleGroup3() {
+
   }
 
   return (
@@ -18,17 +35,10 @@ export default function GroupSelectScreen({ navigation }) {
       <BasicText style={styles.subHeaderText}>
         Where will you be today?
       </BasicText>
-      <View
-        style={{
-          justifyContent: "center",
-          width: "100%",
-          height: "60%",
-          marginTop: 40,
-        }}
-      >
+      <View style={styles.bottomContainer}>
         <Image
           source={BuildingPicture}
-          style={{ width: 440, height: 630, top: -20 }}
+          style={styles.buildingPicture}
         />
         <TouchableOpacity
           style={[
@@ -96,21 +106,30 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   profilePicture: {
-    marginTop: 50,
-    width: 100,
-    height: 100,
+    marginTop: 20,
+    width: 80,
+    height: 80,
     alignSelf: "center",
   },
+  buildingPicture: {
+    height: 400,
+    width: 400,
+    resizeMode: 'contain',
+  },
   headerText: {
-    marginTop: 20,
     fontSize: 40,
     color: "#6E2142",
-    fontWeight: "bold",
+    fontFamily: 'MontserratSemiBold',
   },
   subHeaderText: {
-    marginTop: 5,
     fontSize: 20,
     color: "#6E2142",
+  },
+  bottomContainer: {
+    justifyContent: "center",
+    width: "100%",
+    height: "60%",
+    marginTop: 40,
   },
   groupButton: {
     height: 30,
@@ -125,6 +144,6 @@ const styles = StyleSheet.create({
   },
   groupButtonText: {
     color: "#FFF",
-    fontWeight: "bold",
+    fontFamily: "MontserratBold",
   },
 });
