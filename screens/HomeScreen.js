@@ -37,7 +37,12 @@ import dog1Gif from "../assets/Home-assets/dog1.gif";
 
 export default function HomeScreen({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
-  const [dogImage, setDogImage] = useState(false);
+
+  const [taskBoard, setTaskBoard] = useState(true);
+  const [piggyBank, setPiggyBank] = useState(true);
+  const [washingMachine, setWashingMachine] = useState(true);
+  const [calendar, setCalendar] = useState(true);
+  const [dogImage, setDogImage] = useState(true);
 
   function CustomizeFurniture() {
     const [furnitureModal, setFurnitureModal] = useState(true);
@@ -338,7 +343,7 @@ export default function HomeScreen({ navigation }) {
     }
 
     return (
-      <View>
+      <View style={styles.customizeButton}>
         <TouchableOpacity
           style={styles.CardboardButton}
           onPress={() => setModalVisible(!modalVisible)}
@@ -397,115 +402,126 @@ export default function HomeScreen({ navigation }) {
             <Image source={TreePicture} style={styles.backgroundStyle} />
             <Image source={RoomPicture} style={styles.roomStyle} />
 
-            <TouchableOpacity
-              onPress={goToFinance}
-              style={[
-                styles.buttonStyle,
-                {
-                  top: "60%",
-                  left: "45.5%",
-                  width: "11.8%",
-                  height: "9%",
-                },
-              ]}
-            >
-              <View
+            {piggyBank && (
+              <TouchableOpacity
+                onPress={goToFinance}
                 style={[
-                  styles.buttonContainer,
+                  styles.buttonStyle,
                   {
-                    top: Dimensions.get("window").height * -0.6 - 50.4,
-                    left: Dimensions.get("window").height * -0.455 - 0.7,
+                    top: Dimensions.get("window").height * 0.75 + 75,
+                    left: Dimensions.get("window").height * 0.75 - 30,
+                    width: Dimensions.get("window").height * 0.11,
+                    height: Dimensions.get("window").height * 0.08,
                   },
                 ]}
               >
-                <Image source={BankPicture} style={styles.buttonImageStyle} />
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={goToTask}
-              style={[
-                styles.buttonStyle,
-                {
-                  top: "58%",
-                  left: "57.5%",
-                  width: "6.5%",
-                  height: "9%",
-                },
-              ]}
-            >
-              <View
+                <View
+                  style={[
+                    styles.buttonContainer,
+                    {
+                      top: Dimensions.get("window").height * -0.75 - 126,
+                      left: Dimensions.get("window").height * -0.75 + 30,
+                    },
+                  ]}
+                >
+                  <Image source={BankPicture} style={styles.buttonImageStyle} />
+                </View>
+              </TouchableOpacity>
+            )}
+            {taskBoard && (
+              <TouchableOpacity
+                onPress={goToTask}
                 style={[
-                  styles.buttonContainer,
+                  styles.buttonStyle,
                   {
-                    top: Dimensions.get("window").height * -0.58 - 50.8,
-                    left: Dimensions.get("window").height * -0.575 - 1.3,
+                    top: Dimensions.get("window").height * 0.75 + 60,
+                    left: Dimensions.get("window").height * 0.75 + 50,
+                    width: Dimensions.get("window").height * 0.08,
+                    height: Dimensions.get("window").height * 0.09,
                   },
                 ]}
               >
-                <Image source={TaskPicture} style={styles.buttonImageStyle} />
-              </View>
-            </TouchableOpacity>
+                <View
+                  style={[
+                    styles.buttonContainer,
+                    {
+                      top: Dimensions.get("window").height * -0.75 - 111,
+                      left: Dimensions.get("window").height * -0.75 - 50,
+                    },
+                  ]}
+                >
+                  <Image source={TaskPicture} style={styles.buttonImageStyle} />
+                </View>
+              </TouchableOpacity>
+            )}
+            {washingMachine && (
+              <TouchableOpacity
+                onPress={goToChore}
+                style={[
+                  styles.buttonStyle,
+                  {
+                    top: Dimensions.get("window").height * 0.75 + 5,
+                    left: Dimensions.get("window").height * 0.75 - 222,
+                    width: Dimensions.get("window").height * 0.1,
+                    height: Dimensions.get("window").height * 0.13,
+                  },
+                ]}
+              >
+                <View
+                  style={[
+                    styles.buttonContainer,
+                    {
+                      top: Dimensions.get("window").height * -0.75 - 56,
+                      left: Dimensions.get("window").height * -0.75 + 222,
+                    },
+                  ]}
+                >
+                  <Image
+                    source={ChorePicture}
+                    style={styles.buttonImageStyle}
+                  />
+                </View>
+              </TouchableOpacity>
+            )}
+            {calendar && (
+              <TouchableOpacity
+                onPress={goToCalendar}
+                style={[
+                  styles.buttonStyle,
+                  {
+                    top: Dimensions.get("window").height * 0.75 - 45,
+                    left: Dimensions.get("window").height * 0.75 + 90,
+                    width: Dimensions.get("window").height * 0.08,
+                    height: Dimensions.get("window").height * 0.11,
+                  },
+                ]}
+              >
+                <View
+                  style={[
+                    styles.buttonContainer,
+                    {
+                      top: Dimensions.get("window").height * -0.75 - 6,
+                      left: Dimensions.get("window").height * -0.75 - 90,
+                    },
+                  ]}
+                >
+                  <Image
+                    source={CalendarPicture}
+                    style={styles.buttonImageStyle}
+                  />
+                </View>
+              </TouchableOpacity>
+            )}
 
-            <TouchableOpacity
-              onPress={goToChore}
-              style={[
-                styles.buttonStyle,
-                {
-                  top: "50%",
-                  left: "17%",
-                  width: "14%",
-                  height: "14%",
-                },
-              ]}
-            >
-              <View
-                style={[
-                  styles.buttonContainer,
-                  {
-                    top: Dimensions.get("window").height * -0.5 - 50.8,
-                    left: Dimensions.get("window").height * -0.17 - 1.3,
-                  },
-                ]}
-              >
-                <Image source={ChorePicture} style={styles.buttonImageStyle} />
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={goToCalendar}
-              style={[
-                styles.buttonStyle,
-                {
-                  top: "44%",
-                  left: "62%",
-                  width: "9%",
-                  height: "11%",
-                },
-              ]}
-            >
-              <View
-                style={[
-                  styles.buttonContainer,
-                  {
-                    top: Dimensions.get("window").height * -0.44 - 50.8,
-                    left: Dimensions.get("window").height * -0.62 - 1.3,
-                  },
-                ]}
-              >
-                <Image
-                  source={CalendarPicture}
-                  style={styles.buttonImageStyle}
-                />
-              </View>
-            </TouchableOpacity>
             <TouchableOpacity
               onPress={goToGroupSelect}
               style={[
                 styles.buttonStyle,
                 {
-                  top: "37.2%",
-                  left: "51.2%",
-                  width: "10%",
-                  height: "19%",
+                  top: Dimensions.get("window").height * 0.75 - 95,
+                  left: Dimensions.get("window").height * 0.75 + 10,
+                  width: Dimensions.get("window").height * 0.1,
+                  height: Dimensions.get("window").height * 0.19,
                 },
               ]}
             >
@@ -513,14 +529,15 @@ export default function HomeScreen({ navigation }) {
                 style={[
                   styles.buttonContainer,
                   {
-                    top: Dimensions.get("window").height * -0.372 - 50.8,
-                    left: Dimensions.get("window").height * -0.512 - 1.3,
+                    top: Dimensions.get("window").height * -0.75 + 44,
+                    left: Dimensions.get("window").height * -0.75 - 10,
                   },
                 ]}
               >
                 <Image source={GroupPicture} style={styles.buttonImageStyle} />
               </View>
             </TouchableOpacity>
+
             {dogImage && <Image source={dog1Gif} style={styles.mascotStyle} />}
           </View>
         </ScrollView>
@@ -557,24 +574,23 @@ const styles = StyleSheet.create({
     zIndex: 0,
   },
   roomContainer: {
-    height: Dimensions.get("window").height * 1,
-    width: Dimensions.get("window").height * 1,
+    height: Dimensions.get("window").height * 1.5,
+    width: Dimensions.get("window").height * 1.5,
     justifyContent: "center",
     alignItems: "center",
   },
   roomStyle: {
     resizeMode: "contain",
-    height: "120%",
-    width: "120%",
+    height: "80%",
+    width: "80%",
     zIndex: 2,
     marginBottom: 100,
   },
   backgroundStyle: {
     position: "absolute",
-    top: "-15%",
-    resizeMode: "cover",
-    height: "120%",
-    width: "120%",
+    resizeMode: "contain",
+    height: "100%",
+    width: "100%",
     zIndex: 1,
   },
   buttonStyle: {
@@ -583,27 +599,32 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     position: "absolute",
-    height: Dimensions.get("window").height * 1,
-    width: Dimensions.get("window").height * 1,
+    height: Dimensions.get("window").height * 1.5,
+    width: Dimensions.get("window").height * 1.5,
     justifyContent: "center",
     alignItems: "center",
   },
   buttonImageStyle: {
     resizeMode: "contain",
-    height: "120%",
-    width: "120%",
+    height: "80%",
+    width: "80%",
   },
   mascotStyle: {
     position: "absolute",
-    height: "11%",
-    width: "11%",
-    top: "59%",
-    left: "37%",
+    height: "6.8%",
+    width: "6.8%",
+    top: Dimensions.get("window").height * 0.75 + 68,
+    left: Dimensions.get("window").height * 0.75 - 90,
     zIndex: 3,
   },
   text: {
     fontSize: 42,
     zIndex: 1,
+  },
+  customizeButton: {
+    position: "absolute",
+    bottom: 20,
+    zIndex: 2,
   },
   CardboardButton: {
     //backgroundColor: "#FFF",
