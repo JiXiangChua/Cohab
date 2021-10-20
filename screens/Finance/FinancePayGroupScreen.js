@@ -24,6 +24,9 @@ export default function FinancePayGroupScreen({ navigation }) {
     {
       name: "Thomas",
     },
+    {
+      name: "Claudia",
+    },
   ]);
 
   const [openDropDown, setOpenDropDown] = useState(false);
@@ -82,13 +85,13 @@ export default function FinancePayGroupScreen({ navigation }) {
 
       {/* Write your code here */}
       <BasicText style={{ color: "#943855", fontSize: 40, paddingLeft: 20 }}>
-        Group Split Payment
+        Group Split
       </BasicText>
       <View>
         <ScrollView
           contentContainerStyle={{
             height: 250,
-            marginBottom: 10,
+            marginBottom: 30,
           }}
         >
           {roommateName.map((roommate, index) => {
@@ -101,12 +104,21 @@ export default function FinancePayGroupScreen({ navigation }) {
                     alignSelf: "center",
                   },
                   selectedState[index]
-                    ? { backgroundColor: "green" }
+                    ? { backgroundColor: "#943855" }
                     : { backgroundColor: "white" },
                 ]}
                 onPress={() => selectedButton(index)}
               >
-                <BasicText>{roommate.name}</BasicText>
+                <BasicText
+                  style={[
+                    { fontSize: 18 },
+                    selectedState[index]
+                      ? { color: "#FFF" }
+                      : { color: "#000" },
+                  ]}
+                >
+                  {roommate.name}
+                </BasicText>
               </TouchableOpacity>
             );
           })}
@@ -196,6 +208,7 @@ const styles = StyleSheet.create({
     width: "90%",
     marginVertical: 10,
     borderWidth: 0.1,
+    height: 70,
   },
   shadowProp: {
     shadowColor: "#171717",

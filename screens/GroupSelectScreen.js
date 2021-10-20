@@ -7,9 +7,39 @@ import BuildingPicture from "../assets/Building.png";
 import AddButtonLogo from "../assets/Finance-assets/AddButton.png";
 
 export default function GroupSelectScreen({ navigation }) {
+  function getData() {
+    const URL =
+      "http://46f2-111-65-44-111.ngrok.io/cohab/getGroupsByUser?userId=18";
+
+    // const loginPackage = {
+    //   email: email,
+    //   password: password,
+    // };
+
+    // const init = {
+    //   method: "POST",
+    //   headers: {
+    //     Accept: "application/json",
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(loginPackage),
+    // };
+
+    async () => {
+      try {
+        const response = await fetch(URL);
+        const json = await response.json();
+        console.log(json);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  }
+
   function goToHome() {
     navigation.navigate("Home");
   }
+  getData();
 
   return (
     <SafeAreaView style={styles.backgroundContainer}>
