@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFAF2",
     borderRadius: 8,
     alignItems: "center",
+    paddingVertical: 12,
   },
   taskCardContainer: {
     width: "90%",

@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 6,
   },
   individual1: {
-    minHeight: 20,
+    height: 50,
     padding: 10,
     alignItems: "center",
     flexDirection: "row",

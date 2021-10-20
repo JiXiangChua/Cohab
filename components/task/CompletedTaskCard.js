@@ -24,7 +24,7 @@ export default function CompletedTaskCard(props) {
 
   return (
     <View
-      style={[styles.card, styles.shadowProp, { justifyContent: "center" }]}
+      style={[styles.card, styles.shadowProp2, { justifyContent: "center" }]}
     >
       <View style={{ flexDirection: "row" }}>
         {/* Column for Name, Description & Claim me */}
@@ -96,6 +96,16 @@ const styles = StyleSheet.create({
     shadowRadius: 7.49,
     elevation: 12,
   },
+  shadowProp2: {
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 6,
+    },
+    shadowOpacity: 0.37,
+    shadowRadius: 7.49,
+    elevation: 4,
+  },
   cardDisplayColumnFormat: {
     flexDirection: "column",
     justifyContent: "flex-end",
@@ -110,7 +120,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
     fontSize: 14,
     color: "#36BC7C",
-    marginBottom: 35,
+    marginBottom: 30,
   },
   reviveButton: {
     backgroundColor: "#36BC7C",
