@@ -23,6 +23,25 @@ import WashingMachineLogo from "../assets/Home-assets/washingmachinerender.png";
 import CalendarLogo from "../assets/Home-assets/calendarrender.png";
 import TaskBoardLogo from "../assets/Home-assets/taskboardrender.png";
 import PiggyBankLogo from "../assets/Home-assets/piggybankrender.png";
+import BeansLogo from "../assets/Home-assets/beans.png";
+import BigPlants1Logo from "../assets/Home-assets/bigplants1.png";
+import BigPlants2Logo from "../assets/Home-assets/bigplants2.png";
+import CoffeeMachineLogo from "../assets/Home-assets/coffeemachine.png";
+import CoffeeTableLogo from "../assets/Home-assets/coffeetable.png";
+import DoorMatLogo from "../assets/Home-assets/doormat.png";
+import KitchenCounterLogo from "../assets/Home-assets/kitchencounter.png";
+import KitchenSetLogo from "../assets/Home-assets/kitchenset.png";
+import MediumPlantsLogo from "../assets/Home-assets/mediumplants.png";
+import Painting1Logo from "../assets/Home-assets/painting1.png";
+import Painting2Logo from "../assets/Home-assets/painting2.png";
+import PetBowlsLogo from "../assets/Home-assets/petbowls.png";
+import RefrigeratorLogo from "../assets/Home-assets/refrigerator.png";
+import RugLogo from "../assets/Home-assets/rug.png";
+import ShelfLogo from "../assets/Home-assets/shelf.png";
+import ShoeRackLogo from "../assets/Home-assets/shoerack.png";
+import SmallPlantsLogo from "../assets/Home-assets/smallplants.png";
+import SofaLogo from "../assets/Home-assets/sofa.png";
+import TVSetLogo from "../assets/Home-assets/tvset.png";
 
 // import CustomizeFurniture from "./CustomizeFurniture";
 
@@ -99,7 +118,7 @@ export default function HomeScreen({ navigation }) {
     },
     {
       name: "Calendar",
-      Description: "This is a Calandar",
+      Description: "This is a Calendar",
     },
   ];
 
@@ -137,7 +156,7 @@ export default function HomeScreen({ navigation }) {
                 >
                   <Image
                     source={item.image}
-                    style={{ width: "100%", height: "120%" }}
+                    style={{ width: "100%", height: "100%" }}
                     resizeMode="contain"
                   ></Image>
                 </TouchableOpacity>
@@ -403,6 +422,158 @@ export default function HomeScreen({ navigation }) {
         description:
           "Planning a huge party and need your housemate(s)’ approval? Send a polite request here!",
       },
+      {
+        id: 5,
+        name: "TV set",
+        image: TVSetLogo,
+        functionName: "None",
+        description:
+          "Planning a huge party and need your housemate(s)’ approval? Send a polite request here!",
+      },
+      {
+        id: 6,
+        name: "Sofa",
+        image: SofaLogo,
+        functionName: "None",
+        description:
+          "Planning a huge party and need your housemate(s)’ approval? Send a polite request here!",
+      },
+      {
+        id: 7,
+        name: "Coffee Table",
+        image: CoffeeTableLogo,
+        functionName: "None",
+        description:
+          "Planning a huge party and need your housemate(s)’ approval? Send a polite request here!",
+      },
+      {
+        id: 8,
+        name: "Beans",
+        image: BeansLogo,
+        functionName: "None",
+        description:
+          "Planning a huge party and need your housemate(s)’ approval? Send a polite request here!",
+      },
+      {
+        id: 9,
+        name: "Kitchen Set",
+        image: KitchenSetLogo,
+        functionName: "None",
+        description:
+          "Planning a huge party and need your housemate(s)’ approval? Send a polite request here!",
+      },
+      {
+        id: 10,
+        name: "Kitchen Counter",
+        image: KitchenCounterLogo,
+        functionName: "None",
+        description:
+          "Planning a huge party and need your housemate(s)’ approval? Send a polite request here!",
+      },
+      {
+        id: 11,
+        name: "Refrigerator",
+        image: RefrigeratorLogo,
+        functionName: "None",
+        description:
+          "Planning a huge party and need your housemate(s)’ approval? Send a polite request here!",
+      },
+      {
+        id: 12,
+        name: "Shoe Rack",
+        image: ShoeRackLogo,
+        functionName: "None",
+        description:
+          "Planning a huge party and need your housemate(s)’ approval? Send a polite request here!",
+      },
+      {
+        id: 13,
+        name: "Shelf",
+        image: ShelfLogo,
+        functionName: "None",
+        description:
+          "Planning a huge party and need your housemate(s)’ approval? Send a polite request here!",
+      },
+      {
+        id: 14,
+        name: "Big Plants 1",
+        image: BigPlants1Logo,
+        functionName: "None",
+        description:
+          "Planning a huge party and need your housemate(s)’ approval? Send a polite request here!",
+      },
+      {
+        id: 15,
+        name: "Big Plants 2",
+        image: BigPlants2Logo,
+        functionName: "None",
+        description:
+          "Planning a huge party and need your housemate(s)’ approval? Send a polite request here!",
+      },
+      {
+        id: 16,
+        name: "Medium Plants",
+        image: MediumPlantsLogo,
+        functionName: "None",
+        description:
+          "Planning a huge party and need your housemate(s)’ approval? Send a polite request here!",
+      },
+      {
+        id: 17,
+        name: "Small Plants",
+        image: SmallPlantsLogo,
+        functionName: "None",
+        description:
+          "Planning a huge party and need your housemate(s)’ approval? Send a polite request here!",
+      },
+      {
+        id: 18,
+        name: "Pet Bowls",
+        image: PetBowlsLogo,
+        functionName: "None",
+        description:
+          "Planning a huge party and need your housemate(s)’ approval? Send a polite request here!",
+      },
+      {
+        id: 19,
+        name: "Coffee Machine",
+        image: CoffeeMachineLogo,
+        functionName: "None",
+        description:
+          "Planning a huge party and need your housemate(s)’ approval? Send a polite request here!",
+      },
+      {
+        id: 20,
+        name: "Painting 1",
+        image: Painting1Logo,
+        functionName: "None",
+        description:
+          "Planning a huge party and need your housemate(s)’ approval? Send a polite request here!",
+      },
+      {
+        id: 21,
+        name: "Painting 2",
+        image: Painting2Logo,
+        functionName: "None",
+        description:
+          "Planning a huge party and need your housemate(s)’ approval? Send a polite request here!",
+      },
+      {
+        id: 22,
+        name: "Door Mat",
+        image: DoorMatLogo,
+        functionName: "None",
+        description:
+          "Planning a huge party and need your housemate(s)’ approval? Send a polite request here!",
+      },
+      {
+        id: 23,
+        name: "Rug",
+        image: RugLogo,
+        functionName: "None",
+        description:
+          "Planning a huge party and need your housemate(s)’ approval? Send a polite request here!",
+      },
     ]);
 
     const furnitureFunction = [
@@ -420,7 +591,7 @@ export default function HomeScreen({ navigation }) {
       },
       {
         name: "Calendar",
-        Description: "This is a Calandar",
+        Description: "This is a Calendar",
       },
     ];
 
@@ -1053,6 +1224,7 @@ const styles = StyleSheet.create({
     height: 120,
     width: 120,
     margin: 10,
+    // borderWidth: 1,
   },
   functionCardStyle: {
     backgroundColor: "#F8F0DF",
