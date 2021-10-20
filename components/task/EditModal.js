@@ -37,7 +37,7 @@ export default function EditModal(props) {
           <View
             style={{
               flexDirection: "row",
-              marginTop: -20,
+              marginTop: -60,
             }}
           >
             <Picker

@@ -29,7 +29,7 @@ export default function MissedTaskCard(props) {
         </View>
 
         {/* Column for set deadline  */}
-        <View style={[styles.cardDisplayColumnFormat, { marginLeft: 45 }]}>
+        <View style={[styles.cardDisplayColumnFormat, { marginLeft: 40 }]}>
           <Text style={[styles.deadlineText, { marginRight: 10 }]}>
             {props.deadline}
           </Text>
@@ -58,10 +58,14 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   shadowProp: {
-    shadowColor: "#171717",
-    shadowOffset: { width: -2, height: 4 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 6,
+    },
+    shadowOpacity: 0.37,
+    shadowRadius: 7.49,
+    elevation: 4,
   },
   cardDisplayColumnFormat: {
     flexDirection: "column",
@@ -83,7 +87,7 @@ const styles = StyleSheet.create({
     marginLeft: -15,
     minWidth: 50,
     minHeight: 50,
-    marginTop: -20,
+    marginTop: -15,
     alignSelf: "center",
   },
 });

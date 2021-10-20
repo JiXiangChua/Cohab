@@ -108,10 +108,14 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   shadowProp: {
-    shadowColor: "#171717",
-    shadowOffset: { width: -2, height: 4 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 6,
+    },
+    shadowOpacity: 0.37,
+    shadowRadius: 7.49,
+    elevation: 4,
   },
   cardDisplayColumnFormat: {
     flexDirection: "column",
@@ -119,7 +123,7 @@ const styles = StyleSheet.create({
   },
   cardText: {
     alignSelf: "flex-start",
-    marginRight: 20,
+    marginRight: 15,
     fontSize: 18,
   },
   setText: {
@@ -157,7 +161,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   profileImage: {
-    marginLeft: -5,
+    marginLeft: -10,
     minWidth: 15,
     minHeight: 15,
     marginTop: -15,
