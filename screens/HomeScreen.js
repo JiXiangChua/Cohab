@@ -831,10 +831,12 @@ export default function HomeScreen({ navigation }) {
                 style={[
                   styles.buttonStyle,
                   {
-                    top: Dimensions.get("window").height * 0.75 + 5,
-                    left: Dimensions.get("window").height * 0.75 - 222,
-                    width: Dimensions.get("window").height * 0.1,
-                    height: Dimensions.get("window").height * 0.13,
+                    width: 450,
+                    height: 0,
+                    // top: Dimensions.get("window").height * 0.75 + 5,
+                    // left: Dimensions.get("window").height * 0.75 - 222,
+                    // width: Dimensions.get("window").height * 0.1,
+                    // height: Dimensions.get("window").height * 0.13,
                   },
                 ]}
                 onLongPress={() => {
