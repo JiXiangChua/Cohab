@@ -16,6 +16,10 @@ export default function GroupSelectScreen({ navigation }) {
 
   }
 
+  function handleJoinGroup() {
+
+  }
+  
   function handleGroup1() {
 
   }
@@ -36,10 +40,7 @@ export default function GroupSelectScreen({ navigation }) {
         Where will you be today?
       </BasicText>
       <View style={styles.bottomContainer}>
-        <Image
-          source={BuildingPicture}
-          style={styles.buildingPicture}
-        />
+        <Image source={BuildingPicture} style={styles.buildingPicture} />
         <TouchableOpacity
           style={[
             styles.groupButton,
@@ -83,18 +84,16 @@ export default function GroupSelectScreen({ navigation }) {
           <BasicText style={styles.groupButtonText}>Friends</BasicText>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity style={[styles.groupButton, { flexDirection: "row" }]}>
-        <Image
-          source={AddButtonLogo}
-          style={{
-            width: 20,
-            height: 20,
-            marginRight: 10,
-            alignSelf: "center",
-          }}
-        />
-        <BasicText style={[styles.subHeaderText]}>Add Group</BasicText>
-      </TouchableOpacity>
+      <View style = {styles.bottomButtonsContainer}>
+        <TouchableOpacity style={[styles.groupButton , styles.bottomButton]} onPress = {handleAddGroup}>
+          <Image source = {AddButtonLogo} style = {styles.buttonLogo} />
+          <BasicText style = {[styles.subHeaderText]}>Add Group</BasicText>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.groupButton , styles.bottomButton]} onPress = {handleJoinGroup}>
+          <Image source = {AddButtonLogo} style = {styles.buttonLogo} />
+          <BasicText style = {[styles.subHeaderText]}>Join Group</BasicText>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 }
@@ -112,8 +111,8 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   buildingPicture: {
-    height: 400,
-    width: 400,
+    height: 650,
+    width: 410,
     resizeMode: 'contain',
   },
   headerText: {
@@ -146,4 +145,21 @@ const styles = StyleSheet.create({
     color: "#FFF",
     fontFamily: "MontserratBold",
   },
+  buttonLogo: {
+    width: 20,
+    height: 20,
+    marginRight: 10,
+    alignSelf: "center",
+  },
+  bottomButtonsContainer: {
+    marginTop: 20,
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: "space-evenly",
+  },
+  bottomButton: {
+    width: '40%',
+    marginTop: 10,
+    flexDirection: 'row',
+  }
 });
