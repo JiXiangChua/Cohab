@@ -16,16 +16,10 @@ import {
 import DateTimePicker from "@react-native-community/datetimepicker";
 
 import BasicText from "../BasicText.js";
-import ProfilePic from "../../assets/Finance-assets/Kimberly.png";
-import cleaning from "../../assets/Chores-assets/cleaning.png";
-import household from "../../assets/Chores-assets/household.png";
-import heart from "../../assets/Chores-assets/heart.png";
-import shopping from "../../assets/Chores-assets/online-shopping.png";
-import grocery from "../../assets/Chores-assets/grocery.png";
-import payment from "../../assets/Chores-assets/cash-payment.png";
 import SelectOrder from "../../components/chore/SelectOrder";
 
-export default function ChoreModal({ modalVisible, setModalVisible }) {
+export default function ChoreModal({ modalVisible, setModalVisible, addChore,}) {
+
   // Values needed for Add Chore Screen Popup (Modal)
   var repeatOptions = ["Weekly", "Monthly"];
   var displayRepeatOptions = [];
@@ -35,7 +29,8 @@ export default function ChoreModal({ modalVisible, setModalVisible }) {
   const [show, setShow] = useState(false);
   //onChange receives datechange-->What does it do when receive new change add later when database clear
   const [selectcheck, setSelectCheck] = useState(false);
-  const [showSelectDate, setSelectDate] = useState("heya");
+  const [showSelectDate, setSelectDate] = useState("heya"); //show on the button
+
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     var weekday = selectedDate.toString().split(' ')[0];
@@ -89,95 +84,226 @@ export default function ChoreModal({ modalVisible, setModalVisible }) {
   }
 
   // for choosing the chore icon
- const [state, setState] = useState({
-   switchone: false,
-   switchtwo: false,
-   switchthree: false,
-   switchfour: false,
-   switchfive: false,
+  const [state, setState] = useState({
+    switchone: false,
+    switchtwo: false,
+    switchthree: false,
+    switchfour: false,
+    switchfive: false,
   });
- const handleClick=(flag)=>{
-  switch(flag) {
-    case 0:
-      setState({
-        switchone: false,
-        switchtwo: false,
-        switchthree: false,
-        switchfour: false,
-        switchfive: false,
-        switchsix: false,
-      });
-      break;
+  //setChoreID so it displays user's chosen icon on the screen
+  const [choretypeid, setChoreTypeID] = useState(1);
 
-    case 1:
-      setState({
-        switchone: true,
-        switchtwo: false,
-        switchthree: false,
-        switchfour: false,
-        switchfive: false,
-        switchsix: false,
-      });
-      break;
-    
-    case 2:
-      setState({
-        switchone: false,
-        switchtwo: true,
-        switchthree: false,
-        switchfour: false,
-        switchfive: false,
-        switchsix: false,
-      });
-      break;
+  const handleClick=(flag)=>{
+    switch(flag) {
+      case 0:
+        setState({
+          switchone: false,
+          switchtwo: false,
+          switchthree: false,
+          switchfour: false,
+          switchfive: false,
+          switchsix: false,
+        });
+        break;
 
-    case 3:
-      setState({
-        switchone: false,
-        switchtwo: false,
-        switchthree: true,
-        switchfour: false,
-        switchfive: false,
-        switchsix: false,
-      });
-      break;
+      case 1:
+        setState({
+          switchone: true,
+          switchtwo: false,
+          switchthree: false,
+          switchfour: false,
+          switchfive: false,
+          switchsix: false,
+        });
+        setChoreTypeID(1);
+        break;
+      
+      case 2:
+        setState({
+          switchone: false,
+          switchtwo: true,
+          switchthree: false,
+          switchfour: false,
+          switchfive: false,
+          switchsix: false,
+        });
+        setChoreTypeID(2);
+        break;
 
-    case 4:
-      setState({
-        switchone: false,
-        switchtwo: false,
-        switchthree: false,
-        switchfour: true,
-        switchfive: false,
-        switchsix: false,
-      });
-      break;
+      case 3:
+        setState({
+          switchone: false,
+          switchtwo: false,
+          switchthree: true,
+          switchfour: false,
+          switchfive: false,
+          switchsix: false,
+        });
+        setChoreTypeID(3);
+        break;
 
-    case 5:
-      setState({
-        switchone: false,
-        switchtwo: false,
-        switchthree: false,
-        switchfour: false,
-        switchfive: true,
-        switchsix: false,
-      });
-      break;
+      case 4:
+        setState({
+          switchone: false,
+          switchtwo: false,
+          switchthree: false,
+          switchfour: true,
+          switchfive: false,
+          switchsix: false,
+        });
+        setChoreTypeID(4);
+        break;
 
-    case 6:
-       setState({
-         switchone: false,
-         switchtwo: false,
-         switchthree: false,
-         switchfour: false,
-         switchfive: false,
-         switchsix: true,
-       });
-       break;
+      case 5:
+        setState({
+          switchone: false,
+          switchtwo: false,
+          switchthree: false,
+          switchfour: false,
+          switchfive: true,
+          switchsix: false,
+        });
+        setChoreTypeID(5);
+        break;
 
-    default:
-      setState({switchone: false,});
+      case 6:
+        setState({
+          switchone: false,
+          switchtwo: false,
+          switchthree: false,
+          switchfour: false,
+          switchfive: false,
+          switchsix: true,
+        });
+        setChoreTypeID(6);
+        break;
+
+      default:
+        setState({switchone: false,});
+        setChoreTypeID(1);
     }
+  }
+
+  //importing icon images
+  const [choreiconsource, setChoreIconSource] = useState([]);
+
+  function choresIcons(){
+
+    const choresIconURL = "http://<ID>/cohab/getChoreTypeIcon";
+  
+    const init = {
+      method: "GET",
+      headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      },
+    };
+    (async () => {
+      try {
+        const response = await fetch(choresIconURL, init);
+        const json = await response.json();
+        console.log(json);
+        setChoreIconSource(json.icons);
+        if (json.status == "OK") {
+          console.log("Successfully connected!");
+        } else {
+          console.log("NOPE");
+          console.log(json.status);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+      var entry=0;
+      for(entry=0;entry<choreiconsource.Length;entry++){
+        choretypeid.push(choreiconsource[entry]["choretypeid"]);
+        icon.push(choreiconsource[entry]["icon"]);
+      };
+    })();
+
+    return(
+    <View
+      style={styles.gridcont}
+      >
+        <TouchableOpacity onPress={() => handleClick(1)}>
+        <View style={[styles.iconSquare,{backgroundColor: "#FFCDF4", borderWidth: (state.switchone === false ? 0 : 4)}]}>
+          <Image source={choreiconsource.icon[1]} style={styles.gridimage}/>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => handleClick(2)}>
+        <View style={[styles.iconSquare,{backgroundColor: "#ECC3FF", borderWidth: (state.switchtwo === false ? 0 : 4)}]}>
+          <Image source={choreiconsource.icon[2]} style={styles.gridimage}/>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => handleClick(3)}>
+        <View style={[styles.iconSquare,{backgroundColor: "#FFDBA5", borderWidth: (state.switchthree === false ? 0 : 4)}]}>
+          <Image source={choreiconsource.icon[3]} style={styles.gridimage}/>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => handleClick(4)}>
+        <View style={[styles.iconSquare,{backgroundColor: "#A0FC80", borderWidth: (state.switchfour === false ? 0 : 4)}]}>
+          <Image source={choreiconsource.icon[4]} style={styles.gridimage}/>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => handleClick(5)}>
+        <View style={[styles.iconSquare, {backgroundColor: "#7DE7DA", borderWidth: (state.switchfive === false ? 0 : 4)}]}>
+          <Image source={choreiconsource.icon[5]} style={styles.gridimage}/>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => handleClick(6)}>
+        <View style={[styles.iconSquare,{backgroundColor: "#BDFFC4", borderWidth: (state.switchsix === false ? 0 : 4)}]}>
+          <Image source={choreiconsource.icon[6]} style={styles.gridimage}/>
+          </View>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
+  const [choreTitle , setChoreTitle] = useState('');
+
+  function closeChoreModal(){
+    setModalVisible(!modalVisible);
+    setChoreTitle('');
+    setSelectCheck(false);
+  }
+
+  function saveChore() {
+    const newchore = {
+      dutyname: choreTitle,
+      choretype: repeatByWeekOrMonth,
+      choretypeid: choretypeid,
+      date: date,
+    }
+    const init = {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newchore),
+    };
+    const addChoreURL = "http://<ID>/cohab/addChore";
+    (async () => {
+      try {
+        const response = await fetch(addChoreURL, init);
+        const json = await response.json();
+        console.log(json);
+        if (json.status == "OK") {
+          console.log("Successfully connected!");
+        } else {
+          console.log("NOPE");
+          console.log(json.status);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+    closeChoreModal();
   }
 
   return (
@@ -185,9 +311,7 @@ export default function ChoreModal({ modalVisible, setModalVisible }) {
       animationType="slide"
       transparent={true}
       visible={modalVisible}
-      onRequestClose={() => {
-        setModalVisible(!modalVisible);
-      }}
+      onRequestClose={closeChoreModal}
     >
       {/*Rest of screen will darken*/}
       <View
@@ -207,54 +331,13 @@ export default function ChoreModal({ modalVisible, setModalVisible }) {
           <TextInput
             style={{ borderBottomWidth: 0.5, width: "50%" }}
             placeholder="Chore Title"
-          />
-          {/*Type in Chore description*/}
-          <TextInput
-            style={{ paddingTop: 10, borderBottomWidth: 0.3 }}
-            placeholder="Description"
+            onChangeText = {(choreTitle) => {setChoreTitle(choreTitle)}} 
+            value = {choreTitle}
           />
 
           <BasicText style={{ paddingTop: 20 }}>Select an icon</BasicText>
           
-          <View style={styles.gridcont}>
-
-            <TouchableOpacity onPress={() => handleClick(1)}>
-            <View style={[styles.iconSquare,{backgroundColor: "#FFCDF4", borderWidth: (state.switchone === false ? 0 : 4)}]}>
-              <Image source={cleaning} style={styles.gridimage}/>
-              </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => handleClick(2)}>
-            <View style={[styles.iconSquare,{backgroundColor: "#ECC3FF", borderWidth: (state.switchtwo === false ? 0 : 4)}]}>
-              <Image source={household} style={styles.gridimage}/>
-              </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => handleClick(3)}>
-            <View style={[styles.iconSquare,{backgroundColor: "#FFDBA5", borderWidth: (state.switchthree === false ? 0 : 4)}]}>
-              <Image source={grocery} style={styles.gridimage}/>
-              </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => handleClick(4)}>
-            <View style={[styles.iconSquare,{backgroundColor: "#A0FC80", borderWidth: (state.switchfour === false ? 0 : 4)}]}>
-              <Image source={payment} style={styles.gridimage}/>
-              </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => handleClick(5)}>
-            <View style={[styles.iconSquare, {backgroundColor: "#7DE7DA", borderWidth: (state.switchfive === false ? 0 : 4)}]}>
-              <Image source={shopping} style={styles.gridimage}/>
-              </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => handleClick(6)}>
-            <View style={[styles.iconSquare,{backgroundColor: "#BDFFC4", borderWidth: (state.switchsix === false ? 0 : 4)}]}>
-              <Image source={heart} style={styles.gridimage}/>
-              </View>
-            </TouchableOpacity>
-
-          </View>
+          {choresIcons()}
 
           <BasicText style={{ paddingTop: 20 }}>Select the order</BasicText>
 
@@ -305,13 +388,13 @@ export default function ChoreModal({ modalVisible, setModalVisible }) {
           >
             <Pressable
               style={[styles.optionButton, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
+              onPress={closeChoreModal}
             >
               <BasicText style={styles.optionButtonText}>Cancel</BasicText>
             </Pressable>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => {setModalVisible(!modalVisible); setSelectCheck(false);}}
+              onPress={saveChore}
             >
               <BasicText style={styles.textStyle}>Confirm</BasicText>
             </Pressable>

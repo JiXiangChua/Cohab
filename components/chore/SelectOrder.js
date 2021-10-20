@@ -5,31 +5,40 @@ import ProfilePic from "../../assets/Finance-assets/Kimberly.png";
 
 export default function SelectOrder(props) {
     // use onOrderChange to hook order array change
+    const groupmemURL = "http://<ID>/cohab/getGroupMembers?groupId=1";
+  
+    const init = {
+        method: "GET",
+        headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        },
+    };
 
-    // replace fakebackend with realbackend
-    // fakebackend is an array of users that can assign the order to
-    const [fakebackend, setFakebackend] = useState([
-        {
-            userid: "000001",
-            username: "kimberly",
-            imageSource:  ProfilePic
-        },
-        {
-            userid: "000002",
-            username: "johndoe",
-            imageSource:  ProfilePic
-        },
-        {
-            userid: "000003",
-            username: "janedoe",
-            imageSource:  ProfilePic
-        },
-        {
-            userid: "000004",
-            username: "maryjane",
-            imageSource:  ProfilePic
-        },
-    ])
+    //code to store data from response
+    const [fakebackend, setFakebackend] = useState([]);
+
+    (async () => {
+        try {
+          const response = await fetch(groupmemURL, init);
+          const json = await response.json();
+          console.log(json);
+          setFakebackend(json.members);
+          if (json.status == "OK") {
+            console.log("Successfully connected!");
+          } else {
+            console.log("NOPE");
+            console.log(json.status);
+          }
+        } catch (error) {
+          console.log(error);
+        }
+        var entry=0;
+        for(entry=0;entry<fakebackend.Length;entry++){
+            userid.push(fakebackend[entry]["userid"]);
+            profileimg.push(fakebackend[entry]["profileimg"]);
+          };
+    })();
 
     // {order{userIndex, selected: true}}
     const [counter, setCounter] = useState(new Array())
@@ -53,7 +62,7 @@ export default function SelectOrder(props) {
             for (let i = 0; i < counter.length; i++) {
                 arr.push(fakebackend[counter[i]])
             }
-            props.onOrderChange(arr)
+            props.onOrderChange(arr);
         }
     })
 
@@ -64,7 +73,7 @@ export default function SelectOrder(props) {
                     return counter.includes(index) ?
                         (
                             <TouchableOpacity style={styles.item} onPress={() => setOrder(index)}>
-                                <Image style={{opacity: 0.35, borderWidth: 4, borderColor: "#36BC7C", borderRadius: 100}} source={user.imageSource}/>
+                                <Image style={{opacity: 0.35, borderWidth: 4, borderColor: "#36BC7C", borderRadius: 100}} source={user.profileimg}/>
                                 <View style={styles.textoverlay}>
                                     <Text style={styles.text}>{counter.indexOf(index)+1}</Text>
                                 </View>
@@ -72,7 +81,7 @@ export default function SelectOrder(props) {
                         ) :
                         (
                             <TouchableOpacity style={styles.item} onPress={() => setOrder(index)}>
-                                <Image source={user.imageSource}/>
+                                <Image source={user.profileimg}/>
                             </TouchableOpacity>
                         )
                 })

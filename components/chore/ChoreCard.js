@@ -7,17 +7,13 @@ import {
 } from "react-native";
 
 import ProfilePic from "../../assets/Finance-assets/Kimberly.png";
-import cleaning from "../../assets/Chores-assets/cleaning.png";
-import household from "../../assets/Chores-assets/household.png";
-import grocery from "../../assets/Chores-assets/grocery.png";
 import GeneralButton from "../GeneralButton";
 
 import BasicText from "../BasicText.js";
 
 export default function ChoreCard(props) {
 
-  //let iconObj = {"cleaning": cleaning, "household": household, "grocery": grocery}
-  var icon = props.iconselect
+  var icon = props.iconselect //uri gives this prop a chance to link to remote source in chorescreen
 
   // variable to hold icon colour
   var iconColour = props.iconColour;
@@ -58,7 +54,7 @@ export default function ChoreCard(props) {
         
         <View style={{backgroundColor: iconColour, alignContent:"center",justifyContent:"center", alignSelf: "center", marginLeft: 5, width: 90, height: 90, padding:10, borderRadius: 20}}>
         <Image 
-          source={{uri: icon}}
+          source={{uri: icon}}//uri can link to remote source
           style={styles.image}
         />
         </View>

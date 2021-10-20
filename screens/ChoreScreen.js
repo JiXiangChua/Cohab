@@ -25,7 +25,7 @@ export default function ChoreScreen({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
 
   //function displayChores(){
-  const choresURL = "http://10.27.129.14:9999/cohab/getChores?groupId=1";
+  const choresURL = "http://3a5c-111-65-70-79.ngrok.io/cohab/getChores?groupId=1";
 
     //const loginPackage = {
     //  email: email,
@@ -90,7 +90,7 @@ export default function ChoreScreen({ navigation }) {
               key ={roomie.choreid}
               currentUser={roomie.currentUser}
               choretype= {roomie.repeatType}
-              iconselect = {roomie.icon}
+              iconselect = {roomie.icon} //"icon" has the source link to the database
               nextUser={roomie.nextUser}
               dutyname={roomie.title}
               duedate={roomie.dueOn}
@@ -134,7 +134,7 @@ export default function ChoreScreen({ navigation }) {
           minHeight: 600,
         }}>
       </View>
-      <ChoreModal modalVisible = {modalVisible} setModalVisible = {setModalVisible} />
+      <ChoreModal modalVisible = {modalVisible} setModalVisible = {setModalVisible} addChore = {addChore} />
     </ScrollView>
     {/*</ImageBackground>*/}
   </SafeAreaView>
