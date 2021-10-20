@@ -1,4 +1,4 @@
-import React from "react";
+import React , { useState } from "react";
 import { View, TouchableOpacity, StyleSheet, Text, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { BasicText } from "../components";
@@ -6,18 +6,23 @@ import ProfilePicture from "../assets/Finance-assets/Kimberly.png";
 import BuildingPicture from "../assets/Building.png";
 import AddButtonLogo from "../assets/Finance-assets/AddButton.png";
 
+import { AddGroupModal , JoinGroupModal } from "../components";
+
 export default function GroupSelectScreen({ navigation }) {
+
+  const [addModalVisible , setAddModalVisible] = useState(false);
+  const [joinModalVisible , setJoinModalVisible] = useState(false);
 
   function goToHome() {
     navigation.navigate("Home");
   }
 
   function handleAddGroup() {
-
+    setAddModalVisible(true);
   }
 
   function handleJoinGroup() {
-
+    setJoinModalVisible(true);
   }
   
   function handleGroup1() {
@@ -94,6 +99,8 @@ export default function GroupSelectScreen({ navigation }) {
           <BasicText style = {[styles.subHeaderText]}>Join Group</BasicText>
         </TouchableOpacity>
       </View>
+      <AddGroupModal addModalVisible = {addModalVisible} setAddModalVisible = {setAddModalVisible} />
+      <JoinGroupModal joinModalVisible = {joinModalVisible} setJoinModalVisible = {setJoinModalVisible} />
     </SafeAreaView>
   );
 }
