@@ -33,7 +33,7 @@ import TaskPicture from "../assets/Home-assets/taskboard.png";
 import CalendarPicture from "../assets/Home-assets/calendar.png";
 import dog1Gif from "../assets/Home-assets/dog1.gif";
 
-export default function HomeScreen({ navigation }) {
+export default function HomeScreenBeta({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
 
   const [taskBoard, setTaskBoard] = useState(false);
