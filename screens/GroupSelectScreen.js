@@ -1,4 +1,4 @@
-import React , { useState } from "react";
+import React , { useState , useEffect } from "react";
 import { View, TouchableOpacity, StyleSheet, Text, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { BasicText } from "../components";
@@ -12,6 +12,9 @@ export default function GroupSelectScreen({ navigation }) {
 
   const [addModalVisible , setAddModalVisible] = useState(false);
   const [joinModalVisible , setJoinModalVisible] = useState(false);
+  const [group1 , setGroup1] = useState({});
+  const [group2 , setGroup2] = useState({});
+  const [group3 , setGroup3] = useState({});
 
   function getGroups(userId) {
     const getGroupsURL = `http://<ID>/cohab/getGroupsByUser?userId=${userId}`;
@@ -24,11 +27,27 @@ export default function GroupSelectScreen({ navigation }) {
       },
     };
 
+    function updateGroups(json) {
+      const groups = json.groups;
+      for (let i = 0 ; i < groups.length ; i++) {
+        if (i === 0) {
+          setGroup1(group);
+        }
+        if (i === 1) {
+          setGroup2(group);
+        }
+        if (i === 2) {
+          setGroup3(group);
+        }
+      }
+    }
+
     ;(async () => {
       try {
           const response = await fetch(getGroupsURL, init);
           const json = await response.json();
           console.log(json);
+          updateGroups(json);
       } catch (error) {
         console.log(error);
       }
@@ -57,7 +76,11 @@ export default function GroupSelectScreen({ navigation }) {
 
   function handleGroup3() {
     goToHome();
-  }
+  };
+
+  useEffect(() => {
+    getGroups(1);
+  },[])
 
   return (
     <SafeAreaView style={styles.backgroundContainer}>
