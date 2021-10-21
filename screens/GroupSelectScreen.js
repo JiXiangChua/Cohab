@@ -13,6 +13,28 @@ export default function GroupSelectScreen({ navigation }) {
   const [addModalVisible , setAddModalVisible] = useState(false);
   const [joinModalVisible , setJoinModalVisible] = useState(false);
 
+  function getGroups(userId) {
+    const getGroupsURL = `http://<ID>/cohab/getGroupsByUser?userId=${userId}`;
+
+    const init = {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    };
+
+    ;(async () => {
+      try {
+          const response = await fetch(getGroupsURL, init);
+          const json = await response.json();
+          console.log(json);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }
+  
   function goToHome() {
     navigation.navigate("Home");
   }
@@ -26,15 +48,15 @@ export default function GroupSelectScreen({ navigation }) {
   }
   
   function handleGroup1() {
-
+    goToHome();
   }
   
   function handleGroup2() {
-
+    goToHome();
   }
 
   function handleGroup3() {
-
+    goToHome();
   }
 
   return (
@@ -56,7 +78,7 @@ export default function GroupSelectScreen({ navigation }) {
               backgroundColor: "#852C2C",
             },
           ]}
-          onPress={goToHome}
+          onPress={handleGroup1}
         >
           <BasicText style={styles.groupButtonText}>Hall</BasicText>
         </TouchableOpacity>
@@ -70,7 +92,7 @@ export default function GroupSelectScreen({ navigation }) {
               backgroundColor: "#3E852C",
             },
           ]}
-          onPress={goToHome}
+          onPress={handleGroup2}
         >
           <BasicText style={styles.groupButtonText}>Family</BasicText>
         </TouchableOpacity>
@@ -84,7 +106,7 @@ export default function GroupSelectScreen({ navigation }) {
               backgroundColor: "#2C4085",
             },
           ]}
-          onPress={goToHome}
+          onPress={handleGroup3}
         >
           <BasicText style={styles.groupButtonText}>Friends</BasicText>
         </TouchableOpacity>

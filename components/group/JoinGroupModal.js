@@ -7,6 +7,36 @@ export default function JoinGroupModal({ joinModalVisible , setJoinModalVisible 
 
     function closeModal() {
         setJoinModalVisible(false);
+    };
+
+    function joinGroup() {
+        const joinGroupURL = "http://10.27.124.66:9999/cohab/joinGroup";
+
+        const joinGroupPackage = {
+            userId: 1,
+            groupId: groupId,
+        };
+
+        const init = {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(joinGroupPackage),
+        };
+
+        ;(async () => {
+            try {
+              const response = await fetch(joinGroupURL, init);
+              const json = await response.json();
+              console.log(json);
+            } catch (error) {
+              console.log(error);
+            }
+        })();
+
+        closeModal();
     }
 
     return(
@@ -18,9 +48,9 @@ export default function JoinGroupModal({ joinModalVisible , setJoinModalVisible 
         >
             <View style = {styles.darkBackground}>
                 <View style = {styles.popup}>
-                    <TextInput style = {styles.inputField} onChangeText = {(groupId) => {setEventName(groupId)}} value = {groupId} placeholder = 'Group ID' />
+                    <TextInput style = {styles.inputField} onChangeText = {(groupId) => {setGroupId(groupId)}} value = {groupId} placeholder = 'Group ID' />
                     <View style = {styles.buttons}>
-                        <TouchableOpacity style={[styles.optionButton , styles.green]} onPress={closeModal}>
+                        <TouchableOpacity style={[styles.optionButton , styles.green]} onPress={joinGroup}>
                             <Text style={[styles.optionButtonText , styles.whiteText ]}>Join Group</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.optionButton} onPress={closeModal}>

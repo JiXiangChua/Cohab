@@ -10,6 +10,37 @@ export default function AddGroupModal({ addModalVisible , setAddModalVisible }) 
         setAddModalVisible(false);
     }
 
+    function addGroup() {
+        const addGroupURL = "http://10.27.124.66:9999/cohab/addGroup";
+
+        const addGroupPackage = {
+            userId: 1,
+            groupName: groupName,
+            description: groupDescription,
+        };
+
+        const init = {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(addGroupPackage),
+        };
+
+        ;(async () => {
+            try {
+                const response = await fetch(addGroupURL, init);
+                const json = await response.json();
+                console.log(json);
+            } catch (error) {
+              console.log(error);
+            }
+        })();
+
+        closeModal();
+    };
+
     return(
         <Modal
             animationType="slide" 
@@ -19,10 +50,10 @@ export default function AddGroupModal({ addModalVisible , setAddModalVisible }) 
         >
             <View style = {styles.darkBackground}>
                 <View style = {styles.popup}>
-                    <TextInput style = {styles.inputField} onChangeText = {(groupName) => {setEventName(groupName)}} value = {groupName} placeholder = 'Group Name' />
-                    <TextInput style = {styles.inputField} onChangeText = {(groupDescription) => {setEventName(groupDescription)}} value = {groupDescription} placeholder = 'Group Description' />
+                    <TextInput style = {styles.inputField} onChangeText = {(groupName) => {setGroupName(groupName)}} value = {groupName} placeholder = 'Group Name' />
+                    <TextInput style = {styles.inputField} onChangeText = {(groupDescription) => {setGroupDescription(groupDescription)}} value = {groupDescription} placeholder = 'Group Description' />
                     <View style = {styles.buttons}>
-                        <TouchableOpacity style={[styles.optionButton , styles.green]} onPress={closeModal}>
+                        <TouchableOpacity style={[styles.optionButton , styles.green]} onPress={addGroup}>
                             <Text style={[styles.optionButtonText , styles.whiteText ]}>Add Group</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.optionButton} onPress={closeModal}>
