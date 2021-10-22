@@ -12,6 +12,8 @@ import SharedTasks from "./task/SharedTasks";
 import TaskCard from "./task/TaskCard";
 import ChoreModal from "./chore/ChoreModal";
 import CalendarModal from "./calendar/CalendarModal";
+import AddGroupModal from "./group/AddGroupModal";
+import JoinGroupModal from "./group/JoinGroupModal";
 
 export {
     MenuBar,
@@ -28,4 +30,6 @@ export {
     TaskCard,
     ChoreModal,
     CalendarModal,
+    AddGroupModal,
+    JoinGroupModal,
 }
