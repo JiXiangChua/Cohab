@@ -12,12 +12,20 @@ export default function GroupSelectScreen({ navigation }) {
 
   const [addModalVisible , setAddModalVisible] = useState(false);
   const [joinModalVisible , setJoinModalVisible] = useState(false);
-  const [group1 , setGroup1] = useState({});
-  const [group2 , setGroup2] = useState({});
+  const [group1 , setGroup1] = useState({
+    "description": "This is for all NTU EEE students",
+    "id": 1,
+    "groupname": "EEE"
+  });
+  const [group2 , setGroup2] = useState({
+    "description": "This is for all hall 3 students",
+    "id": 8,
+    "groupname": "Hall"
+  });
   const [group3 , setGroup3] = useState({});
 
   function getGroups(userId) {
-    const getGroupsURL = `http://<ID>/cohab/getGroupsByUser?userId=${userId}`;
+    const getGroupsURL = `http://10.27.124.66:9999/cohab/getGroupsByUser?userId=${userId}`;
 
     const init = {
       method: "GET",
@@ -81,7 +89,7 @@ export default function GroupSelectScreen({ navigation }) {
   useEffect(() => {
     getGroups(1);
   },[])
-
+  
   return (
     <SafeAreaView style={styles.backgroundContainer}>
       <Image source={ProfilePicture} style={styles.profilePicture} />
@@ -103,7 +111,7 @@ export default function GroupSelectScreen({ navigation }) {
           ]}
           onPress={handleGroup1}
         >
-          <BasicText style={styles.groupButtonText}>Hall</BasicText>
+          <BasicText style={styles.groupButtonText}>{group1.groupname}</BasicText>
         </TouchableOpacity>
         <TouchableOpacity
           style={[
@@ -117,7 +125,7 @@ export default function GroupSelectScreen({ navigation }) {
           ]}
           onPress={handleGroup2}
         >
-          <BasicText style={styles.groupButtonText}>Family</BasicText>
+          <BasicText style={styles.groupButtonText}>{group2.groupname}</BasicText>
         </TouchableOpacity>
         <TouchableOpacity
           style={[
