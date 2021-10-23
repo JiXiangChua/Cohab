@@ -11,7 +11,8 @@ import {
   Pressable,
 } from "react-native";
 
-import ProfilePic from "../../assets/Finance-assets/Kimberly.png";
+import ProfilePic from "../../assets/Calendar-assets/ProfileImage2.png";
+import GeneralButton from "../GeneralButton";
 
 export default function SharedTaskCard(props) {
   return (
@@ -25,20 +26,10 @@ export default function SharedTaskCard(props) {
           <Text style={[styles.cardText, { fontSize: 14, color: "#8A8585" }]}>
             {props.description}
           </Text>
-          {/* Edit button */}
-          <View style={{ flexDirection: "row" }}>
-            <TouchableOpacity style={[styles.editButton, styles.shadowProp]}>
-              <Text style={{ color: "#FFF", fontSize: 16 }}>Edit</Text>
-            </TouchableOpacity>
-            {/* Done button */}
-            <TouchableOpacity style={[styles.claimButton, styles.shadowProp]}>
-              <Text style={{ color: "#FFF", fontSize: 16 }}>Done</Text>
-            </TouchableOpacity>
-          </View>
         </View>
 
         {/* Column for set deadline  */}
-        <View style={[styles.cardDisplayColumnFormat, { marginLeft: 5 }]}>
+        <View style={[styles.cardDisplayColumnFormat, { marginLeft: -5 }]}>
           <Text style={[styles.deadlineText, { marginRight: 10 }]}>
             {props.deadline}
           </Text>
@@ -64,12 +55,17 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     borderWidth: 1,
     borderColor: "#0038FF",
+    alignSelf: "center",
   },
   shadowProp: {
-    shadowColor: "#171717",
-    shadowOffset: { width: -2, height: 4 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 6,
+    },
+    shadowOpacity: 0.37,
+    shadowRadius: 7.49,
+    elevation: 4,
   },
   cardDisplayColumnFormat: {
     flexDirection: "column",
@@ -82,36 +78,16 @@ const styles = StyleSheet.create({
   },
   deadlineText: {
     alignSelf: "center",
-    marginRight: 10,
+    marginRight: 15,
     fontSize: 14,
     color: "#FF0000",
     marginBottom: 45,
   },
-  editButton: {
-    backgroundColor: "#0038FF",
-    height: 38,
-    width: 100,
-    borderRadius: 10,
-    marginRight: 10,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 10,
-  },
-  claimButton: {
-    backgroundColor: "#36BC7C",
-    height: 38,
-    width: 100,
-    borderRadius: 10,
-    marginRight: 10,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 10,
-  },
   profileImage: {
     marginLeft: -15,
-    minWidth: 15,
-    minHeight: 15,
-    marginTop: -20,
+    minWidth: 50,
+    minHeight: 50,
+    marginTop: -15,
     alignSelf: "center",
   },
 });

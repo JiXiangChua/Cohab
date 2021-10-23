@@ -8,19 +8,16 @@ import Individual1Tab from "./Individual1Tab";
 import Kimberly from "../../assets/Finance-assets/Kimberly.png";
 
 export default function SharedTasks() {
-  const [currentTab, setCurrentTab] = useState("shared");
+  const [currentTab, setCurrentTab] = useState("individual1");
 
   var shared = [styles.shared];
   var individual1 = [styles.individual1];
-  var individual2 = [styles.individual2];
   var completed = [styles.completed];
 
   if (currentTab === "shared") {
     shared.push(styles.currentTab);
   } else if (currentTab === "individual1") {
     individual1.push(styles.currentTab);
-  } else if (currentTab === "individual2") {
-    individual2.push(styles.currentTab);
   } else if (currentTab === "completed") {
     completed.push(styles.currentTab);
   }
@@ -35,11 +32,6 @@ export default function SharedTasks() {
     console.log(currentTab);
   }
 
-  function handleIndividual2() {
-    setCurrentTab("individual2");
-    console.log(currentTab);
-  }
-
   function handleCompleted() {
     setCurrentTab("completed");
     console.log(currentTab);
@@ -48,16 +40,12 @@ export default function SharedTasks() {
   return (
     <View style={styles.taskContainer}>
       <View style={styles.title}>
-        <TouchableOpacity style={shared} onPress={handleShared}>
-          <Text style={styles.subHeaderText}>Shared</Text>
-        </TouchableOpacity>
-
         <TouchableOpacity style={individual1} onPress={handleIndividual1}>
-          <Image source={Kimberly} style={styles.profileImage} />
+          <Text style={styles.subHeaderText}>My Task</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={individual2} onPress={handleIndividual2}>
-          <Image source={Kimberly} style={styles.profileImage} />
+        <TouchableOpacity style={shared} onPress={handleShared}>
+          <Text style={styles.subHeaderText}>Others</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={completed} onPress={handleCompleted}>
@@ -95,12 +83,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   currentTab: {
-    backgroundColor: "white",
+    backgroundColor: "#FFFAF2",
     borderTopLeftRadius: 6,
     borderTopRightRadius: 6,
   },
   individual1: {
-    minHeight: 20,
+    height: 50,
     padding: 10,
     alignItems: "center",
     flexDirection: "row",
@@ -129,7 +117,7 @@ const styles = StyleSheet.create({
   },
   backgroundContainer: {
     width: "105%",
-    backgroundColor: "white",
+    backgroundColor: "#FFFAF2",
     borderRadius: 8,
     alignItems: "center",
   },
