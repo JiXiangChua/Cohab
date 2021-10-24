@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, TouchableOpacity, StyleSheet, Text, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { BasicText } from "../components";
 import ProfilePicture from "../assets/Finance-assets/Kimberly.png";
 import BuildingPicture from "../assets/Building.png";
 import AddButtonLogo from "../assets/Finance-assets/AddButton.png";
+import dog1Gif from "../assets/Home-assets/dog1.gif";
 
 export default function GroupSelectScreen({ navigation }) {
+  const [dogImage, setDogImage] = useState(true);
   function getData() {
     const URL =
       "http://46f2-111-65-44-111.ngrok.io/cohab/getGroupsByUser?userId=18";
@@ -115,6 +117,7 @@ export default function GroupSelectScreen({ navigation }) {
         />
         <BasicText style={[styles.subHeaderText]}>Add Group</BasicText>
       </TouchableOpacity>
+      {dogImage && <Image source={dog1Gif} style={styles.mascotStyle} />}
     </SafeAreaView>
   );
 }
