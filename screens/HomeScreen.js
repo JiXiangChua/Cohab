@@ -57,7 +57,7 @@ import dog1Gif from "../assets/Home-assets/dog1.gif";
 export default function HomeScreen({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
 
-  const [taskBoard, setTaskBoard] = useState(true);
+  const [taskBoard, setTaskBoard] = useState(false);
   const [piggyBank, setPiggyBank] = useState(false);
   const [washingMachine, setWashingMachine] = useState(false);
   const [calendar, setCalendar] = useState(false);
@@ -98,7 +98,7 @@ export default function HomeScreen({ navigation }) {
       id: 4,
       name: "Piggy Bank",
       image: PiggyBankLogo,
-      functionName: "Finance",
+      functionName: "Wallet",
       description:
         "Planning a huge party and need your housemate(s)’ approval? Send a polite request here!",
     },
@@ -324,16 +324,34 @@ export default function HomeScreen({ navigation }) {
   function setVisibilityOfSelectedFurniture(selectedFurniture) {
     switch (selectedFurniture) {
       case 1:
-        setWashingMachine(!washingMachine);
+        setWashingMachine(true);
         break;
       case 2:
-        setTaskBoard(!taskBoard);
+        setTaskBoard(true);
         break;
       case 3:
-        setCalendar(!calendar);
+        setCalendar(true);
         break;
       case 4:
-        setPiggyBank(!piggyBank);
+        setPiggyBank(true);
+        break;
+      default:
+        console.log("Error while setting visibility of button");
+    }
+  }
+  function deleteSelectedFurniture(selectedFurniture) {
+    switch (selectedFurniture) {
+      case 1:
+        setWashingMachine(false);
+        break;
+      case 2:
+        setTaskBoard(false);
+        break;
+      case 3:
+        setCalendar(false);
+        break;
+      case 4:
+        setPiggyBank(false);
         break;
       default:
         console.log("Error while setting visibility of button");
@@ -379,7 +397,7 @@ export default function HomeScreen({ navigation }) {
               buttonText="Delete"
               color="#FF1A1A"
               onPress={() => {
-                setVisibilityOfSelectedFurniture(itemID);
+                deleteSelectedFurniture(itemID);
                 setDeleteModal(false);
               }}
             />
@@ -464,7 +482,10 @@ export default function HomeScreen({ navigation }) {
 
           {/* Buttons Section */}
           <View
-            style={{ flexDirection: "row", justifyContent: "space-evenly" }}
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-evenly",
+            }}
           >
             <TouchableOpacity
               style={styles.functionModalButtonStyle}
@@ -588,7 +609,7 @@ export default function HomeScreen({ navigation }) {
 
   function assignCustomFunctionsToFurniture(nameOfFunction) {
     switch (nameOfFunction) {
-      case "Finance":
+      case "Wallet":
         goToFinance();
         break;
       case "Task":
@@ -987,11 +1008,11 @@ export default function HomeScreen({ navigation }) {
             {/* {Dog Avatar} */}
             <TouchableOpacity
               style={{
-                width: 30,
+                width: 20,
                 height: 80,
                 position: "absolute",
                 top: 635,
-                left: 430,
+                left: 435,
               }}
               onPress={() => {
                 // assignCustomFunctionsToFurniture(furniture[2].functionName);
@@ -1135,7 +1156,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     right: 10,
-    bottom: 30,
+    bottom: 50,
   },
   CardboardStyle: {
     width: 180,

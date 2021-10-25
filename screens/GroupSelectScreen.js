@@ -64,7 +64,7 @@ export default function GroupSelectScreen({ navigation }) {
   function goToHome() {
     navigation.navigate("Home");
   }
-  getData();
+  //getData();
 
   function handleAddGroup() {
     setAddModalVisible(true);
