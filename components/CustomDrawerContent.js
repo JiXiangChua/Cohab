@@ -22,6 +22,7 @@ import BasicText from "../components/BasicText.js";
 import Card from "../navigation/genericNotifCard.js";
 import ProfilePic from "../assets/Finance-assets/Kimberly.png";
 import profileImage from '../assets/Calendar-assets/ProfileImage2.png';
+import EventBox from "../navigation/EventBox.js";
 
 export default function CustomDrawerContent({ navigation }) {
 
@@ -86,25 +87,16 @@ export default function CustomDrawerContent({ navigation }) {
             <Image source={ProfilePic} style={styles.profileImage} />
         </View>
             <Text style = {styles.alignCenter}>Announcements</Text>
-            <View style={styles.notifContainer}>
+            <View style={styles.announcementContainer}>
                 <Card
-                    name="What is ligma?"
+                    name="What's for lunch?"
                     date_created="18 Aug"
                     fdCheck={false}
                 />
             </View>
         <Text style = {styles.alignCenter}>Events</Text>
-        <View style={styles.notifContainer}>
-            <Card
-              name="What is ligma?"
-              date_created="18 Aug"
-              fdCheck={false}
-            />
-            <Card
-              name="What is ligma?"
-              date_created="18 Aug"
-               fdCheck={false}
-            />
+        <View style={styles.eventContainer}>
+            <EventBox />
         </View>
 
       </View>
@@ -155,12 +147,18 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
   },
-  notifContainer: {
-    width: "95%",
+  announcementContainer: {
+    marginLeft: 10,
+    width: "85%",
     flexDirection: "column",
     justifyContent: "space-evenly",
   },
-
+  eventContainer: {
+      marginLeft: 10,
+      width: "85%",
+      flexDirection: "column",
+      justifyContent: "space-evenly",
+    },
   checkInButton: {
     borderRadius: 20,
     borderStyle: "solid",
