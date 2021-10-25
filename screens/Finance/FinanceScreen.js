@@ -488,12 +488,17 @@ export default function FinanceScreen({ navigation }) {
               NEW
             </BasicText>
             <TouchableOpacity
-              style={{ position: "absolute", right: -5, fontSize: 18 }}
+              style={{
+                position: "absolute",
+                right: 5,
+                top: 5,
+                fontSize: 18,
+              }}
               onPress={renderPayRoomateScreen}
             >
               <Image
                 source={AddButton}
-                style={{ width: 50, height: 50 }}
+                style={{ width: 35, height: 35 }}
               ></Image>
             </TouchableOpacity>
           </View>
@@ -555,12 +560,12 @@ export default function FinanceScreen({ navigation }) {
               NEW
             </BasicText>
             <TouchableOpacity
-              style={{ position: "absolute", right: -5, fontSize: 18 }}
+              style={{ position: "absolute", right: 5, top: 5, fontSize: 18 }}
               onPress={renderPayGroupScreen}
             >
               <Image
                 source={AddButton}
-                style={{ width: 50, height: 50 }}
+                style={{ width: 35, height: 35 }}
               ></Image>
             </TouchableOpacity>
           </View>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, TouchableOpacity, StyleSheet, Text, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { BasicText } from "../components";
@@ -7,41 +7,89 @@ import BuildingPicture from "../assets/Building.png";
 import AddButtonLogo from "../assets/Finance-assets/AddButton.png";
 import dog1Gif from "../assets/Home-assets/dog1.gif";
 
+import { AddGroupModal, JoinGroupModal } from "../components";
+
 export default function GroupSelectScreen({ navigation }) {
-  const [dogImage, setDogImage] = useState(true);
-  function getData() {
-    const URL =
-      "http://46f2-111-65-44-111.ngrok.io/cohab/getGroupsByUser?userId=18";
+  const [addModalVisible, setAddModalVisible] = useState(false);
+  const [joinModalVisible, setJoinModalVisible] = useState(false);
+  const [group1, setGroup1] = useState({
+    description: "This is for all NTU EEE students",
+    id: 1,
+    groupname: "EEE",
+  });
+  const [group2, setGroup2] = useState({
+    description: "This is for all hall 3 students",
+    id: 8,
+    groupname: "Hall",
+  });
+  const [group3, setGroup3] = useState({});
 
-    // const loginPackage = {
-    //   email: email,
-    //   password: password,
-    // };
+  function getGroups(userId) {
+    const getGroupsURL = `http://10.27.124.66:9999/cohab/getGroupsByUser?userId=${userId}`;
 
-    // const init = {
-    //   method: "POST",
-    //   headers: {
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(loginPackage),
-    // };
+    const init = {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    };
 
-    async () => {
+    function updateGroups(json) {
+      const groups = json.groups;
+      for (let i = 0; i < groups.length; i++) {
+        if (i === 0) {
+          setGroup1(group);
+        }
+        if (i === 1) {
+          setGroup2(group);
+        }
+        if (i === 2) {
+          setGroup3(group);
+        }
+      }
+    }
+
+    (async () => {
       try {
-        const response = await fetch(URL);
+        const response = await fetch(getGroupsURL, init);
         const json = await response.json();
         console.log(json);
+        updateGroups(json);
       } catch (error) {
         console.log(error);
       }
-    };
+    })();
   }
 
   function goToHome() {
     navigation.navigate("Home");
   }
-  getData();
+  //getData();
+
+  function handleAddGroup() {
+    setAddModalVisible(true);
+  }
+
+  function handleJoinGroup() {
+    setJoinModalVisible(true);
+  }
+
+  function handleGroup1() {
+    goToHome();
+  }
+
+  function handleGroup2() {
+    goToHome();
+  }
+
+  function handleGroup3() {
+    goToHome();
+  }
+
+  useEffect(() => {
+    getGroups(1);
+  }, []);
 
   return (
     <SafeAreaView style={styles.backgroundContainer}>
@@ -50,18 +98,8 @@ export default function GroupSelectScreen({ navigation }) {
       <BasicText style={styles.subHeaderText}>
         Where will you be today?
       </BasicText>
-      <View
-        style={{
-          justifyContent: "center",
-          width: "100%",
-          height: "60%",
-          marginTop: 40,
-        }}
-      >
-        <Image
-          source={BuildingPicture}
-          style={{ width: 440, height: 630, top: -20 }}
-        />
+      <View style={styles.bottomContainer}>
+        <Image source={BuildingPicture} style={styles.buildingPicture} />
         <TouchableOpacity
           style={[
             styles.groupButton,
@@ -72,9 +110,11 @@ export default function GroupSelectScreen({ navigation }) {
               backgroundColor: "#852C2C",
             },
           ]}
-          onPress={goToHome}
+          onPress={handleGroup1}
         >
-          <BasicText style={styles.groupButtonText}>Hall</BasicText>
+          <BasicText style={styles.groupButtonText}>
+            {group1.groupname}
+          </BasicText>
         </TouchableOpacity>
         <TouchableOpacity
           style={[
@@ -86,9 +126,11 @@ export default function GroupSelectScreen({ navigation }) {
               backgroundColor: "#3E852C",
             },
           ]}
-          onPress={goToHome}
+          onPress={handleGroup2}
         >
-          <BasicText style={styles.groupButtonText}>Family</BasicText>
+          <BasicText style={styles.groupButtonText}>
+            {group2.groupname}
+          </BasicText>
         </TouchableOpacity>
         <TouchableOpacity
           style={[
@@ -100,24 +142,36 @@ export default function GroupSelectScreen({ navigation }) {
               backgroundColor: "#2C4085",
             },
           ]}
-          onPress={goToHome}
+          onPress={handleGroup3}
         >
           <BasicText style={styles.groupButtonText}>Friends</BasicText>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity style={[styles.groupButton, { flexDirection: "row" }]}>
-        <Image
-          source={AddButtonLogo}
-          style={{
-            width: 20,
-            height: 20,
-            marginRight: 10,
-            alignSelf: "center",
-          }}
-        />
-        <BasicText style={[styles.subHeaderText]}>Add Group</BasicText>
-      </TouchableOpacity>
-      {dogImage && <Image source={dog1Gif} style={styles.mascotStyle} />}
+
+      <View style={styles.bottomButtonsContainer}>
+        <TouchableOpacity
+          style={[styles.groupButton, styles.bottomButton]}
+          onPress={handleAddGroup}
+        >
+          <Image source={AddButtonLogo} style={styles.buttonLogo} />
+          <BasicText style={[styles.subHeaderText]}>Add Group</BasicText>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.groupButton, styles.bottomButton]}
+          onPress={handleJoinGroup}
+        >
+          <Image source={AddButtonLogo} style={styles.buttonLogo} />
+          <BasicText style={[styles.subHeaderText]}>Join Group</BasicText>
+        </TouchableOpacity>
+      </View>
+      <AddGroupModal
+        addModalVisible={addModalVisible}
+        setAddModalVisible={setAddModalVisible}
+      />
+      <JoinGroupModal
+        joinModalVisible={joinModalVisible}
+        setJoinModalVisible={setJoinModalVisible}
+      />
     </SafeAreaView>
   );
 }
@@ -129,21 +183,30 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   profilePicture: {
-    marginTop: 50,
-    width: 100,
-    height: 100,
+    marginTop: 20,
+    width: 80,
+    height: 80,
     alignSelf: "center",
   },
+  buildingPicture: {
+    height: 650,
+    width: 410,
+    resizeMode: "contain",
+  },
   headerText: {
-    marginTop: 20,
     fontSize: 40,
     color: "#6E2142",
-    fontWeight: "bold",
+    fontFamily: "MontserratSemiBold",
   },
   subHeaderText: {
-    marginTop: 5,
     fontSize: 20,
     color: "#6E2142",
+  },
+  bottomContainer: {
+    justifyContent: "center",
+    width: "100%",
+    height: "60%",
+    marginTop: 40,
   },
   groupButton: {
     height: 30,
@@ -158,6 +221,23 @@ const styles = StyleSheet.create({
   },
   groupButtonText: {
     color: "#FFF",
-    fontWeight: "bold",
+    fontFamily: "MontserratBold",
+  },
+  buttonLogo: {
+    width: 20,
+    height: 20,
+    marginRight: 10,
+    alignSelf: "center",
+  },
+  bottomButtonsContainer: {
+    marginTop: 20,
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+  },
+  bottomButton: {
+    width: "40%",
+    marginTop: 10,
+    flexDirection: "row",
   },
 });
