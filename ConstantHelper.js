@@ -1,0 +1,1 @@
+export const CONNECTION = "http://10.27.7.171:9999/cohab/";
