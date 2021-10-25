@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   TextInput,
@@ -18,7 +17,7 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import BasicText from "../BasicText.js";
 import SelectOrder from "./SelectOrder";
 
-export default function ChoreModalEDIT({ modalVisibleB, setModalVisibleB, editChore, placeholder,}) {
+export default function ChoreModalEDIT({ modalVisibleB, setModalVisibleB, placeholder,}) {
 
   // Values needed for Add Chore Screen Popup (Modal)
   var repeatOptions = ["Weekly", "Monthly"];
@@ -190,7 +189,7 @@ export default function ChoreModalEDIT({ modalVisibleB, setModalVisibleB, editCh
 
   function choresIcons(){
 
-    const choresIconURL = "http://<ID>/cohab/getChoreTypeIcon";
+    const choresIconURL = "http:/5dcd-111-65-47-45.ngrok.io/cohab/getChoreTypeIcon";
   
     const init = {
       method: "GET",
@@ -199,67 +198,45 @@ export default function ChoreModalEDIT({ modalVisibleB, setModalVisibleB, editCh
       "Content-Type": "application/json",
       },
     };
-    (async () => {
-      try {
-        const response = await fetch(choresIconURL, init);
-        const json = await response.json();
-        console.log(json);
-        setChoreIconSource(json.icons);
-        if (json.status == "OK") {
-          console.log("Successfully connected!");
-        } else {
-          console.log("NOPE");
-          console.log(json.status);
+
+    useEffect(() => {
+      async function fetchChoreIcons() {
+        try {
+          const response = await fetch(choresIconURL, init);
+          const json = await response.json();
+          console.log(json);
+          setChoreIconSource(json.icons);
+          if (json.status == "OK") {
+            console.log("Successfully connected!");
+          } else {
+            console.log("NOPE");
+            console.log(json.status);
+          }
+        } catch (error) {
+          console.log(error);
         }
-      } catch (error) {
-        console.log(error);
       }
+      fetchChoreIcons();
       var entry=0;
       for(entry=0;entry<choreiconsource.Length;entry++){
         choretypeid.push(choreiconsource[entry]["choretypeid"]);
         icon.push(choreiconsource[entry]["icon"]);
       };
-    })();
+    }, [])
 
     return(
-    <View
+      <View
       style={styles.gridcont}
       >
-        <TouchableOpacity onPress={() => handleClick(1)}>
-        <View style={[styles.iconSquare,{backgroundColor: "#FFCDF4", borderWidth: (state.switchone === false ? 0 : 4)}]}>
-          <Image source={choreiconsource.icon[1]} style={styles.gridimage}/>
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => handleClick(2)}>
-        <View style={[styles.iconSquare,{backgroundColor: "#ECC3FF", borderWidth: (state.switchtwo === false ? 0 : 4)}]}>
-          <Image source={choreiconsource.icon[2]} style={styles.gridimage}/>
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => handleClick(3)}>
-        <View style={[styles.iconSquare,{backgroundColor: "#FFDBA5", borderWidth: (state.switchthree === false ? 0 : 4)}]}>
-          <Image source={choreiconsource.icon[3]} style={styles.gridimage}/>
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => handleClick(4)}>
-        <View style={[styles.iconSquare,{backgroundColor: "#A0FC80", borderWidth: (state.switchfour === false ? 0 : 4)}]}>
-          <Image source={choreiconsource.icon[4]} style={styles.gridimage}/>
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => handleClick(5)}>
-        <View style={[styles.iconSquare, {backgroundColor: "#7DE7DA", borderWidth: (state.switchfive === false ? 0 : 4)}]}>
-          <Image source={choreiconsource.icon[5]} style={styles.gridimage}/>
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => handleClick(6)}>
-        <View style={[styles.iconSquare,{backgroundColor: "#BDFFC4", borderWidth: (state.switchsix === false ? 0 : 4)}]}>
-          <Image source={choreiconsource.icon[6]} style={styles.gridimage}/>
-          </View>
-        </TouchableOpacity>
+        {choreiconsource.map((choreicon, index) => {
+            return (
+              <TouchableOpacity key={index} onPress={() => handleClick(this,choreicon.choretypeid)}>
+                <View style={[styles.iconSquare,{backgroundColor: "#ECC3FF", borderWidth: (state.switchtwo === false ? 0 : 4)}]}>
+                  <Image source={{uri: choreicon.icon}} style={styles.gridimage}/>
+                </View>
+              </TouchableOpacity>
+            );
+          })}
       </View>
     );
   }
@@ -296,22 +273,25 @@ export default function ChoreModalEDIT({ modalVisibleB, setModalVisibleB, editCh
       },
       body: JSON.stringify(newchore),
     };
-    const editChoreURL = "http://<ID>/cohab/updateChore";
-    (async () => {
-      try {
-        const response = await fetch(editChoreURL, init);
-        const json = await response.json();
-        console.log(json);
-        if (json.status == "OK") {
-          console.log("Successfully connected!");
-        } else {
-          console.log("NOPE");
-          console.log(json.status);
+    const editChoreURL = "http://5dcd-111-65-47-45.ngrok.io/cohab/updateChore";
+    useEffect(() => {
+      async function newSaveChores() {
+        try {
+          const response = await fetch(editChoreURL, init);
+          const json = await response.json();
+          console.log(json);
+          if (json.status == "OK") {
+            console.log("Successfully connected!");
+          } else {
+            console.log("NOPE");
+            console.log(json.status);
+          }
+        } catch (error) {
+          console.log(error);
         }
-      } catch (error) {
-        console.log(error);
       }
-    })();
+    newSaveChores();
+    }, [])
     closeChoreModal();
   }
 

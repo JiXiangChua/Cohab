@@ -9,7 +9,7 @@ import {
 import ProfilePic from "../../assets/Finance-assets/Kimberly.png";
 import GeneralButton from "../GeneralButton";
 //components
-import { ChoreModalEDIT, } from "../components";
+import ChoreModalEDIT from "./ChoreModalEDIT";
 
 import BasicText from "../BasicText.js";
 
@@ -89,7 +89,7 @@ export default function ChoreCard(props) {
             </View>
         </View>
       </View>
-      <ChoreModalEDIT modalVisibleB = {modalVisibleB} setModalVisibleB = {setModalVisibleB} placeholder= {props.dutyname} editChore = {editChore} />
+      <ChoreModalEDIT modalVisibleB = {modalVisibleB} setModalVisibleB = {setModalVisibleB} placeholder= {props.dutyname}/>
     </View>
   );
 }
