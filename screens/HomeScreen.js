@@ -672,24 +672,6 @@ export function HomeScreen(props) {
 
   return (
     <View style={styles.backgroundContainer}>
-      {/* For troubleshooting customise function, when fully completed can delete */}
-      {/* {piggyBank && (
-        <TouchableOpacity
-          onPress={() => {
-            // console.log(furniture[3].functionName);
-            assignCustomFunctionsToFurniture(furniture[3].functionName);
-          }}
-          onLongPress={() => {
-            setPiggyBank(false);
-          }}
-        >
-          <Image
-            source={BankPicture}
-            style={{ width: 200, height: 200 }}
-          ></Image>
-        </TouchableOpacity>
-      )} */}
-
       <ScrollView
         style={styles.scrollView}
         horizontal={true}
