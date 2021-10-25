@@ -274,10 +274,19 @@ export default function ChoreModal({ modalVisible, setModalVisible, addChore,}) 
 
   function saveChore() {
     const newchore = {
-      dutyname: choreTitle,
-      choretype: repeatByWeekOrMonth,
+      userId: 12,
+      groupid: 8,
+      title: choreTitle,
+      type: repeatByWeekOrMonth,
       choretypeid: choretypeid,
       date: date,
+      seq:[{
+        seqNo:1,
+        userId:1,
+      },{
+        seqNo:2,
+        userId:2,
+      }],
     }
     const init = {
       method: "POST",
