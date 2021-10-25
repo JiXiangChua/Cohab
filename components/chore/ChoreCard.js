@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import {
   View,
   StyleSheet,
@@ -7,17 +6,15 @@ import {
 } from "react-native";
 
 import ProfilePic from "../../assets/Finance-assets/Kimberly.png";
-import cleaning from "../../assets/Chores-assets/cleaning.png";
-import household from "../../assets/Chores-assets/household.png";
-import grocery from "../../assets/Chores-assets/grocery.png";
 import GeneralButton from "../GeneralButton";
 
 import BasicText from "../BasicText.js";
 
 export default function ChoreCard(props) {
 
-  //let iconObj = {"cleaning": cleaning, "household": household, "grocery": grocery}
-  var icon = props.iconselect
+  var icon = props.iconselect //uri gives this prop a chance to link to remote source in chorescreen
+  var currentUser = props.currentUser 
+  var nextUser = props.nextUser
 
   // variable to hold icon colour
   var iconColour = props.iconColour;
@@ -31,12 +28,14 @@ export default function ChoreCard(props) {
     // Set text colour to pink
     cycleColour = "#E16363"; 
     // Display deadline
-    deadlineTab[0] = (
-    <View style={{flexDirection:"row", justifyContent:"flex-start", marginVertical:-10}}>
-    <View style={styles.duedatecont}>
-      <BasicText style={styles.duedatetext}>Due: {props.duedate}</BasicText>
-    </View>
-    </View>);
+    // deadlineTab[0] = (
+    // <View style={{flexDirection:"row", justifyContent:"flex-start", marginVertical:-10}}>
+    // <View style={styles.duedatecont}>
+    //   <BasicText style={styles.duedatetext}>Due: {props.duedate}</BasicText>
+    // </View>
+    // </View>
+    //);
+    deadlineTab[0] = null;
   } else if (props.choretype == "Monthly"){
     // Set text colour to blue
     cycleColour = "#04ACE1"; 
@@ -58,7 +57,7 @@ export default function ChoreCard(props) {
         
         <View style={{backgroundColor: iconColour, alignContent:"center",justifyContent:"center", alignSelf: "center", marginLeft: 5, width: 90, height: 90, padding:10, borderRadius: 20}}>
         <Image 
-          source={{uri: icon}}
+          source={{uri: icon}}//uri can link to remote source
           style={styles.image}
         />
         </View>
@@ -85,8 +84,10 @@ export default function ChoreCard(props) {
           }]}>
           <BasicText style={[styles.chorebasictxt, {color: cycleColour}]}>{"Every " + props.cycleStart}</BasicText>
             <View style={styles.whosnextcont}>
-              <Image source={ProfilePic} style={styles.profileimgsmall}></Image>
+              <Image source={{uri: nextUser}} style={styles.profileimgsmall}></Image>
               <Image source={ProfilePic} style={styles.profileimg}></Image>
+              {/* <Image source={{uri: currentUser}} style={styles.profileimgsmall}></Image>
+              <Image source={{uri: nextUser}} style={styles.profileimg}></Image> */}
             </View>
         </View>
       </View>
@@ -157,7 +158,7 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     fontSize: 18,
     color: "#6F6F6F",
-    fontFamily: 'MontserratBold',
+    fontWeight: "bold",
   },
   chorebasictxt:{
     fontSize: 15,  

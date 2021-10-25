@@ -3,34 +3,10 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 
 import ProfilePic from "../../assets/Finance-assets/Kimberly.png";
 
-export default function SelectOrder(props) {
+export default function SelectOrder(props,groupmems) {
     // use onOrderChange to hook order array change
-
-    // replace fakebackend with realbackend
-    // fakebackend is an array of users that can assign the order to
-    const [fakebackend, setFakebackend] = useState([
-        {
-            userid: "000001",
-            username: "kimberly",
-            imageSource:  ProfilePic
-        },
-        {
-            userid: "000002",
-            username: "johndoe",
-            imageSource:  ProfilePic
-        },
-        {
-            userid: "000003",
-            username: "janedoe",
-            imageSource:  ProfilePic
-        },
-        {
-            userid: "000004",
-            username: "maryjane",
-            imageSource:  ProfilePic
-        },
-    ])
-
+    const [fakebackend, setFakebackend] = useState([]);
+    
     // {order{userIndex, selected: true}}
     const [counter, setCounter] = useState(new Array())
 
@@ -42,7 +18,8 @@ export default function SelectOrder(props) {
         }
         let arr = counter
         setCounter(arr)
-        setFakebackend([...fakebackend])
+        // setFakebackend([...fakebackend])
+        setFakebackend(groupmems);
     }
 
     // returns the order array back to parent view if item(s) is selected
