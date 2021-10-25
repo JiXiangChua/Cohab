@@ -1,4 +1,4 @@
-import React , { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { View, TouchableOpacity, StyleSheet, Text, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { BasicText } from "../components";
@@ -6,23 +6,22 @@ import ProfilePicture from "../assets/Finance-assets/Kimberly.png";
 import BuildingPicture from "../assets/Building.png";
 import AddButtonLogo from "../assets/Finance-assets/AddButton.png";
 
-import { AddGroupModal , JoinGroupModal } from "../components";
+import { AddGroupModal, JoinGroupModal } from "../components";
 
 export default function GroupSelectScreen({ navigation }) {
-
-  const [addModalVisible , setAddModalVisible] = useState(false);
-  const [joinModalVisible , setJoinModalVisible] = useState(false);
-  const [group1 , setGroup1] = useState({
-    "description": "This is for all NTU EEE students",
-    "id": 1,
-    "groupname": "EEE"
+  const [addModalVisible, setAddModalVisible] = useState(false);
+  const [joinModalVisible, setJoinModalVisible] = useState(false);
+  const [group1, setGroup1] = useState({
+    description: "This is for all NTU EEE students",
+    id: 1,
+    groupname: "EEE",
   });
-  const [group2 , setGroup2] = useState({
-    "description": "This is for all hall 3 students",
-    "id": 8,
-    "groupname": "Hall"
+  const [group2, setGroup2] = useState({
+    description: "This is for all hall 3 students",
+    id: 8,
+    groupname: "Hall",
   });
-  const [group3 , setGroup3] = useState({});
+  const [group3, setGroup3] = useState({});
 
   function getGroups(userId) {
     const getGroupsURL = `http://10.27.124.66:9999/cohab/getGroupsByUser?userId=${userId}`;
@@ -37,7 +36,7 @@ export default function GroupSelectScreen({ navigation }) {
 
     function updateGroups(json) {
       const groups = json.groups;
-      for (let i = 0 ; i < groups.length ; i++) {
+      for (let i = 0; i < groups.length; i++) {
         if (i === 0) {
           setGroup1(group);
         }
@@ -50,21 +49,22 @@ export default function GroupSelectScreen({ navigation }) {
       }
     }
 
-    ;(async () => {
+    (async () => {
       try {
-          const response = await fetch(getGroupsURL, init);
-          const json = await response.json();
-          console.log(json);
-          updateGroups(json);
+        const response = await fetch(getGroupsURL, init);
+        const json = await response.json();
+        console.log(json);
+        updateGroups(json);
       } catch (error) {
         console.log(error);
       }
     })();
   }
-  
+
   function goToHome() {
     navigation.navigate("Home");
   }
+  getData();
 
   function handleAddGroup() {
     setAddModalVisible(true);
@@ -73,23 +73,23 @@ export default function GroupSelectScreen({ navigation }) {
   function handleJoinGroup() {
     setJoinModalVisible(true);
   }
-  
+
   function handleGroup1() {
     goToHome();
   }
-  
+
   function handleGroup2() {
     goToHome();
   }
 
   function handleGroup3() {
     goToHome();
-  };
+  }
 
   useEffect(() => {
     getGroups(1);
-  },[])
-  
+  }, []);
+
   return (
     <SafeAreaView style={styles.backgroundContainer}>
       <Image source={ProfilePicture} style={styles.profilePicture} />
@@ -111,7 +111,9 @@ export default function GroupSelectScreen({ navigation }) {
           ]}
           onPress={handleGroup1}
         >
-          <BasicText style={styles.groupButtonText}>{group1.groupname}</BasicText>
+          <BasicText style={styles.groupButtonText}>
+            {group1.groupname}
+          </BasicText>
         </TouchableOpacity>
         <TouchableOpacity
           style={[
@@ -125,7 +127,9 @@ export default function GroupSelectScreen({ navigation }) {
           ]}
           onPress={handleGroup2}
         >
-          <BasicText style={styles.groupButtonText}>{group2.groupname}</BasicText>
+          <BasicText style={styles.groupButtonText}>
+            {group2.groupname}
+          </BasicText>
         </TouchableOpacity>
         <TouchableOpacity
           style={[
@@ -142,18 +146,30 @@ export default function GroupSelectScreen({ navigation }) {
           <BasicText style={styles.groupButtonText}>Friends</BasicText>
         </TouchableOpacity>
       </View>
-      <View style = {styles.bottomButtonsContainer}>
-        <TouchableOpacity style={[styles.groupButton , styles.bottomButton]} onPress = {handleAddGroup}>
-          <Image source = {AddButtonLogo} style = {styles.buttonLogo} />
-          <BasicText style = {[styles.subHeaderText]}>Add Group</BasicText>
+      <View style={styles.bottomButtonsContainer}>
+        <TouchableOpacity
+          style={[styles.groupButton, styles.bottomButton]}
+          onPress={handleAddGroup}
+        >
+          <Image source={AddButtonLogo} style={styles.buttonLogo} />
+          <BasicText style={[styles.subHeaderText]}>Add Group</BasicText>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.groupButton , styles.bottomButton]} onPress = {handleJoinGroup}>
-          <Image source = {AddButtonLogo} style = {styles.buttonLogo} />
-          <BasicText style = {[styles.subHeaderText]}>Join Group</BasicText>
+        <TouchableOpacity
+          style={[styles.groupButton, styles.bottomButton]}
+          onPress={handleJoinGroup}
+        >
+          <Image source={AddButtonLogo} style={styles.buttonLogo} />
+          <BasicText style={[styles.subHeaderText]}>Join Group</BasicText>
         </TouchableOpacity>
       </View>
-      <AddGroupModal addModalVisible = {addModalVisible} setAddModalVisible = {setAddModalVisible} />
-      <JoinGroupModal joinModalVisible = {joinModalVisible} setJoinModalVisible = {setJoinModalVisible} />
+      <AddGroupModal
+        addModalVisible={addModalVisible}
+        setAddModalVisible={setAddModalVisible}
+      />
+      <JoinGroupModal
+        joinModalVisible={joinModalVisible}
+        setJoinModalVisible={setJoinModalVisible}
+      />
     </SafeAreaView>
   );
 }
@@ -173,12 +189,12 @@ const styles = StyleSheet.create({
   buildingPicture: {
     height: 650,
     width: 410,
-    resizeMode: 'contain',
+    resizeMode: "contain",
   },
   headerText: {
     fontSize: 40,
     color: "#6E2142",
-    fontFamily: 'MontserratSemiBold',
+    fontFamily: "MontserratSemiBold",
   },
   subHeaderText: {
     fontSize: 20,
@@ -213,13 +229,13 @@ const styles = StyleSheet.create({
   },
   bottomButtonsContainer: {
     marginTop: 20,
-    width: '100%',
-    flexDirection: 'row',
+    width: "100%",
+    flexDirection: "row",
     justifyContent: "space-evenly",
   },
   bottomButton: {
-    width: '40%',
+    width: "40%",
     marginTop: 10,
-    flexDirection: 'row',
-  }
+    flexDirection: "row",
+  },
 });

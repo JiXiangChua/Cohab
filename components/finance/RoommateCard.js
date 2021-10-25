@@ -8,7 +8,6 @@ import {
   ScrollView,
 } from "react-native";
 
-import ProfilePic from "../../assets/Finance-assets/Kimberly.png";
 import GeneralButton from "../GeneralButton";
 import BasicText from "../BasicText.js";
 
@@ -28,7 +27,7 @@ export default function RoommateCard(props) {
       <View style={{ flexDirection: "row" }}>
         {/* Here the image need change when the database is ready */}
         <Image
-          source={ProfilePic}
+          source={props.profileImage}
           style={styles.cardDisplayColumnLeftFormat}
         ></Image>
 
