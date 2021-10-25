@@ -5,6 +5,7 @@ import { BasicText } from "../components";
 import ProfilePicture from "../assets/Finance-assets/Kimberly.png";
 import BuildingPicture from "../assets/Building.png";
 import AddButtonLogo from "../assets/Finance-assets/AddButton.png";
+import dog1Gif from "../assets/Home-assets/dog1.gif";
 
 import { AddGroupModal, JoinGroupModal } from "../components";
 
@@ -146,6 +147,7 @@ export default function GroupSelectScreen({ navigation }) {
           <BasicText style={styles.groupButtonText}>Friends</BasicText>
         </TouchableOpacity>
       </View>
+
       <View style={styles.bottomButtonsContainer}>
         <TouchableOpacity
           style={[styles.groupButton, styles.bottomButton]}
