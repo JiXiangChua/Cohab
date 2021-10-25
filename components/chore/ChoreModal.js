@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { useState } from "react";
 import {
   View,
   TextInput,
@@ -17,8 +18,7 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import BasicText from "../BasicText.js";
 import SelectOrder from "../../components/chore/SelectOrder";
 
-export default function ChoreModal({ modalVisible, setModalVisible,}) {
-
+export default function ChoreModal({ modalVisible, setModalVisible, choreiconsource,groupmems}) {
   // Values needed for Add Chore Screen Popup (Modal)
   var repeatOptions = ["Weekly", "Monthly"];
   var displayRepeatOptions = [];
@@ -30,7 +30,7 @@ export default function ChoreModal({ modalVisible, setModalVisible,}) {
   const [selectcheck, setSelectCheck] = useState(false);
   const [showSelectDate, setSelectDate] = useState("heya"); //show on the button
 
-  const onChange = (event, selectedDate) => {
+  const onChange = (selectedDate) => {
     const currentDate = selectedDate || date;
     var weekday = selectedDate.toString().split(' ')[0];
     var dateday = selectedDate.toString().split(' ')[2];
@@ -81,167 +81,27 @@ export default function ChoreModal({ modalVisible, setModalVisible,}) {
       </Pressable>
     );
   }
-
-  // for choosing the chore icon
-  const [state, setState] = useState({
-    switchone: false,
-    switchtwo: false,
-    switchthree: false,
-    switchfour: false,
-    switchfive: false,
-  });
+  
   //setChoreID so it displays user's chosen icon on the screen
   const [choretypeid, setChoreTypeID] = useState(1);
 
-  const handleClick=(flag)=>{
-    switch(flag) {
-      case 0:
-        setState({
-          switchone: false,
-          switchtwo: false,
-          switchthree: false,
-          switchfour: false,
-          switchfive: false,
-          switchsix: false,
-        });
-        break;
-
-      case 1:
-        setState({
-          switchone: true,
-          switchtwo: false,
-          switchthree: false,
-          switchfour: false,
-          switchfive: false,
-          switchsix: false,
-        });
-        setChoreTypeID(1);
-        break;
-      
-      case 2:
-        setState({
-          switchone: false,
-          switchtwo: true,
-          switchthree: false,
-          switchfour: false,
-          switchfive: false,
-          switchsix: false,
-        });
-        setChoreTypeID(2);
-        break;
-
-      case 3:
-        setState({
-          switchone: false,
-          switchtwo: false,
-          switchthree: true,
-          switchfour: false,
-          switchfive: false,
-          switchsix: false,
-        });
-        setChoreTypeID(3);
-        break;
-
-      case 4:
-        setState({
-          switchone: false,
-          switchtwo: false,
-          switchthree: false,
-          switchfour: true,
-          switchfive: false,
-          switchsix: false,
-        });
-        setChoreTypeID(4);
-        break;
-
-      case 5:
-        setState({
-          switchone: false,
-          switchtwo: false,
-          switchthree: false,
-          switchfour: false,
-          switchfive: true,
-          switchsix: false,
-        });
-        setChoreTypeID(5);
-        break;
-
-      case 6:
-        setState({
-          switchone: false,
-          switchtwo: false,
-          switchthree: false,
-          switchfour: false,
-          switchfive: false,
-          switchsix: true,
-        });
-        setChoreTypeID(6);
-        break;
-
-      default:
-        setState({switchone: false,});
-        setChoreTypeID(1);
-    }
-  }
-
-  //importing icon images
-  const [choreiconsource, setChoreIconSource] = useState([]);
-
-  function choresIcons(){
-
-    const choresIconURL = "http:/5dcd-111-65-47-45.ngrok.io/cohab/getChoreTypeIcon";
-  
-    const init = {
-      method: "GET",
-      headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      },
-    };
-
-    useEffect(() => {
-      async function fetchChoreIcons() {
-        try {
-          const response = await fetch(choresIconURL, init);
-          const json = await response.json();
-          console.log(json);
-          setChoreIconSource(json.icons);
-          if (json.status == "OK") {
-            console.log("Successfully connected!");
-          } else {
-            console.log("NOPE");
-            console.log(json.status);
-          }
-        } catch (error) {
-          console.log(error);
-        }
-      }
-      fetchChoreIcons();
-      var entry=0;
-      for(entry=0;entry<choreiconsource.Length;entry++){
-        choretypeid.push(choreiconsource[entry]["choretypeid"]);
-        icon.push(choreiconsource[entry]["icon"]);
-      };
-    }, [])
-
-    return(
-      <View
-      style={styles.gridcont}
-      >
-        {choreiconsource.map((choreicon, index) => {
-            return (
-              <TouchableOpacity key={index} onPress={() => handleClick(this,choreicon.choretypeid)}>
-                <View style={[styles.iconSquare,{backgroundColor: "#ECC3FF", borderWidth: (state.switchtwo === false ? 0 : 4)}]}>
-                  <Image source={{uri: choreicon.icon}} style={styles.gridimage}/>
-                </View>
-              </TouchableOpacity>
-            );
-          })}
-      </View>
-    );
-  }
-
   const [choreTitle , setChoreTitle] = useState('');
+
+  const [iconSelected, setIconSelected] = useState([false,false,false,false,false,false]);
+  const [userSelected, setUserSelected] = useState([]);
+  var userArray = [];
+  
+  const handleClick=(choretypeid)=>{
+    var array = [false,false,false,false,false,false];
+    array[choretypeid-1] = true;
+    setIconSelected(array);
+    setChoreTypeID(choretypeid);
+  }
+
+  const userImgClick=(userid)=>{
+    userArray.push(userid);
+    setUserSelected(userArray);
+  }
 
   function closeChoreModal(){
     setModalVisible(!modalVisible);
@@ -250,20 +110,25 @@ export default function ChoreModal({ modalVisible, setModalVisible,}) {
   }
 
   function saveChore() {
+    var userSeqs=[{
+      seqNo:1,
+      userId:userArray[0],
+    },{
+      seqNo:2,
+      userId:userArray[1],
+    },{
+      seqNo:3,
+      userId:userArray[2],
+    }];
+    
     const newchore = {
-      userId: 12,
-      groupid: 8,
-      title: choreTitle,
+      userId:15,
+		  groupid:1,
+		  title:choreTitle,
+      seqs:userSeqs,
       type: repeatByWeekOrMonth,
       choretypeid: choretypeid,
-      date: date,
-      seq:[{
-        seqNo:1,
-        userId:1,
-      },{
-        seqNo:2,
-        userId:2,
-      }],
+      date: "2021-10-25",
     }
     const init = {
       method: "POST",
@@ -273,30 +138,21 @@ export default function ChoreModal({ modalVisible, setModalVisible,}) {
       },
       body: JSON.stringify(newchore),
     };
-
-    const addChoreURL = "http://5dcd-111-65-47-45.ngrok.io/cohab/addChore";
-
-    useEffect(() => {
-      async function newSaveChores() {
-        try {
-          const response = await fetch(addChoreURL, init);
-          const json = await response.json();
-          console.log(json);
-          if (json.status == "OK") {
-            console.log("Successfully connected!");
-          } else {
-            console.log("NOPE");
-            console.log(json.status);
-          }
-        } catch (error) {
-          console.log(error);
+    const addChoreURL = "http://10.27.7.171:9999/cohab/addChore";
+    (async () => {
+      try {
+        const response = await fetch(addChoreURL, init);
+        const json = await response.json();
+        if (json.status == "OK") {
+          console.log("Successfully connected!");
         }
+      } catch (error) {
+        console.log(error);
       }
-    newSaveChores();
-    }, [])
+    })();
     closeChoreModal();
   }
-
+  
   return (
     <Modal
       animationType="slide"
@@ -328,11 +184,31 @@ export default function ChoreModal({ modalVisible, setModalVisible,}) {
 
           <BasicText style={{ paddingTop: 20 }}>Select an icon</BasicText>
           
-          {choresIcons()}
+          <View style={styles.gridcont}>
+            {choreiconsource.map((choreicon, index) => {
+                return (
+                  <TouchableOpacity key={index} onPress={() => handleClick(choreicon.choretypeid)}>
+                  <View style={[styles.iconSquare,{backgroundColor: "#ECC3FF", borderWidth: (iconSelected[index] === false ? 0 : 4)}]}>
+                    <Image source={{uri: choreicon.icon}} style={styles.gridimage}/>
+                  </View>
+                </TouchableOpacity>
+                );
+              })}
+          </View>
 
           <BasicText style={{ paddingTop: 20 }}>Select the order</BasicText>
 
-         <SelectOrder onOrderChange={(newOrder)=> console.log(newOrder)}/>
+          <View style={styles.container}>
+            {
+                groupmems.map((user, index) => {
+                    return(
+                      <TouchableOpacity key={index} style={styles.item} onPress={() => userImgClick(user.userid)}>
+                          <Image style={{height: 50,width: 50, opacity: 0.35, borderWidth: 4, borderColor: "#36BC7C", borderRadius: 100}} source={{uri: user.profileimg}}/>
+                      </TouchableOpacity>
+                    );
+                })
+            }
+          </View>
 
           <BasicText style={{ paddingTop: 20 }}>Repeat</BasicText>
 
@@ -364,7 +240,7 @@ export default function ChoreModal({ modalVisible, setModalVisible,}) {
                 mode={mode}
                 is24Hour={true}
                 display="default"
-                onChange={onChange}
+                onChange={onChange(date)}
               />
             )}
           </View>
@@ -486,4 +362,35 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
+
+  container: {
+    flex: 1,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    marginTop: 20,
+},
+item: {
+    marginTop: 10,
+    marginHorizontal: 7,
+},
+image: {
+    resizeMode: "contain",
+    borderRadius: 10,
+    opacity: 0.35
+},
+textoverlay: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    alignItems: "center",
+    justifyContent: "center",
+},
+text: {
+    fontSize: 18,
+    fontWeight: "bold",
+}
 });
