@@ -10,11 +10,18 @@ import {
   Text,
   Animated,
   Easing,
+  Switch,
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Modal from "react-native-modal";
 import ReactNativeZoomableView from "@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView";
+import {
+  copilot,
+  walkthroughable,
+  CopilotStep,
+  copilotEvents,
+} from "react-native-copilot";
 
 import { BasicText, HomeScreenHeader } from "../components";
 import CardboardLogo from "../assets/Home-assets/cardboard.png";
@@ -53,8 +60,11 @@ import GroupPicture from "../assets/Home-assets/door.png";
 import TaskPicture from "../assets/Home-assets/taskboard.png";
 import CalendarPicture from "../assets/Home-assets/calendar.png";
 import dog1Gif from "../assets/Home-assets/dog1.gif";
+import { startDetecting } from "react-native/Libraries/Utilities/PixelRatio";
 
-export default function HomeScreen({ navigation }) {
+export function HomeScreen(props) {
+  const { navigation } = props;
+  console.log(props.copilotEvents);
   const [modalVisible, setModalVisible] = useState(false);
 
   const [taskBoard, setTaskBoard] = useState(false);
@@ -68,6 +78,20 @@ export default function HomeScreen({ navigation }) {
   const [functionModal, setFunctionModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
   const [itemID, setItemID] = useState(-1);
+
+  const CopilotText = walkthroughable(Text);
+  const [secondStepActive, setsecondStep] = useState(true);
+  const WalkthroughableText = walkthroughable(Text);
+  const WalkthroughableImage = walkthroughable(Image);
+  const WalkthroughableButton = walkthroughable(TouchableOpacity);
+
+  useEffect(() => {
+    props.copilotEvents.on("stepChange", handleStepChange);
+  }, []);
+
+  const handleStepChange = (step) => {
+    console.log(`current step is: ${step.name}`);
+  };
 
   const [furniture, setFurniture] = useState([
     {
@@ -1016,6 +1040,7 @@ export default function HomeScreen({ navigation }) {
               }}
               onPress={() => {
                 // assignCustomFunctionsToFurniture(furniture[2].functionName);
+                props.start();
               }}
             >
               <Image
@@ -1067,10 +1092,42 @@ export default function HomeScreen({ navigation }) {
       <HomeScreenHeader navigation={navigation} />
       <View style={styles.header}>
         <BasicText style={styles.screenTitle}>Hall</BasicText>
+        {/* <TouchableOpacity onPress={() => props.start()}>
+          <CopilotStep
+            text="This is a hello world example!"
+            order={1}
+            name="hello"
+          >
+            <CopilotText>Hello world!</CopilotText>
+          </CopilotStep>
+        </TouchableOpacity>
+        <CopilotStep
+          text="This is a hello world example!"
+          order={2}
+          name="hello"
+          active={secondStepActive}
+        >
+          <CopilotText>abcdefg!</CopilotText>
+        </CopilotStep> */}
+        <View style={{ position: "absolute", top: 500 }}>
+          <CopilotStep text="Screen 1" order={1} name="openApp">
+            <WalkthroughableText></WalkthroughableText>
+          </CopilotStep>
+        </View>
+        <CopilotStep text="Screen 2" order={2} name="thirdText">
+          <WalkthroughableButton></WalkthroughableButton>
+        </CopilotStep>
+        <CopilotStep text="Screen 3" order={3} name="testing1">
+          <WalkthroughableText>
+            {/* for highlight components */}
+          </WalkthroughableText>
+        </CopilotStep>
       </View>
     </View>
   );
 }
+
+export default copilot()(HomeScreen);
 
 const styles = StyleSheet.create({
   backgroundContainer: {
