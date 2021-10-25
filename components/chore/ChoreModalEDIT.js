@@ -16,9 +16,9 @@ import {
 import DateTimePicker from "@react-native-community/datetimepicker";
 
 import BasicText from "../BasicText.js";
-import SelectOrder from "../../components/chore/SelectOrder";
+import SelectOrder from "./SelectOrder";
 
-export default function ChoreModal({ modalVisible, setModalVisible, saveChore,}) {
+export default function ChoreModalEDIT({ modalVisibleB, setModalVisibleB, editChore, placeholder,}) {
 
   // Values needed for Add Chore Screen Popup (Modal)
   var repeatOptions = ["Weekly", "Monthly"];
@@ -267,12 +267,12 @@ export default function ChoreModal({ modalVisible, setModalVisible, saveChore,})
   const [choreTitle , setChoreTitle] = useState('');
 
   function closeChoreModal(){
-    setModalVisible(!modalVisible);
+    setModalVisibleB(!modalVisibleB);
     setChoreTitle('');
     setSelectCheck(false);
   }
 
-  function saveChore() {
+  function editChore() {
     const newchore = {
       userId: 12,
       groupid: 8,
@@ -285,7 +285,7 @@ export default function ChoreModal({ modalVisible, setModalVisible, saveChore,})
         userId:1,
       },{
         seqNo:2,
-        userId:2,
+        userId:3,
       }],
     }
     const init = {
@@ -296,10 +296,10 @@ export default function ChoreModal({ modalVisible, setModalVisible, saveChore,})
       },
       body: JSON.stringify(newchore),
     };
-    const addChoreURL = "http://<ID>/cohab/addChore";
+    const editChoreURL = "http://<ID>/cohab/updateChore";
     (async () => {
       try {
-        const response = await fetch(addChoreURL, init);
+        const response = await fetch(editChoreURL, init);
         const json = await response.json();
         console.log(json);
         if (json.status == "OK") {
@@ -319,7 +319,7 @@ export default function ChoreModal({ modalVisible, setModalVisible, saveChore,})
     <Modal
       animationType="slide"
       transparent={true}
-      visible={modalVisible}
+      visible={modalVisibleB}
       onRequestClose={closeChoreModal}
     >
       {/*Rest of screen will darken*/}
@@ -339,7 +339,7 @@ export default function ChoreModal({ modalVisible, setModalVisible, saveChore,})
           {/*Type in Chore name*/}
           <TextInput
             style={{ borderBottomWidth: 0.5, width: "50%" }}
-            placeholder="Chore Title"
+            placeholder={placeholder}
             onChangeText = {(choreTitle) => {setChoreTitle(choreTitle)}} 
             value = {choreTitle}
           />
@@ -403,7 +403,7 @@ export default function ChoreModal({ modalVisible, setModalVisible, saveChore,})
             </Pressable>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={saveChore}
+              onPress={editChore}
             >
               <BasicText style={styles.textStyle}>Confirm</BasicText>
             </Pressable>

@@ -13,7 +13,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 //components
-import { MenuBar , ChoreCard , BasicText, ChoreModal } from "../components";
+import { MenuBar , ChoreCard , BasicText, ChoreModal, ChoreModalEDIT, } from "../components";
 //assets
 import NewChoresButton from "../assets/icons/icon_designs-03.png";
 import placeholderBG from "../assets/sampleappbg.jpg";
@@ -134,7 +134,7 @@ export default function ChoreScreen({ navigation }) {
           minHeight: 600,
         }}>
       </View>
-      <ChoreModal modalVisible = {modalVisible} setModalVisible = {setModalVisible} addChore = {addChore} />
+      <ChoreModal modalVisible = {modalVisible} setModalVisible = {setModalVisible} saveChore = {saveChore} />
     </ScrollView>
     {/*</ImageBackground>*/}
   </SafeAreaView>

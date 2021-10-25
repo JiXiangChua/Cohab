@@ -8,12 +8,15 @@ import {
 
 import ProfilePic from "../../assets/Finance-assets/Kimberly.png";
 import GeneralButton from "../GeneralButton";
+//components
+import { ChoreModalEDIT, } from "../components";
 
 import BasicText from "../BasicText.js";
 
 export default function ChoreCard(props) {
 
   var icon = props.iconselect //uri gives this prop a chance to link to remote source in chorescreen
+  const [modalVisibleB, setModalVisibleB] = useState(false);
 
   // variable to hold icon colour
   var iconColour = props.iconColour;
@@ -69,7 +72,7 @@ export default function ChoreCard(props) {
             <GeneralButton
                 buttonText= "Edit"
                 color="#7B98FF"
-                //onPress={}
+                onPress={() => setModalVisibleB(true)}
             />
           </View>
         </View>
@@ -86,6 +89,7 @@ export default function ChoreCard(props) {
             </View>
         </View>
       </View>
+      <ChoreModalEDIT modalVisibleB = {modalVisibleB} setModalVisibleB = {setModalVisibleB} placeholder= {props.dutyname} editChore = {editChore} />
     </View>
   );
 }
