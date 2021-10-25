@@ -29,16 +29,19 @@ export default function ChoreModal({ modalVisible, setModalVisible, choreiconsou
   //onChange receives datechange-->What does it do when receive new change add later when database clear
   const [selectcheck, setSelectCheck] = useState(false);
   const [showSelectDate, setSelectDate] = useState("heya"); //show on the button
+  const [dateSELECT, setDateSELECT] = useState("");//for database date
 
-  const onChange = (selectedDate) => {
+  const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     var weekday = selectedDate.toString().split(' ')[0];
     var dateday = selectedDate.toString().split(' ')[2];
     var datemonth = selectedDate.toString().split(' ')[1];
     var dateyear = selectedDate.toString().split(' ')[3];
+    var dateSENT = selectedDate.toISOString().split('T')[0];
     setSelectDate(weekday+", "+dateday+" "+datemonth+" "+dateyear);
     setSelectCheck(true);
     setShow(false);
+    setDateSELECT(dateSENT);
     setDate(currentDate);
   };
 
@@ -128,7 +131,7 @@ export default function ChoreModal({ modalVisible, setModalVisible, choreiconsou
       seqs:userSeqs,
       type: repeatByWeekOrMonth,
       choretypeid: choretypeid,
-      date: "2021-10-25",
+      date: dateSELECT,
     }
     const init = {
       method: "POST",
@@ -138,7 +141,7 @@ export default function ChoreModal({ modalVisible, setModalVisible, choreiconsou
       },
       body: JSON.stringify(newchore),
     };
-    const addChoreURL = "http://10.27.7.171:9999/cohab/addChore";
+    const addChoreURL = "http://8412-111-65-47-49.ngrok.io/cohab/addChore";
     (async () => {
       try {
         const response = await fetch(addChoreURL, init);
@@ -240,7 +243,7 @@ export default function ChoreModal({ modalVisible, setModalVisible, choreiconsou
                 mode={mode}
                 is24Hour={true}
                 display="default"
-                onChange={onChange(date)}
+                onChange={onChange}
               />
             )}
           </View>

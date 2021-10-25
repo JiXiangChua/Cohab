@@ -189,7 +189,7 @@ export default function ChoreModalEDIT({ modalVisibleB, setModalVisibleB, placeh
 
   function choresIcons(){
 
-    const choresIconURL = "http:/5dcd-111-65-47-45.ngrok.io/cohab/getChoreTypeIcon";
+    const choresIconURL = "http://8412-111-65-47-49.ngrok.io/cohab/getChoreTypeIcon";
   
     const init = {
       method: "GET",
@@ -273,7 +273,7 @@ export default function ChoreModalEDIT({ modalVisibleB, setModalVisibleB, placeh
       },
       body: JSON.stringify(newchore),
     };
-    const editChoreURL = "http://5dcd-111-65-47-45.ngrok.io/cohab/updateChore";
+    const editChoreURL = "http://8412-111-65-47-49.ngrok.io/cohab/updateChore";
     useEffect(() => {
       async function newSaveChores() {
         try {

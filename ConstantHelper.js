@@ -1,0 +1,1 @@
+export const CONNECTION = "http://8412-111-65-47-49.ngrok.io/cohab/";

@@ -26,9 +26,10 @@ export default function ChoreScreen({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
 
   //function displayChores(){
-  const choresURL = ConstantHelper.CONNECTION + "getChores?groupId=1";
-  const choresIconURL = "http://10.27.7.171:9999/cohab/getChoreTypeIcon";
-  const groupmemURL = "http://10.27.7.171:9999/cohab/getGroupMembers?groupId=1";
+  //const choresURL = ConstantHelper.CONNECTION + "http://8412-111-65-47-49.ngrok.io/cohab/getChores?groupId=1";
+  const choresURL = "http://8412-111-65-47-49.ngrok.io/cohab/getChores?groupId=1";
+  const choresIconURL = "http://8412-111-65-47-49.ngrok.io/cohab/getChoreTypeIcon";
+  const groupmemURL = "http://8412-111-65-47-49.ngrok.io/cohab/getGroupMembers?groupId=1";
 
   const init = {
     method: "GET",
