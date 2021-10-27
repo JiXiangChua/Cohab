@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 
 import Card from "../navigation/inviteCard.js";
+import receiveMail from "../assets/icons/invitationreceived.png"
+import sentMail from "../assets/icons/invitationsentout.png"
 
 export default function EventBox() {
   const [currentTab, setCurrentTab] = useState("out");
@@ -32,11 +34,11 @@ export default function EventBox() {
     <View style={styles.taskContainer}>
       <View style={styles.title}>
         <TouchableOpacity style={received} onPress={handleReceived}>
-          <Text style={styles.subHeaderText}>In</Text>
+          <Image source={receiveMail} style={styles.mailIcon} />
         </TouchableOpacity>
 
         <TouchableOpacity style={sent} onPress={handleSent}>
-          <Text style={styles.subHeaderText}>Out</Text>
+          <Image source={sentMail} style={styles.mailIcon} />
         </TouchableOpacity>
       </View>
 
@@ -81,10 +83,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    width: "95%",
+    width: "100%",
     height: 50,
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: "30%",
     marginTop: 0,
     alignItems: "center",
   },
@@ -118,6 +121,13 @@ const styles = StyleSheet.create({
     minHeight: 8,
     alignSelf: "center",
   },
+  mailIcon: {
+      width: "500%",
+      height: "100%",
+      minWidth: 8,
+      minHeight: 8,
+      alignSelf: "center",
+    },
   subHeaderText: {
     fontSize: 22,
     alignItems: "center",
