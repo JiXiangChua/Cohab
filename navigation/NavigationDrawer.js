@@ -14,7 +14,7 @@ import FinancePayRMScreen from "../screens/Finance/FinancePayRMScreen";
 import FinancePayGroupScreen from "../screens/Finance/FinancePayGroupScreen";
 import CustomDrawerContent from "../components/CustomDrawerContent";
 import GroupSelectScreen from "../screens/GroupSelectScreen";
-import SplashScreen from "../screens/SplashScreen";
+//import SplashScreen from "../screens/SplashScreen";
 
 const Drawer = createDrawerNavigator();
 const Stack = createNativeStackNavigator();
@@ -38,13 +38,11 @@ export default function NavigationDrawer() {
 
   return (
     <Drawer.Navigator
-      // initialRouteName="GroupSelect"
-      initialRouteName="Splash"
+      initialRouteName="GroupSelect"
       screenOptions={screenOptions}
       drawerContent={(props) => <CustomDrawerContent {...props} />}
     >
       <Drawer.Screen name="Home" component={HomeScreen} />
-      <Drawer.Screen name="Splash" component={SplashScreen} />
       <Drawer.Screen name="GroupSelect" component={GroupSelectScreen} />
       <Drawer.Screen name="Calendar" component={CalendarScreen} />
       <Drawer.Screen name="Chore" component={ChoreScreen} />
