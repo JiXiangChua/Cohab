@@ -8,6 +8,8 @@ import {
   Button,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Video, AVPlaybackStatus } from "expo-av";
+import LaunchScreen from "../assets/LaunchScreen2.mp4";
 import { BasicText } from "../components";
 
 export default function SplashScreen({ navigation }) {
@@ -15,18 +17,32 @@ export default function SplashScreen({ navigation }) {
   setTimeout(() => {
     navigation.navigate("Login");
   }, 3000);
+  const video = React.useRef(null);
   return (
-    <SafeAreaView>
-      <Text>Hello world!</Text>
-      {/* But later we just put like 3 seconds auto navigate to GroupSelectScreen */}
-      <Button
-        onPress={() => {
-          navigation.navigate("Login");
-        }}
-        title="Click to go to Group Select Screen"
-      ></Button>
-    </SafeAreaView>
+    <View style={styles.container}>
+      <Video
+        ref={video}
+        style={styles.video}
+        source={LaunchScreen}
+        useNativeControls={false}
+        resizeMode="cover"
+        shouldPlay
+        isLooping
+      />
+    </View>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    backgroundColor: "#ecf0f1",
+  },
+  video: {
+    alignSelf: "center",
+    flex: 1,
+    width: "100%",
+    height: "100%",
+  },
+});
