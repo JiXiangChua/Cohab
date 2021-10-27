@@ -1,12 +1,10 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import {
-  LoginScreen,
-  RegisterScreen,
-} from "../screens";
+import { LoginScreen, RegisterScreen } from "../screens";
 import NavigationDrawer from "./NavigationDrawer";
 import { useLoginContext } from "../LoginContext";
+import SplashScreen from "../screens/SplashScreen";
 
 const RootStack = createNativeStackNavigator();
 export default function RootStackScreen({ navigation }) {
@@ -18,20 +16,13 @@ export default function RootStackScreen({ navigation }) {
 
   if (!isSignedIn) {
     return (
-      <RootStack.Navigator screenOptions = {noHeader}>
-        <RootStack.Screen
-          name="Login"
-          component={LoginScreen}
-        />
-        <RootStack.Screen
-          name="Register"
-          component={RegisterScreen}
-        />
+      <RootStack.Navigator screenOptions={noHeader}>
+        <RootStack.Screen name="Splash" component={SplashScreen} />
+        <RootStack.Screen name="Login" component={LoginScreen} />
+        <RootStack.Screen name="Register" component={RegisterScreen} />
       </RootStack.Navigator>
     );
   } else {
-    return(
-      <NavigationDrawer />
-    );
+    return <NavigationDrawer />;
   }
 }

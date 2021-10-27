@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import {
+  Text,
   View,
   TextInput,
   Modal,
@@ -14,18 +15,11 @@ import {
   AppRegistry,
 } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
-
+import * as ConstantHelper from "../../ConstantHelper.js";
 import BasicText from "../BasicText.js";
-import ProfilePic from "../../assets/Finance-assets/Kimberly.png";
-import cleaning from "../../assets/Chores-assets/cleaning.png";
-import household from "../../assets/Chores-assets/household.png";
-import heart from "../../assets/Chores-assets/heart.png";
-import shopping from "../../assets/Chores-assets/online-shopping.png";
-import grocery from "../../assets/Chores-assets/grocery.png";
-import payment from "../../assets/Chores-assets/cash-payment.png";
 import SelectOrder from "../../components/chore/SelectOrder";
 
-export default function ChoreModal({ modalVisible, setModalVisible }) {
+export default function ChoreModal({ modalVisible, setModalVisible, choreiconsource,groupmems}) {
   // Values needed for Add Chore Screen Popup (Modal)
   var repeatOptions = ["Weekly", "Monthly"];
   var displayRepeatOptions = [];
@@ -35,17 +29,23 @@ export default function ChoreModal({ modalVisible, setModalVisible }) {
   const [show, setShow] = useState(false);
   //onChange receives datechange-->What does it do when receive new change add later when database clear
   const [selectcheck, setSelectCheck] = useState(false);
-  const [showSelectDate, setSelectDate] = useState("heya");
+  const [showSelectDate, setSelectDate] = useState("heya"); //show on the button
+  const [dateSELECT, setDateSELECT] = useState("");//for database date
+
   const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
-    var weekday = selectedDate.toString().split(' ')[0];
-    var dateday = selectedDate.toString().split(' ')[2];
-    var datemonth = selectedDate.toString().split(' ')[1];
-    var dateyear = selectedDate.toString().split(' ')[3];
-    setSelectDate(weekday+", "+dateday+" "+datemonth+" "+dateyear);
-    setSelectCheck(true);
-    setShow(false);
-    setDate(currentDate);
+    if(selectedDate!=undefined){
+      const currentDate = selectedDate || date;
+      var weekday = selectedDate.toString().split(' ')[0];
+      var dateday = selectedDate.toString().split(' ')[2];
+      var datemonth = selectedDate.toString().split(' ')[1];
+      var dateyear = selectedDate.toString().split(' ')[3];
+      var dateSENT = selectedDate.toISOString().split('T')[0];
+      setSelectDate(weekday+", "+dateday+" "+datemonth+" "+dateyear);
+      setSelectCheck(true);
+      setShow(false);
+      setDateSELECT(dateSENT);
+      setDate(currentDate);
+    }
   };
 
   const showMode = (currentMode) => {
@@ -56,7 +56,6 @@ export default function ChoreModal({ modalVisible, setModalVisible }) {
   const showDatepicker = () => {
     showMode("date");
   };
-
 
   // Variables to indicate if monthly or weekly button selected
   var monthlySelected = false;
@@ -87,107 +86,84 @@ export default function ChoreModal({ modalVisible, setModalVisible }) {
       </Pressable>
     );
   }
+  
+  //setChoreID so it displays user's chosen icon on the screen
+  const [choretypeid, setChoreTypeID] = useState(1);
 
-  // for choosing the chore icon
- const [state, setState] = useState({
-   switchone: false,
-   switchtwo: false,
-   switchthree: false,
-   switchfour: false,
-   switchfive: false,
-  });
- const handleClick=(flag)=>{
-  switch(flag) {
-    case 0:
-      setState({
-        switchone: false,
-        switchtwo: false,
-        switchthree: false,
-        switchfour: false,
-        switchfive: false,
-        switchsix: false,
-      });
-      break;
+  const [choreTitle , setChoreTitle] = useState('');
 
-    case 1:
-      setState({
-        switchone: true,
-        switchtwo: false,
-        switchthree: false,
-        switchfour: false,
-        switchfive: false,
-        switchsix: false,
-      });
-      break;
-    
-    case 2:
-      setState({
-        switchone: false,
-        switchtwo: true,
-        switchthree: false,
-        switchfour: false,
-        switchfive: false,
-        switchsix: false,
-      });
-      break;
-
-    case 3:
-      setState({
-        switchone: false,
-        switchtwo: false,
-        switchthree: true,
-        switchfour: false,
-        switchfive: false,
-        switchsix: false,
-      });
-      break;
-
-    case 4:
-      setState({
-        switchone: false,
-        switchtwo: false,
-        switchthree: false,
-        switchfour: true,
-        switchfive: false,
-        switchsix: false,
-      });
-      break;
-
-    case 5:
-      setState({
-        switchone: false,
-        switchtwo: false,
-        switchthree: false,
-        switchfour: false,
-        switchfive: true,
-        switchsix: false,
-      });
-      break;
-
-    case 6:
-       setState({
-         switchone: false,
-         switchtwo: false,
-         switchthree: false,
-         switchfour: false,
-         switchfive: false,
-         switchsix: true,
-       });
-       break;
-
-    default:
-      setState({switchone: false,});
-    }
+  const [iconSelected, setIconSelected] = useState([false,false,false,false,false,false]);
+  const [userSelected, setUserSelected] = useState([]);
+  
+  const handleClick=(choretypeid)=>{
+    var array = [false,false,false,false,false,false];
+    array[choretypeid-1] = true;
+    setIconSelected(array);
+    setChoreTypeID(choretypeid);
   }
 
+  const userImgClick=(userid)=>{
+    userSelected.push(userid);
+    console.log(userSelected);
+  }
+
+  function closeChoreModal(){
+    setModalVisible(!modalVisible);
+    setChoreTitle('');
+    setSelectCheck(false);
+    setUserSelected([]);
+  }
+
+  function saveChore() {
+    var userSeqs=[{
+      seqNo:1,
+      userId:userSelected[0],
+    },{
+      seqNo:2,
+      userId:userSelected[1],
+    },{
+      seqNo:3,
+      userId:userSelected[2],
+    }];
+    
+    const newchore = {
+      userId:15,
+		  groupid:1,
+		  title:choreTitle,
+      seqs:userSeqs,
+      type: repeatByWeekOrMonth,
+      choretypeid: choretypeid,
+      date: dateSELECT,
+    }
+    const init = {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newchore),
+    };
+    const addChoreURL = ConstantHelper.CONNECTION + "addChore";
+    (async () => {
+      try {
+        const response = await fetch(addChoreURL, init);
+        const json = await response.json();
+        if (json.status == "OK") {
+          console.log("Successfully connected!");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+    closeChoreModal();
+  }
+  
   return (
     <Modal
       animationType="slide"
       transparent={true}
       visible={modalVisible}
-      onRequestClose={() => {
-        setModalVisible(!modalVisible);
-      }}
+      onRequestClose={closeChoreModal}
     >
       {/*Rest of screen will darken*/}
       <View
@@ -207,58 +183,58 @@ export default function ChoreModal({ modalVisible, setModalVisible }) {
           <TextInput
             style={{ borderBottomWidth: 0.5, width: "50%" }}
             placeholder="Chore Title"
-          />
-          {/*Type in Chore description*/}
-          <TextInput
-            style={{ paddingTop: 10, borderBottomWidth: 0.3 }}
-            placeholder="Description"
+            onChangeText = {(choreTitle) => {setChoreTitle(choreTitle)}} 
+            value = {choreTitle}
           />
 
           <BasicText style={{ paddingTop: 20 }}>Select an icon</BasicText>
           
           <View style={styles.gridcont}>
-
-            <TouchableOpacity onPress={() => handleClick(1)}>
-            <View style={[styles.iconSquare,{backgroundColor: "#FFCDF4", borderWidth: (state.switchone === false ? 0 : 4)}]}>
-              <Image source={cleaning} style={styles.gridimage}/>
-              </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => handleClick(2)}>
-            <View style={[styles.iconSquare,{backgroundColor: "#ECC3FF", borderWidth: (state.switchtwo === false ? 0 : 4)}]}>
-              <Image source={household} style={styles.gridimage}/>
-              </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => handleClick(3)}>
-            <View style={[styles.iconSquare,{backgroundColor: "#FFDBA5", borderWidth: (state.switchthree === false ? 0 : 4)}]}>
-              <Image source={grocery} style={styles.gridimage}/>
-              </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => handleClick(4)}>
-            <View style={[styles.iconSquare,{backgroundColor: "#A0FC80", borderWidth: (state.switchfour === false ? 0 : 4)}]}>
-              <Image source={payment} style={styles.gridimage}/>
-              </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => handleClick(5)}>
-            <View style={[styles.iconSquare, {backgroundColor: "#7DE7DA", borderWidth: (state.switchfive === false ? 0 : 4)}]}>
-              <Image source={shopping} style={styles.gridimage}/>
-              </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => handleClick(6)}>
-            <View style={[styles.iconSquare,{backgroundColor: "#BDFFC4", borderWidth: (state.switchsix === false ? 0 : 4)}]}>
-              <Image source={heart} style={styles.gridimage}/>
-              </View>
-            </TouchableOpacity>
-
+            {choreiconsource.map((choreicon, index) => {
+                return (
+                  <TouchableOpacity key={index} onPress={() => handleClick(choreicon.choretypeid)}>
+                  <View style={[styles.iconSquare,{backgroundColor: "#ECC3FF", borderWidth: (iconSelected[index] === false ? 0 : 4)}]}>
+                    <Image source={{uri: choreicon.icon}} style={styles.gridimage}/>
+                  </View>
+                </TouchableOpacity>
+                );
+              })}
           </View>
 
           <BasicText style={{ paddingTop: 20 }}>Select the order</BasicText>
 
-         <SelectOrder onOrderChange={(newOrder)=> console.log(newOrder)}/>
+          <View style={styles.container}>
+          {
+                groupmems.map((user, index) => {
+                return userSelected.includes(user.userid) ?
+                    (
+                      <TouchableOpacity key={index} style={styles.item} >
+                            <Image style={{height: 50,width: 50, opacity: 0.35, borderWidth: 4, borderColor: "#36BC7C", borderRadius: 100}} source={{uri: user.profileimg}}/>
+                            <View style={styles.textoverlay}>
+                                <Text style={styles.text}>{userSelected.indexOf(user.userid)+1}</Text>
+                            </View>
+                        </TouchableOpacity>
+                    ) :
+                    (
+                      <TouchableOpacity key={index} style={styles.item} onPress={() => userImgClick(user.userid)}>
+                            <Image style={{height: 50,width: 50, borderWidth: 4, borderColor: "#36BC7C", borderRadius: 100}} source={{uri: user.profileimg}}/>
+                      </TouchableOpacity>
+                    );
+                })
+            }
+            {/* {
+                groupmems.map((user, index) => {
+                return(
+                      <TouchableOpacity key={index} style={styles.item} >
+                            <Image style={{height: 50,width: 50, opacity: (userSelected.includes(user.userid) ? 0.35 : 1), borderWidth: 4, borderColor: "#36BC7C", borderRadius: 100}} source={{uri: user.profileimg}}/>
+                            <View style={styles.textoverlay}>
+                                <Text style={styles.text}>{(userSelected.includes(user.userid) ? userSelected.indexOf(user.userid)+1 : "")}</Text>
+                            </View>
+                        </TouchableOpacity>
+                    );
+                })
+            } */}
+          </View>
 
           <BasicText style={{ paddingTop: 20 }}>Repeat</BasicText>
 
@@ -305,13 +281,13 @@ export default function ChoreModal({ modalVisible, setModalVisible }) {
           >
             <Pressable
               style={[styles.optionButton, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
+              onPress={closeChoreModal}
             >
               <BasicText style={styles.optionButtonText}>Cancel</BasicText>
             </Pressable>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => {setModalVisible(!modalVisible); setSelectCheck(false);}}
+              onPress={saveChore}
             >
               <BasicText style={styles.textStyle}>Confirm</BasicText>
             </Pressable>
@@ -403,13 +379,44 @@ const styles = StyleSheet.create({
 
   optionButtonText: {
     color: "#2196F3",
-    fontFamily: 'MontserratBold',
+    fontWeight: "bold",
     textAlign: "center",
   },
 
   textStyle: {
     color: "white",
-    fontFamily: 'MontserratBold',
+    fontWeight: "bold",
     textAlign: "center",
   },
+
+  container: {
+    flex: 1,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    marginTop: 20,
+},
+item: {
+    marginTop: 10,
+    marginHorizontal: 7,
+},
+image: {
+    resizeMode: "contain",
+    borderRadius: 10,
+    opacity: 0.35
+},
+textoverlay: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    alignItems: "center",
+    justifyContent: "center",
+},
+text: {
+    fontSize: 18,
+    fontWeight: "bold",
+}
 });
