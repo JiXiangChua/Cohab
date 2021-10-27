@@ -14,6 +14,7 @@ import FinancePayRMScreen from "../screens/Finance/FinancePayRMScreen";
 import FinancePayGroupScreen from "../screens/Finance/FinancePayGroupScreen";
 import CustomDrawerContent from "../components/CustomDrawerContent";
 import GroupSelectScreen from "../screens/GroupSelectScreen";
+//import SplashScreen from "../screens/SplashScreen";
 
 const Drawer = createDrawerNavigator();
 const Stack = createNativeStackNavigator();
