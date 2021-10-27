@@ -14,7 +14,7 @@ import {
 import { ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Modal from "react-native-modal";
-import ReactNativeZoomableView from "@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView";
+// import ReactNativeZoomableView from "@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView";
 
 import { BasicText, HomeScreenHeader } from "../components";
 import CardboardLogo from "../assets/Home-assets/cardboard.png";
@@ -843,7 +843,7 @@ export default function HomeScreen({ navigation }) {
 
             {dogImage && <Image source={dog1Gif} style={styles.mascotStyle} />}
           </View> */}
-          <ReactNativeZoomableView
+          {/* <ReactNativeZoomableView
             maxZoom={1.3}
             minZoom={1}
             zoomStep={0.5}
@@ -851,184 +851,184 @@ export default function HomeScreen({ navigation }) {
             bindToBorders={true}
             initialOffsetX={-280}
             initialOffsetY={-50}
+          > */}
+          <View style={{ justifyContent: "center" }}>
+            <Image
+              source={TreePicture}
+              style={{ width: 1000, height: 1000 }}
+            ></Image>
+          </View>
+          <View style={{ position: "absolute", top: 300, left: 250 }}>
+            <Image
+              source={RoomPicture}
+              style={{ width: 500, height: 500 }}
+            ></Image>
+          </View>
+          {/* {Door Furniture} */}
+          <TouchableOpacity
+            style={{
+              width: 50,
+              height: 100,
+              position: "absolute",
+              top: 500,
+              left: 520,
+            }}
+            onPress={goToGroupSelect}
           >
-            <View style={{ justifyContent: "center" }}>
-              <Image
-                source={TreePicture}
-                style={{ width: 1000, height: 1000 }}
-              ></Image>
-            </View>
-            <View style={{ position: "absolute", top: 300, left: 250 }}>
-              <Image
-                source={RoomPicture}
-                style={{ width: 500, height: 500 }}
-              ></Image>
-            </View>
-            {/* {Door Furniture} */}
+            <Image
+              source={GroupPicture}
+              style={{
+                resizeMode: "contain",
+                width: 150,
+                height: 150,
+                alignSelf: "center",
+              }}
+            ></Image>
+          </TouchableOpacity>
+          {/* {Calandar Furniture} */}
+          {calendar && (
             <TouchableOpacity
               style={{
                 width: 50,
                 height: 100,
                 position: "absolute",
-                top: 500,
-                left: 520,
-              }}
-              onPress={goToGroupSelect}
-            >
-              <Image
-                source={GroupPicture}
-                style={{
-                  resizeMode: "contain",
-                  width: 150,
-                  height: 150,
-                  alignSelf: "center",
-                }}
-              ></Image>
-            </TouchableOpacity>
-            {/* {Calandar Furniture} */}
-            {calendar && (
-              <TouchableOpacity
-                style={{
-                  width: 50,
-                  height: 100,
-                  position: "absolute",
-                  top: 560,
-                  left: 595,
-                }}
-                onPress={() => {
-                  assignCustomFunctionsToFurniture(furniture[2].functionName);
-                }}
-                onLongPress={() => {
-                  setDeleteModal(true);
-                  deleteFurnitureModal();
-                  setItemID(3);
-                }}
-              >
-                <Image
-                  source={CalendarLogo}
-                  style={{
-                    resizeMode: "contain",
-                    width: 70,
-                    height: 70,
-                    alignSelf: "center",
-                  }}
-                ></Image>
-              </TouchableOpacity>
-            )}
-            {/* {TaskBoard Furniture} */}
-            {taskBoard && (
-              <TouchableOpacity
-                style={{
-                  width: 50,
-                  height: 100,
-                  position: "absolute",
-                  top: 655,
-                  left: 560,
-                }}
-                onPress={() => {
-                  assignCustomFunctionsToFurniture(furniture[1].functionName);
-                }}
-                onLongPress={() => {
-                  setDeleteModal(true);
-                  deleteFurnitureModal();
-                  setItemID(2);
-                }}
-              >
-                <Image
-                  source={TaskBoardLogo}
-                  style={{
-                    resizeMode: "contain",
-                    width: 80,
-                    height: 80,
-                    alignSelf: "center",
-                  }}
-                ></Image>
-              </TouchableOpacity>
-            )}
-            {/* {WashingMachine Furniture} */}
-            {washingMachine && (
-              <TouchableOpacity
-                style={{
-                  width: 50,
-                  height: 100,
-                  position: "absolute",
-                  top: 615,
-                  left: 285,
-                }}
-                onPress={() => {
-                  assignCustomFunctionsToFurniture(furniture[0].functionName);
-                }}
-                onLongPress={() => {
-                  setDeleteModal(true);
-                  deleteFurnitureModal();
-                  setItemID(1);
-                }}
-              >
-                <Image
-                  source={WashingMachineLogo}
-                  style={{
-                    resizeMode: "contain",
-                    width: 90,
-                    height: 90,
-                    alignSelf: "center",
-                  }}
-                ></Image>
-              </TouchableOpacity>
-            )}
-            {/* {PiggyBank Furniture} */}
-            {piggyBank && (
-              <TouchableOpacity
-                style={{
-                  width: 50,
-                  height: 100,
-                  position: "absolute",
-                  top: 670,
-                  left: 485,
-                }}
-                onPress={() => {
-                  assignCustomFunctionsToFurniture(furniture[3].functionName);
-                }}
-                onLongPress={() => {
-                  setDeleteModal(true);
-                  deleteFurnitureModal();
-                  setItemID(4);
-                }}
-              >
-                <Image
-                  source={PiggyBankLogo}
-                  style={{
-                    resizeMode: "contain",
-                    width: 40,
-                    height: 40,
-                    alignSelf: "center",
-                  }}
-                ></Image>
-              </TouchableOpacity>
-            )}
-            {/* {Dog Avatar} */}
-            <TouchableOpacity
-              style={{
-                width: 20,
-                height: 80,
-                position: "absolute",
-                top: 635,
-                left: 435,
+                top: 560,
+                left: 595,
               }}
               onPress={() => {
-                // assignCustomFunctionsToFurniture(furniture[2].functionName);
+                assignCustomFunctionsToFurniture(furniture[2].functionName);
+              }}
+              onLongPress={() => {
+                setDeleteModal(true);
+                deleteFurnitureModal();
+                setItemID(3);
               }}
             >
               <Image
-                source={dog1Gif}
+                source={CalendarLogo}
                 style={{
                   resizeMode: "contain",
-                  width: 150,
-                  height: 150,
+                  width: 70,
+                  height: 70,
                   alignSelf: "center",
                 }}
               ></Image>
             </TouchableOpacity>
-          </ReactNativeZoomableView>
+          )}
+          {/* {TaskBoard Furniture} */}
+          {taskBoard && (
+            <TouchableOpacity
+              style={{
+                width: 50,
+                height: 100,
+                position: "absolute",
+                top: 655,
+                left: 560,
+              }}
+              onPress={() => {
+                assignCustomFunctionsToFurniture(furniture[1].functionName);
+              }}
+              onLongPress={() => {
+                setDeleteModal(true);
+                deleteFurnitureModal();
+                setItemID(2);
+              }}
+            >
+              <Image
+                source={TaskBoardLogo}
+                style={{
+                  resizeMode: "contain",
+                  width: 80,
+                  height: 80,
+                  alignSelf: "center",
+                }}
+              ></Image>
+            </TouchableOpacity>
+          )}
+          {/* {WashingMachine Furniture} */}
+          {washingMachine && (
+            <TouchableOpacity
+              style={{
+                width: 50,
+                height: 100,
+                position: "absolute",
+                top: 615,
+                left: 285,
+              }}
+              onPress={() => {
+                assignCustomFunctionsToFurniture(furniture[0].functionName);
+              }}
+              onLongPress={() => {
+                setDeleteModal(true);
+                deleteFurnitureModal();
+                setItemID(1);
+              }}
+            >
+              <Image
+                source={WashingMachineLogo}
+                style={{
+                  resizeMode: "contain",
+                  width: 90,
+                  height: 90,
+                  alignSelf: "center",
+                }}
+              ></Image>
+            </TouchableOpacity>
+          )}
+          {/* {PiggyBank Furniture} */}
+          {piggyBank && (
+            <TouchableOpacity
+              style={{
+                width: 50,
+                height: 100,
+                position: "absolute",
+                top: 670,
+                left: 485,
+              }}
+              onPress={() => {
+                assignCustomFunctionsToFurniture(furniture[3].functionName);
+              }}
+              onLongPress={() => {
+                setDeleteModal(true);
+                deleteFurnitureModal();
+                setItemID(4);
+              }}
+            >
+              <Image
+                source={PiggyBankLogo}
+                style={{
+                  resizeMode: "contain",
+                  width: 40,
+                  height: 40,
+                  alignSelf: "center",
+                }}
+              ></Image>
+            </TouchableOpacity>
+          )}
+          {/* {Dog Avatar} */}
+          <TouchableOpacity
+            style={{
+              width: 20,
+              height: 80,
+              position: "absolute",
+              top: 635,
+              left: 435,
+            }}
+            onPress={() => {
+              // assignCustomFunctionsToFurniture(furniture[2].functionName);
+            }}
+          >
+            <Image
+              source={dog1Gif}
+              style={{
+                resizeMode: "contain",
+                width: 150,
+                height: 150,
+                alignSelf: "center",
+              }}
+            ></Image>
+          </TouchableOpacity>
+          {/* </ReactNativeZoomableView> */}
         </ScrollView>
       </ScrollView>
       {/* <CustomizeFurniture /> */}
