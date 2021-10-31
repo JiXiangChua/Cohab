@@ -1050,7 +1050,7 @@ export default function HomeScreen({ navigation, route }) {
       <HomeScreenHeader navigation={navigation} />
       <View style={styles.header}>
         <BasicText style={styles.screenTitle}>
-          {route.params.groupName}
+          {route.params?.groupName}
         </BasicText>
       </View>
     </View>
