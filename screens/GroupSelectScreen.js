@@ -61,8 +61,10 @@ export default function GroupSelectScreen({ navigation }) {
     })();
   }
 
-  function goToHome() {
-    navigation.navigate("Home");
+  function goToHome(selectedGroup) {
+    navigation.navigate("Home", {
+      groupName: selectedGroup,
+    });
   }
   //getData();
 
@@ -75,15 +77,15 @@ export default function GroupSelectScreen({ navigation }) {
   }
 
   function handleGroup1() {
-    goToHome();
+    goToHome(group1.groupname);
   }
 
   function handleGroup2() {
-    goToHome();
+    goToHome(group2.groupname);
   }
 
   function handleGroup3() {
-    goToHome();
+    goToHome("Friends");
   }
 
   useEffect(() => {
