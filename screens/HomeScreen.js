@@ -894,6 +894,10 @@ export default function HomeScreen({ navigation, route }) {
                   width: 70,
                   height: 70,
                   alignSelf: "center",
+                  shadowColor: "#FFF",
+                  shadowOffset: { width: -2, height: 3 },
+                  shadowOpacity: 0.6,
+                  shadowRadius: 3,
                 }}
               ></Image>
             </TouchableOpacity>
@@ -924,6 +928,10 @@ export default function HomeScreen({ navigation, route }) {
                   width: 80,
                   height: 80,
                   alignSelf: "center",
+                  shadowColor: "#FFF",
+                  shadowOffset: { width: -2, height: 3 },
+                  shadowOpacity: 0.6,
+                  shadowRadius: 3,
                 }}
               ></Image>
             </TouchableOpacity>
@@ -954,6 +962,10 @@ export default function HomeScreen({ navigation, route }) {
                   width: 90,
                   height: 90,
                   alignSelf: "center",
+                  shadowColor: "#FFF",
+                  shadowOffset: { width: -2, height: 3 },
+                  shadowOpacity: 0.6,
+                  shadowRadius: 3,
                 }}
               ></Image>
             </TouchableOpacity>
@@ -984,6 +996,10 @@ export default function HomeScreen({ navigation, route }) {
                   width: 40,
                   height: 40,
                   alignSelf: "center",
+                  shadowColor: "#FFF",
+                  shadowOffset: { width: -2, height: 3 },
+                  shadowOpacity: 0.6,
+                  shadowRadius: 3,
                 }}
               ></Image>
             </TouchableOpacity>
@@ -1008,6 +1024,10 @@ export default function HomeScreen({ navigation, route }) {
                 width: 150,
                 height: 150,
                 alignSelf: "center",
+                shadowColor: "#FFF",
+                shadowOffset: { width: -2, height: 3 },
+                shadowOpacity: 0.6,
+                shadowRadius: 3,
               }}
             ></Image>
           </TouchableOpacity>
