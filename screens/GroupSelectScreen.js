@@ -14,8 +14,32 @@ import BuildingAfternoonLogo from "../assets/Group-assets/grpbuildingafternoon.p
 import BuildingMorningLogo from "../assets/Group-assets/grpbuildingmorning.png";
 
 import { AddGroupModal, JoinGroupModal } from "../components";
+import {
+  copilot,
+  walkthroughable,
+  CopilotStep,
+  copilotEvents,
+} from "react-native-copilot";
+import { moderateScale } from "react-native-size-matters";
 
-export default function GroupSelectScreen({ navigation }) {
+export function GroupSelectScreen(props) {
+  const { navigation } = props;
+  const [copilotStatus, setCopilotStatus] = useState(false);
+  const CopilotText = walkthroughable(Text);
+  const [secondStepActive, setsecondStep] = useState(true);
+  const WalkthroughableText = walkthroughable(Text);
+  const WalkthroughableImage = walkthroughable(Image);
+  const WalkthroughableView = walkthroughable(View);
+  const WalkthroughableButton = walkthroughable(TouchableOpacity);
+
+  useEffect(() => {
+    props.copilotEvents.on("stepChange", handleStepChange);
+  }, []);
+
+  const handleStepChange = (step) => {
+    console.log(`current step is: ${step.name}`);
+  };
+
   const [addModalVisible, setAddModalVisible] = useState(false);
   const [joinModalVisible, setJoinModalVisible] = useState(false);
   const [group1, setGroup1] = useState({
@@ -100,7 +124,7 @@ export default function GroupSelectScreen({ navigation }) {
   }, []);
 
   //Get Current Time
-  var currentTime = new Date("2011-04-20T08:30:51.01"); //"2011-04-20T13:30:51.01" for troubleshooting
+  var currentTime = new Date(); //"2011-04-20T13:30:51.01" for troubleshooting
   console.log(currentTime.getHours());
   var backgroundImage;
   var rectangleMaskColor;
@@ -128,7 +152,6 @@ export default function GroupSelectScreen({ navigation }) {
           style={{ height: 1000, width: 500 }}
         ></Image>
       </View>
-
       {/* <View
 >>>>>>> jixiang
         style={[
@@ -149,6 +172,53 @@ export default function GroupSelectScreen({ navigation }) {
           Where will you be today?
         </BasicText>
         <Image source={buildingImage} style={styles.buildingPicture} />
+
+        {/* {Dog Avatar} */}
+        <TouchableOpacity
+          style={{
+            width: 30,
+            height: 130,
+            position: "absolute",
+            top: 610,
+            left: 155,
+          }}
+          onPress={() => {
+            // assignCustomFunctionsToFurniture(furniture[2].functionName);
+            setCopilotStatus(!copilotStatus);
+            props.start();
+          }}
+        >
+          <Image
+            source={dog1Gif}
+            style={{
+              resizeMode: "contain",
+              width: 200,
+              height: 200,
+              alignSelf: "center",
+              shadowColor: "#FFF",
+              shadowOffset: { width: -2, height: 3 },
+              shadowOpacity: 0.6,
+              shadowRadius: 3,
+            }}
+          ></Image>
+        </TouchableOpacity>
+        <View
+          style={[
+            styles.item,
+            styles.itemOut,
+            { positon: "absolute", top: 410, right: 60 },
+          ]}
+        >
+          <View style={[styles.balloon, { backgroundColor: "#FFF" }]}>
+            <Text style={{ paddingTop: 5, color: "black" }}>
+              Welcome to Cohab! Click me.
+            </Text>
+            <View
+              style={[styles.arrowContainer, styles.arrowRightContainer]}
+            ></View>
+          </View>
+        </View>
+
         <View style={styles.bottomContainer}>
           {/* <Image
             source={BuildingAfternoonLogo}
@@ -160,7 +230,7 @@ export default function GroupSelectScreen({ navigation }) {
               {
                 position: "absolute",
                 left: 30,
-                top: 120,
+                top: 90,
                 backgroundColor: "#852C2C",
               },
             ]}
@@ -176,7 +246,7 @@ export default function GroupSelectScreen({ navigation }) {
               {
                 position: "absolute",
                 left: 190,
-                top: 30,
+                top: 10,
                 backgroundColor: "#3E852C",
               },
             ]}
@@ -192,7 +262,7 @@ export default function GroupSelectScreen({ navigation }) {
               {
                 position: "absolute",
                 left: 180,
-                top: 270,
+                top: 230,
                 backgroundColor: "#2C4085",
               },
             ]}
@@ -226,9 +296,48 @@ export default function GroupSelectScreen({ navigation }) {
           setJoinModalVisible={setJoinModalVisible}
         />
       </SafeAreaView>
+      {/* Copilot View */}
+      {copilotStatus && (
+        <View>
+          {/* Tut step 1 */}
+          <View style={{ position: "absolute", left: 75, bottom: 500 }}>
+            <CopilotStep
+              text="Select which group you want to view"
+              order={1}
+              name="group"
+            >
+              <WalkthroughableView>
+                <View style={{ width: 70, height: 50 }}></View>
+              </WalkthroughableView>
+            </CopilotStep>
+          </View>
+          {/* Tut step 2 */}
+          <View style={{ top: -45, right: 95 }}>
+            <CopilotStep text="Create a new group" order={2} name="add group">
+              <WalkthroughableView>
+                <View style={{ width: 180, height: 50 }}></View>
+              </WalkthroughableView>
+            </CopilotStep>
+          </View>
+          {/* Tut step 3 */}
+          <View style={{ position: "absolute", left: 95, top: -45 }}>
+            <CopilotStep
+              text="Join an existing group"
+              order={3}
+              name="join group"
+            >
+              <WalkthroughableText>
+                <View style={{ width: 180, height: 50 }}></View>
+              </WalkthroughableText>
+            </CopilotStep>
+          </View>
+        </View>
+      )}
     </View>
   );
 }
+
+export default copilot()(GroupSelectScreen);
 
 const styles = StyleSheet.create({
   backgroundContainer: {
@@ -237,17 +346,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   profilePicture: {
-    marginTop: 20,
     width: 80,
     height: 80,
     alignSelf: "center",
   },
   buildingPicture: {
-    width: 500,
+    width: 420,
     height: 760,
     resizeMode: "contain",
     position: "absolute",
-    top: "16%",
+    top: "15%",
     alignSelf: "center",
   },
   headerText: {
@@ -287,14 +395,13 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   bottomButtonsContainer: {
-    marginTop: 20,
+    marginTop: 10,
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-evenly",
   },
   bottomButton: {
     width: "40%",
-    marginTop: 35,
     flexDirection: "row",
   },
   backgroundImageRectMask: {
@@ -304,5 +411,49 @@ const styles = StyleSheet.create({
     width: 500,
     height: 320,
     bottom: 0,
+  },
+  item: {
+    marginVertical: moderateScale(7, 2),
+    flexDirection: "row",
+  },
+  itemIn: {
+    marginLeft: 20,
+  },
+  itemOut: {
+    alignSelf: "flex-end",
+    marginRight: 20,
+  },
+  balloon: {
+    maxWidth: moderateScale(300, 2),
+    paddingHorizontal: moderateScale(10, 2),
+    paddingTop: moderateScale(5, 2),
+    paddingBottom: moderateScale(7, 2),
+    borderRadius: 20,
+  },
+  arrowContainer: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: -1,
+    flex: 1,
+  },
+  arrowLeftContainer: {
+    justifyContent: "flex-end",
+    alignItems: "flex-start",
+  },
+
+  arrowRightContainer: {
+    justifyContent: "flex-end",
+    alignItems: "flex-end",
+  },
+
+  arrowLeft: {
+    left: moderateScale(-6, 0.5),
+  },
+
+  arrowRight: {
+    right: moderateScale(-6, 0.5),
   },
 });

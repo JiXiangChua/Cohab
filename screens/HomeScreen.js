@@ -1098,8 +1098,9 @@ export function HomeScreen(props) {
       </View>
       <HomeScreenHeader navigation={navigation} />
       <View style={styles.header}>
-        <BasicText style={styles.screenTitle}>Hall</BasicText>
-
+        <BasicText style={styles.screenTitle}>
+          {route.params?.groupName}
+        </BasicText>
         {/* Copilot View top: 655, left: 110*/}
         {copilotStatus && (
           <View>
@@ -1138,9 +1139,6 @@ export function HomeScreen(props) {
             </View>
           </View>
         )}
-        <BasicText style={styles.screenTitle}>
-          {route.params?.groupName}
-        </BasicText>
       </View>
     </View>
   );
