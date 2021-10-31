@@ -11,6 +11,7 @@ import EveningBackground from "../assets/Group-assets/EveningBG.png";
 import NightBackground from "../assets/Group-assets/NightSkyBG.png";
 import BuildingAfternoonLogo from "../assets/Group-assets/grpbuildingafternoon.png";
 import BuildingMorningLogo from "../assets/Group-assets/grpbuildingmorning.png";
+import BuildingNightLogo from "../assets/Group-assets/grpbuildingnight.png";
 
 import { AddGroupModal, JoinGroupModal } from "../components";
 
@@ -99,7 +100,7 @@ export default function GroupSelectScreen({ navigation }) {
   }, []);
 
   //Get Current Time
-  var currentTime = new Date("2011-04-20T08:30:51.01"); //"2011-04-20T13:30:51.01" for troubleshooting
+  var currentTime = new Date(); //"2011-04-20T13:30:51.01" for troubleshooting
   console.log(currentTime.getHours());
   var backgroundImage;
   var rectangleMaskColor;
@@ -112,7 +113,7 @@ export default function GroupSelectScreen({ navigation }) {
   } else if (currentTime.getHours() >= 19 || currentTime.getHours() <= 5) {
     backgroundImage = NightBackground;
     rectangleMaskColor = "#536D9E";
-    buildingImage = BuildingMorningLogo;
+    buildingImage = BuildingNightLogo;
   } else {
     backgroundImage = EveningBackground;
     rectangleMaskColor = "#7E98EF";
@@ -157,7 +158,7 @@ export default function GroupSelectScreen({ navigation }) {
               {
                 position: "absolute",
                 left: 30,
-                top: 120,
+                top: 100,
                 backgroundColor: "#852C2C",
               },
             ]}
@@ -189,7 +190,7 @@ export default function GroupSelectScreen({ navigation }) {
               {
                 position: "absolute",
                 left: 180,
-                top: 270,
+                top: 260,
                 backgroundColor: "#2C4085",
               },
             ]}
@@ -240,8 +241,8 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   buildingPicture: {
-    width: 500,
-    height: 760,
+    width: 400,
+    height: 740,
     resizeMode: "contain",
     position: "absolute",
     top: "16%",
@@ -284,15 +285,14 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   bottomButtonsContainer: {
-    marginTop: 20,
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-evenly",
   },
   bottomButton: {
     width: "40%",
-    marginTop: 35,
     flexDirection: "row",
+    marginTop: 50,
   },
   backgroundImageRectMask: {
     justifyContent: "center",
