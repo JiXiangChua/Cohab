@@ -1078,30 +1078,42 @@ export function HomeScreen(props) {
       <View style={styles.header}>
         <BasicText style={styles.screenTitle}>Hall</BasicText>
 
-        {/* Copilot View */}
+        {/* Copilot View top: 655, left: 110*/}
         {copilotStatus && (
           <View>
-            <View style={{ position: "absolute", top: 655, left: 110 }}>
+            <View style={{ position: "absolute", left: 110, top: 625 }}>
               <CopilotStep
-                text="Screen 1 asdasdasdasdasdasdas"
+                text="Click to customise your own furniture"
                 order={1}
-                name="openApp"
+                name="furniture"
               >
                 <WalkthroughableView>
                   <View style={{ width: 130, height: 120 }}></View>
                 </WalkthroughableView>
               </CopilotStep>
             </View>
-            <View>
-              <CopilotStep text="Screen 2" order={2} name="thirdText">
-                <WalkthroughableView></WalkthroughableView>
+            <View style={{ top: -50 }}>
+              <CopilotStep
+                text="See which group you're in"
+                order={2}
+                name="group"
+              >
+                <WalkthroughableView>
+                  <View style={{ width: 100, height: 50 }}></View>
+                </WalkthroughableView>
               </CopilotStep>
             </View>
-            <CopilotStep text="Screen 3" order={3} name="testing1">
-              <WalkthroughableText>
-                {/* for highlight components */}
-              </WalkthroughableText>
-            </CopilotStep>
+            <View style={{ position: "absolute", left: -140, top: -80 }}>
+              <CopilotStep
+                text="Check out the latest annoucement and events"
+                order={3}
+                name="annoucement"
+              >
+                <WalkthroughableText>
+                  <View style={{ width: 350, height: 30 }}></View>
+                </WalkthroughableText>
+              </CopilotStep>
+            </View>
           </View>
         )}
       </View>
