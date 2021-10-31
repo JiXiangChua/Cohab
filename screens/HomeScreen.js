@@ -63,8 +63,10 @@ import dog1Gif from "../assets/Home-assets/dog1.gif";
 import { startDetecting } from "react-native/Libraries/Utilities/PixelRatio";
 
 export function HomeScreen(props) {
-  const { navigation } = props;
+  const { navigation, route } = props;
   console.log(props.copilotEvents);
+  // console.log(route.params.groupName);
+
   const [modalVisible, setModalVisible] = useState(false);
 
   const [taskBoard, setTaskBoard] = useState(false);
@@ -434,8 +436,8 @@ export function HomeScreen(props) {
   }
 
   function renderOverviewModal() {
-    console.log(itemID);
-    console.log(furniture);
+    //console.log(itemID);
+    //console.log(furniture);
     var selectedFurniture;
 
     if (overviewModal == true && itemID > 0) {
@@ -543,7 +545,7 @@ export function HomeScreen(props) {
     }
   }
   function renderChooseFunction() {
-    console.log(furniture);
+    //console.log(furniture);
     if (functionModal == true) {
       return (
         <View>
@@ -919,6 +921,10 @@ export function HomeScreen(props) {
                   width: 70,
                   height: 70,
                   alignSelf: "center",
+                  shadowColor: "#FFF",
+                  shadowOffset: { width: -2, height: 3 },
+                  shadowOpacity: 0.6,
+                  shadowRadius: 3,
                 }}
               ></Image>
             </TouchableOpacity>
@@ -949,6 +955,10 @@ export function HomeScreen(props) {
                   width: 80,
                   height: 80,
                   alignSelf: "center",
+                  shadowColor: "#FFF",
+                  shadowOffset: { width: -2, height: 3 },
+                  shadowOpacity: 0.6,
+                  shadowRadius: 3,
                 }}
               ></Image>
             </TouchableOpacity>
@@ -979,6 +989,10 @@ export function HomeScreen(props) {
                   width: 90,
                   height: 90,
                   alignSelf: "center",
+                  shadowColor: "#FFF",
+                  shadowOffset: { width: -2, height: 3 },
+                  shadowOpacity: 0.6,
+                  shadowRadius: 3,
                 }}
               ></Image>
             </TouchableOpacity>
@@ -1009,6 +1023,10 @@ export function HomeScreen(props) {
                   width: 40,
                   height: 40,
                   alignSelf: "center",
+                  shadowColor: "#FFF",
+                  shadowOffset: { width: -2, height: 3 },
+                  shadowOpacity: 0.6,
+                  shadowRadius: 3,
                 }}
               ></Image>
             </TouchableOpacity>
@@ -1035,6 +1053,10 @@ export function HomeScreen(props) {
                 width: 150,
                 height: 150,
                 alignSelf: "center",
+                shadowColor: "#FFF",
+                shadowOffset: { width: -2, height: 3 },
+                shadowOpacity: 0.6,
+                shadowRadius: 3,
               }}
             ></Image>
           </TouchableOpacity>
@@ -1116,6 +1138,9 @@ export function HomeScreen(props) {
             </View>
           </View>
         )}
+        <BasicText style={styles.screenTitle}>
+          {route.params?.groupName}
+        </BasicText>
       </View>
     </View>
   );

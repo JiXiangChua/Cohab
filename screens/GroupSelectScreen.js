@@ -2,10 +2,14 @@ import React, { useState, useEffect } from "react";
 import { View, TouchableOpacity, StyleSheet, Text, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { BasicText } from "../components";
+
 import ProfilePicture from "../assets/Finance-assets/Kimberly.png";
 import BuildingPicture from "../assets/Building.png";
 import AddButtonLogo from "../assets/Finance-assets/AddButton.png";
 import dog1Gif from "../assets/Home-assets/dog1.gif";
+import DayBackground from "../assets/Group-assets/DayBG.png";
+import EveningBackground from "../assets/Group-assets/EveningBG.png";
+import NightBackground from "../assets/Group-assets/NightSkyBG.png";
 
 import { AddGroupModal, JoinGroupModal } from "../components";
 
@@ -62,8 +66,10 @@ export default function GroupSelectScreen({ navigation }) {
     })();
   }
 
-  function goToHome() {
-    navigation.navigate("Home");
+  function goToHome(selectedGroup) {
+    navigation.navigate("Home", {
+      groupName: selectedGroup,
+    });
   }
   //getData();
 
@@ -76,103 +82,141 @@ export default function GroupSelectScreen({ navigation }) {
   }
 
   function handleGroup1() {
-    goToHome();
+    goToHome(group1.groupname);
   }
 
   function handleGroup2() {
-    goToHome();
+    goToHome(group2.groupname);
   }
 
   function handleGroup3() {
-    goToHome();
+    goToHome("Friends");
   }
 
   useEffect(() => {
     getGroups(1);
   }, []);
 
+  //Get Current Time
+  var currentTime = new Date(); //"2011-04-20T13:30:51.01" for troubleshooting
+  console.log(currentTime.getHours());
+  var backgroundImage;
+  var rectangleMaskColor;
+
+  if (currentTime.getHours() >= 8 && currentTime.getHours() <= 16) {
+    backgroundImage = DayBackground;
+    rectangleMaskColor = "#B3E1F7";
+  } else if (currentTime.getHours() >= 19 || currentTime.getHours() <= 5) {
+    backgroundImage = NightBackground;
+    rectangleMaskColor = "#536D9E";
+  } else {
+    backgroundImage = EveningBackground;
+    rectangleMaskColor = "#7E98EF";
+  }
+
   return (
-    <SafeAreaView style={styles.backgroundContainer}>
-      <Image source={ProfilePicture} style={styles.profilePicture} />
-      <BasicText style={styles.headerText}>Hello, Jane!</BasicText>
-      <BasicText style={styles.subHeaderText}>
-        Where will you be today?
-      </BasicText>
-      <View style={styles.bottomContainer}>
-        <Image source={BuildingPicture} style={styles.buildingPicture} />
-        <TouchableOpacity
-          style={[
-            styles.groupButton,
-            {
-              position: "absolute",
-              left: 30,
-              top: 60,
-              backgroundColor: "#852C2C",
-            },
-          ]}
-          onPress={handleGroup1}
-        >
-          <BasicText style={styles.groupButtonText}>
-            {group1.groupname}
-          </BasicText>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[
-            styles.groupButton,
-            {
-              position: "absolute",
-              left: 140,
-              top: -30,
-              backgroundColor: "#3E852C",
-            },
-          ]}
-          onPress={handleGroup2}
-        >
-          <BasicText style={styles.groupButtonText}>
-            {group2.groupname}
-          </BasicText>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[
-            styles.groupButton,
-            {
-              position: "absolute",
-              left: 320,
-              top: 60,
-              backgroundColor: "#2C4085",
-            },
-          ]}
-          onPress={handleGroup3}
-        >
-          <BasicText style={styles.groupButtonText}>Friends</BasicText>
-        </TouchableOpacity>
+    <View style={styles.backgroundContainer}>
+      <View style={{ justifyContent: "center", position: "absolute" }}>
+        <Image
+          source={backgroundImage}
+          style={{ height: 1000, width: 500 }}
+        ></Image>
       </View>
 
-      <View style={styles.bottomButtonsContainer}>
-        <TouchableOpacity
-          style={[styles.groupButton, styles.bottomButton]}
-          onPress={handleAddGroup}
+      <View
+        style={[
+          styles.backgroundImageRectMask,
+          { backgroundColor: rectangleMaskColor },
+        ]}
+      ></View>
+
+      <SafeAreaView>
+        <Image source={ProfilePicture} style={styles.profilePicture} />
+        <BasicText
+          style={[styles.headerText, { color: "#FFF", alignSelf: "center" }]}
         >
-          <Image source={AddButtonLogo} style={styles.buttonLogo} />
-          <BasicText style={[styles.subHeaderText]}>Add Group</BasicText>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.groupButton, styles.bottomButton]}
-          onPress={handleJoinGroup}
+          Hello, Jane!
+        </BasicText>
+        <BasicText
+          style={[styles.subHeaderText, { color: "#FFF", alignSelf: "center" }]}
         >
-          <Image source={AddButtonLogo} style={styles.buttonLogo} />
-          <BasicText style={[styles.subHeaderText]}>Join Group</BasicText>
-        </TouchableOpacity>
-      </View>
-      <AddGroupModal
-        addModalVisible={addModalVisible}
-        setAddModalVisible={setAddModalVisible}
-      />
-      <JoinGroupModal
-        joinModalVisible={joinModalVisible}
-        setJoinModalVisible={setJoinModalVisible}
-      />
-    </SafeAreaView>
+          Where will you be today?
+        </BasicText>
+        <View style={styles.bottomContainer}>
+          <Image source={BuildingPicture} style={styles.buildingPicture} />
+          <TouchableOpacity
+            style={[
+              styles.groupButton,
+              {
+                position: "absolute",
+                left: 30,
+                top: 60,
+                backgroundColor: "#852C2C",
+              },
+            ]}
+            onPress={handleGroup1}
+          >
+            <BasicText style={styles.groupButtonText}>
+              {group1.groupname}
+            </BasicText>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[
+              styles.groupButton,
+              {
+                position: "absolute",
+                left: 140,
+                top: -30,
+                backgroundColor: "#3E852C",
+              },
+            ]}
+            onPress={handleGroup2}
+          >
+            <BasicText style={styles.groupButtonText}>
+              {group2.groupname}
+            </BasicText>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[
+              styles.groupButton,
+              {
+                position: "absolute",
+                left: 320,
+                top: 60,
+                backgroundColor: "#2C4085",
+              },
+            ]}
+            onPress={handleGroup3}
+          >
+            <BasicText style={styles.groupButtonText}>Friends</BasicText>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.bottomButtonsContainer}>
+          <TouchableOpacity
+            style={[styles.groupButton, styles.bottomButton]}
+            onPress={handleAddGroup}
+          >
+            <Image source={AddButtonLogo} style={styles.buttonLogo} />
+            <BasicText style={[styles.subHeaderText]}>Add Group</BasicText>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.groupButton, styles.bottomButton]}
+            onPress={handleJoinGroup}
+          >
+            <Image source={AddButtonLogo} style={styles.buttonLogo} />
+            <BasicText style={[styles.subHeaderText]}>Join Group</BasicText>
+          </TouchableOpacity>
+        </View>
+        <AddGroupModal
+          addModalVisible={addModalVisible}
+          setAddModalVisible={setAddModalVisible}
+        />
+        <JoinGroupModal
+          joinModalVisible={joinModalVisible}
+          setJoinModalVisible={setJoinModalVisible}
+        />
+      </SafeAreaView>
+    </View>
   );
 }
 
@@ -239,5 +283,13 @@ const styles = StyleSheet.create({
     width: "40%",
     marginTop: 10,
     flexDirection: "row",
+  },
+  backgroundImageRectMask: {
+    justifyContent: "center",
+    position: "absolute",
+    backgroundColor: "#536D9E",
+    width: 500,
+    height: 320,
+    bottom: 0,
   },
 });
