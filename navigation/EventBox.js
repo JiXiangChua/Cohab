@@ -44,13 +44,15 @@ export default function EventBox() {
 
       <Card
          name="Play Basketball"
+         description="Game at Court 15"
          date_created="18 Aug"
          time = "8pm"
          fdCheck={false}
       />
 
       <Card
-        name="Buy   Groceries"
+        name="Buy Groceries"
+        description="Meet at downstairs Hall A Lobby 1 if yall wanna join"
         date_created="20 Aug"
         time = "5pm"
         fdCheck={false}

@@ -20,28 +20,27 @@ export default function genericNotifCard(props) {
 
       <View style={{ flexDirection: "row" }}>
         {/* Message */}
-        <View style={styles.cardDisplayColumnFormat}>
-          <Text style={styles.cardText}>{props.name}</Text>
-          <Text style={[styles.cardText, { fontSize: 12, color: "#8A8585" }]}>
+        <View style={[styles.cardDisplayColumnFormat,{width: "85%",}]}>
+          <BasicText style={styles.cardText}>{props.name}</BasicText>
+          <BasicText style={[styles.cardText, { fontSize: 12, color: "#8A8585", marginVertical: 10, }]}>
             {props.description}
-          </Text>
-
+          </BasicText>
         </View>
 
         {/* Column for sender*/}
-        <View style={[styles.cardDisplayColumnFormat, { marginTop: 40, marginLeft: -25 }]}>
-          <View style={{ flexDirection: "row" }}>
-            <Text style={[styles.cardText, { fontSize: 12, color: "#8A8585" }]}>
+        <View style={styles.cardDisplayColumnFormat}>
+          <View style={{ flexDirection: "column" }}>
+            <BasicText style={[styles.cardText, { fontSize: 12, color: "#8A8585" }]}>
               {props.date_created}
-            </Text>
+            </BasicText>
             <Image source={ProfilePic} style={styles.profileImage} />
           </View>
         </View>
 
         <View style={[styles.cardDisplayColumnFormat]}>
-          <Text style={[styles.deadlineText, { marginLeft: -110, alignSelf: "flex-end" }]}>
+          <BasicText style={[styles.deadlineText, { marginLeft: -110, alignSelf: "flex-end" }]}>
             {props.deadline}
-          </Text>
+          </BasicText>
         </View>
       </View>
     </View>
@@ -75,10 +74,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   profileImage: {
-    marginLeft: -12,
-    minWidth: 15,
-    minHeight: 15,
-    marginTop: -15,
-    alignSelf: "flex-end",
+    width: 35,
+    height: 35,
+    marginTop: 40,
+    alignSelf: "center",
   }
 });
