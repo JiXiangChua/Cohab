@@ -9,6 +9,8 @@ import AddButtonLogo from "../assets/Finance-assets/AddButton.png";
 import DayBackground from "../assets/Group-assets/DayBG.png";
 import EveningBackground from "../assets/Group-assets/EveningBG.png";
 import NightBackground from "../assets/Group-assets/NightSkyBG.png";
+import BuildingAfternoonLogo from "../assets/Group-assets/grpbuildingafternoon.png";
+import BuildingMorningLogo from "../assets/Group-assets/grpbuildingmorning.png";
 
 import { AddGroupModal, JoinGroupModal } from "../components";
 
@@ -97,20 +99,24 @@ export default function GroupSelectScreen({ navigation }) {
   }, []);
 
   //Get Current Time
-  var currentTime = new Date(); //"2011-04-20T13:30:51.01" for troubleshooting
+  var currentTime = new Date("2011-04-20T08:30:51.01"); //"2011-04-20T13:30:51.01" for troubleshooting
   console.log(currentTime.getHours());
   var backgroundImage;
   var rectangleMaskColor;
+  var buildingImage;
 
   if (currentTime.getHours() >= 8 && currentTime.getHours() <= 16) {
     backgroundImage = DayBackground;
     rectangleMaskColor = "#B3E1F7";
+    buildingImage = BuildingAfternoonLogo;
   } else if (currentTime.getHours() >= 19 || currentTime.getHours() <= 5) {
     backgroundImage = NightBackground;
     rectangleMaskColor = "#536D9E";
+    buildingImage = BuildingMorningLogo;
   } else {
     backgroundImage = EveningBackground;
     rectangleMaskColor = "#7E98EF";
+    buildingImage = BuildingMorningLogo;
   }
 
   return (
@@ -121,13 +127,12 @@ export default function GroupSelectScreen({ navigation }) {
           style={{ height: 1000, width: 500 }}
         ></Image>
       </View>
-      <View
+      {/* <View
         style={[
           styles.backgroundImageRectMask,
           { backgroundColor: rectangleMaskColor },
         ]}
-      ></View>
-
+      ></View> */}
       <SafeAreaView>
         <Image source={ProfilePicture} style={styles.profilePicture} />
         <BasicText
@@ -140,15 +145,19 @@ export default function GroupSelectScreen({ navigation }) {
         >
           Where will you be today?
         </BasicText>
+        <Image source={buildingImage} style={styles.buildingPicture} />
         <View style={styles.bottomContainer}>
-          <Image source={BuildingPicture} style={styles.buildingPicture} />
+          {/* <Image
+            source={BuildingAfternoonLogo}
+            style={styles.buildingPicture}
+          /> */}
           <TouchableOpacity
             style={[
               styles.groupButton,
               {
                 position: "absolute",
                 left: 30,
-                top: 60,
+                top: 120,
                 backgroundColor: "#852C2C",
               },
             ]}
@@ -163,8 +172,8 @@ export default function GroupSelectScreen({ navigation }) {
               styles.groupButton,
               {
                 position: "absolute",
-                left: 140,
-                top: -30,
+                left: 190,
+                top: 30,
                 backgroundColor: "#3E852C",
               },
             ]}
@@ -179,8 +188,8 @@ export default function GroupSelectScreen({ navigation }) {
               styles.groupButton,
               {
                 position: "absolute",
-                left: 320,
-                top: 60,
+                left: 180,
+                top: 270,
                 backgroundColor: "#2C4085",
               },
             ]}
@@ -231,9 +240,12 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   buildingPicture: {
-    height: 650,
-    width: 410,
+    width: 500,
+    height: 760,
     resizeMode: "contain",
+    position: "absolute",
+    top: "16%",
+    alignSelf: "center",
   },
   headerText: {
     fontSize: 40,
@@ -279,7 +291,7 @@ const styles = StyleSheet.create({
   },
   bottomButton: {
     width: "40%",
-    marginTop: 10,
+    marginTop: 35,
     flexDirection: "row",
   },
   backgroundImageRectMask: {
