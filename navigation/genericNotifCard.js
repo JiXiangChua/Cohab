@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   cardText: {
     alignSelf: "flex-start",
     marginRight: 15,
-    fontSize: 18,
+    fontSize: 15,
   },
   profileImage: {
     width: 35,

@@ -21,7 +21,7 @@ export default function inviteCard(props) {
         {/* Message */}
         <View style={[styles.cardDisplayColumnFormat,{width: "75%",}]}>
           <BasicText style={styles.cardText}>{props.name}</BasicText>
-          <BasicText style={[styles.cardText, { fontSize: 12, color: "#8A8585", marginVertical: 10, }]}>
+          <BasicText style={[styles.cardText, { fontSize: 11, color: "#8A8585", marginVertical: 10, }]}>
             {props.description}
           </BasicText>
         </View>
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
   cardText: {
     alignSelf: "flex-start",
     marginRight: 20,
-    fontSize: 18,
+    fontSize: 15,
   },
   profileImage: {
     width: 35,
