@@ -102,7 +102,7 @@ export default function GroupSelectScreen({ navigation }) {
   }, []);
 
   //Get Current Time
-  var currentTime = new Date("2011-04-20T20:30:51.01"); //"2011-04-20T13:30:51.01" for troubleshooting
+  var currentTime = new Date(); //"2011-04-20T13:30:51.01" for troubleshooting
   console.log(currentTime.getHours());
   var backgroundImage;
   var rectangleMaskColor;

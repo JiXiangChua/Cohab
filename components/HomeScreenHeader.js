@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet, TouchableOpacity, Image } from "react-native";
 import MenuBarLogo from "../assets/Menu.png";
-
+import NotificationButton from "../assets/icons/icon_designs-07.png";
 import BasicText from "./BasicText.js";
 
 export default function HomeScreenHeader({ navigation }) {
@@ -12,7 +12,10 @@ export default function HomeScreenHeader({ navigation }) {
         onPress={navigation.openDrawer}
       >
         {/* <BasicText style={styles.navigationButtonText}>navigation</BasicText> */}
-        <Image source={MenuBarLogo} style={styles.menuButtonStyle}></Image>
+        <Image
+          source={NotificationButton}
+          style={styles.menuButtonStyle}
+        ></Image>
       </TouchableOpacity>
     </View>
   );
@@ -37,11 +40,13 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   menuButtonStyle: {
-    width: 50,
-    height: 50,
+    width: 40,
+    height: 40,
     shadowColor: "#FFF",
     shadowOffset: { width: -2, height: 3 },
     shadowOpacity: 0.6,
     shadowRadius: 3,
+    marginTop: 10,
+    marginLeft: 10,
   },
 });
