@@ -12,6 +12,8 @@ import NightBackground from "../assets/Group-assets/NightSkyBG.png";
 import BuildingAfternoonLogo from "../assets/Group-assets/grpbuildingafternoon.png";
 import BuildingMorningLogo from "../assets/Group-assets/grpbuildingmorning.png";
 import BuildingNightLogo from "../assets/Group-assets/grpbuildingnight.png";
+import CarMorningLogo from "../assets/Group-assets/carMorning.gif";
+import CarAfternoonLogo from "../assets/Group-assets/carAfternoon.gif";
 
 import { AddGroupModal, JoinGroupModal } from "../components";
 
@@ -105,19 +107,23 @@ export default function GroupSelectScreen({ navigation }) {
   var backgroundImage;
   var rectangleMaskColor;
   var buildingImage;
+  var carGIF;
 
   if (currentTime.getHours() >= 8 && currentTime.getHours() <= 16) {
     backgroundImage = DayBackground;
     rectangleMaskColor = "#B3E1F7";
     buildingImage = BuildingAfternoonLogo;
+    carGIF = CarAfternoonLogo;
   } else if (currentTime.getHours() >= 19 || currentTime.getHours() <= 5) {
     backgroundImage = NightBackground;
     rectangleMaskColor = "#536D9E";
     buildingImage = BuildingNightLogo;
+    carGIF = CarMorningLogo;
   } else {
     backgroundImage = EveningBackground;
     rectangleMaskColor = "#7E98EF";
     buildingImage = BuildingMorningLogo;
+    carGIF = CarMorningLogo;
   }
 
   return (
@@ -128,6 +134,7 @@ export default function GroupSelectScreen({ navigation }) {
           style={{ height: 1000, width: 500 }}
         ></Image>
       </View>
+
       {/* <View
         style={[
           styles.backgroundImageRectMask,
@@ -147,6 +154,9 @@ export default function GroupSelectScreen({ navigation }) {
           Where will you be today?
         </BasicText>
         <Image source={buildingImage} style={styles.buildingPicture} />
+        <View style={{ position: "absolute", top: 55, left: -20 }}>
+          <Image source={carGIF} />
+        </View>
         <View style={styles.bottomContainer}>
           {/* <Image
             source={BuildingAfternoonLogo}
