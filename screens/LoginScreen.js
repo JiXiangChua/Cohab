@@ -7,7 +7,8 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import logo from "../assets/logo.png";
+import logo from "../assets/Cohab_Logo.png";
+import LoginScreenBG from "../assets/LoginScreenBG.png";
 
 import { useLoginContext } from "../LoginContext";
 import { BasicText } from "../components";
@@ -70,34 +71,45 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
+      <View style={{ position: "absolute" }}>
+        <Image
+          source={LoginScreenBG}
+          style={{ width: 400, height: 950 }}
+        ></Image>
+      </View>
       <ModalScreen
         isVisible={visible}
         setVisible={setVisible}
         message={message}
         buttonText="Try Again"
       />
-      <Image source={logo} style={styles.logo} />
+      <TouchableOpacity onPress={cheatLogin} activeOpacity={1}>
+        <Image source={logo} style={styles.logo} />
+      </TouchableOpacity>
+      <BasicText style={styles.cohabText}>COHAB</BasicText>
       <TextInput
         style={styles.inputField}
-        placeholder="Email"
+        placeholder="Username / Email"
+        placeholderTextColor="#FFF"
         onChangeText={(email) => setEmail(email)}
         defaultValue={email}
       />
       <TextInput
         style={styles.inputField}
         placeholder="Password"
+        placeholderTextColor="#FFF"
         onChangeText={(password) => setPassword(password)}
         defaultValue={password}
         secureTextEntry={true}
       />
-      <TouchableOpacity style={styles.button} onPress={cheatLogin}>
+      {/* <TouchableOpacity style={styles.button} onPress={cheatLogin}>
         <BasicText style={styles.buttonText}>Cheater Log In</BasicText>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={login}>
+      </TouchableOpacity> */}
+      <TouchableOpacity style={[styles.button]} onPress={login}>
         <BasicText style={styles.buttonText}>Log In</BasicText>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={goToRegister}>
-        <BasicText style={styles.buttonText}>Sign Up</BasicText>
+      <TouchableOpacity onPress={goToRegister}>
+        <BasicText style={styles.signUpText}>Create New Account</BasicText>
       </TouchableOpacity>
     </SafeAreaView>
   );
@@ -105,10 +117,15 @@ export default function LoginScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   logo: {
-    minHeight: 100,
-    minWidth: 150,
-    marginBottom: 100,
+    width: 150,
+    height: 150,
     resizeMode: "center",
+  },
+  cohabText: {
+    fontSize: 35,
+    fontFamily: "MontserratSemiBold",
+    color: "#FFD692",
+    marginBottom: 30,
   },
   container: {
     flex: 1,
@@ -121,19 +138,22 @@ const styles = StyleSheet.create({
     height: 40,
     width: "75%",
     borderBottomWidth: 1,
-    borderColor: "#6E2142",
+    borderColor: "#FFD692",
+    color: "#FFF",
   },
   button: {
-    marginTop: 30,
+    marginTop: 50,
     height: 40,
     width: "75%",
-    backgroundColor: "#E16363",
+    backgroundColor: "#F7DBF0",
     justifyContent: "center",
+    borderRadius: 15,
   },
   buttonText: {
-    color: "#FFD692",
+    color: "#6E2142",
     textAlign: "center",
     fontSize: 18,
+    fontFamily: "MontserratSemiBold",
   },
   modalStyle: {
     height: 200,
@@ -151,5 +171,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
     alignItems: "center",
     justifyContent: "center",
+  },
+  signUpText: {
+    color: "#F7DBF0",
+    textAlign: "center",
+    fontSize: 18,
+    fontFamily: "Montserrat",
+    marginTop: 20,
   },
 });
