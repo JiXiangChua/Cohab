@@ -25,6 +25,7 @@ import {
 export function GroupSelectScreen(props) {
   const { navigation } = props;
   const [copilotStatus, setCopilotStatus] = useState(false);
+  const [avatarSpeechInterval, setAvatarSpeechInterval] = useState(true);
   const CopilotText = walkthroughable(Text);
   const [secondStepActive, setsecondStep] = useState(true);
   const WalkthroughableText = walkthroughable(Text);
@@ -125,7 +126,6 @@ export function GroupSelectScreen(props) {
 
   //Get Current Time
   var currentTime = new Date(); //"2011-04-20T13:30:51.01" for troubleshooting
-  console.log(currentTime.getHours());
   var backgroundImage;
   var rectangleMaskColor;
   var buildingImage;
@@ -142,6 +142,13 @@ export function GroupSelectScreen(props) {
     backgroundImage = EveningBackground;
     rectangleMaskColor = "#7E98EF";
     buildingImage = BuildingMorningLogo;
+  }
+
+  //Set Dog speech bubble interval
+  function avatarSpeechBubble() {
+    setTimeout(() => {
+      setAvatarSpeechInterval(!avatarSpeechInterval);
+    }, 4000);
   }
 
   return (
@@ -179,8 +186,8 @@ export function GroupSelectScreen(props) {
             width: 30,
             height: 130,
             position: "absolute",
-            top: 670,
-            left: 155,
+            top: 650,
+            left: 60,
           }}
           onPress={() => {
             // assignCustomFunctionsToFurniture(furniture[2].functionName);
@@ -221,27 +228,39 @@ export function GroupSelectScreen(props) {
           </View> */}
 
         {/* New speech bubble */}
+        {avatarSpeechBubble()}
         <View
-          style={[
-            {
-              positon: "absolute",
-              backgroundColor: "#fff",
-              padding: 10,
-              top: 420,
-              left: 180,
-              maxWidth: "50%",
-              borderRadius: 20,
-            },
-          ]}
+          style={{
+            width: 300,
+            height: 100,
+            position: "absolute",
+            top: 600,
+            left: 80,
+          }}
         >
-          <Text style={{ fontSize: 14, color: "black" }}>
-            Welcome to Cohab! Click me.
-          </Text>
+          {avatarSpeechInterval && (
+            <View
+              style={[
+                {
+                  backgroundColor: "#fff",
+                  padding: 10,
+                  // top: 420,
+                  // left: 180,
+                  maxWidth: "50%",
+                  borderRadius: 20,
+                },
+              ]}
+            >
+              <View style={styles.leftArrow}></View>
 
-          <View style={styles.leftArrow}></View>
-
-          <View style={styles.leftArrowOverlap}></View>
+              <View style={styles.leftArrowOverlap}></View>
+              <Text style={{ fontSize: 14, color: "black" }}>
+                Welcome to Cohab! Click me for guide!
+              </Text>
+            </View>
+          )}
         </View>
+
         {/* </View> */}
 
         <View style={styles.bottomContainer}>
@@ -254,7 +273,7 @@ export function GroupSelectScreen(props) {
               styles.groupButton,
               {
                 position: "absolute",
-                left: 30,
+                left: -50,
                 top: 90,
                 backgroundColor: "#852C2C",
               },
@@ -270,8 +289,8 @@ export function GroupSelectScreen(props) {
               styles.groupButton,
               {
                 position: "absolute",
-                left: 190,
-                top: 10,
+                left: 120,
+                top: 20,
                 backgroundColor: "#3E852C",
               },
             ]}
@@ -286,8 +305,8 @@ export function GroupSelectScreen(props) {
               styles.groupButton,
               {
                 position: "absolute",
-                left: 180,
-                top: 230,
+                left: 100,
+                top: 250,
                 backgroundColor: "#2C4085",
               },
             ]}
@@ -325,7 +344,7 @@ export function GroupSelectScreen(props) {
       {copilotStatus && (
         <View>
           {/* Tut step 1 */}
-          <View style={{ position: "absolute", left: 75, bottom: 500 }}>
+          <View style={{ position: "absolute", left: 80, bottom: 480 }}>
             <CopilotStep
               text="Select which group you want to view"
               order={1}
@@ -337,7 +356,7 @@ export function GroupSelectScreen(props) {
             </CopilotStep>
           </View>
           {/* Tut step 2 */}
-          <View style={{ top: -45, right: 95 }}>
+          <View style={{ top: -5, right: 90 }}>
             <CopilotStep text="Create a new group" order={2} name="add group">
               <WalkthroughableView>
                 <View style={{ width: 180, height: 50 }}></View>
@@ -345,7 +364,7 @@ export function GroupSelectScreen(props) {
             </CopilotStep>
           </View>
           {/* Tut step 3 */}
-          <View style={{ position: "absolute", left: 95, top: -45 }}>
+          <View style={{ position: "absolute", left: 95, top: -5 }}>
             <CopilotStep
               text="Join an existing group"
               order={3}
@@ -420,7 +439,9 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   bottomButtonsContainer: {
-    marginTop: 10,
+    position: "absolute",
+    alignSelf: "center",
+    bottom: "-5%",
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-evenly",
