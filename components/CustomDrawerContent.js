@@ -89,7 +89,7 @@ export default function CustomDrawerContent({ navigation }) {
           <View style={styles.announcementContainer}>
             <Card
               name="Badminton game on 8 Oct"
-              description="Hall 12 Court 13 if you guys wanna join in or somthn"
+              description="Hall 12 Court 13 if you guys wanna join"
               date_created="18 Aug"
               fdCheck={false}
             />
@@ -101,9 +101,7 @@ export default function CustomDrawerContent({ navigation }) {
         </View>
 
         <View style = {styles.bottomContainer}>
-          <View style = {styles.alignRight}>
-            <Image source = {profileImage} style = {styles.profileImage} />
-          </View>
+
           <TouchableOpacity onPress = {handleEditProfile}>
             <BasicText style = {styles.alignRight}>Edit Profile</BasicText>
           </TouchableOpacity>
