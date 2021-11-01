@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Video, AVPlaybackStatus } from "expo-av";
-import LaunchScreen from "../assets/LaunchScreen2.mp4";
+import LaunchScreen from "../assets/LaunchScreen3.mp4";
 import { BasicText } from "../components";
 
 export default function SplashScreen({ navigation }) {

@@ -54,7 +54,8 @@ import TaskPicture from "../assets/Home-assets/taskboard.png";
 import CalendarPicture from "../assets/Home-assets/calendar.png";
 import dog1Gif from "../assets/Home-assets/dog1.gif";
 
-export default function HomeScreen({ navigation }) {
+export default function HomeScreen({ navigation, route }) {
+  // console.log(route.params.groupName);
   const [modalVisible, setModalVisible] = useState(false);
 
   const [taskBoard, setTaskBoard] = useState(false);
@@ -408,8 +409,8 @@ export default function HomeScreen({ navigation }) {
   }
 
   function renderOverviewModal() {
-    console.log(itemID);
-    console.log(furniture);
+    //console.log(itemID);
+    //console.log(furniture);
     var selectedFurniture;
 
     if (overviewModal == true && itemID > 0) {
@@ -517,7 +518,7 @@ export default function HomeScreen({ navigation }) {
     }
   }
   function renderChooseFunction() {
-    console.log(furniture);
+    //console.log(furniture);
     if (functionModal == true) {
       return (
         <View>
@@ -648,24 +649,6 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <View style={styles.backgroundContainer}>
-      {/* For troubleshooting customise function, when fully completed can delete */}
-      {/* {piggyBank && (
-        <TouchableOpacity
-          onPress={() => {
-            // console.log(furniture[3].functionName);
-            assignCustomFunctionsToFurniture(furniture[3].functionName);
-          }}
-          onLongPress={() => {
-            setPiggyBank(false);
-          }}
-        >
-          <Image
-            source={BankPicture}
-            style={{ width: 200, height: 200 }}
-          ></Image>
-        </TouchableOpacity>
-      )} */}
-
       <ScrollView
         style={styles.scrollView}
         horizontal={true}
@@ -911,6 +894,10 @@ export default function HomeScreen({ navigation }) {
                   width: 70,
                   height: 70,
                   alignSelf: "center",
+                  shadowColor: "#FFF",
+                  shadowOffset: { width: -2, height: 3 },
+                  shadowOpacity: 0.6,
+                  shadowRadius: 3,
                 }}
               ></Image>
             </TouchableOpacity>
@@ -941,6 +928,10 @@ export default function HomeScreen({ navigation }) {
                   width: 80,
                   height: 80,
                   alignSelf: "center",
+                  shadowColor: "#FFF",
+                  shadowOffset: { width: -2, height: 3 },
+                  shadowOpacity: 0.6,
+                  shadowRadius: 3,
                 }}
               ></Image>
             </TouchableOpacity>
@@ -971,6 +962,10 @@ export default function HomeScreen({ navigation }) {
                   width: 90,
                   height: 90,
                   alignSelf: "center",
+                  shadowColor: "#FFF",
+                  shadowOffset: { width: -2, height: 3 },
+                  shadowOpacity: 0.6,
+                  shadowRadius: 3,
                 }}
               ></Image>
             </TouchableOpacity>
@@ -1001,6 +996,10 @@ export default function HomeScreen({ navigation }) {
                   width: 40,
                   height: 40,
                   alignSelf: "center",
+                  shadowColor: "#FFF",
+                  shadowOffset: { width: -2, height: 3 },
+                  shadowOpacity: 0.6,
+                  shadowRadius: 3,
                 }}
               ></Image>
             </TouchableOpacity>
@@ -1025,6 +1024,10 @@ export default function HomeScreen({ navigation }) {
                 width: 150,
                 height: 150,
                 alignSelf: "center",
+                shadowColor: "#FFF",
+                shadowOffset: { width: -2, height: 3 },
+                shadowOpacity: 0.6,
+                shadowRadius: 3,
               }}
             ></Image>
           </TouchableOpacity>
@@ -1066,7 +1069,9 @@ export default function HomeScreen({ navigation }) {
       </View>
       <HomeScreenHeader navigation={navigation} />
       <View style={styles.header}>
-        <BasicText style={styles.screenTitle}>Hall</BasicText>
+        <BasicText style={styles.screenTitle}>
+          {route.params?.groupName}
+        </BasicText>
       </View>
     </View>
   );
