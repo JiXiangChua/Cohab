@@ -186,8 +186,10 @@ export function GroupSelectScreen(props) {
             width: 30,
             height: 130,
             position: "absolute",
-            top: 650,
-            left: 60,
+            // top: 645,
+            // left: 70,
+            top: 620,
+            left: 250,
           }}
           onPress={() => {
             // assignCustomFunctionsToFurniture(furniture[2].functionName);
@@ -200,7 +202,8 @@ export function GroupSelectScreen(props) {
             style={{
               resizeMode: "contain",
               width: 180,
-              height: 80,
+              // height: 80,
+              height: 150,
               alignSelf: "center",
               shadowColor: "#FFF",
               shadowOffset: { width: -2, height: 3 },
@@ -228,7 +231,7 @@ export function GroupSelectScreen(props) {
           </View> */}
 
         {/* New speech bubble */}
-        {avatarSpeechBubble()}
+        {/* {avatarSpeechBubble()} */}
         <View
           style={{
             width: 300,
@@ -321,14 +324,14 @@ export function GroupSelectScreen(props) {
             onPress={handleAddGroup}
           >
             <Image source={AddButtonLogo} style={styles.buttonLogo} />
-            <BasicText style={[styles.subHeaderText]}>Add Group</BasicText>
+            <BasicText style={[styles.subHeaderText]}>Create</BasicText>
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.groupButton, styles.bottomButton]}
             onPress={handleJoinGroup}
           >
             <Image source={AddButtonLogo} style={styles.buttonLogo} />
-            <BasicText style={[styles.subHeaderText]}>Join Group</BasicText>
+            <BasicText style={[styles.subHeaderText]}>Join</BasicText>
           </TouchableOpacity>
         </View>
         <AddGroupModal
@@ -444,11 +447,14 @@ const styles = StyleSheet.create({
     bottom: "-5%",
     width: "100%",
     flexDirection: "row",
-    justifyContent: "space-evenly",
+    left: -50,
+    // justifyContent: "space-evenly",
   },
   bottomButton: {
-    width: "40%",
+    // width: "40%",
+    width: "30%",
     flexDirection: "row",
+    marginRight: 20,
   },
   backgroundImageRectMask: {
     justifyContent: "center",
