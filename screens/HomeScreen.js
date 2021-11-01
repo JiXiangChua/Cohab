@@ -1101,10 +1101,10 @@ export function HomeScreen(props) {
         <BasicText style={styles.screenTitle}>
           {route.params?.groupName}
         </BasicText>
-        {/* Copilot View top: 655, left: 110*/}
+
         {copilotStatus && (
           <View>
-            <View style={{ position: "absolute", left: 110, top: 625 }}>
+            <View style={{ position: "absolute", left: 117, top: 545 }}>
               <CopilotStep
                 text="Click to customise your own furniture"
                 order={1}
@@ -1126,14 +1126,14 @@ export function HomeScreen(props) {
                 </WalkthroughableView>
               </CopilotStep>
             </View>
-            <View style={{ position: "absolute", left: -140, top: -80 }}>
+            <View style={{ position: "absolute", left: -140, top: -70 }}>
               <CopilotStep
                 text="Check out the latest annoucement and events"
                 order={3}
                 name="annoucement"
               >
                 <WalkthroughableText>
-                  <View style={{ width: 350, height: 30 }}></View>
+                  <View style={{ width: 50, height: 30 }}></View>
                 </WalkthroughableText>
               </CopilotStep>
             </View>
