@@ -20,7 +20,7 @@ import {
   CopilotStep,
   copilotEvents,
 } from "react-native-copilot";
-import { moderateScale } from "react-native-size-matters";
+// import { moderateScale } from "react-native-size-matters";
 
 export function GroupSelectScreen(props) {
   const { navigation } = props;
@@ -202,7 +202,9 @@ export function GroupSelectScreen(props) {
             }}
           ></Image>
         </TouchableOpacity>
-        <View
+
+        {/* old speeech */}
+        {/* <View
           style={[
             styles.item,
             styles.itemOut,
@@ -216,35 +218,31 @@ export function GroupSelectScreen(props) {
             <View
               style={[styles.arrowContainer, styles.arrowRightContainer]}
             ></View>
-          </View>
+          </View> */}
 
-          {/* New speech bubble */}
-          {/* <View
-          style={{
-            backgroundColor: "#0078fe",
-            padding: 10,
-            marginLeft: "45%",
-            borderRadius: 5,
-            //marginBottom: 15,
-            marginTop: 5,
-            marginRight: "5%",
-            maxWidth: "50%",
-            alignSelf: "flex-end",
-            //maxWidth: 500,
-
-            borderRadius: 20,
-          }}
-          key={index}
+        {/* New speech bubble */}
+        <View
+          style={[
+            {
+              positon: "absolute",
+              backgroundColor: "#fff",
+              padding: 10,
+              top: 420,
+              left: 180,
+              maxWidth: "50%",
+              borderRadius: 20,
+            },
+          ]}
         >
-          <Text style={{ fontSize: 16, color: "#fff" }} key={index}>
-            {item.text}
+          <Text style={{ fontSize: 14, color: "black" }}>
+            Welcome to Cohab! Click me.
           </Text>
 
-          <View style={styles.rightArrow}></View>
+          <View style={styles.leftArrow}></View>
 
-          <View style={styles.rightArrowOverlap}></View>
-        </View> */}
+          <View style={styles.leftArrowOverlap}></View>
         </View>
+        {/* </View> */}
 
         <View style={styles.bottomContainer}>
           {/* <Image
@@ -398,7 +396,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: "100%",
     height: "60%",
-    marginTop: 40,
+    marginTop: 55,
   },
   groupButton: {
     height: 30,
@@ -440,61 +438,61 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
   // old speech
-  item: {
-    marginVertical: moderateScale(7, 2),
-    flexDirection: "row",
-  },
-  itemIn: {
-    marginLeft: 20,
-  },
-  itemOut: {
-    alignSelf: "flex-end",
-    marginRight: 20,
-  },
-  balloon: {
-    maxWidth: moderateScale(300, 2),
-    paddingHorizontal: moderateScale(10, 2),
-    paddingTop: moderateScale(5, 2),
-    paddingBottom: moderateScale(7, 2),
-    borderRadius: 20,
-  },
-  arrowContainer: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    zIndex: -1,
-    flex: 1,
-  },
-  arrowLeftContainer: {
-    justifyContent: "flex-end",
-    alignItems: "flex-start",
-  },
+  // item: {
+  //   marginVertical: moderateScale(7, 2),
+  //   flexDirection: "row",
+  // },
+  // itemIn: {
+  //   marginLeft: 20,
+  // },
+  // itemOut: {
+  //   alignSelf: "flex-end",
+  //   marginRight: 20,
+  // },
+  // balloon: {
+  //   maxWidth: moderateScale(300, 2),
+  //   paddingHorizontal: moderateScale(10, 2),
+  //   paddingTop: moderateScale(5, 2),
+  //   paddingBottom: moderateScale(7, 2),
+  //   borderRadius: 20,
+  // },
+  // arrowContainer: {
+  //   position: "absolute",
+  //   top: 0,
+  //   left: 0,
+  //   right: 0,
+  //   bottom: 0,
+  //   zIndex: -1,
+  //   flex: 1,
+  // },
+  // arrowLeftContainer: {
+  //   justifyContent: "flex-end",
+  //   alignItems: "flex-start",
+  // },
 
-  arrowRightContainer: {
-    justifyContent: "flex-end",
-    alignItems: "flex-end",
-  },
+  // arrowRightContainer: {
+  //   justifyContent: "flex-end",
+  //   alignItems: "flex-end",
+  // },
 
-  arrowLeft: {
-    left: moderateScale(-6, 0.5),
-  },
+  // arrowLeft: {
+  //   left: moderateScale(-6, 0.5),
+  // },
 
-  arrowRight: {
-    right: moderateScale(-6, 0.5),
-  },
+  // arrowRight: {
+  //   right: moderateScale(-6, 0.5),
+  // },
 
   //New speech bubble
   // rightArrow: {
   //   position: "absolute",
-  //   backgroundColor: "#0078fe",
+  //   backgroundColor: "#fff",
   //   //backgroundColor:"red",
   //   width: 20,
   //   height: 25,
   //   bottom: 0,
   //   borderBottomLeftRadius: 25,
-  //   right: -10
+  //   right: -10,
   // },
 
   // rightArrowOverlap: {
@@ -505,30 +503,29 @@ const styles = StyleSheet.create({
   //   height: 35,
   //   bottom: -6,
   //   borderBottomLeftRadius: 18,
-  //   right: -20
-
+  //   right: -20,
   // },
 
-  // /*Arrow head for recevied messages*/
-  // leftArrow: {
-  //   position: "absolute",
-  //   backgroundColor: "#dedede",
-  //   //backgroundColor:"red",
-  //   width: 20,
-  //   height: 25,
-  //   bottom: 0,
-  //   borderBottomRightRadius: 25,
-  //   left: -10,
-  // },
+  /*Arrow head for recevied messages*/
+  leftArrow: {
+    position: "absolute",
+    backgroundColor: "#fff",
+    //backgroundColor:"red",
+    width: 20,
+    height: 15,
+    bottom: 0,
+    borderBottomRightRadius: 25,
+    left: 0,
+  },
 
-  // leftArrowOverlap: {
-  //   position: "absolute",
-  //   backgroundColor: "#eeeeee",
-  //   //backgroundColor:"green",
-  //   width: 20,
-  //   height: 35,
-  //   bottom: -6,
-  //   borderBottomRightRadius: 18,
-  //   left: -20,
-  // },
+  leftArrowOverlap: {
+    position: "absolute",
+    backgroundColor: "#fff",
+    //backgroundColor:"green",
+    width: 20,
+    height: 15,
+    bottom: -3,
+    borderBottomRightRadius: 18,
+    left: 0,
+  },
 });
