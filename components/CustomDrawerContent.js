@@ -5,6 +5,7 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
+  TouchableHighlight,
   Image,
   ScrollView,
   Modal,
@@ -81,9 +82,16 @@ export default function CustomDrawerContent({ navigation }) {
             {displayCheckIn}
           </View>
           <View style={{ flexDirection: "row", justifyContent:"center" }}>
-              <Image source = {profileImage} style = {styles.profileImage} />
-              <Image source = {profileImage} style = {styles.profileImage} />
-              <Image source={ProfilePic} style={styles.profileImage} />
+              <TouchableHighlight
+                style={[styles.profileImgContainer, { borderColor: 'orange', borderWidth:3 }]}
+              >
+                <Image source = {profileImage} style = {styles.profileImage} />
+              </TouchableHighlight>
+              <TouchableHighlight
+                style={[styles.profileImgContainer, { borderColor: 'green', borderWidth:3 }]}
+              >
+                <Image source={ProfilePic} style={styles.profileImage} />
+              </TouchableHighlight>
           </View>
           <BasicText style = {styles.alignCenter}>Announcements</BasicText>
           <View style={styles.announcementContainer}>
@@ -146,9 +154,14 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   profileImage: {
-    marginHorizontal: 10,
     width: 50,
     height: 50,
+  },
+  profileImgContainer: {
+    marginHorizontal: 10,
+    width: 56,
+    height: 56,
+    borderRadius: 30,
   },
   announcementContainer: {
     marginLeft: 10,
