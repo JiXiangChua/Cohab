@@ -77,7 +77,7 @@ export default function HomeScreen({ navigation, route }) {
       image: WashingMachineLogo,
       functionName: "Chore",
       description:
-        "Planning a huge party and need your housemate(s)’ approval? Send a polite request here!",
+        "Getting ready to do some chores? The washing machine is waiting for you!",
     },
     {
       id: 2,
@@ -85,7 +85,7 @@ export default function HomeScreen({ navigation, route }) {
       image: TaskBoardLogo,
       functionName: "Task",
       description:
-        "Planning a huge party and need your housemate(s)’ approval? Send a polite request here!",
+        "Plan to do something but cannot remember? Write it down here! ",
     },
     {
       id: 3,
@@ -101,7 +101,7 @@ export default function HomeScreen({ navigation, route }) {
       image: PiggyBankLogo,
       functionName: "Wallet",
       description:
-        "Planning a huge party and need your housemate(s)’ approval? Send a polite request here!",
+        "Pay your friends, manage your finance better! This piggybank will take care of your wealth!",
     },
     {
       id: 5,
