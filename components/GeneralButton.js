@@ -9,12 +9,14 @@ import {
 } from "react-native";
 
 import BasicText from "./BasicText";
+ 
 
 export default function GeneralButton(props) {
   return (
     <View>
       <TouchableOpacity
         style={[styles.ButtonStyle, { backgroundColor: props.color }]}
+        onPress={props.onPress}
       >
         <BasicText style={styles.ButtonTextStyle}>{props.buttonText}</BasicText>
       </TouchableOpacity>

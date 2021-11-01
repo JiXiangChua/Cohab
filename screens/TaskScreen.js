@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
 import {
-  View ,
-  StyleSheet ,
-  TouchableOpacity ,
-  Image ,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
   ScrollView,
   Modal,
   Button,
@@ -13,14 +13,17 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { MenuBar , MyTasks , SharedTasks , BasicText } from "../components";
+import { MenuBar, MyTasks, SharedTasks, BasicText } from "../components";
 
 export default function TaskScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
-      <MenuBar navigation = {navigation} />
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollViewStyle}>
-        <BasicText style = {styles.taskText}> Tasks </BasicText>
+      <MenuBar navigation={navigation} />
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.scrollViewStyle}
+      >
+        <BasicText style={styles.taskText}> Tasks </BasicText>
         <MyTasks />
         <SharedTasks />
       </ScrollView>

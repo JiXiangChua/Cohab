@@ -3,6 +3,7 @@ import { View , Modal , StyleSheet , TouchableOpacity, TextInput , Text } from '
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 import BasicText from '../BasicText.js';
+import GeneralButton from '../GeneralButton.js';
 
 export default function CalendarModal({ modalVisible , setModalVisible , modalDate = Date.now , addEvent }) {
 
@@ -71,19 +72,34 @@ export default function CalendarModal({ modalVisible , setModalVisible , modalDa
         >
             <View style = {styles.darkBackground}>
                 <View style = {styles.popup}>
-                    <View style = {styles.center}><BasicText>New Event</BasicText></View>
-                    <BasicText style = {styles.fieldTitle}>Name:</BasicText>
-                    <TextInput style = {styles.inputField} onChangeText = {(eventName) => {setEventName(eventName)}} value = {eventName} />
-                    <BasicText style = {styles.fieldTitle}>Location:</BasicText>
-                    <TextInput style = {styles.inputField} onChangeText = {(eventLocation) => {setEventLocation(eventLocation)}} value = {eventLocation} />
-                    <BasicText style = {styles.fieldTitle}>Date:</BasicText>
-                    <Text onPress = {showDatePicker} style = {styles.inputField}>{date.toDateString()}</Text>
-                    <BasicText style = {styles.fieldTitle}>Time:</BasicText>
-                    <Text onPress = {showTimePicker} style = {styles.inputField}>{date.toLocaleTimeString()}</Text>
+                    <TextInput style = {styles.inputField} onChangeText = {(eventName) => {setEventName(eventName)}} value = {eventName} placeholder = 'Event Name' />
+                    <TextInput style = {styles.inputField} onChangeText = {(eventLocation) => {setEventLocation(eventLocation)}} value = {eventLocation} placeholder = 'Event Location' />
+                    <TouchableOpacity
+                        style={styles.optionButton}
+                        onPress={showDatePicker}
+                    >
+                        <BasicText style={styles.optionButtonText}>{date.toDateString()}</BasicText>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.optionButton}
+                        onPress={showTimePicker}
+                    >
+                        <BasicText style={styles.optionButtonText}>{date.toLocaleTimeString()}</BasicText>
+                    </TouchableOpacity>
                     {visibleDateTimePicker}
                     <View style = {styles.buttons}>
-                        <TouchableOpacity onPress = {saveEvent} style = {styles.button}><BasicText>Save</BasicText></TouchableOpacity>
-                        <TouchableOpacity onPress = {closeModal} style = {styles.button}><BasicText>Close</BasicText></TouchableOpacity>
+                        <TouchableOpacity
+                            style={[styles.optionButton , styles.green ]}
+                            onPress={saveEvent}
+                        >
+                            <BasicText style={[ styles.optionButtonText , styles.whiteText ]}>Save</BasicText>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.optionButton}
+                            onPress={closeModal}
+                        >
+                            <BasicText style={styles.optionButtonText}>Close</BasicText>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>
@@ -100,13 +116,15 @@ const styles = StyleSheet.create({
         backgroundColor: "#000000aa",
         flex: 1,
         alignItems: "center",
+        justifyContent: 'center',
     },
     popup: {
         backgroundColor: "#ffffff",
         width: '90%',
         borderRadius: 10,
         marginTop: 30,
-        padding: 10,
+        padding: 30,
+        justifyContent: 'center',
     },
     button: {
         width: '49%',
@@ -117,11 +135,9 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     inputField: {
-        height: 20,
+        borderBottomWidth: 0.5,
         width: "100%",
-        borderBottomWidth: 1,
-        borderColor: "#000000",
-        marginBottom: 10,
+        marginBottom: 15,
     },
     fieldTitle: {
         color: 'grey',
@@ -130,6 +146,28 @@ const styles = StyleSheet.create({
     buttons: {
         marginTop: 5,
         flexDirection: 'row',
-        justifyContent : 'space-between',
+        justifyContent : 'space-around',
     },
+    optionButton: {
+        borderRadius: 20,
+        minWidth: 100,
+        borderStyle: "solid",
+        borderWidth: 1,
+        borderColor: "#2196F3",
+        backgroundColor: "white",
+        padding: 10,
+        elevation: 2,
+        marginBottom: 15,
+    },
+    optionButtonText: {
+        color: "#2196F3",
+        fontWeight: "bold",
+        textAlign: "center",
+    },
+    green: {
+        backgroundColor: "#36BC7C",
+    },
+    whiteText: {
+        color: "white",
+    }
 })

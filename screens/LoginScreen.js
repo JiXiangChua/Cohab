@@ -12,6 +12,7 @@ import logo from "../assets/logo.png";
 import { useLoginContext } from "../LoginContext";
 import { BasicText } from "../components";
 import ModalScreen from "../components/ModalScreen";
+import * as ConstantHelper from "../ConstantHelper.js";
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
@@ -21,7 +22,7 @@ export default function LoginScreen({ navigation }) {
   const { setIsSignedIn } = useLoginContext();
 
   function login() {
-    const loginURL = "http://10.27.124.66:9999/cohab/login";
+    const loginURL = ConstantHelper.CONNECTION + "login";
 
     const loginPackage = {
       email: email,

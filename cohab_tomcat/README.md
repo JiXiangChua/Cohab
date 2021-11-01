@@ -1,19 +1,128 @@
-1>Download and setup tomcat and mysql
-  If you have installed tomcat and mysql can skip this part
-	>Follow the Step3.2 to 3.7 instructions (https://www3.ntu.edu.sg/home/ehchua/programming/sql/MySQL_HowTo.html)
-	>Follow the Step2.1 to 2.4 instructions (https://www3.ntu.edu.sg/home/ehchua/programming/howto/Tomcat_HowTo.html)
+1>APIs example
 
-2>Copy the folder cohab (cohab_tomcat/cohab) to C:\myWebProject\tomcat\webapps
-
-3>Download mysql-connector-java-8.0.26 and put it in to C:\myWebProject\tomcat\lib
-
-4>Create database and table in mysql
-	cmd:
-		cd \myWebProject\mysql\bin
-		mysql -u myuser -p
-
-		create database if not exists cohab_db;
+	GROUP:
+		POST:http://<ID>/cohab/addGroup
+		dataPost:{
+		   "userId":12,
+		   "groupName":"Hall",
+		   "description":"This is for all hall 3 students",
+		}
+		POST:http://<ID>/cohab/joinGroup
+		dataPost:
+		{
+		   "userId":15,
+		   "groupId":8
+		}
+		GET:http://<ID>/cohab/getGroupsByUser?userId=15
+		response:
+		{
+			"groups": [
+				{
+					"description": "This is for all NTU EEE students",
+					"id": 1,
+					"groupname": "EEE"
+				},
+				{
+					"description": "This is for all hall 3 students",
+					"id": 8,
+					"groupname": "Hall"
+				}
+			]
+		}
+	CHORES:
+		GET:http://<ID>/cohab/getChores?groupId=1
+		response:
+		{
+			"chores": [
+				{
+					"currentUser": 15,
+					"repeatType": "Daily",
+					"icon": "img base64data",
+					"nextUser": 16,
+					"choreid": 1,
+					"title": "Wash the dishes"
+					"dueOn": "2021-10-11"
+				},
+				{
+					"currentUser": 18,
+					"repeatType": "Weekly",
+					"icon": "img base64data",
+					"nextUser": 16,
+					"choreid": 2,
+					"title": "Mop the floor"
+					"dueOn": "2021-10-11"
+				}
+			]
+		}
+		POST:http://<ID>/cohab/addChore
+		dataPost:{
+		   "userId":12,
+		   "groupid":"8",
+		   "title":"Mop the floor",
+		   "seqs":[{
+				"seqNo":1,
+				"userId":1,
+		   },{
+				"seqNo":2,
+				"userId":2,
+		   }],
+		   "type":"Weekly"
+		   "date":"2021-10-11"
+		}
+		POST:http://<ID>/cohab/updateChore
+		dataPost:{
+		   "choreid":1,
+		   "userId":12,
+		   "groupid":"8",
+		   "title":"Mop the floor",
+		   "seqs":[{
+				"seqNo":1,
+				"userId":1,
+		   },{
+				"seqNo":2,
+				"userId":3,
+		   }],
+		   "type":"Weekly"
+		   "date":"2021-10-11"
+		}
+		GET:http://<ID>/cohab/deleteChore?choreid=1
+		response:
+		{
+			"status":"done"
+		}
+		GET:http://<ID>/cohab/getChoreTypeIcon
+		response:
+		{
+			"icons":[
+				{"icon": "img base64data"},
+				{"icon": "img base64data"},
+				{"icon": "img base64data"},
+				{"icon": "img base64data"},
+				{"icon": "img base64data"},
+				{"icon": "img base64data"}
+			]
+		}
+		GET:http://<ID>/cohab/getGroupMembers?groupId=1
+		response:
+		{
+			"members":[
+				{
+					"userid": 15,
+					"profileimg": "img base64data"
+				},
+				{
+					"userid": 16,
+					"profileimg": "img base64data"
+				},
+				{
+					"userid": 17,
+					"profileimg": "img base64data"
+				}
+			]
+		}
 		
+2>Database (tables&cols)
+	
 		CREATE TABLE `announcement` (
 		  `announcementid` int NOT NULL AUTO_INCREMENT,
 		  `userid` int NOT NULL,
@@ -132,17 +241,3 @@
 		  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 		  PRIMARY KEY (`id`)
 		);
-
-		
-5>call api examples
-	http://<ip address>:9999/cohab/register
-	sample data:{
-		"email":"test@a.com",
-		"password":"aaa",
-		"username":"qqq"
-	}
-	http://<ip address>:9999/cohab/login
-	sample data:{
-		"email":"test@a.com",
-		"password":"aaa"
-	}

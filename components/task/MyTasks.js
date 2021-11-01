@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
 import {
-  View ,
-  StyleSheet ,
-  TouchableOpacity ,
-  Image ,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
   ScrollView,
   Modal,
   Button,
@@ -15,44 +15,67 @@ import {
 import newTaskButton from "../../assets/Task-assets/NewTaskButton.png";
 
 import BasicText from "../BasicText.js";
-import TaskCard from './TaskCard.js';
+import TaskCard from "./TaskCard.js";
 
-import TaskModal from './TaskModal.js';
+import TaskModal from "./TaskModal.js";
 
 export default function MyTasks() {
-  const [modalVisible, setModalVisible] = useState(false)
-  //Toggle on and off modal screeen
+  const [modalVisible, setModalVisible] = useState(false); //Toggle on and off modal screeen
+  const [laundryCard, setlaundryCard] = useState(true);
+  const [dishCard, setdishCard] = useState(true);
+
+  function toggleLaundryTask() {
+    setlaundryCard(!laundryCard);
+  }
+
+  function toggleDishTask() {
+    setdishCard(!dishCard);
+  }
 
   return (
-    <View style={styles.myTasks}>
-      <View style={styles.title}>
-        <BasicText style={styles.subHeaderText}>Claim Tasks</BasicText>
+    <View style={styles.tasksContainer}>
+      <View style={styles.myTasks}>
+        <View style={styles.title}>
+          <BasicText style={styles.subHeaderText}>Claim Tasks</BasicText>
 
-        <TouchableOpacity
-        style={styles.newTask}
-        onPress={() => setModalVisible(true)}
-        >
-          <BasicText style={styles.subHeaderText}>New Task</BasicText>
-          <Image source={newTaskButton} style={styles.newTaskButton} />
-          {/*icon is a lil off center cause the image is off center. if the new icon is centered it should be centered*/}
-        </TouchableOpacity>
-      </View>
+          <TouchableOpacity
+            style={styles.newTask}
+            onPress={() => setModalVisible(true)}
+          >
+            <BasicText style={styles.subHeaderText}>New Task</BasicText>
+            <Image source={newTaskButton} style={styles.newTaskButton} />
+          </TouchableOpacity>
+        </View>
 
-      <View style={styles.tasksContainer}>
-        <TaskCard 
-          name="Laundry"
-          description="we have no clothes :(("
-          set="Set own deadline"
-          date_created = "18 Aug"
-        />
-        <TaskCard 
-          name="Do the dishes"
-          description="our sink is clogging !!!"
-          deadline="Deadline:26 Aug"
-          date_created = "18 Aug"
+        {/* <View style={styles.tasksContainer}> */}
+        <View style={styles.laundryContainer}>
+          {laundryCard && (
+            <TaskCard
+              name="Laundry"
+              description="we have no clothes :(("
+              set="Set own deadline"
+              date_created="18 Aug"
+              toggle={toggleLaundryTask}
+              fdCheck={false}
+            />
+          )}
+
+          {dishCard && (
+            <TaskCard
+              name="Do the dishes"
+              description="our sink is clogging !!!"
+              deadline="Deadline:26 Aug"
+              date_created="18 Aug"
+              fdCheck={true}
+              toggle={toggleDishTask}
+            />
+          )}
+        </View>
+        <TaskModal
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
         />
       </View>
-      <TaskModal modalVisible = {modalVisible} setModalVisible = {setModalVisible} />
     </View>
   );
 }
@@ -81,14 +104,18 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   newTaskButton: {
-    minWidth: 30,
-    minHeight: 30,
-    resizeMode: "center",
+    width: 30,
+    height: 30,
+    marginLeft: 10,
+    // resizeMode: "center",
   },
   tasksContainer: {
-    width: "90%",
+    width: "100%",
     alignItems: "center",
     flexDirection: "column",
     justifyContent: "space-evenly",
+  },
+  laundryContainer: {
+    height: 300,
   },
 });

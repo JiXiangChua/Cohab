@@ -26,14 +26,14 @@ export default function CompletedTab({ visible }) {
           name="Install shelves"
           description="package in the living room"
           deadline="Completed:3 Aug"
-          date_created="30 Jul"
+          date_created="Claimed:"
         ></CompletedTaskCard>
       </View>
 
-      {/* See all button*/}
+      {/* See all button
       <TouchableOpacity style={[styles.SeeAll, { marginLeft: 300 }]}>
         <Text style={styles.SeeAllText}>See All</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 }
@@ -41,9 +41,10 @@ export default function CompletedTab({ visible }) {
 const styles = StyleSheet.create({
   backgroundContainer: {
     width: "100%",
-    backgroundColor: "white",
+    backgroundColor: "#FFFAF2",
     borderRadius: 8,
     alignItems: "center",
+    paddingVertical: 12,
   },
   taskCardContainer: {
     width: "90%",
