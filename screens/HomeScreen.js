@@ -1106,7 +1106,7 @@ export function HomeScreen(props) {
           <View>
             <View style={{ position: "absolute", left: 117, top: 545 }}>
               <CopilotStep
-                text="Click to customise your own furniture"
+                text="Customize my room for me!"
                 order={1}
                 name="furniture"
               >
@@ -1117,7 +1117,7 @@ export function HomeScreen(props) {
             </View>
             <View style={{ top: -50 }}>
               <CopilotStep
-                text="See which group you're in"
+                text="Welcome to my special hideout!"
                 order={2}
                 name="group"
               >
@@ -1128,7 +1128,7 @@ export function HomeScreen(props) {
             </View>
             <View style={{ position: "absolute", left: -140, top: -70 }}>
               <CopilotStep
-                text="Check out the latest annoucement and events"
+                text="Woof! Check out the latest updates!"
                 order={3}
                 name="annoucement"
               >

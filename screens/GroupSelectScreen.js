@@ -188,7 +188,7 @@ export function GroupSelectScreen(props) {
             position: "absolute",
             // top: 645,
             // left: 70,
-            top: 620,
+            top: 690,
             left: 250,
           }}
           onPress={() => {
@@ -237,7 +237,7 @@ export function GroupSelectScreen(props) {
             width: 300,
             height: 100,
             position: "absolute",
-            top: 600,
+            top: 650,
             left: 80,
           }}
         >
@@ -249,16 +249,16 @@ export function GroupSelectScreen(props) {
                   padding: 10,
                   // top: 420,
                   // left: 180,
-                  maxWidth: "50%",
+                  maxWidth: "60%",
                   borderRadius: 20,
                 },
               ]}
             >
-              <View style={styles.leftArrow}></View>
+              <View style={styles.rightArrow}></View>
 
-              <View style={styles.leftArrowOverlap}></View>
+              <View style={styles.rightArrowOverlap}></View>
               <Text style={{ fontSize: 14, color: "black" }}>
-                Welcome to Cohab! Click me for guide!
+                Hi! Im Carl! Lets take a walk together!
               </Text>
             </View>
           )}
@@ -347,9 +347,9 @@ export function GroupSelectScreen(props) {
       {copilotStatus && (
         <View>
           {/* Tut step 1 */}
-          <View style={{ position: "absolute", left: 80, bottom: 480 }}>
+          <View style={{ position: "absolute", left: 65, bottom: 510 }}>
             <CopilotStep
-              text="Select which group you want to view"
+              text="Woof! Check out my different hideouts!"
               order={1}
               name="group"
             >
@@ -359,22 +359,26 @@ export function GroupSelectScreen(props) {
             </CopilotStep>
           </View>
           {/* Tut step 2 */}
-          <View style={{ top: -5, right: 90 }}>
-            <CopilotStep text="Create a new group" order={2} name="add group">
+          <View style={{ top: -5, right: 110 }}>
+            <CopilotStep
+              text="Create a new hideout for me!"
+              order={2}
+              name="add group"
+            >
               <WalkthroughableView>
-                <View style={{ width: 180, height: 50 }}></View>
+                <View style={{ width: 140, height: 50 }}></View>
               </WalkthroughableView>
             </CopilotStep>
           </View>
           {/* Tut step 3 */}
-          <View style={{ position: "absolute", left: 95, top: -5 }}>
+          <View style={{ position: "absolute", left: 30, top: -5 }}>
             <CopilotStep
-              text="Join an existing group"
+              text="Join my friend’s hideout!"
               order={3}
               name="join group"
             >
               <WalkthroughableText>
-                <View style={{ width: 180, height: 50 }}></View>
+                <View style={{ width: 140, height: 50 }}></View>
               </WalkthroughableText>
             </CopilotStep>
           </View>
@@ -511,27 +515,27 @@ const styles = StyleSheet.create({
   // },
 
   //New speech bubble
-  // rightArrow: {
-  //   position: "absolute",
-  //   backgroundColor: "#fff",
-  //   //backgroundColor:"red",
-  //   width: 20,
-  //   height: 25,
-  //   bottom: 0,
-  //   borderBottomLeftRadius: 25,
-  //   right: -10,
-  // },
+  rightArrow: {
+    position: "absolute",
+    backgroundColor: "#fff",
+    //backgroundColor:"red",
+    width: 20,
+    height: 15,
+    bottom: 0,
+    borderBottomLeftRadius: 25,
+    right: 0,
+  },
 
-  // rightArrowOverlap: {
-  //   position: "absolute",
-  //   backgroundColor: "#eeeeee",
-  //   //backgroundColor:"green",
-  //   width: 20,
-  //   height: 35,
-  //   bottom: -6,
-  //   borderBottomLeftRadius: 18,
-  //   right: -20,
-  // },
+  rightArrowOverlap: {
+    position: "absolute",
+    backgroundColor: "#fff",
+    //backgroundColor:"green",
+    width: 20,
+    height: 15,
+    bottom: 3,
+    borderBottomLeftRadius: 18,
+    right: 0,
+  },
 
   /*Arrow head for recevied messages*/
   leftArrow: {
