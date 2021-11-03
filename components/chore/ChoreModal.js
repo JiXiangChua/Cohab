@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import {
   Text,
   View,
@@ -17,9 +17,8 @@ import {
 import DateTimePicker from "@react-native-community/datetimepicker";
 import * as ConstantHelper from "../../ConstantHelper.js";
 import BasicText from "../BasicText.js";
-import SelectOrder from "../../components/chore/SelectOrder";
-
-export default function ChoreModal({ modalVisible, setModalVisible, choreiconsource,groupmems}) {
+let userSelectedArr = [];
+export default function ChoreModal({ modalVisible, setModalVisible, choreiconsource,groupmems,isLoading,setIsLoading}) {
   // Values needed for Add Chore Screen Popup (Modal)
   var repeatOptions = ["Weekly", "Monthly"];
   var displayRepeatOptions = [];
@@ -103,8 +102,8 @@ export default function ChoreModal({ modalVisible, setModalVisible, choreiconsou
   }
 
   const userImgClick=(userid)=>{
-    userSelected.push(userid);
-    console.log(userSelected);
+    userSelectedArr.push(userid);
+    setUserSelected([...userSelectedArr]);
   }
 
   function closeChoreModal(){
@@ -112,6 +111,9 @@ export default function ChoreModal({ modalVisible, setModalVisible, choreiconsou
     setChoreTitle('');
     setSelectCheck(false);
     setUserSelected([]);
+    userSelectedArr = [];
+    //refresh choreScreen
+    setIsLoading(!isLoading);
   }
 
   function saveChore() {
@@ -205,7 +207,7 @@ export default function ChoreModal({ modalVisible, setModalVisible, choreiconsou
 
           <View style={styles.container}>
           {
-                groupmems.map((user, index) => {
+              groupmems.map((user, index) => {
                 return userSelected.includes(user.userid) ?
                     (
                       <TouchableOpacity key={index} style={styles.item} >
@@ -222,18 +224,6 @@ export default function ChoreModal({ modalVisible, setModalVisible, choreiconsou
                     );
                 })
             }
-            {/* {
-                groupmems.map((user, index) => {
-                return(
-                      <TouchableOpacity key={index} style={styles.item} >
-                            <Image style={{height: 50,width: 50, opacity: (userSelected.includes(user.userid) ? 0.35 : 1), borderWidth: 4, borderColor: "#36BC7C", borderRadius: 100}} source={{uri: user.profileimg}}/>
-                            <View style={styles.textoverlay}>
-                                <Text style={styles.text}>{(userSelected.includes(user.userid) ? userSelected.indexOf(user.userid)+1 : "")}</Text>
-                            </View>
-                        </TouchableOpacity>
-                    );
-                })
-            } */}
           </View>
 
           <BasicText style={{ paddingTop: 20 }}>Repeat</BasicText>

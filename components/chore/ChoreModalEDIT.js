@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { useState,useEffect } from "react";
 import {
+  Text,
   View,
   TextInput,
   Modal,
@@ -13,11 +15,13 @@ import {
   AppRegistry,
 } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
-
+import * as ConstantHelper from "../../ConstantHelper.js";
 import BasicText from "../BasicText.js";
-import SelectOrder from "./SelectOrder";
-
-export default function ChoreModalEDIT({ modalVisibleB, setModalVisibleB, placeholder,}) {
+let userSelectedArr = [];
+export default function ChoreModalEDIT(props) {
+  const [choreid, setChoreid] = useState(props.choreid);
+  const [choreiconsource, setIcons] = useState(props.icons);
+  const [groupmems, setGroupmates] = useState(props.groupmates);
 
   // Values needed for Add Chore Screen Popup (Modal)
   var repeatOptions = ["Weekly", "Monthly"];
@@ -29,17 +33,22 @@ export default function ChoreModalEDIT({ modalVisibleB, setModalVisibleB, placeh
   //onChange receives datechange-->What does it do when receive new change add later when database clear
   const [selectcheck, setSelectCheck] = useState(false);
   const [showSelectDate, setSelectDate] = useState("heya"); //show on the button
+  const [dateSELECT, setDateSELECT] = useState("");//for database date
 
   const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
-    var weekday = selectedDate.toString().split(' ')[0];
-    var dateday = selectedDate.toString().split(' ')[2];
-    var datemonth = selectedDate.toString().split(' ')[1];
-    var dateyear = selectedDate.toString().split(' ')[3];
-    setSelectDate(weekday+", "+dateday+" "+datemonth+" "+dateyear);
-    setSelectCheck(true);
-    setShow(false);
-    setDate(currentDate);
+    if(selectedDate!=undefined){
+      const currentDate = selectedDate || date;
+      var weekday = selectedDate.toString().split(' ')[0];
+      var dateday = selectedDate.toString().split(' ')[2];
+      var datemonth = selectedDate.toString().split(' ')[1];
+      var dateyear = selectedDate.toString().split(' ')[3];
+      var dateSENT = selectedDate.toISOString().split('T')[0];
+      setSelectDate(weekday+", "+dateday+" "+datemonth+" "+dateyear);
+      setSelectCheck(true);
+      setShow(false);
+      setDateSELECT(dateSENT);
+      setDate(currentDate);
+    }
   };
 
   const showMode = (currentMode) => {
@@ -51,13 +60,12 @@ export default function ChoreModalEDIT({ modalVisibleB, setModalVisibleB, placeh
     showMode("date");
   };
 
-
   // Variables to indicate if monthly or weekly button selected
   var monthlySelected = false;
   var weeklySelected = false;
 
   // Change variables as user selects between weekly or monthly
-  const [repeatByWeekOrMonth, setWeeklyOrMonthly] = useState("Weekly");
+  const [repeatByWeekOrMonth, setWeeklyOrMonthly] = useState(props.choretype);
 
   if (repeatByWeekOrMonth == "Weekly") {
     monthlySelected = false;
@@ -81,189 +89,46 @@ export default function ChoreModalEDIT({ modalVisibleB, setModalVisibleB, placeh
       </Pressable>
     );
   }
-
-  // for choosing the chore icon
-  const [state, setState] = useState({
-    switchone: false,
-    switchtwo: false,
-    switchthree: false,
-    switchfour: false,
-    switchfive: false,
-  });
+  
   //setChoreID so it displays user's chosen icon on the screen
   const [choretypeid, setChoreTypeID] = useState(1);
 
-  const handleClick=(flag)=>{
-    switch(flag) {
-      case 0:
-        setState({
-          switchone: false,
-          switchtwo: false,
-          switchthree: false,
-          switchfour: false,
-          switchfive: false,
-          switchsix: false,
-        });
-        break;
+  const [choreTitle , setChoreTitle] = useState(props.dutyname);
 
-      case 1:
-        setState({
-          switchone: true,
-          switchtwo: false,
-          switchthree: false,
-          switchfour: false,
-          switchfive: false,
-          switchsix: false,
-        });
-        setChoreTypeID(1);
-        break;
-      
-      case 2:
-        setState({
-          switchone: false,
-          switchtwo: true,
-          switchthree: false,
-          switchfour: false,
-          switchfive: false,
-          switchsix: false,
-        });
-        setChoreTypeID(2);
-        break;
-
-      case 3:
-        setState({
-          switchone: false,
-          switchtwo: false,
-          switchthree: true,
-          switchfour: false,
-          switchfive: false,
-          switchsix: false,
-        });
-        setChoreTypeID(3);
-        break;
-
-      case 4:
-        setState({
-          switchone: false,
-          switchtwo: false,
-          switchthree: false,
-          switchfour: true,
-          switchfive: false,
-          switchsix: false,
-        });
-        setChoreTypeID(4);
-        break;
-
-      case 5:
-        setState({
-          switchone: false,
-          switchtwo: false,
-          switchthree: false,
-          switchfour: false,
-          switchfive: true,
-          switchsix: false,
-        });
-        setChoreTypeID(5);
-        break;
-
-      case 6:
-        setState({
-          switchone: false,
-          switchtwo: false,
-          switchthree: false,
-          switchfour: false,
-          switchfive: false,
-          switchsix: true,
-        });
-        setChoreTypeID(6);
-        break;
-
-      default:
-        setState({switchone: false,});
-        setChoreTypeID(1);
-    }
-  }
-
-  //importing icon images
-  const [choreiconsource, setChoreIconSource] = useState([]);
-
-  function choresIcons(){
-
-    const choresIconURL = "http:/5dcd-111-65-47-45.ngrok.io/cohab/getChoreTypeIcon";
+  const [iconSelected, setIconSelected] = useState([true,false,false,false,false,false]);
+  const [userSelected, setUserSelected] = useState([]);
   
-    const init = {
-      method: "GET",
-      headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      },
-    };
-
-    useEffect(() => {
-      async function fetchChoreIcons() {
-        try {
-          const response = await fetch(choresIconURL, init);
-          const json = await response.json();
-          console.log(json);
-          setChoreIconSource(json.icons);
-          if (json.status == "OK") {
-            console.log("Successfully connected!");
-          } else {
-            console.log("NOPE");
-            console.log(json.status);
-          }
-        } catch (error) {
-          console.log(error);
-        }
-      }
-      fetchChoreIcons();
-      var entry=0;
-      for(entry=0;entry<choreiconsource.Length;entry++){
-        choretypeid.push(choreiconsource[entry]["choretypeid"]);
-        icon.push(choreiconsource[entry]["icon"]);
-      };
-    }, [])
-
-    return(
-      <View
-      style={styles.gridcont}
-      >
-        {choreiconsource.map((choreicon, index) => {
-            return (
-              <TouchableOpacity key={index} onPress={() => handleClick(this,choreicon.choretypeid)}>
-                <View style={[styles.iconSquare,{backgroundColor: "#ECC3FF", borderWidth: (state.switchtwo === false ? 0 : 4)}]}>
-                  <Image source={{uri: choreicon.icon}} style={styles.gridimage}/>
-                </View>
-              </TouchableOpacity>
-            );
-          })}
-      </View>
-    );
+  const handleClick=(choretypeid)=>{
+    var array = [false,false,false,false,false,false];
+    array[choretypeid-1] = true;
+    setIconSelected(array);
+    setChoreTypeID(choretypeid);
   }
 
-  const [choreTitle , setChoreTitle] = useState('');
-
-  function closeChoreModal(){
-    setModalVisibleB(!modalVisibleB);
-    setChoreTitle('');
-    setSelectCheck(false);
+  const userImgClick=(userid)=>{
+    userSelectedArr.push(userid);
+    setUserSelected([...userSelectedArr]);
   }
 
   function editChore() {
-    const newchore = {
-      userId: 12,
-      groupid: 8,
-      title: choreTitle,
+    var userSeqs=[{
+      seqNo:1,
+      userId:userSelected[0],
+    },{
+      seqNo:2,
+      userId:userSelected[1],
+    },{
+      seqNo:3,
+      userId:userSelected[2],
+    }];
+    
+    const choredata = {
+      choreid:choreid,
+		  title:choreTitle,
+      seqs:userSeqs,
       type: repeatByWeekOrMonth,
       choretypeid: choretypeid,
-      date: date,
-      seq:[{
-        seqNo:1,
-        userId:1,
-      },{
-        seqNo:2,
-        userId:3,
-      }],
+      date: dateSELECT,
     }
     const init = {
       method: "POST",
@@ -271,36 +136,59 @@ export default function ChoreModalEDIT({ modalVisibleB, setModalVisibleB, placeh
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(newchore),
+      body: JSON.stringify(choredata),
     };
-    const editChoreURL = "http://5dcd-111-65-47-45.ngrok.io/cohab/updateChore";
-    useEffect(() => {
-      async function newSaveChores() {
-        try {
-          const response = await fetch(editChoreURL, init);
-          const json = await response.json();
-          console.log(json);
-          if (json.status == "OK") {
-            console.log("Successfully connected!");
-          } else {
-            console.log("NOPE");
-            console.log(json.status);
-          }
-        } catch (error) {
-          console.log(error);
+    const updateChoreURL = ConstantHelper.CONNECTION + "updateChore";
+    (async () => {
+      try {
+        const response = await fetch(updateChoreURL, init);
+        const json = await response.json();
+        if (json.status == "OK") {
+          console.log("Successfully Updated!");
         }
+      } catch (error) {
+        console.log(error);
       }
-    newSaveChores();
-    }, [])
-    closeChoreModal();
+    })();
+    userSelectedArr=[];
+    props.saveButton();
   }
 
+  function deleteChore(){
+    const init = {
+      method: "GET",
+      headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      }
+    };
+    const deleteChoreURL = ConstantHelper.CONNECTION + "deleteChore?choreid="+choreid;
+    (async () => {
+      try {
+        const response = await fetch(deleteChoreURL, init);
+        const json = await response.json();
+        if(json.status=="OK"){
+          console.log("Successfully Deleted!");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+      var entry=0;
+      for(entry=0;entry<choreiconsource.Length;entry++){
+        choretypeid.push(choreiconsource[entry]["choretypeid"]);
+        icon.push(choreiconsource[entry]["icon"]);
+      };
+    })();
+    userSelectedArr=[];
+    props.saveButton();
+  }
+  
   return (
     <Modal
       animationType="slide"
       transparent={true}
-      visible={modalVisibleB}
-      onRequestClose={closeChoreModal}
+      visible={true}
+      onRequestClose={props.cancelButton}
     >
       {/*Rest of screen will darken*/}
       <View
@@ -319,18 +207,47 @@ export default function ChoreModalEDIT({ modalVisibleB, setModalVisibleB, placeh
           {/*Type in Chore name*/}
           <TextInput
             style={{ borderBottomWidth: 0.5, width: "50%" }}
-            placeholder={placeholder}
+            placeholder="Chore Title"
             onChangeText = {(choreTitle) => {setChoreTitle(choreTitle)}} 
             value = {choreTitle}
           />
 
           <BasicText style={{ paddingTop: 20 }}>Select an icon</BasicText>
           
-          {choresIcons()}
+          <View style={styles.gridcont}>
+            {choreiconsource.map((choreicon, index) => {
+                return (
+                  <TouchableOpacity key={index} onPress={() => handleClick(choreicon.choretypeid)}>
+                  <View style={[styles.iconSquare,{backgroundColor: "#ECC3FF", borderWidth: (iconSelected[index] === false ? 0 : 4)}]}>
+                    <Image source={{uri: choreicon.icon}} style={styles.gridimage}/>
+                  </View>
+                </TouchableOpacity>
+                );
+              })}
+          </View>
 
           <BasicText style={{ paddingTop: 20 }}>Select the order</BasicText>
 
-         <SelectOrder onOrderChange={(newOrder)=> console.log(newOrder)}/>
+          <View style={styles.container}>
+          {
+              groupmems.map((user, index) => {
+                return userSelected.includes(user.userid) ?
+                    (
+                      <TouchableOpacity key={index} style={styles.item} >
+                            <Image style={{height: 50,width: 50, opacity: 0.35, borderWidth: 4, borderColor: "#36BC7C", borderRadius: 100}} source={{uri: user.profileimg}}/>
+                            <View style={styles.textoverlay}>
+                                <Text style={styles.text}>{userSelected.indexOf(user.userid)+1}</Text>
+                            </View>
+                        </TouchableOpacity>
+                    ) :
+                    (
+                      <TouchableOpacity key={index} style={styles.item} onPress={() => userImgClick(user.userid)}>
+                            <Image style={{height: 50,width: 50, borderWidth: 4, borderColor: "#36BC7C", borderRadius: 100}} source={{uri: user.profileimg}}/>
+                      </TouchableOpacity>
+                    );
+                })
+            }
+          </View>
 
           <BasicText style={{ paddingTop: 20 }}>Repeat</BasicText>
 
@@ -377,7 +294,7 @@ export default function ChoreModalEDIT({ modalVisibleB, setModalVisibleB, placeh
           >
             <Pressable
               style={[styles.optionButton, styles.buttonClose]}
-              onPress={closeChoreModal}
+              onPress={props.cancelButton}
             >
               <BasicText style={styles.optionButtonText}>Cancel</BasicText>
             </Pressable>
@@ -388,6 +305,12 @@ export default function ChoreModalEDIT({ modalVisibleB, setModalVisibleB, placeh
               <BasicText style={styles.textStyle}>Confirm</BasicText>
             </Pressable>
           </View>
+          <Pressable
+              style={[styles.button, styles.buttonDelete]}
+              onPress={deleteChore}
+            >
+              <BasicText style={styles.textStyle}>Delete</BasicText>
+          </Pressable>
         </View>
         </ScrollView>
       </View>
@@ -461,7 +384,11 @@ const styles = StyleSheet.create({
   buttonClose: {
     minWidth: 100,
   },
-
+  buttonDelete:{
+    minWidth: 180,
+    marginTop: 10,
+    backgroundColor: "red",
+  },
   optionButton: {
     borderRadius: 20,
     borderStyle: "solid",
@@ -484,4 +411,35 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
+
+  container: {
+    flex: 1,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    marginTop: 20,
+},
+item: {
+    marginTop: 10,
+    marginHorizontal: 7,
+},
+image: {
+    resizeMode: "contain",
+    borderRadius: 10,
+    opacity: 0.35
+},
+textoverlay: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    alignItems: "center",
+    justifyContent: "center",
+},
+text: {
+    fontSize: 18,
+    fontWeight: "bold",
+}
 });

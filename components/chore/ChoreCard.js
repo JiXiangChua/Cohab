@@ -1,16 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   StyleSheet,
   Image,
 } from "react-native";
-
-import ProfilePic from "../../assets/Finance-assets/Kimberly.png";
 import GeneralButton from "../GeneralButton";
+import ChoreModalEDIT from "./ChoreModalEDIT";
 
 import BasicText from "../BasicText.js";
 
 export default function ChoreCard(props) {
+  const [editModalVisible, setEditModalVisible] = useState(false);
+
+  function onCancel() {
+    setEditModalVisible(!editModalVisible);
+  }
+  function onSave() {
+    setEditModalVisible(!editModalVisible);
+    //refresh choreScreen
+    props.setIsLoading(!props.isLoading);
+  }
 
   var icon = props.iconselect //uri gives this prop a chance to link to remote source in chorescreen
   var currentUser = props.currentUser 
@@ -41,8 +50,8 @@ export default function ChoreCard(props) {
     cycleColour = "#04ACE1"; 
     // Do not display deadline
     deadlineTab[0] = null;
-  } 
-
+  }
+  
   return (
     <View
       style={[styles.card, styles.shadowProp, {
@@ -51,6 +60,19 @@ export default function ChoreCard(props) {
         alignContent: "center",
      }]}
     >
+      {editModalVisible && (
+        <ChoreModalEDIT
+          cancelButton={onCancel}
+          saveButton={onSave}
+          choreid = {props.choreid}
+          choretype = {props.choretype}
+          dutyname = {props.dutyname}
+          icons={props.icons}
+          groupmates={props.groupmates}
+        >
+        </ChoreModalEDIT>
+      )}
+
       {deadlineTab[0]}
       
       <View style={{ flexDirection: "row", paddingTop: 0}}>
@@ -72,7 +94,9 @@ export default function ChoreCard(props) {
             <GeneralButton
                 buttonText= "Edit"
                 color="#7B98FF"
-                //onPress={}
+                onPress={() => {
+                  setEditModalVisible(!editModalVisible);
+                }}
             />
           </View>
         </View>
@@ -84,10 +108,8 @@ export default function ChoreCard(props) {
           }]}>
           <BasicText style={[styles.chorebasictxt, {color: cycleColour}]}>{"Every " + props.cycleStart}</BasicText>
             <View style={styles.whosnextcont}>
-              <Image source={{uri: nextUser}} style={styles.profileimgsmall}></Image>
-              <Image source={ProfilePic} style={styles.profileimg}></Image>
-              {/* <Image source={{uri: currentUser}} style={styles.profileimgsmall}></Image>
-              <Image source={{uri: nextUser}} style={styles.profileimg}></Image> */}
+              <Image source={{uri: currentUser}} style={styles.profileimgsmall}></Image>
+              <Image source={{uri: nextUser}} style={styles.profileimg}></Image>
             </View>
         </View>
       </View>
@@ -168,7 +190,8 @@ const styles = StyleSheet.create({
   profileimg: {
     marginVertical: 10, 
     alignSelf: "center" ,
-    //borderWidth: 4,
+    width:50,
+    height:50,
     borderColor: "#FF8C8C",
     borderRadius: 25
   },
