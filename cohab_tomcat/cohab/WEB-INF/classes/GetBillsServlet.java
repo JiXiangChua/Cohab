@@ -10,58 +10,45 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
-@WebServlet("/getTasks")
-public class GetTasksServlet extends HttpServlet {
+@WebServlet("/getBills")
+public class GetBillsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
                 String groupid = request.getParameter("groupid");
-            try{   
-                JSONArray tasksObject = getGroupTasks(groupid);
-                JSONObject mainObj = new JSONObject();
-                mainObj.put("tasks", tasksObject);
-                System.out.println("---------------------------------------->"+tasksObject);
+                String userid = request.getParameter("userid");
+                JSONObject roomBillsObject = getBillsById(groupid,userid);
+
+                System.out.println("---------------------------------------->"+roomBillsObject);
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
-                response.getWriter().write(mainObj.toString());
-            }
-            catch (JSONException e) {
-            // crash and burn
-            throw new IOException("Error parsing JSON request string");
-            }
+                response.getWriter().write(roomBillsObject.toString());
     }
 
-    public JSONArray getGroupTasks(String groupid){
+    public JSONObject getBillsById(String groupid, String userid){
         Connection connection = null;
         Statement statement = null;
         ResultSet resultset = null;
-        JSONArray tasksObject = new JSONArray();
+        JSONObject billsObject = new JSONObject();
 
         try{
-            String sqlGetTasks = "SELECT a.*,b.fullname FROM cohab_db.task as a join cohab_db.user as b on a.hostid = b.id where a.groupid = "+ groupid;
+            String sqlGetBills = "SELECT a.status, a.timestamp, b.portion,b.totalamt,b.description, c.username, c.profileimage FROM cohab_db.billstatus AS a JOIN cohab_db.bill AS b ON a.billid = b.billid JOIN cohab_db.user AS c ON c.id = b.userid WHERE a.userid = "+ userid +" AND b.groupid = "+groupid;
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/cohab_db?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC","root", "ziyi");
             statement = connection.createStatement();
-            resultset = statement.executeQuery(sqlGetTasks);
+            resultset = statement.executeQuery(sqlGetBills);
     
             while(resultset.next()){
-                JSONObject taskObject = new JSONObject();
-                taskObject.put("id", resultset.getInt("taskid"));
-                taskObject.put("title", resultset.getString("title"));
-                taskObject.put("description", resultset.getString("description"));
-                taskObject.put("deadline", resultset.getString("deadline"));
-                taskObject.put("status", resultset.getString("status"));
-                taskObject.put("type", resultset.getString("type"));
-                taskObject.put("executorid", resultset.getInt("executorid"));
-                taskObject.put("hostid", resultset.getInt("hostid"));
-                taskObject.put("createBy", resultset.getString("fullname"));
-                taskObject.put("createAt", resultset.getString("timestamp"));
-                tasksObject.put(taskObject);
+                billsObject.put("status", resultset.getInt("status"));
+                billsObject.put("totalamt", resultset.getInt("totalamt"));
+                billsObject.put("description", resultset.getString("description"));
+                billsObject.put("creditor", resultset.getString("username"));
+                billsObject.put("profileimage", resultset.getString("profileimage"));
             }
         
         }catch(Exception ex)
         {
-            tasksObject = null;
+            billsObject = null;
             System.err.println(ex.getMessage());     
         }finally{
             if(resultset !=null) 
@@ -85,7 +72,7 @@ public class GetTasksServlet extends HttpServlet {
                     System.err.println(ex.getMessage()); 
                 }    
         }
-        return tasksObject;
+        return billsObject;
     }
 }
 

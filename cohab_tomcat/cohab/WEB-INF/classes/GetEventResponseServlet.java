@@ -10,52 +10,43 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
-@WebServlet("/getGroupsByUser")
-public class GetGroupsByUserServlet extends HttpServlet {
+@WebServlet("/getEventResponse")
+public class GetEventResponseServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
-            String userId = request.getParameter("userId");
-            try{
-                JSONArray groupsObject = searchGroupsById(userId);
-                JSONObject mainObj = new JSONObject();
-                mainObj.put("groups", groupsObject);
-                System.out.println("---------------------------------------->"+groupsObject);
+                String eventid = request.getParameter("eventid");
+                JSONObject eventResObject = getEventRes(eventid);
+                System.out.println("---------------------------------------->"+eventResObject);
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
-                response.getWriter().write(mainObj.toString());
-            }
-            catch (JSONException e) {
-                // crash and burn
-                throw new IOException("Error parsing JSON request string");
-            }
+                response.getWriter().write(eventResObject.toString());
     }
 
-    public JSONArray searchGroupsById(String userId){
+    public JSONObject getEventRes(String eventid){
         Connection connection = null;
         Statement statement = null;
         ResultSet resultset = null;
-        JSONArray groupsObject = new JSONArray();
-        
+        JSONObject eventResObject = new JSONObject();
+
         try{
-            String sqlGetGroup = "SELECT a.* FROM cohab_db.group as a join usergroup as b on a.id = b.groupId where b.userId = "+userId;
+            String sqlGetEventRes = "SELECT a.status,b.fullname,b.profileimage,b.username,b.gender FROM cohab_db.eventresponce as a join cohab_db.user as b on a.userid=b.id where eventid = "+eventid;
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/cohab_db?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC","root", "ziyi");
             statement = connection.createStatement();
-            resultset = statement.executeQuery(sqlGetGroup);
-            
+            resultset = statement.executeQuery(sqlGetEventRes);
     
             while(resultset.next()){
-                JSONObject groupObject = new JSONObject();
-                groupObject.put("id", resultset.getInt("id"));
-                groupObject.put("groupname", resultset.getString("groupname"));
-                groupObject.put("description", resultset.getString("description"));
-                groupsObject.put(groupObject);
+                eventResObject.put("status", resultset.getString("status"));
+                eventResObject.put("fullname", resultset.getString("fullname"));
+                eventResObject.put("profileimage", resultset.getString("profileimage"));
+                eventResObject.put("username", resultset.getString("username"));
+                eventResObject.put("gender", resultset.getString("gender"));
             }
         
         }catch(Exception ex)
         {
-            groupsObject = null;
+            eventResObject = null;
             System.err.println(ex.getMessage());     
         }finally{
             if(resultset !=null) 
@@ -79,7 +70,7 @@ public class GetGroupsByUserServlet extends HttpServlet {
                     System.err.println(ex.getMessage()); 
                 }    
         }
-        return groupsObject;
+        return eventResObject;
     }
 }
 

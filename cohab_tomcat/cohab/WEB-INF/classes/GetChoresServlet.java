@@ -5,6 +5,9 @@ import java.sql.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.text.ParseException;
 import org.json.HTTP;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,12 +19,20 @@ public class GetChoresServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
-                String groupId = request.getParameter("groupId");
-                JSONObject choresObject = getChoresById(groupId);
-                System.out.println("---------------------------------------->"+choresObject);
+            String groupId = request.getParameter("groupId");
+            try{
+                JSONArray choresObject = getChoresById(groupId);
+                JSONObject mainObj = new JSONObject();
+                mainObj.put("chores", choresObject);
+                //System.out.println("---------------------------------------->"+choresObject);
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
-                response.getWriter().write(choresObject.toString());
+                response.getWriter().write(mainObj.toString());
+            }
+            catch (JSONException e) {
+                // crash and burn
+                throw new IOException("Error parsing JSON request string");
+            }
     }
 
     public JSONObject getUserByChores(int choreid){
@@ -39,17 +50,17 @@ public class GetChoresServlet extends HttpServlet {
             int i = 0;
             while(resultset.next()){
                 if(resultset.getInt("seqNo")==1){
-                    usersObject.put("currentUser", resultset.getInt("userid"));
+                    usersObject.put("currentUser", resultset.getString("profileimage"));
                 }
                 else if(resultset.getInt("seqNo")==2){
-                    usersObject.put("nextUser", resultset.getInt("userid"));
+                    usersObject.put("nextUser", resultset.getString("profileimage"));
                 }
                 i++;
             }
             if(i<2){
                 if(resultset.next()){
-                    usersObject.put("currentUser", resultset.getInt("userid"));
-                    usersObject.put("nextUser", resultset.getInt("userid"));
+                    usersObject.put("currentUser", resultset.getString("profileimage"));
+                    usersObject.put("nextUser", resultset.getString("profileimage"));
                 }
             }
         
@@ -82,11 +93,11 @@ public class GetChoresServlet extends HttpServlet {
         return usersObject;
     }
 
-    public JSONObject getChoresById(String groupId){
+    public JSONArray getChoresById(String groupId){
         Connection connection = null;
         Statement statement = null;
         ResultSet resultset = null;
-        JSONObject choresObject = new JSONObject();
+        JSONArray choresObject = new JSONArray();
 
         try{
             String sqlGetChore = "SELECT*FROM cohab_db.chore as a join cohab_db.choretype as b on a.choretype = b.id where groupid = "+groupId;
@@ -95,14 +106,36 @@ public class GetChoresServlet extends HttpServlet {
             resultset = statement.executeQuery(sqlGetChore);
     
             while(resultset.next()){
-                choresObject.put("choreid", resultset.getInt("choreid"));
-                choresObject.put("title", resultset.getString("title"));
-                choresObject.put("repeatType", resultset.getString("repeatType"));
-                choresObject.put("icon", resultset.getString("icon"));
-                //choresObject.put("startdate", resultset.getString("timestamp"));
+                JSONObject choreObject = new JSONObject();
+                choreObject.put("choreid", resultset.getInt("choreid"));
+                choreObject.put("title", resultset.getString("title"));
+                choreObject.put("repeatType", resultset.getString("repeatType"));
+                choreObject.put("icon", resultset.getString("icon"));
+
+                String repeatType = resultset.getString("repeatType");
+                String startDate = resultset.getString("startDate");
+                String cycleday = "";
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                Calendar c = Calendar.getInstance();
+                try{
+                    //Setting the date to the given date
+                    c.setTime(sdf.parse(startDate));
+                }catch(ParseException e){
+                    e.printStackTrace();
+                }
+
+                if(repeatType.contains("Weekly")){
+                    cycleday = getDayOfWeek(c.get(Calendar.DAY_OF_WEEK));
+                }else if(repeatType.contains("Monthly")){
+                    cycleday = c.get(Calendar.DAY_OF_MONTH)+"th";
+                }
+                
+                choreObject.put("cycleday", cycleday);
+                
                 JSONObject usersObject = getUserByChores(resultset.getInt("choreid"));
-                choresObject.put("currentUser", usersObject.getInt("currentUser"));
-                choresObject.put("nextUser", usersObject.getInt("nextUser"));
+                choreObject.put("currentUser", usersObject.getString("currentUser"));
+                choreObject.put("nextUser", usersObject.getString("nextUser"));
+                choresObject.put(choreObject);
             }
         
         }catch(Exception ex)
@@ -133,6 +166,33 @@ public class GetChoresServlet extends HttpServlet {
         }
         return choresObject;
     }
-}
 
+    public String getDayOfWeek(int value){
+        String day = "";
+        switch(value){
+        case 1:
+            day="Sun";
+            break;
+        case 2:
+            day="Mon";
+            break;
+        case 3:
+            day="Tue";
+            break;
+        case 4:
+            day="Wed";
+            break;
+        case 5:
+            day="Thu";
+            break;
+        case 6:
+            day="Fri";
+            break;
+        case 7:
+            day="Sat";
+            break;
+        }
+        return day;
+    }
+}
 

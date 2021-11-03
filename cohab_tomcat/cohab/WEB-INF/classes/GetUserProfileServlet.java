@@ -9,9 +9,9 @@ import org.json.HTTP;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONArray;
-
-@WebServlet("/getTasks")
-public class GetTasksServlet extends HttpServlet {
+//test
+@WebServlet("/getUser")
+public class GetUserProfileServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response)

@@ -10,58 +10,50 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
-@WebServlet("/getTasks")
-public class GetTasksServlet extends HttpServlet {
+@WebServlet("/getGroupMembers")
+public class GetGroupMembersServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
-                String groupid = request.getParameter("groupid");
-            try{   
-                JSONArray tasksObject = getGroupTasks(groupid);
+            String groupId = request.getParameter("groupId");    
+            try{
+                JSONArray membersObject = getGroupMembers(groupId);
                 JSONObject mainObj = new JSONObject();
-                mainObj.put("tasks", tasksObject);
-                System.out.println("---------------------------------------->"+tasksObject);
+                mainObj.put("members", membersObject);
+                System.out.println("---------------------------------------->"+mainObj);
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
                 response.getWriter().write(mainObj.toString());
             }
             catch (JSONException e) {
-            // crash and burn
-            throw new IOException("Error parsing JSON request string");
+                // crash and burn
+                throw new IOException("Error parsing JSON request string");
             }
     }
 
-    public JSONArray getGroupTasks(String groupid){
+    public JSONArray getGroupMembers(String groupId){
         Connection connection = null;
         Statement statement = null;
         ResultSet resultset = null;
-        JSONArray tasksObject = new JSONArray();
-
+        JSONArray membersObject = new JSONArray();
+        
         try{
-            String sqlGetTasks = "SELECT a.*,b.fullname FROM cohab_db.task as a join cohab_db.user as b on a.hostid = b.id where a.groupid = "+ groupid;
+            String sqlGetGroupMembers = "SELECT b.id,b.profileimage FROM cohab_db.usergroup as a join cohab_db.user as b on a.userid = b.id where a.groupid = "+groupId;
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/cohab_db?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC","root", "ziyi");
             statement = connection.createStatement();
-            resultset = statement.executeQuery(sqlGetTasks);
+            resultset = statement.executeQuery(sqlGetGroupMembers);
     
             while(resultset.next()){
-                JSONObject taskObject = new JSONObject();
-                taskObject.put("id", resultset.getInt("taskid"));
-                taskObject.put("title", resultset.getString("title"));
-                taskObject.put("description", resultset.getString("description"));
-                taskObject.put("deadline", resultset.getString("deadline"));
-                taskObject.put("status", resultset.getString("status"));
-                taskObject.put("type", resultset.getString("type"));
-                taskObject.put("executorid", resultset.getInt("executorid"));
-                taskObject.put("hostid", resultset.getInt("hostid"));
-                taskObject.put("createBy", resultset.getString("fullname"));
-                taskObject.put("createAt", resultset.getString("timestamp"));
-                tasksObject.put(taskObject);
+                JSONObject memberObject = new JSONObject();
+                memberObject.put("userid", resultset.getInt("id"));
+                memberObject.put("profileimg", resultset.getString("profileimage"));
+                membersObject.put(memberObject);
             }
         
         }catch(Exception ex)
         {
-            tasksObject = null;
+            membersObject = null;
             System.err.println(ex.getMessage());     
         }finally{
             if(resultset !=null) 
@@ -85,7 +77,7 @@ public class GetTasksServlet extends HttpServlet {
                     System.err.println(ex.getMessage()); 
                 }    
         }
-        return tasksObject;
+        return membersObject;
     }
 }
 

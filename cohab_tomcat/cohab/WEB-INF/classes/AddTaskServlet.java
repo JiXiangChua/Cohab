@@ -9,46 +9,50 @@ import org.json.HTTP;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONArray;
-
-@WebServlet("/addGroup")
-public class AddGroupServlet extends HttpServlet {
+//test
+@WebServlet("/addTask")
+public class AddTaskServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, 
             HttpServletResponse response) 
             throws IOException, ServletException{
                 StringBuffer jb = new StringBuffer();
-        String line = null;
-        try {
-            BufferedReader reader = request.getReader();
-            while ((line = reader.readLine()) != null)
-              jb.append(line);
-        } catch (Exception e) {
-             throw new IOException("Error request string");
-        }try {
-            JSONObject jsonObject = new JSONObject(jb.toString());
-            int userId = jsonObject.getInt("userId");
-            String groupName = jsonObject.getString("groupName");
-            String description = jsonObject.getString("description");
-            
-            JSONObject jObject = new JSONObject();
-            String createStatus = "";
-            int groupId = addGroup(groupName, description);
-            if(groupId!=0){
-                createStatus = addRelation(groupId,userId);
-            }
-            
-            switch (createStatus) {
-                    case "Success":
-                        jObject.put("status", "OK");
-                        jObject.put("groupId", groupId);
-                        break;
-                    case "Fail":
-                        default:
-                        jObject.put("status", "Sorry, here was some error happend. Please try again.");
-                        break;
-            }
+                String line = null;
+            try {
+                BufferedReader reader = request.getReader();
+                while ((line = reader.readLine()) != null)
+                jb.append(line);
+            } catch (Exception e) {
+                throw new IOException("Error request string");
+            }try {
+                JSONObject jsonObject = new JSONObject(jb.toString());
+                int userId = jsonObject.getInt("userId");
+                int groupid = jsonObject.getInt("groupid");
+                int choretypeid = jsonObject.getInt("choretypeid");
+                String title = jsonObject.getString("title");
+                String type = jsonObject.getString("type");
+                String date = jsonObject.getString("date");
 
-            System.out.println("---------------------------------------->"+jObject);
+                String createStatus = "NOK";
+                int choreid = addNewChore(groupid,choretypeid,title,type,date);
+                if(choreid!=0){
+                    JSONArray seqsObject = jsonObject.getJSONArray("seqs");
+                    int length = seqsObject .length(); 
+                    //loop to get all json objects from data json array
+                    for(int i=0; i<length; i++) 
+                    {
+                        JSONObject seq = seqsObject.getJSONObject(i);
+                        int seqUserId = seq.getInt("userId");
+                        int seqNo = seq.getInt("seqNo");
+                        createStatus = addChoreSeqs(choreid,seqUserId,seqNo);
+                    }
+                    
+                }
+
+                JSONObject jObject = new JSONObject();
+                jObject.put("status",createStatus);
+
+                System.out.println("---------------------------------------->"+jObject);
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
                 response.getWriter().write(jObject.toString());
@@ -59,24 +63,27 @@ public class AddGroupServlet extends HttpServlet {
             }
     }
 
-    public int addGroup(String groupName, String description){
+    public int addNewChore(int groupid,int choretypeid,String title, String type, String date){
         Connection connection = null;
         Statement statement = null;
         PreparedStatement preparedStatement =null;
         ResultSet resultset = null;
-        int groupId = 0;
+        int choreid = 0;
 
         try{
-            String sqlInsertGroup = "INSERT INTO cohab_db.group (groupname,description) values(?,?)";
+            String sqlInsertChore = "INSERT INTO cohab_db.chore (groupid,title,choretype,repeatType,startDate) values(?,?,?,?,?)";
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/cohab_db?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC","root", "ziyi");
-            preparedStatement=connection.prepareStatement(sqlInsertGroup,Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1, groupName);
-            preparedStatement.setString(2, description);
+            preparedStatement=connection.prepareStatement(sqlInsertChore,Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setInt(1, groupid);
+            preparedStatement.setString(2, title);
+            preparedStatement.setInt(3, choretypeid);
+            preparedStatement.setString(4, type);
+            preparedStatement.setString(5, date);
             preparedStatement.executeUpdate();
             
             ResultSet rs = preparedStatement.getGeneratedKeys();
             if (rs.next()) {
-                groupId = rs.getInt(1);
+                choreid = rs.getInt(1);
             }
         }
         catch(SQLException ex)
@@ -106,29 +113,28 @@ public class AddGroupServlet extends HttpServlet {
                     System.err.println(ex.getMessage());
                 }   
         }
-        return groupId;
+        return choreid;
     }
 
-    public String addRelation(int groupId, int userId)
+    public String addChoreSeqs(int choreid, int userid, int seqNo)
      {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultset = null;
         String createStatus = "";
-
         try{
-            String sqlInsertRelation = "INSERT INTO usergroup (groupid,userid) values("+groupId+","+userId+")";
+            String sqlInsertSeq = "INSERT INTO cohab_db.choreseq (choreid,userid,seqNo) values("+choreid+","+userid+","+seqNo+")";
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/cohab_db?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC","root", "ziyi");
             statement = connection.createStatement();
-            int result = statement.executeUpdate(sqlInsertRelation);
+            int result = statement.executeUpdate(sqlInsertSeq);
 
             if(result==1){
-                createStatus = "Success";
+                createStatus = "OK";
             }
         
         }catch(Exception ex)
         {
-            createStatus = "Fail";
+            createStatus = "NOK";
             System.err.println(ex.getMessage());     
         }finally{
             if(resultset !=null) 
