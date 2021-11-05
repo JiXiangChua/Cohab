@@ -231,7 +231,7 @@ export function GroupSelectScreen(props) {
           </View> */}
 
         {/* New speech bubble */}
-        {/* {avatarSpeechBubble()} */}
+        {avatarSpeechBubble()}
         <View
           style={{
             width: 300,

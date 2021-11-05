@@ -74,6 +74,7 @@ export function HomeScreen(props) {
   const [washingMachine, setWashingMachine] = useState(false);
   const [calendar, setCalendar] = useState(false);
   const [dogImage, setDogImage] = useState(true);
+  const [avatarSpeechInterval, setAvatarSpeechInterval] = useState(true);
 
   const [furnitureModal, setFurnitureModal] = useState(true);
   const [overviewModal, setOverviewModal] = useState(false);
@@ -302,6 +303,13 @@ export function HomeScreen(props) {
       Description: "This is a Calendar",
     },
   ];
+
+  //Set Dog speech bubble interval
+  function avatarSpeechBubble() {
+    setTimeout(() => {
+      setAvatarSpeechInterval(!avatarSpeechInterval);
+    }, 4000);
+  }
 
   function renderChooseFurniture() {
     if (furnitureModal == true) {
@@ -1032,6 +1040,38 @@ export function HomeScreen(props) {
             </TouchableOpacity>
           )}
           {/* {Dog Avatar} */}
+          {avatarSpeechBubble()}
+          <View
+            style={{
+              width: 230,
+              height: 50,
+              position: "absolute",
+              top: 660,
+              left: 290,
+            }}
+          >
+            {avatarSpeechInterval && (
+              <View
+                style={[
+                  {
+                    backgroundColor: "#FFF",
+                    padding: 10,
+                    // top: 420,
+                    // left: 180,
+                    maxWidth: "60%",
+                    borderRadius: 20,
+                  },
+                ]}
+              >
+                <View style={styles.rightArrow}></View>
+
+                <View style={styles.rightArrowOverlap}></View>
+                <Text style={{ fontSize: 14, color: "black" }}>
+                  Woof! Need Help?
+                </Text>
+              </View>
+            )}
+          </View>
           <TouchableOpacity
             style={{
               width: 20,
@@ -1298,5 +1338,26 @@ const styles = StyleSheet.create({
     shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.25,
     shadowRadius: 3,
+  },
+  rightArrow: {
+    position: "absolute",
+    backgroundColor: "#fff",
+    //backgroundColor:"red",
+    width: 20,
+    height: 15,
+    bottom: 0,
+    borderBottomLeftRadius: 25,
+    right: 0,
+  },
+
+  rightArrowOverlap: {
+    position: "absolute",
+    backgroundColor: "#fff",
+    //backgroundColor:"green",
+    width: 20,
+    height: 15,
+    bottom: 3,
+    borderBottomLeftRadius: 18,
+    right: 0,
   },
 });
