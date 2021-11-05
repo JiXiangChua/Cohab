@@ -74,7 +74,7 @@ export default function LoginScreen({ navigation }) {
       <View style={{ position: "absolute" }}>
         <Image
           source={LoginScreenBG}
-          style={{ width: 400, height: 950 }}
+          style={{ width: 450, height: 950 }}
         ></Image>
       </View>
       <ModalScreen
