@@ -10,11 +10,18 @@ import {
   Text,
   Animated,
   Easing,
+  Switch,
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Modal from "react-native-modal";
-// import ReactNativeZoomableView from "@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView";
+//import ReactNativeZoomableView from "@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView";
+import {
+  copilot,
+  walkthroughable,
+  CopilotStep,
+  copilotEvents,
+} from "react-native-copilot";
 
 import { BasicText, HomeScreenHeader } from "../components";
 import CardboardLogo from "../assets/Home-assets/cardboard.png";
@@ -53,9 +60,13 @@ import GroupPicture from "../assets/Home-assets/door.png";
 import TaskPicture from "../assets/Home-assets/taskboard.png";
 import CalendarPicture from "../assets/Home-assets/calendar.png";
 import dog1Gif from "../assets/Home-assets/dog1.gif";
+import { startDetecting } from "react-native/Libraries/Utilities/PixelRatio";
 
-export default function HomeScreen({ navigation, route }) {
+export function HomeScreen(props) {
+  const { navigation, route } = props;
+  console.log(props.copilotEvents);
   // console.log(route.params.groupName);
+
   const [modalVisible, setModalVisible] = useState(false);
 
   const [taskBoard, setTaskBoard] = useState(false);
@@ -63,12 +74,29 @@ export default function HomeScreen({ navigation, route }) {
   const [washingMachine, setWashingMachine] = useState(false);
   const [calendar, setCalendar] = useState(false);
   const [dogImage, setDogImage] = useState(true);
+  const [avatarSpeechInterval, setAvatarSpeechInterval] = useState(true);
 
   const [furnitureModal, setFurnitureModal] = useState(true);
   const [overviewModal, setOverviewModal] = useState(false);
   const [functionModal, setFunctionModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
   const [itemID, setItemID] = useState(-1);
+
+  const [copilotStatus, setCopilotStatus] = useState(false);
+  const CopilotText = walkthroughable(Text);
+  const [secondStepActive, setsecondStep] = useState(true);
+  const WalkthroughableText = walkthroughable(Text);
+  const WalkthroughableImage = walkthroughable(Image);
+  const WalkthroughableView = walkthroughable(View);
+  const WalkthroughableButton = walkthroughable(TouchableOpacity);
+
+  useEffect(() => {
+    props.copilotEvents.on("stepChange", handleStepChange);
+  }, []);
+
+  const handleStepChange = (step) => {
+    console.log(`current step is: ${step.name}`);
+  };
 
   const [furniture, setFurniture] = useState([
     {
@@ -275,6 +303,13 @@ export default function HomeScreen({ navigation, route }) {
       Description: "This is a Calendar",
     },
   ];
+
+  //Set Dog speech bubble interval
+  function avatarSpeechBubble() {
+    setTimeout(() => {
+      setAvatarSpeechInterval(!avatarSpeechInterval);
+    }, 4000);
+  }
 
   function renderChooseFurniture() {
     if (furnitureModal == true) {
@@ -1005,6 +1040,38 @@ export default function HomeScreen({ navigation, route }) {
             </TouchableOpacity>
           )}
           {/* {Dog Avatar} */}
+          {avatarSpeechBubble()}
+          <View
+            style={{
+              width: 230,
+              height: 50,
+              position: "absolute",
+              top: 660,
+              left: 290,
+            }}
+          >
+            {avatarSpeechInterval && (
+              <View
+                style={[
+                  {
+                    backgroundColor: "#FFF",
+                    padding: 10,
+                    // top: 420,
+                    // left: 180,
+                    maxWidth: "60%",
+                    borderRadius: 20,
+                  },
+                ]}
+              >
+                <View style={styles.rightArrow}></View>
+
+                <View style={styles.rightArrowOverlap}></View>
+                <Text style={{ fontSize: 14, color: "black" }}>
+                  Woof! Need Help?
+                </Text>
+              </View>
+            )}
+          </View>
           <TouchableOpacity
             style={{
               width: 20,
@@ -1015,6 +1082,8 @@ export default function HomeScreen({ navigation, route }) {
             }}
             onPress={() => {
               // assignCustomFunctionsToFurniture(furniture[2].functionName);
+              setCopilotStatus(!copilotStatus);
+              props.start();
             }}
           >
             <Image
@@ -1072,10 +1141,50 @@ export default function HomeScreen({ navigation, route }) {
         <BasicText style={styles.screenTitle}>
           {route.params?.groupName}
         </BasicText>
+
+        {copilotStatus && (
+          <View>
+            <View style={{ position: "absolute", left: 117, top: 545 }}>
+              <CopilotStep
+                text="Customize my room for me!"
+                order={1}
+                name="furniture"
+              >
+                <WalkthroughableView>
+                  <View style={{ width: 130, height: 120 }}></View>
+                </WalkthroughableView>
+              </CopilotStep>
+            </View>
+            <View style={{ top: -50 }}>
+              <CopilotStep
+                text="Welcome to my special hideout!"
+                order={2}
+                name="group"
+              >
+                <WalkthroughableView>
+                  <View style={{ width: 100, height: 50 }}></View>
+                </WalkthroughableView>
+              </CopilotStep>
+            </View>
+            <View style={{ position: "absolute", left: -140, top: -70 }}>
+              <CopilotStep
+                text="Woof! Check out the latest updates!"
+                order={3}
+                name="annoucement"
+              >
+                <WalkthroughableText>
+                  <View style={{ width: 50, height: 30 }}></View>
+                </WalkthroughableText>
+              </CopilotStep>
+            </View>
+          </View>
+        )}
       </View>
     </View>
   );
 }
+
+export default copilot()(HomeScreen);
 
 const styles = StyleSheet.create({
   backgroundContainer: {
@@ -1229,5 +1338,26 @@ const styles = StyleSheet.create({
     shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.25,
     shadowRadius: 3,
+  },
+  rightArrow: {
+    position: "absolute",
+    backgroundColor: "#fff",
+    //backgroundColor:"red",
+    width: 20,
+    height: 15,
+    bottom: 0,
+    borderBottomLeftRadius: 25,
+    right: 0,
+  },
+
+  rightArrowOverlap: {
+    position: "absolute",
+    backgroundColor: "#fff",
+    //backgroundColor:"green",
+    width: 20,
+    height: 15,
+    bottom: 3,
+    borderBottomLeftRadius: 18,
+    right: 0,
   },
 });
