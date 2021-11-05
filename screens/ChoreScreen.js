@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
   },
   choreText: {
     flexWrap: "wrap",
-    //fontFamily: "Montserrat",
+    fontFamily: "MontserratBold",
     color: "#E16363",
     fontSize: 20,
     marginVertical: 10,

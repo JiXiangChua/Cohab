@@ -379,7 +379,7 @@ const styles = StyleSheet.create({
 
   optionButtonText: {
     color: "#2196F3",
-    fontWeight: "bold",
+    fontFamily:"RobotoBold",
     textAlign: "center",
   },
 

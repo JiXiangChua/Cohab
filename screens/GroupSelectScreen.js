@@ -194,11 +194,12 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 40,
     color: "#6E2142",
-    fontFamily: "MontserratSemiBold",
+    fontFamily: "MontserratBold",
   },
   subHeaderText: {
     fontSize: 20,
     color: "#6E2142",
+    fontFamily: "MontserratSemiBold",
   },
   bottomContainer: {
     justifyContent: "center",

@@ -133,6 +133,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "#FFD692",
     textAlign: "center",
+    fontFamily:"MontserratSemiBold",
     fontSize: 18,
   },
   modalStyle: {

@@ -425,7 +425,7 @@ export default function FinanceScreen({ navigation }) {
         <BasicText style={{ color: "#943855", fontSize: 50 }}>
           $100.00
         </BasicText>
-        <BasicText style={{ color: "#943855", opacity: 0.7, fontSize: 18 }}>
+        <BasicText style={{ color: "#943855", fontFamily:"Montserrat", opacity: 0.7, fontSize: 18 }}>
           Current Balance
         </BasicText>
 
@@ -433,7 +433,7 @@ export default function FinanceScreen({ navigation }) {
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.walletButton}>
             <Image source={TopUpLogo} style={[styles.walletButtonLogo]}></Image>
-            <BasicText>Top Up</BasicText>
+          <BasicText>Top Up</BasicText>
           </TouchableOpacity>
           <TouchableOpacity style={styles.walletButton}>
             <Image source={ScanLogo} style={styles.walletButtonLogo}></Image>
@@ -455,7 +455,7 @@ export default function FinanceScreen({ navigation }) {
         {/* Monthly Budget Section */}
 
         <View style={styles.budgetContainer}>
-          <BasicText style={{ position: "absolute", left: 0, fontSize: 24 }}>
+          <BasicText style={{ position: "absolute", fontFamily:"Montserrat", left: 0, fontSize: 24 }}>
             Monthly Budget
           </BasicText>
           <TouchableOpacity
@@ -637,6 +637,7 @@ const styles = StyleSheet.create({
   balanceText: {
     color: "#E16363",
     fontSize: 20,
+    fontFamily: "MontserratBold",
     marginBottom: 10,
   },
   buttonContainer: {
@@ -713,6 +714,7 @@ const styles = StyleSheet.create({
   createNewTitle: {
     position: "absolute",
     left: 0,
+    fontFamily:"Montserrat",
     fontSize: 24,
     marginTop: 7,
   },

@@ -107,6 +107,7 @@ const styles = StyleSheet.create({
   calendarText: {
     color: "#E16363",
     fontSize: 20,
+    fontFamily: "MontserratBold",
     marginBottom: 10,
     alignSelf: "center",
   },
