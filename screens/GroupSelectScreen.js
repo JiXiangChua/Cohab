@@ -12,9 +12,10 @@ import EveningBackground from "../assets/Group-assets/EveningBG.png";
 import NightBackground from "../assets/Group-assets/NightSkyBG.png";
 import BuildingAfternoonLogo from "../assets/Group-assets/grpbuildingafternoon.png";
 import BuildingMorningLogo from "../assets/Group-assets/grpbuildingmorning.png";
-import BuildingNightLogo from "../assets/Group-assets/grpbuildingnight.png";
+import BuildingNightLogo from "../assets/Group-assets/grpbuildingnight2.png";
 import CarMorningLogo from "../assets/Group-assets/carMorning.gif";
 import CarAfternoonLogo from "../assets/Group-assets/carAfternoon.gif";
+import CarNightLogo from "../assets/Group-assets/carNight.gif";
 
 import { AddGroupModal, JoinGroupModal } from "../components";
 import {
@@ -129,8 +130,7 @@ export function GroupSelectScreen(props) {
 
   //Get Current Time
   var currentTime = new Date(); //"2011-04-20T13:30:51.01" for troubleshooting
-  console.log(currentTime.getHours());
-
+  // console.log(currentTime.getHours());
   var backgroundImage;
   var rectangleMaskColor;
   var buildingImage;
@@ -145,7 +145,7 @@ export function GroupSelectScreen(props) {
     backgroundImage = NightBackground;
     rectangleMaskColor = "#536D9E";
     buildingImage = BuildingNightLogo;
-    carGIF = CarMorningLogo;
+    carGIF = CarNightLogo;
   } else {
     backgroundImage = EveningBackground;
     rectangleMaskColor = "#7E98EF";
@@ -189,20 +189,20 @@ export function GroupSelectScreen(props) {
           Where will you be today?
         </BasicText>
         <Image source={buildingImage} style={styles.buildingPicture} />
-        <View style={{ position: "absolute", top: 55, left: -20 }}>
+        <View style={{ position: "absolute", top: 35, left: -90 }}>
           <Image source={carGIF} />
         </View>
 
         {/* {Dog Avatar} */}
         <TouchableOpacity
           style={{
-            width: 30,
+            width: 70,
             height: 130,
             position: "absolute",
             // top: 645,
             // left: 70,
             top: 690,
-            left: 250,
+            left: 230,
           }}
           onPress={() => {
             // assignCustomFunctionsToFurniture(furniture[2].functionName);
@@ -449,9 +449,10 @@ const styles = StyleSheet.create({
     // justifyContent: "space-evenly",
   },
   bottomButton: {
-    width: "40%",
+    width: "30%",
     flexDirection: "row",
     marginTop: 50,
+    marginRight: 20,
   },
   backgroundImageRectMask: {
     justifyContent: "center",
@@ -461,57 +462,9 @@ const styles = StyleSheet.create({
     height: 320,
     bottom: 0,
   },
-  // old speech
-  // item: {
-  //   marginVertical: moderateScale(7, 2),
-  //   flexDirection: "row",
-  // },
-  // itemIn: {
-  //   marginLeft: 20,
-  // },
-  // itemOut: {
-  //   alignSelf: "flex-end",
-  //   marginRight: 20,
-  // },
-  // balloon: {
-  //   maxWidth: moderateScale(300, 2),
-  //   paddingHorizontal: moderateScale(10, 2),
-  //   paddingTop: moderateScale(5, 2),
-  //   paddingBottom: moderateScale(7, 2),
-  //   borderRadius: 20,
-  // },
-  // arrowContainer: {
-  //   position: "absolute",
-  //   top: 0,
-  //   left: 0,
-  //   right: 0,
-  //   bottom: 0,
-  //   zIndex: -1,
-  //   flex: 1,
-  // },
-  // arrowLeftContainer: {
-  //   justifyContent: "flex-end",
-  //   alignItems: "flex-start",
-  // },
-
-  // arrowRightContainer: {
-  //   justifyContent: "flex-end",
-  //   alignItems: "flex-end",
-  // },
-
-  // arrowLeft: {
-  //   left: moderateScale(-6, 0.5),
-  // },
-
-  // arrowRight: {
-  //   right: moderateScale(-6, 0.5),
-  // },
-
-  //New speech bubble
   rightArrow: {
     position: "absolute",
     backgroundColor: "#fff",
-    //backgroundColor:"red",
     width: 20,
     height: 15,
     bottom: 0,
@@ -522,7 +475,6 @@ const styles = StyleSheet.create({
   rightArrowOverlap: {
     position: "absolute",
     backgroundColor: "#fff",
-    //backgroundColor:"green",
     width: 20,
     height: 15,
     bottom: 3,
@@ -534,7 +486,6 @@ const styles = StyleSheet.create({
   leftArrow: {
     position: "absolute",
     backgroundColor: "#fff",
-    //backgroundColor:"red",
     width: 20,
     height: 15,
     bottom: 0,
@@ -545,7 +496,6 @@ const styles = StyleSheet.create({
   leftArrowOverlap: {
     position: "absolute",
     backgroundColor: "#fff",
-    //backgroundColor:"green",
     width: 20,
     height: 15,
     bottom: -3,

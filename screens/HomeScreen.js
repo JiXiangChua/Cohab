@@ -64,7 +64,7 @@ import { startDetecting } from "react-native/Libraries/Utilities/PixelRatio";
 
 export function HomeScreen(props) {
   const { navigation, route } = props;
-  console.log(props.copilotEvents);
+  //console.log(props.copilotEvents);
   // console.log(route.params.groupName);
 
   const [modalVisible, setModalVisible] = useState(false);
