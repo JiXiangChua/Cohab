@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   taskText: {
+    fontFamily: "Montserrat",
     color: "#E16363",
     fontSize: 20,
   },
