@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
+  RefreshControl,
   View , 
   StyleSheet , 
   TouchableOpacity , 
@@ -14,10 +15,19 @@ import NewChoresButton from "../assets/icons/icon_designs-03.png";
 import * as ConstantHelper from "../ConstantHelper.js";
 
 export default function ChoreScreen({ navigation }) {
-   
+  const wait = (timeout) => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+  }
+  
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    wait(2000).then(() => setRefreshing(false));
+  }, []);
   //Toggle on and off modal screeen
   const [modalVisible, setModalVisible] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(false);
   //function displayChores(){
   const choresURL = ConstantHelper.CONNECTION + "getChores?groupId=1";
   const choresIconURL = ConstantHelper.CONNECTION + "getChoreTypeIcon";
@@ -61,7 +71,7 @@ export default function ChoreScreen({ navigation }) {
           title.push(chores[entry]["title"]);
           cycleday.push(chores[entry]["cycleday"]);
         };
-      }, [])
+      }, [isLoading])
   
       return(
         chores.map((roomie) => {
@@ -75,6 +85,7 @@ export default function ChoreScreen({ navigation }) {
             }}>
               <ChoreCard
                 key ={roomie.choreid}
+                choreid ={roomie.choreid}
                 currentUser={roomie.currentUser}
                 choretype= {roomie.repeatType}
                 iconselect = {roomie.icon} //"icon" has the source link to the database
@@ -83,6 +94,10 @@ export default function ChoreScreen({ navigation }) {
                 //duedate={roomie.dueOn}
                 iconColour = "#FFDBA5"
                 cycleStart={roomie.cycleday}
+                icons={choreiconsource}
+                groupmates={groupmems}
+                isLoading={isLoading}
+                setIsLoading={setIsLoading}
               ></ChoreCard>
             </View>
           );
@@ -129,11 +144,15 @@ export default function ChoreScreen({ navigation }) {
       {/*stuff*/}
       {/*<ImageBackground source={placeholderBG} style = {{flex:1}}resizeMode="cover">*/}
       <ScrollView
-      showsVerticalScrollIndicator={false}
-      contentContainerStyle={{
-        justifyContent: "center",
-        alignItems: "center",
-      }}>
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.scrollView}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+          />
+        }
+      >
         <BasicText style={styles.choreText}> Chores </BasicText>
         <View style={styles.choreContainer}>
           <BasicText style={styles.chorenewText}>New Chore</BasicText>
@@ -153,13 +172,17 @@ export default function ChoreScreen({ navigation }) {
           minHeight: 600,
         }}>
       </View>
-      <ChoreModal modalVisible = {modalVisible} setModalVisible = {setModalVisible} choreiconsource = {choreiconsource} groupmems={groupmems}/>
+      <ChoreModal modalVisible = {modalVisible} setModalVisible = {setModalVisible} choreiconsource = {choreiconsource} groupmems={groupmems} isLoading={isLoading} setIsLoading={setIsLoading}/>
     </ScrollView>
     {/*</ImageBackground>*/}
   </SafeAreaView>
   );
 }
 const styles = StyleSheet.create({
+  scrollView:{
+    justifyContent: "center",
+        alignItems: "center",
+  },
   container: {
     flex: 1,
     backgroundColor: "#FFD897",
@@ -180,13 +203,8 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     right: 10,
   },
-  scrollView: {
-    flex: 1,
-    flexDirection: "column",
-  },
   choreText: {
     flexWrap: "wrap",
-    //fontFamily: "Montserrat",
     color: "#E16363",
     fontSize: 20,
     marginVertical: 10,
