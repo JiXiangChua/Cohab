@@ -95,6 +95,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   subHeaderText: {
+    fontFamily: "Montserrat",
     fontSize: 22,
     alignItems: "center",
   },

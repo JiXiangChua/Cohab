@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   SeeAllText: {
+    fontFamily: "Montserrat",
     fontSize: 16,
     textDecorationLine: "underline",
   },

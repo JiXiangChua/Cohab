@@ -154,7 +154,7 @@ export default function RestoreTask({ restoreVisible, setRestoreVisible }) {
           </View>
 
           <View style={{ flexDirection: "row", marginTop: 10 }}>
-            <View style={{ marginTop: 10, paddingRight: 10 }}>
+            <View style={{fontFamily: "Montserrat", marginTop: 10, paddingRight: 10 }}>
               <BorderColorButton
                 buttonText={"Cancel"}
                 color={"#7B98FF"}
@@ -162,7 +162,7 @@ export default function RestoreTask({ restoreVisible, setRestoreVisible }) {
               />
             </View>
 
-            <View style={{ marginTop: 10 }}>
+            <View style={{fontFamily: "Montserrat", marginTop: 10 }}>
               <GeneralButton
                 buttonText={"Restore"}
                 color={"#36BC7C"}
@@ -242,13 +242,8 @@ const styles = StyleSheet.create({
   },
 
   optionButtonText: {
+    fontFamily: "Montserrat",
     color: "#2196F3",
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-
-  textStyle: {
-    color: "white",
     fontWeight: "bold",
     textAlign: "center",
   },
@@ -273,6 +268,7 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 10,
     textAlign: "center",
+    fontFamily: "Montserrat",
     fontSize: 18,
   },
 

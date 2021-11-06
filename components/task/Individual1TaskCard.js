@@ -55,7 +55,7 @@ export default function Individual1TaskCard(props) {
           {/* Edit button */}
           <View style={{ flexDirection: "row" }}>
             {/* Edit button */}
-            <View style={{ marginTop: 10 }}>
+            <View style={{fontFamily: "Montserrat", marginTop: 10 }}>
               <GeneralButton
                 buttonText={"Edit"}
                 color={"#7D98FF"}
@@ -66,7 +66,7 @@ export default function Individual1TaskCard(props) {
             </View>
 
             {/* Done button */}
-            <View style={{ marginTop: 10, marginLeft: 5 }}>
+            <View style={{fontFamily: "Montserrat", marginTop: 10, marginLeft: 5 }}>
               <GeneralButton
                 buttonText={"Done"}
                 color={"#36BC7C"}
@@ -80,11 +80,11 @@ export default function Individual1TaskCard(props) {
 
         {/* Column for set deadline  */}
         <View style={[styles.cardDisplayColumnFormat, { marginLeft: 15 }]}>
-          <Text style={[styles.setText, { marginRight: 10 }]}>
+          <Text style={[styles.setText, {fontFamily: "Montserrat", marginRight: 10 }]}>
             {"Deadline:" + day + " " + month}
           </Text>
           <View style={{ flexDirection: "row" }}>
-            <Text style={[styles.cardText, { fontSize: 15, color: "#8A8585" }]}>
+            <Text style={[styles.cardText, {fontFamily: "Montserrat", fontSize: 15, color: "#8A8585" }]}>
               {props.date_created}
             </Text>
             <Image source={ProfilePic} style={styles.profileImage} />
@@ -124,11 +124,13 @@ const styles = StyleSheet.create({
   cardText: {
     alignSelf: "flex-start",
     marginRight: 15,
+    fontFamily: "Montserrat",
     fontSize: 18,
   },
   setText: {
     alignSelf: "center",
     marginRight: 10,
+    fontFamily: "Montserrat",
     fontSize: 14,
     color: "#0038FF",
     marginBottom: 37,
@@ -136,6 +138,7 @@ const styles = StyleSheet.create({
   deadlineText: {
     alignSelf: "center",
     marginRight: 10,
+    fontFamily: "Montserrat",
     fontSize: 14,
     color: "#FF0000",
     marginBottom: 55,

@@ -34,7 +34,7 @@ export default function CompletedTaskCard(props) {
             {props.description}
           </Text>
 
-          <View style={{ marginTop: 10 }}>
+          <View style={{fontFamily: "Montserrat", marginTop: 10 }}>
             <TouchableOpacity
               style={styles.newTask}
               onPress={() => setRestoreVisible(true)}
@@ -113,11 +113,13 @@ const styles = StyleSheet.create({
   cardText: {
     alignSelf: "flex-start",
     marginRight: 15,
+    fontFamily: "Montserrat",
     fontSize: 18,
   },
   deadlineText: {
     alignSelf: "center",
     marginRight: 10,
+    fontFamily: "Montserrat",
     fontSize: 14,
     color: "#36BC7C",
     marginBottom: 30,

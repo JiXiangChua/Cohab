@@ -142,7 +142,7 @@ export default function ClaimTaskSDModal(props) {
             }}
           >
             {/* CANCEL BUTTON */}
-            <View style={{ marginTop: 10, paddingRight: 10 }}>
+            <View style={{fontFamily: "Montserrat", marginTop: 10, paddingRight: 10 }}>
               <BorderColorButton
                 buttonText={"Cancel"}
                 color={"#7B98FF"}
@@ -151,7 +151,7 @@ export default function ClaimTaskSDModal(props) {
             </View>
 
             {/* SAVE BUTTON */}
-            <View style={{ marginTop: 10 }}>
+            <View style={{fontFamily: "Montserrat", marginTop: 10 }}>
               <GeneralButton
                 buttonText={"Save"}
                 color={"#36BC7C"}
@@ -198,6 +198,7 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 40,
     textAlign: "center",
+    fontFamily: "Montserrat",
     fontSize: 18,
   },
   centeredView: {

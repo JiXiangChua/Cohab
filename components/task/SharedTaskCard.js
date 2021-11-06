@@ -74,11 +74,13 @@ const styles = StyleSheet.create({
   cardText: {
     alignSelf: "flex-start",
     marginRight: 20,
+    fontFamily: "Montserrat",
     fontSize: 18,
   },
   deadlineText: {
     alignSelf: "center",
     marginRight: 15,
+    fontFamily: "Montserrat",
     fontSize: 14,
     color: "#FF0000",
     marginBottom: 45,

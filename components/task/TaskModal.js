@@ -56,12 +56,13 @@ export default function TaskModal({ modalVisible, setModalVisible }) {
         >
           {/*Type in Task name*/}
           <TextInput
-            style={{ borderBottomWidth: 0.5, width: "50%" }}
+            style={{fontFamily: "Montserrat", borderBottomWidth: 0.5, width: "50%" }}
             placeholder="Task Title"
           />
           {/*Type in Task description*/}
           <TextInput
             style={{
+              fontFamily: "Montserrat",
               paddingTop: 20,
               height: 200,
               borderBottomWidth: 0.5,
@@ -70,7 +71,7 @@ export default function TaskModal({ modalVisible, setModalVisible }) {
             placeholder="Description"
           />
 
-          <BasicText style={{ paddingTop: 30 }}>Choose Deadline: </BasicText>
+          <BasicText style={{fontFamily: "Montserrat", paddingTop: 30 }}>Choose Deadline: </BasicText>
           <View
             style={{
               paddingTop: 10,
@@ -83,7 +84,7 @@ export default function TaskModal({ modalVisible, setModalVisible }) {
             {displayRepeatOptions}
           </View>
 
-          <BasicText style={{ paddingTop: 30, paddingBottom: 10 }}>
+          <BasicText style={{fontFamily: "Montserrat", paddingTop: 30, paddingBottom: 10 }}>
             Choose a Date:{" "}
           </BasicText>
           <View
@@ -200,13 +201,13 @@ export default function TaskModal({ modalVisible, setModalVisible }) {
                   onValueChange={setSelection}
                   style={styles.checkbox}
                 />
-                <Text style={{}}>I will do it!</Text>
+                <Text style={{fontFamily: "Montserrat"}}>I will do it!</Text>
               </View>
             </View>
           </View>
 
           <View style={{ flexDirection: "row" }}>
-            <View style={{ marginTop: 10, paddingRight: 10 }}>
+            <View style={{fontFamily: "Montserrat", marginTop: 10, paddingRight: 10 }}>
               <BorderColorButton
                 buttonText={"Cancel"}
                 color={"#7B98FF"}
@@ -214,7 +215,7 @@ export default function TaskModal({ modalVisible, setModalVisible }) {
               />
             </View>
 
-            <View style={{ marginTop: 10 }}>
+            <View style={{fontFamily: "Montserrat", marginTop: 10 }}>
               <GeneralButton
                 buttonText={"Add Entry"}
                 color={"#36BC7C"}
@@ -277,6 +278,7 @@ const styles = StyleSheet.create({
   },
 
   optionButtonText: {
+    fontFamily: "Montserrat",
     color: "#2196F3",
     fontWeight: "bold",
     textAlign: "center",

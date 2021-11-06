@@ -142,7 +142,7 @@ export default function EditModal(props) {
             }}
           >
             {/* CANCEL BUTTON */}
-            <View style={{ marginTop: 10, paddingRight: 10 }}>
+            <View style={{fontFamily: "Montserrat", marginTop: 10, paddingRight: 10 }}>
               <BorderColorButton
                 buttonText={"Cancel"}
                 color={"#7B98FF"}
@@ -151,7 +151,7 @@ export default function EditModal(props) {
             </View>
 
             {/* SAVE BUTTON */}
-            <View style={{ marginTop: 10 }}>
+            <View style={{fontFamily: "Montserrat", marginTop: 10 }}>
               <GeneralButton
                 buttonText={"Save"}
                 color={"#36BC7C"}
@@ -165,7 +165,7 @@ export default function EditModal(props) {
           </View>
           <View style={{ flexDirection: "row", marginTop: 20 }}>
             {/* UNLOAD BUTTON */}
-            <View style={{ marginTop: 10 }}>
+            <View style={{fontFamily: "Montserrat", marginTop: 10 }}>
               <GeneralButton
                 buttonText={"Unload"}
                 color={"#FF1A1A"}
@@ -193,6 +193,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3,
   },
+  cardText: {
+    alignSelf: "flex-start",
+    marginRight: 15,
+    fontFamily: "Montserrat",
+    fontSize: 18,
+  },
   modalView: {
     margin: 20,
     backgroundColor: "white",
@@ -212,6 +218,7 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 40,
     textAlign: "center",
+    fontFamily: "Montserrat",
     fontSize: 18,
   },
   centeredView: {

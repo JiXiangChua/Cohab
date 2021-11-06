@@ -48,7 +48,7 @@ export default function ClaimTaskFDModal(props) {
             }}
           >
             {/* CANCEL BUTTON */}
-            <View style={{ marginTop: 10, paddingRight: 10 }}>
+            <View style={{fontFamily: "Montserrat", marginTop: 10, paddingRight: 10 }}>
               <BorderColorButton
                 buttonText={"Cancel"}
                 color={"#7B98FF"}
@@ -57,7 +57,7 @@ export default function ClaimTaskFDModal(props) {
             </View>
 
             {/* SAVE BUTTON */}
-            <View style={{ marginTop: 10 }}>
+            <View style={{fontFamily: "Montserrat", marginTop: 10 }}>
               <GeneralButton
                 buttonText={"Save"}
                 color={"#36BC7C"}
@@ -85,6 +85,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3,
   },
+  cardText: {
+    alignSelf: "flex-start",
+    marginRight: 15,
+    fontFamily: "Montserrat",
+    fontSize: 18,
+  },
   modalView: {
     margin: 20,
     backgroundColor: "white",
@@ -104,6 +110,7 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 40,
     textAlign: "center",
+    fontFamily: "Montserrat",
     fontSize: 18,
   },
   centeredView: {
@@ -114,6 +121,7 @@ const styles = StyleSheet.create({
   },
   deadlineText: {
     color: "#FF0000",
+    fontFamily: "Montserrat",
     fontSize: 15,
     textAlign: "center",
   },

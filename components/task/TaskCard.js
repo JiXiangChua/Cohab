@@ -52,7 +52,7 @@ export default function TaskCard(props) {
             {props.description}
           </Text>
 
-          <View style={{ marginTop: 10 }}>
+          <View style={{fontFamily: "Montserrat", marginTop: 10 }}>
             <GeneralButton
               buttonText={"Claim me"}
               color={"#36BC7C"}
@@ -108,11 +108,13 @@ const styles = StyleSheet.create({
   cardText: {
     alignSelf: "flex-start",
     marginRight: 15,
+    fontFamily: "Montserrat",
     fontSize: 18,
   },
   setText: {
     alignSelf: "center",
     marginRight: 10,
+    fontFamily: "Montserrat",
     fontSize: 14,
     color: "#0038FF",
     marginBottom: 37,
@@ -120,6 +122,7 @@ const styles = StyleSheet.create({
   deadlineText: {
     alignSelf: "center",
     marginRight: 10,
+    fontFamily: "Montserrat",
     fontSize: 14,
     color: "#FF0000",
     marginBottom: 55,
