@@ -57,7 +57,11 @@ export function GroupSelectScreen(props) {
     id: 8,
     groupname: "Hall",
   });
-  const [group3, setGroup3] = useState({});
+  const [group3, setGroup3] = useState({
+    description: "This is for family",
+    id: 0,
+    groupname: "Family",
+  });
 
   function getGroups(userId) {
     const getGroupsURL = `http://10.27.124.66:9999/cohab/getGroupsByUser?userId=${userId}`;
@@ -121,7 +125,7 @@ export function GroupSelectScreen(props) {
   }
 
   function handleGroup3() {
-    goToHome("Friends");
+    goToHome(group3.groupname);
   }
 
   useEffect(() => {
@@ -309,7 +313,9 @@ export function GroupSelectScreen(props) {
             ]}
             onPress={handleGroup3}
           >
-            <BasicText style={styles.groupButtonText}>Friends</BasicText>
+            <BasicText style={styles.groupButtonText}>
+              {group3.groupname}
+            </BasicText>
           </TouchableOpacity>
         </View>
         <View style={styles.bottomButtonsContainer}>
