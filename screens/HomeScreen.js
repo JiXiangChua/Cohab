@@ -52,7 +52,7 @@ import SmallPlantsLogo from "../assets/Home-assets/smallplants.png";
 import SofaLogo from "../assets/Home-assets/sofa.png";
 import TVSetLogo from "../assets/Home-assets/tvset.png";
 
-import TreePicture from "../assets/Home-assets/background.png";
+import TreePicture from "../assets/Home-assets/building.png";
 import RoomPicture from "../assets/Home-assets/roomPicture.png";
 import BankPicture from "../assets/Home-assets/piggybank.png";
 import ChorePicture from "../assets/Home-assets/washingmachine.png";
@@ -873,10 +873,10 @@ export function HomeScreen(props) {
           <View style={{ justifyContent: "center" }}>
             <Image
               source={TreePicture}
-              style={{ width: 1000, height: 1000 }}
+              style={{ width: 1450, height: 1450 }}
             ></Image>
           </View>
-          <View style={{ position: "absolute", top: 300, left: 250 }}>
+          <View style={{ position: "absolute", top: 426, left: 470 }}>
             <Image
               source={RoomPicture}
               style={{ width: 500, height: 500 }}
@@ -886,10 +886,10 @@ export function HomeScreen(props) {
           <TouchableOpacity
             style={{
               width: 50,
-              height: 100,
+              height: 130,
               position: "absolute",
-              top: 500,
-              left: 520,
+              top: 633,
+              left: 743,
             }}
             onPress={goToGroupSelect}
           >
@@ -897,8 +897,8 @@ export function HomeScreen(props) {
               source={GroupPicture}
               style={{
                 resizeMode: "contain",
-                width: 150,
-                height: 150,
+                width: 140,
+                height: 140,
                 alignSelf: "center",
               }}
             ></Image>
@@ -908,10 +908,10 @@ export function HomeScreen(props) {
             <TouchableOpacity
               style={{
                 width: 50,
-                height: 100,
+                height: 80,
                 position: "absolute",
-                top: 560,
-                left: 595,
+                top: 688,
+                left: 815,
               }}
               onPress={() => {
                 assignCustomFunctionsToFurniture(furniture[2].functionName);
@@ -941,11 +941,11 @@ export function HomeScreen(props) {
           {taskBoard && (
             <TouchableOpacity
               style={{
-                width: 50,
-                height: 100,
+                width: 70,
+                height: 70,
                 position: "absolute",
-                top: 655,
-                left: 560,
+                top: 795,
+                left: 770,
               }}
               onPress={() => {
                 assignCustomFunctionsToFurniture(furniture[1].functionName);
@@ -960,8 +960,8 @@ export function HomeScreen(props) {
                 source={TaskBoardLogo}
                 style={{
                   resizeMode: "contain",
-                  width: 80,
-                  height: 80,
+                  width: 55,
+                  height: 55,
                   alignSelf: "center",
                   shadowColor: "#FFF",
                   shadowOffset: { width: -2, height: 3 },
@@ -975,11 +975,11 @@ export function HomeScreen(props) {
           {washingMachine && (
             <TouchableOpacity
               style={{
-                width: 50,
+                width: 90,
                 height: 100,
                 position: "absolute",
-                top: 615,
-                left: 285,
+                top: 734,
+                left: 483,
               }}
               onPress={() => {
                 assignCustomFunctionsToFurniture(furniture[0].functionName);
@@ -994,8 +994,8 @@ export function HomeScreen(props) {
                 source={WashingMachineLogo}
                 style={{
                   resizeMode: "contain",
-                  width: 90,
-                  height: 90,
+                  width: 95,
+                  height: 95,
                   alignSelf: "center",
                   shadowColor: "#FFF",
                   shadowOffset: { width: -2, height: 3 },
@@ -1009,11 +1009,11 @@ export function HomeScreen(props) {
           {piggyBank && (
             <TouchableOpacity
               style={{
-                width: 50,
-                height: 100,
+                width: 80,
+                height: 80,
                 position: "absolute",
-                top: 670,
-                left: 485,
+                top: 810,
+                left: 691,
               }}
               onPress={() => {
                 assignCustomFunctionsToFurniture(furniture[3].functionName);
@@ -1028,8 +1028,8 @@ export function HomeScreen(props) {
                 source={PiggyBankLogo}
                 style={{
                   resizeMode: "contain",
-                  width: 40,
-                  height: 40,
+                  width: 28,
+                  height: 28,
                   alignSelf: "center",
                   shadowColor: "#FFF",
                   shadowOffset: { width: -2, height: 3 },
@@ -1046,8 +1046,8 @@ export function HomeScreen(props) {
               width: 230,
               height: 50,
               position: "absolute",
-              top: 660,
-              left: 290,
+              top: 780,
+              left: 510,
             }}
           >
             {avatarSpeechInterval && (
@@ -1077,8 +1077,8 @@ export function HomeScreen(props) {
               width: 20,
               height: 80,
               position: "absolute",
-              top: 635,
-              left: 435,
+              top: 761,
+              left: 655,
             }}
             onPress={() => {
               // assignCustomFunctionsToFurniture(furniture[2].functionName);
