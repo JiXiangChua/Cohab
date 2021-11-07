@@ -45,7 +45,7 @@ import SmallPlantsLogo from "../assets/Home-assets/smallplants.png";
 import SofaLogo from "../assets/Home-assets/sofa.png";
 import TVSetLogo from "../assets/Home-assets/tvset.png";
 
-import TreePicture from "../assets/Home-assets/background.png";
+import TreePicture from "../assets/Home-assets/building.png";
 import RoomPicture from "../assets/Home-assets/roomPicture.png";
 import BankPicture from "../assets/Home-assets/piggybank.png";
 import ChorePicture from "../assets/Home-assets/washingmachine.png";
@@ -57,7 +57,7 @@ import dog1Gif from "../assets/Home-assets/dog1.gif";
 export default function HomeScreen({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
 
-  const [taskBoard, setTaskBoard] = useState(true);
+  const [taskBoard, setTaskBoard] = useState(false);
   const [piggyBank, setPiggyBank] = useState(false);
   const [washingMachine, setWashingMachine] = useState(false);
   const [calendar, setCalendar] = useState(false);
@@ -98,7 +98,7 @@ export default function HomeScreen({ navigation }) {
       id: 4,
       name: "Piggy Bank",
       image: PiggyBankLogo,
-      functionName: "Finance",
+      functionName: "Wallet",
       description:
         "Planning a huge party and need your housemate(s)’ approval? Send a polite request here!",
     },
@@ -324,16 +324,34 @@ export default function HomeScreen({ navigation }) {
   function setVisibilityOfSelectedFurniture(selectedFurniture) {
     switch (selectedFurniture) {
       case 1:
-        setWashingMachine(!washingMachine);
+        setWashingMachine(true);
         break;
       case 2:
-        setTaskBoard(!taskBoard);
+        setTaskBoard(true);
         break;
       case 3:
-        setCalendar(!calendar);
+        setCalendar(true);
         break;
       case 4:
-        setPiggyBank(!piggyBank);
+        setPiggyBank(true);
+        break;
+      default:
+        console.log("Error while setting visibility of button");
+    }
+  }
+  function deleteSelectedFurniture(selectedFurniture) {
+    switch (selectedFurniture) {
+      case 1:
+        setWashingMachine(false);
+        break;
+      case 2:
+        setTaskBoard(false);
+        break;
+      case 3:
+        setCalendar(false);
+        break;
+      case 4:
+        setPiggyBank(false);
         break;
       default:
         console.log("Error while setting visibility of button");
@@ -379,7 +397,7 @@ export default function HomeScreen({ navigation }) {
               buttonText="Delete"
               color="#FF1A1A"
               onPress={() => {
-                setVisibilityOfSelectedFurniture(itemID);
+                deleteSelectedFurniture(itemID);
                 setDeleteModal(false);
               }}
             />
@@ -464,7 +482,10 @@ export default function HomeScreen({ navigation }) {
 
           {/* Buttons Section */}
           <View
-            style={{ flexDirection: "row", justifyContent: "space-evenly" }}
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-evenly",
+            }}
           >
             <TouchableOpacity
               style={styles.functionModalButtonStyle}
@@ -588,7 +609,7 @@ export default function HomeScreen({ navigation }) {
 
   function assignCustomFunctionsToFurniture(nameOfFunction) {
     switch (nameOfFunction) {
-      case "Finance":
+      case "Wallet":
         goToFinance();
         break;
       case "Task":
@@ -834,10 +855,10 @@ export default function HomeScreen({ navigation }) {
             <View style={{ justifyContent: "center" }}>
               <Image
                 source={TreePicture}
-                style={{ width: 1000, height: 1000 }}
+                style={{ width: 1450, height: 1450 }}
               ></Image>
             </View>
-            <View style={{ position: "absolute", top: 300, left: 250 }}>
+            <View style={{ position: "absolute", top: 426, left: 470 }}>
               <Image
                 source={RoomPicture}
                 style={{ width: 500, height: 500 }}
@@ -847,10 +868,10 @@ export default function HomeScreen({ navigation }) {
             <TouchableOpacity
               style={{
                 width: 50,
-                height: 100,
+                height: 130,
                 position: "absolute",
-                top: 500,
-                left: 520,
+                top: 633,
+                left: 743,
               }}
               onPress={goToGroupSelect}
             >
@@ -858,8 +879,8 @@ export default function HomeScreen({ navigation }) {
                 source={GroupPicture}
                 style={{
                   resizeMode: "contain",
-                  width: 150,
-                  height: 150,
+                  width: 140,
+                  height: 140,
                   alignSelf: "center",
                 }}
               ></Image>
@@ -869,10 +890,10 @@ export default function HomeScreen({ navigation }) {
               <TouchableOpacity
                 style={{
                   width: 50,
-                  height: 100,
+                  height: 80,
                   position: "absolute",
-                  top: 560,
-                  left: 595,
+                  top: 688,
+                  left: 815,
                 }}
                 onPress={() => {
                   assignCustomFunctionsToFurniture(furniture[2].functionName);
@@ -898,11 +919,11 @@ export default function HomeScreen({ navigation }) {
             {taskBoard && (
               <TouchableOpacity
                 style={{
-                  width: 50,
-                  height: 100,
+                  width: 60,
+                  height: 60,
                   position: "absolute",
-                  top: 655,
-                  left: 560,
+                  top: 795,
+                  left: 770,
                 }}
                 onPress={() => {
                   assignCustomFunctionsToFurniture(furniture[1].functionName);
@@ -917,8 +938,8 @@ export default function HomeScreen({ navigation }) {
                   source={TaskBoardLogo}
                   style={{
                     resizeMode: "contain",
-                    width: 80,
-                    height: 80,
+                    width: 55,
+                    height: 55,
                     alignSelf: "center",
                   }}
                 ></Image>
@@ -928,11 +949,11 @@ export default function HomeScreen({ navigation }) {
             {washingMachine && (
               <TouchableOpacity
                 style={{
-                  width: 50,
+                  width: 90,
                   height: 100,
                   position: "absolute",
-                  top: 615,
-                  left: 285,
+                  top: 734,
+                  left: 483,
                 }}
                 onPress={() => {
                   assignCustomFunctionsToFurniture(furniture[0].functionName);
@@ -947,8 +968,8 @@ export default function HomeScreen({ navigation }) {
                   source={WashingMachineLogo}
                   style={{
                     resizeMode: "contain",
-                    width: 90,
-                    height: 90,
+                    width: 95,
+                    height: 95,
                     alignSelf: "center",
                   }}
                 ></Image>
@@ -958,11 +979,11 @@ export default function HomeScreen({ navigation }) {
             {piggyBank && (
               <TouchableOpacity
                 style={{
-                  width: 50,
-                  height: 100,
+                  width: 80,
+                  height: 60,
                   position: "absolute",
-                  top: 670,
-                  left: 485,
+                  top: 810,
+                  left: 691,
                 }}
                 onPress={() => {
                   assignCustomFunctionsToFurniture(furniture[3].functionName);
@@ -977,8 +998,8 @@ export default function HomeScreen({ navigation }) {
                   source={PiggyBankLogo}
                   style={{
                     resizeMode: "contain",
-                    width: 40,
-                    height: 40,
+                    width: 28,
+                    height: 28,
                     alignSelf: "center",
                   }}
                 ></Image>
@@ -987,11 +1008,11 @@ export default function HomeScreen({ navigation }) {
             {/* {Dog Avatar} */}
             <TouchableOpacity
               style={{
-                width: 30,
+                width: 20,
                 height: 80,
                 position: "absolute",
-                top: 635,
-                left: 430,
+                top: 761,
+                left: 655,
               }}
               onPress={() => {
                 // assignCustomFunctionsToFurniture(furniture[2].functionName);
@@ -1135,7 +1156,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     right: 10,
-    bottom: 30,
+    bottom: 50,
   },
   CardboardStyle: {
     width: 180,
