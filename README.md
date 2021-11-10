@@ -1,4 +1,6 @@
-Hello friends pls follow my instructions
+Project Video : https://youtu.be/dmbcqFSZPyw
+
+Instructions how on how to run CoHab mobile application:
 
 First download [Node.js](https://nodejs.org/en/download/).
 We're not really using Node.js but we need it for npm, which is a package manager that you use to download everything else
