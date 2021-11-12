@@ -193,7 +193,7 @@ export function GroupSelectScreen(props) {
           Where will you be today?
         </BasicText>
         <Image source={buildingImage} style={styles.buildingPicture} />
-        <View style={{ position: "absolute", top: 35, left: -90 }}>
+        <View style={{ position: "absolute", top: 65, left: -100 }}>
           <Image source={carGIF} />
         </View>
 
@@ -205,7 +205,7 @@ export function GroupSelectScreen(props) {
             position: "absolute",
             // top: 645,
             // left: 70,
-            top: 690,
+            top: 710,
             left: 230,
           }}
           onPress={() => {
@@ -237,8 +237,8 @@ export function GroupSelectScreen(props) {
             width: 300,
             height: 100,
             position: "absolute",
-            top: 650,
-            left: 80,
+            top: 700,
+            left: 60,
           }}
         >
           {avatarSpeechInterval && (
@@ -275,7 +275,7 @@ export function GroupSelectScreen(props) {
               {
                 position: "absolute",
                 left: -50,
-                top: 90,
+                top: 110,
                 backgroundColor: "#852C2C",
               },
             ]}
@@ -291,7 +291,7 @@ export function GroupSelectScreen(props) {
               {
                 position: "absolute",
                 left: 120,
-                top: 20,
+                top: 40,
                 backgroundColor: "#3E852C",
               },
             ]}
@@ -307,7 +307,7 @@ export function GroupSelectScreen(props) {
               {
                 position: "absolute",
                 left: 100,
-                top: 250,
+                top: 260,
                 backgroundColor: "#2C4085",
               },
             ]}
@@ -403,7 +403,8 @@ const styles = StyleSheet.create({
   },
   buildingPicture: {
     width: 400,
-    height: 740,
+    // height: 740,
+    height: 790,
     resizeMode: "contain",
     position: "absolute",
     top: "15%",
@@ -452,6 +453,7 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     left: -50,
+    bottom: -50,
     // justifyContent: "space-evenly",
   },
   bottomButton: {
